@@ -1,0 +1,42 @@
+<!--
+ * @Author: 莫卓才
+ * @eMail: handsome.mo@foxmail.com
+ * @Descripttion: 描述
+ * @version: 1.0.0
+ * @Date: 2020-07-01 14:44:36
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2020-07-18 16:43:20
+--> 
+
+<%- include('/commom/header',{
+  title:data?data.settingList[0].title:"海南昆仑体育文化股份有限公司",
+  Keywords:data?data.settingList[0].Keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:data?data.settingList[0].companyDescription:"海南昆仑体育文化股份有限公司",
+}) %>
+
+<%- include('/commom/banner') %>
+
+<div class="content-full">
+  <div class="content main-info">
+
+    <%- include('/commom/column') %>
+    
+      <div class="content-right">
+          <div class="about">
+
+            <% if(data.AboutList[0].aboutTitle){ %>
+              <img src="/public/images/about_img.png" alt="">
+            <% } %>
+              <h5><%= data.AboutList[0].aboutTitle %></h5>
+              <%- data.AboutList[0].content %>
+          </div>
+      </div>
+  </div>
+</div>
+
+<%- include('/commom/serInfo') %>
+
+<%- include('/commom/footer') %>
+
+</body>
+</html>

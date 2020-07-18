@@ -1,3 +1,12 @@
+/*
+ * @Author: 莫卓才
+ * @eMail: handsome.mo@foxmail.com
+ * @Descripttion: 描述
+ * @version: 1.0.0
+ * @Date: 2020-06-30 19:36:54
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2020-07-01 15:09:08
+ */
 /* eslint valid-jsdoc: "off" */
 
 'use strict';
@@ -17,6 +26,23 @@ module.exports = appInfo => {
 
   // add your middleware config here
   config.middleware = [];
+
+  // ejs
+  config.view = {
+    mapping: {
+      '.ejs': 'ejs',
+    },
+  };
+
+  // sequelize
+  config.sequelize = {
+    dialect: 'mysql',
+    host: '127.0.0.1',
+    port: 3306,
+    username: 'root',
+    password: '123456',
+    database: 'egg-demo',
+  };
 
   // add your user config here
   const userConfig = {

@@ -1,0 +1,52 @@
+<!--
+ * @Author: 莫卓才
+ * @eMail: handsome.mo@foxmail.com
+ * @Descripttion: 描述
+ * @version: 1.0.0
+ * @Date: 2020-07-02 11:55:56
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2020-07-17 17:28:31
+--> 
+<div class="banner">
+  <div class="banner-left">
+      <div class="news-report">
+          <div class="scrollbox">
+              <div class="news-k" id="scrollDiv">
+                  <strong>通知</strong>
+                  <ul class="carousel-inner2">
+                    <% data.advertisingList.forEach((item,index)=>{ %>
+                      <li class="item active">
+                          <div>
+                              <a href="<%= item.url %>">
+                                  <p><%= item.remark %></p>
+                                  <span><%= item.created_at %></span>
+                              </a>
+                          </div>
+                      </li>
+                    <% }) %>
+                  </ul>
+              </div>
+          </div>
+      </div>
+      <!-- Add Pagination -->
+      <div class="banner-pagination"></div>
+      <!-- Add Arrows -->
+      <div class="banner-button">
+          <div class="swiper-button-next swiper-button-next2"></div>
+          <span class="banner-button-link">|</span>
+          <div class="swiper-button-prev swiper-button-prev2"></div>
+      </div>
+  </div>
+  <div class="swiper-wrapper">
+    <% data.advertisingList.forEach((item,index)=>{ %>
+      <% if(item.place === 0){ %>
+        <div class="swiper-slide">
+          <a href="<%= item.url %>" target="_blank"><img src="<%= item.filepath %>" alt="" class="banner-img"></a>
+        </div>
+      <% } %>
+    <% }) %>
+  </div>
+  <div class="banner-right">
+      <a href="javascript:;" class="click-jump"><img src="/public/images/bottom_icon.png" alt=""></a>
+  </div>
+</div>

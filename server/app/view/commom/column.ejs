@@ -1,0 +1,27 @@
+<!--
+ * @Author: 莫卓才
+ * @eMail: handsome.mo@foxmail.com
+ * @Descripttion: 描述
+ * @version: 1.0.0
+ * @Date: 2020-07-17 11:20:24
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2020-07-18 16:05:33
+--> 
+<div class="nav-left">
+  <div class="row-title">
+      <div class="title-link"></div>
+      <% const pid = ctx.query.pid %>
+      <h5><%= data.menuList[pid].title %></h5>
+  </div>
+  <% if(data.menuList[pid].children){ %>
+  <div class="nav-left-list">
+    <ul>
+      <% data.menuList[pid].children.forEach(item=>{ %>
+        <li>
+            <a href="<%= item.url+'?pid='+[pid]+'&cid='+item.id %>" class="<%= '/'+ item.url+'?pid='+[pid]+'&cid='+item.id === ctx.url ? 'active' : '' %>"><%= item.title %></a>
+        </li>
+      <% }) %>
+    </ul>
+  </div>
+  <% } %>
+</div>

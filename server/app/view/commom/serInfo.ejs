@@ -1,0 +1,26 @@
+<!--
+ * @Author: 莫卓才
+ * @eMail: handsome.mo@foxmail.com
+ * @Descripttion: 描述
+ * @version: 1.0.0
+ * @Date: 2020-07-17 15:37:58
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2020-07-17 18:54:13
+--> 
+<div class="content-full ser-info">
+  <div class="swiper-wrapper">
+    <% data.advertisingList.forEach((item,index)=>{ %>
+      <% if(item.place === 1){ %>
+        <div class="swiper-slide">
+          <a href="<%= item.url %>">
+            <img src="<%= item.filepath %>" alt="" class="ser-info-img">
+            <div class="ser-info-txt">
+              <h5><%= item.title %></h5>
+              <p><%= item.remark %></p>
+            </div>
+          </a>
+        </div>
+        <% } %>
+      <% }) %>
+  </div>
+</div>
