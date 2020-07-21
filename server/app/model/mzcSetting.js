@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-14 20:43:41
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-18 10:27:47
+ * @LastEditTime: 2020-07-21 10:51:44
  */
 'use strict';
 
 module.exports = app => {
   const { INTEGER, STRING } = app.Sequelize;
-  const mzcSetting = app.model.define('mzc-setting', {
+  const MzcSetting = app.model.define('mzc-setting', {
     id: {
       allowNull: !1, // 是否为空
       autoIncrement: !0, // 自增
@@ -117,6 +117,6 @@ module.exports = app => {
     tableName: 'mzc-setting',
     underscored: !1,
   });
-  return mzcSetting;
+  return MzcSetting;
 };
 

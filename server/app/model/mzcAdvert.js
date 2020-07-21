@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 19:53:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-18 10:27:39
+ * @LastEditTime: 2020-07-21 10:51:26
  */
 'use strict';
 
 module.exports = app => {
   const { INTEGER, STRING, BOOLEAN } = app.Sequelize;
-  const mzcAdvert = app.model.define('mzc-advert', {
+  const MzcAdvert = app.model.define('mzc-advert', {
     id: {
       allowNull: !1, // 是否为空
       autoIncrement: !0, // 自增
@@ -94,5 +94,5 @@ module.exports = app => {
     tableName: 'mzc-advert',
     underscored: !1,
   });
-  return mzcAdvert;
+  return MzcAdvert;
 };

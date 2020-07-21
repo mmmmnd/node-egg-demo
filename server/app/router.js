@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-18 17:41:04
+ * @LastEditTime: 2020-07-21 11:38:49
  */
 'use strict';
 
@@ -17,5 +17,6 @@ module.exports = app => {
   router.get('/', controller.web.index);
   router.get('/about', controller.web.about);
 
+  // app.resources('home', '/home', app.controller.home);
   router.get('*', controller.web.error); // 404
 };

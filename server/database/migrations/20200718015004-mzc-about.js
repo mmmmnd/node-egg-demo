@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 09:50:04
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-18 14:38:17
+ * @LastEditTime: 2020-07-21 19:40:11
  */
 'use strict';
 
@@ -55,6 +55,30 @@ module.exports = {
         type: TEXT, // 类型
         defaultValue: '', // 默认值
         comment: '单页内容', // 备注
+      },
+      type: {
+        allowNull: !1, // 是否为空
+        type: BOOLEAN, // 类型
+        defaultValue: '0', // 默认值
+        comment: '类型', // 备注 0 -> 单页 1 -> 列表
+      },
+      dropType: {
+        allowNull: !1, // 是否为空
+        type: STRING(2), // 类型
+        defaultValue: '0', // 默认值
+        comment: '下拉', // 备注 0 -> 不存在；菜单对于的二级id值
+      },
+      dropTypeId: {
+        allowNull: !0, // 是否为空
+        type: STRING(2), // 类型
+        defaultValue: '0', // 默认值
+        comment: '下拉id', // 备注 0 -> 不存在；菜单对于的二级id值
+      },
+      dropImage: {
+        allowNull: !0, // 是否为空
+        type: STRING, // 类型
+        defaultValue: '', // 默认值
+        comment: '图片', // 备注
       },
       satus: {
         allowNull: !1, // 是否为空

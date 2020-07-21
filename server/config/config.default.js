@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-01 15:09:08
+ * @LastEditTime: 2020-07-20 19:46:41
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -42,6 +42,8 @@ module.exports = appInfo => {
     username: 'root',
     password: '123456',
     database: 'egg-demo',
+    underscored: true,
+    timezone: '+08:00',
   };
 
   // add your user config here
