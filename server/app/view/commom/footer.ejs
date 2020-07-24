@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:47:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-21 16:34:59
+ * @LastEditTime: 2020-07-22 20:17:02
 --> 
 <div class="content-full footer">
   <div class="content">
@@ -68,53 +68,77 @@
 <script src="/public/js/sidebar.js"></script>
 <script src="/public/js/wzlb.js"></script>
 <script src="/public/js/kunlun.js"></script>
+<script src="/public/js/jquery.paroller.js"></script>
 <script>
-  var swiper = new Swiper('.banner', {
-      pagination: {
-          el: '.banner-pagination',
-      },
-      navigation: {
-          nextEl: '.swiper-button-next2',
-          prevEl: '.swiper-button-prev2',
-      },
-      spaceBetween: 0,
-      centeredSlides: true,
-      autoplay: {
-          delay: 5000,
-          disableOnInteraction: false,
-      },
+    $(function () {
+        $(window).paroller();
+    });
+</script>
+<script>
+    var swiper = new Swiper('.banner', {
+        pagination: {
+            el: '.banner-pagination',
+        },
+        navigation: {
+            nextEl: '.swiper-button-next2',
+            prevEl: '.swiper-button-prev2',
+        },
+        spaceBetween: 0,
+        centeredSlides: true,
+        autoplay: {
+            delay: 5000,
+            disableOnInteraction: false,
+        },
+    });
+</script>
+<script>
+  var swiper = new Swiper('.row2-swiper', {
+    slidesPerView: 'auto',
+    spaceBetween: 0,
+    navigation: {
+        nextEl: '.swiper-button-next3',
+        prevEl: '.swiper-button-prev3',
+    },
   });
 </script>
 <script>
-var swiper = new Swiper('.row2-swiper', {
-  slidesPerView: 'auto',
-  spaceBetween: 0,
-  navigation: {
-      nextEl: '.swiper-button-next3',
-      prevEl: '.swiper-button-prev3',
-  },
-});
-</script>
-<script>
-var swiper = new Swiper('.row3-swiper', {
-  slidesPerView: 4,
-  spaceBetween: 15,
-  navigation: {
-      nextEl: '.swiper-button-next4',
-      prevEl: '.swiper-button-prev4',
-  },
-});
+  var swiper = new Swiper('.row3-swiper', {
+    slidesPerView: 4,
+    spaceBetween: 15,
+    navigation: {
+        nextEl: '.swiper-button-next4',
+        prevEl: '.swiper-button-prev4',
+    },
+  });
 </script>
 
 <script>
-var swiper = new Swiper('.row4-swiper', {
-  slidesPerView: 2.5,
-  spaceBetween: 15,
-  pagination: {
-    el: '.swiper4-pagination',
-    clickable: true,
-  },
-});
+  var swiper = new Swiper('.row4-swiper', {
+    slidesPerView: 2.5,
+    spaceBetween: 15,
+    pagination: {
+      el: '.swiper4-pagination',
+      clickable: true,
+    },
+  });
+</script>
+<script type="text/javascript">
+    $("#scrollDiv").Scroll({
+        line:1,
+        speed:500,
+        timer:3000,
+        up:"but_up",
+        down:"but_down"
+    });
+</script>
+<script type="text/javascript">   
+
+    $(".click-jump").click(function() {
+        $('html, body').animate({
+            scrollTop: $('.row1').offset().top
+        });
+    });
+
 </script>
 <script>
   var swiper = new Swiper('.ser-info', {
@@ -122,76 +146,73 @@ var swiper = new Swiper('.row4-swiper', {
     spaceBetween: 0,
   });
 </script>
-<script type="text/javascript">
-  $("#scrollDiv").Scroll({
-      line:1,
-      speed:500,
-      timer:3000,
-      up:"but_up",
-      down:"but_down"
+<script>
+  var swiper = new Swiper('.ser-info-photo', {
+    slidesPerView: 'auto',
+    spaceBetween: 30,
+    freeMode: true,
+    pagination: {
+        el: '.photo-pagination',
+        clickable: true,
+    },
   });
 </script>
-<script type="text/javascript">   
-
-  $(".click-jump").click(function() {
-      $('html, body').animate({
-          scrollTop: $('.row1').offset().top
-      });
-  });
-
-</script>
 <script type="text/javascript">
- //创建和初始化地图函数：
- function initMap(){
-   createMap();//创建地图
-   setMapEvent();//设置地图事件
-   addMapControl();//向地图添加控件
-   addMapOverlay();//向地图添加覆盖物
- }
- function createMap(){ 
-   map = new BMap.Map("map"); 
-   map.centerAndZoom(new BMap.Point(110.494815,19.973199),15);
- }
- function setMapEvent(){
-   map.enableScrollWheelZoom();
-   map.enableKeyboard();
-   map.enableDragging();
-   map.enableDoubleClickZoom()
- }
- function addClickHandler(target,window){
-   target.addEventListener("click",function(){
-     target.openInfoWindow(window);
-   });
- }
- function addMapOverlay(){
-   var markers = [
-     {content:"电话：0898-65771519邮箱：hnkunlun@vip.163.com",title:"海南昆仑体育文化股份有限公司",imageOffset: {width:-23,height:-21},position:{lat:19.971976,lng:110.492659}}
-   ];
-   for(var index = 0; index < markers.length; index++ ){
-     var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
-     var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap//public/images/icon.png",new BMap.Size(20,25),{
-       imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
-     })});
-     var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
-     var opts = {
-       width: 200,
-       title: markers[index].title,
-       enableMessage: false
-     };
-     var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
-     marker.setLabel(label);
-     addClickHandler(marker,infoWindow);
-     map.addOverlay(marker);
-   };
- }
- //向地图添加控件
- function addMapControl(){
-   var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
-   scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
-   map.addControl(scaleControl);
-   var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
-   map.addControl(navControl);
- }
- var map;
-   initMap();
-</script>
+  var longitude = <%= data.settingList[0].longitude %>;
+  var latitude = <%= data.settingList[0].latitude %>;
+  //创建和初始化地图函数：
+  function initMap(){
+    createMap();//创建地图
+    setMapEvent();//设置地图事件
+    addMapControl();//向地图添加控件
+    addMapOverlay();//向地图添加覆盖物
+  }
+  function createMap(){ 
+    map = new BMap.Map("map"); 
+    map.centerAndZoom(new BMap.Point(longitude,latitude),15);
+  }
+  function setMapEvent(){
+    map.enableScrollWheelZoom();
+    map.enableKeyboard();
+    map.enableDragging();
+    map.enableDoubleClickZoom()
+  }
+  function addClickHandler(target,window){
+    target.addEventListener("click",function(){
+      target.openInfoWindow(window);
+    });
+  }
+  function addMapOverlay(){
+    var markers = [
+      {content:"电话：0898-65771519邮箱：hnkunlun@vip.163.com",title:"海南昆仑体育文化股份有限公司",imageOffset: {width:-23,height:-21},position:{lat:19.971976,lng:110.492659}}
+    ];
+    for(var index = 0; index < markers.length; index++ ){
+      var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
+      var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap//public/images/icon.png",new BMap.Size(20,25),{
+        imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
+      })});
+      var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
+      var opts = {
+        width: 200,
+        title: markers[index].title,
+        enableMessage: false
+      };
+      var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
+      marker.setLabel(label);
+      addClickHandler(marker,infoWindow);
+      map.addOverlay(marker);
+    };
+  }
+  //向地图添加控件
+  function addMapControl(){
+    var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+    scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
+    map.addControl(scaleControl);
+    var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+    map.addControl(navControl);
+  }
+  var map;
+    initMap();
+ </script>
+</body>
+</html>

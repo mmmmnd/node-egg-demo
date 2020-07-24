@@ -3,27 +3,28 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-07-18 15:05:28
+ * @Date: 2020-07-21 11:40:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-23 20:30:48
+ * @LastEditTime: 2020-07-23 20:30:24
  */
 'use strict';
+
 /**
- * 关于我们
+ * 下拉菜单
  */
-class AboutDao {
+class AboutDroptypeDao {
   /**
-   * 关于我们列表
+   * 下拉菜单列表
    * @param { Object } ctx 全局this
    * @param { Number } cid 二级菜单id
    */
   static async list(ctx, cid) {
-    return await ctx.model.MzcAbout.findAll({
+    return await ctx.model.MzcAboutDroptype.findAll({
       where: {
-        category_id: cid,
+        dropType: cid,
       },
-    });// 公司简介
+    });
   }
 }
 
-module.exports = AboutDao;
+module.exports = AboutDroptypeDao;

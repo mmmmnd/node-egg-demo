@@ -5,6 +5,10 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 15:27:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-17 17:13:46
+ * @LastEditTime: 2020-07-22 20:19:00
 --> 
-<div class="banner-info" style="background: url('/public/images/banner_info.png') no-repeat center;" data-paroller-factor="0.5"></div>
+<% data.advertisingList.forEach((item,index)=>{ %>
+  <% if(item.place === 2 && item.parentId == ctx.query.pid){ %>
+    <div class="banner-info" style="background: url('<%= item.filepath %>') no-repeat center;" data-paroller-factor="0.5"></div>
+  <% } %>
+<% }) %>

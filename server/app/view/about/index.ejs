@@ -5,13 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:44:36
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-21 20:05:07
+ * @LastEditTime: 2020-07-23 20:55:37
 --> 
-
 <%- include('/commom/header',{
-  title:data?data.settingList[0].title:"海南昆仑体育文化股份有限公司",
-  Keywords:data?data.settingList[0].Keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:data?data.settingList[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  title:data?data.aboutList[0].title:"海南昆仑体育文化股份有限公司",
+  Keywords:data?data.aboutList[0].keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:data?data.aboutList[0].companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 <style>
   .dropdown-menu>.active>a, .dropdown-menu>.active>a:focus, .dropdown-menu>.active>a:hover{
@@ -60,7 +59,7 @@
               <% data.aboutList.forEach(item => { %>
                 <% if(item.dropTypeId == val.id){ %>
                   <li>
-                    <img src="public/<%= item.dropImage %>" alt="" class="about2-img">
+                    <img src="<%= item.dropImage %>" alt="" class="about2-img">
                     <div class="about2-right">
                       <h3><%= item.aboutTitle %></h3>
                       <%- item.content %>
@@ -84,7 +83,7 @@
                       <li class="honor-list">
                         <i></i>
                         <div class="honor-right">
-                          <img src="public/<%= item.dropImage %>" alt="" class="honor-img">
+                          <img src="<%= item.dropImage %>" alt="" class="honor-img">
                           <div class="honor-txt">
                             <p class="honor-data"><%= item.created_at %></p>
                             <h5><%= item.aboutTitle %></h5>
@@ -102,7 +101,7 @@
                 <li class="honor-list">
                   <i></i>
                   <div class="honor-right">
-                    <img src="public/<%= item.dropImage %>" alt="" class="honor-img">
+                    <img src="<%= item.dropImage %>" alt="" class="honor-img">
                     <div class="honor-txt">
                       <p class="honor-data"><%= item.created_at %></p>
                       <h5><%= item.aboutTitle %></h5>
@@ -126,6 +125,11 @@
 <%- include('/commom/footer') %>
 
 <script>
+  var swiper = new Swiper('.ser-info', {
+    slidesPerView: '3.5',
+    spaceBetween: 0,
+  });
+
   $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
     var text = this.innerText;
     var span = `<b class="caret"></b>`;

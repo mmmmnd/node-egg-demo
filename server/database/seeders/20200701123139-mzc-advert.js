@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 20:31:39
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-17 17:19:25
+ * @LastEditTime: 2020-07-22 15:18:52
  */
 'use strict';
 
@@ -21,6 +21,7 @@ module.exports = {
         filepath: '/public/images/banner.png',
         file_type: '1',
         place: '0',
+        parentId:'0',
         status: '0',
         remark: '近千名越野爱好者挑战“中国版卢比肯路” “岩路·灵鹫山国际森林近千名越野爱好者挑战“中国版卢比肯路” “岩路·灵鹫山国际森林',
         sort: '0',
@@ -35,6 +36,7 @@ module.exports = {
         filepath: '/public/images/banner2.png',
         file_type: '1',
         place: '0',
+        parentId:'0',
         status: '0',
         remark: '近千名越野爱好者挑战“中国版卢比肯路” “岩路·灵鹫山国际森林近千名越野爱好者挑战“中国版卢比肯路” “岩路·灵鹫山国际森林',
         sort: '0',
@@ -49,6 +51,7 @@ module.exports = {
         filepath: '/public/images/banner.png',
         file_type: '1',
         place: '0',
+        parentId:'0',
         status: '0',
         remark: '近千名越野爱好者挑战“中国版卢比肯路” “岩路·灵鹫山国际森林近千名越野爱好者挑战“中国版卢比肯路” “岩路·灵鹫山国际森林',
         sort: '0',
@@ -63,6 +66,7 @@ module.exports = {
         filepath: '/public/images/ser_info.png',
         file_type: '1',
         place: '1',
+        parentId:'0',
         status: '0',
         remark: '体育板块对于体育文化公司而言，不仅肩负着公司主要业务板块的开拓，更是公司的主打方向。',
         sort: '0',
@@ -77,6 +81,7 @@ module.exports = {
         filepath: '/public/images/ser_info3.png',
         file_type: '1',
         place: '1',
+        parentId:'0',
         status: '0',
         remark: '体育板块对于体育文化公司而言，不仅肩负着公司主要业务板块的开拓，更是公司的主打方向。',
         sort: '0',
@@ -91,6 +96,7 @@ module.exports = {
         filepath: '/public/images/ser_info2.png',
         file_type: '1',
         place: '1',
+        parentId:'0',
         status: '0',
         remark: '体育板块对于体育文化公司而言，不仅肩负着公司主要业务板块的开拓，更是公司的主打方向。',
         sort: '0',
@@ -105,6 +111,7 @@ module.exports = {
         filepath: '/public/images/ser_info4.png',
         file_type: '1',
         place: '1',
+        parentId:'0',
         status: '0',
         remark: '体育板块对于体育文化公司而言，不仅肩负着公司主要业务板块的开拓，更是公司的主打方向。',
         sort: '0',

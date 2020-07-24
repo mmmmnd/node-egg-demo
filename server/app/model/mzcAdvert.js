@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 19:53:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-21 10:51:26
+ * @LastEditTime: 2020-07-22 15:19:04
  */
 'use strict';
 
@@ -48,6 +48,12 @@ module.exports = app => {
       type: INTEGER(6).UNSIGNED, // 类型
       defaultValue: '0', // 默认值
       comment: '文件类型', // 备注
+    },
+    parentId: {
+      allowNull: !0, // 是否为空
+      type: BOOLEAN, // 类型
+      defaultValue: '0', // 默认值
+      comment: '分类id', // 备注
     },
     status: {
       allowNull: !1, // 是否为空
