@@ -8,6 +8,7 @@
  * @LastEditTime: 2020-07-23 20:31:18
  */
 'use strict';
+
 const getTree = require('../getTree.js').getTree;
 
 /**

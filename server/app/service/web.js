@@ -5,12 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-24 09:22:09
+ * @LastEditTime: 2020-07-27 14:54:14
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
 const MenuDao = require('../dao/menu');
 const AboutDao = require('../dao/about');
+const companyDao = require('../dao/company');
 const SettingDao = require('../dao/setting');
 const servicesDao = require('../dao/services');
 const AdvertisingDao = require('../dao/advertising');
@@ -70,13 +71,12 @@ class WebService extends Service {
     if (err) return render(ctx);
 
     const menuList = await MenuDao.list(ctx); // 导航栏菜单
-    const servicesList = await servicesDao.list(ctx,cid); // services数据
+    const companyList = await companyDao.list(ctx,cid); // services数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
-    const data = { menuList, settingList, servicesList,advertisingList }
-    await ctx.render('services/index.ejs', { data });
-    
+    const data = { menuList, settingList, companyList, advertisingList }
+    await ctx.render('company/index.ejs', { data });
   }
 }
 

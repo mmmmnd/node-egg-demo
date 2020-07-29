@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-24 09:42:35
+ * @LastEditTime: 2020-07-29 19:31:13
 --> 
 
 <%- include('/commom/header',{
-  title:data?data.servicesList[0].title:"海南昆仑体育文化股份有限公司",
-  Keywords:data?data.servicesList[0].Keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:data?data.servicesList[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  title:data?data.companyList[0].title:"海南昆仑体育文化股份有限公司",
+  Keywords:data?data.companyList[0].Keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:data?data.companyList[0].companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <%- include('/commom/banner') %>
@@ -20,34 +20,53 @@
   <div class="content main-info">
 
     <%- include('/commom/column') %>
-      <div class="content-right">
-        <div class="ser-top">
-            <div class="ser-top-txt">
-                <h5><%= data.servicesList[0].title %></h5>
-                <p><%= data.servicesList[0].companyDescription %></p>
-            </div>
-            <img src="<%= data.servicesList[0].servicesImage %>" alt="" class="ser-top-img">
-        </div>
-        <%- include('/commom/serInfoPhoto') %>
-        <div class="ser-info-text">
-          <%- data.servicesList[0].content %>
-        </div>
+    <div class="content-right">
+      <div class="nav-right">
+        <% data.companyList.forEach(item => { %>
+          <% if(item.category_id == ctx.query.cid){ %>
+            <a href="#<%= item.id %>" class="nav-btn <%= data.companyList[0] == item ?'active':''; %>" data-toggle="tab"><%= item.companyTitle %></a>
+          <% } %>
+        <% }) %>
       </div>
+      <div class="tab-content">
+      <% data.companyList.forEach(item => { %>
+        <% if(item.category_id == ctx.query.cid){ %>
+          <div class="ser-top tab-pane fade <%= data.companyList[0] == item ?'in active':''; %>" id="<%= item.id %>">
+            <div class="ser-top-txt">
+              <h5><%= item.companyTitle %></h5>
+              <%- item.content %>
+            </div>
+            <img src="<%= item.image %>" alt="" class="ser-top-img">
+
+            <%- include('/commom/serInfoPhoto',{id: item.id }) %>
+
+            <div class="ser-info-text">
+               <h5>联系方式</h5>
+               <div class="ser-info-cont">
+                 <div class="ser-text-right">
+                   <p>公司地址：<%= item.address %></p>
+                   <p>公司网址：<a href="<%= item.website %>" target="_blank"><%= item.website %></a></p>
+                   <p>电子邮箱：<%= item.email %></p>
+                   <p>联系电话：<a tel="<%= item.phone %>"><%= item.phone %></a></p>
+                 </div>
+               </div>
+            </div>
+          </div>
+        <% } %>
+      <% }) %>
+      </div>
+    </div>
   </div>
 </div>
 <%- include('/commom/serInfo') %>
 
 <%- include('/commom/footer') %>
 <script>
-  var swiper = new Swiper('.ser-info-photo', {
-    slidesPerView: 'auto',
-    spaceBetween: 30,
-    freeMode: true,
-    pagination: {
-        el: '.photo-pagination',
-        clickable: true,
-    },
-  });
+
+  $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+    $(this).addClass('active').siblings().removeClass('active');
+  })
+
 </script>
 </body>
 </html>

@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 16:08:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-24 16:14:14
+ * @LastEditTime: 2020-07-27 16:12:59
  */
 'use strict';
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    const { INTEGER, STRING, BOOLEAN, TEXT } = Sequelize;
+    const { INTEGER, STRING, TEXT } = Sequelize;
     await queryInterface.createTable('mzc-company', {
       id: {
         allowNull: !1, // 是否为空
@@ -61,17 +61,56 @@ module.exports = {
         type: STRING, // 类型
         defaultValue: '', // 默认值
         comment: '图片', // 备注
-      }
-
+      },
+      address:{
+        allowNull: !0, // 是否为空
+        type: STRING(60), // 类型
+        defaultValue: '', // 默认值
+        comment: '地址', // 备注
+      },
+      website:{
+        allowNull: !0, // 是否为空
+        type: STRING(60), // 类型
+        defaultValue: '', // 默认值
+        comment: '网站', // 备注
+      },
+      email:{
+        allowNull: !0, // 是否为空
+        type: STRING(60), // 类型
+        defaultValue: '', // 默认值
+        comment: '电子邮箱', // 备注
+      },
+      phone:{
+        allowNull: !0, // 是否为空
+        type: STRING(20), // 类型
+        defaultValue: '', // 默认值
+        comment: '联系电话', // 备注
+      },
+      sort: {
+        allowNull: !1, // 是否为空
+        type: STRING(6), // 类型
+        defaultValue: '0', // 默认值
+        comment: '排序', // 备注
+      },
+      created_at: {
+        allowNull: !0, // 是否为空
+        type: STRING(13), // 类型
+        comment: '创建时间', // 备注
+      },
+      updated_at: {
+        allowNull: !0, // 是否为空
+        type: STRING(13), // 类型
+        comment: '修改时间', // 备注
+      },
+      delete_at: {
+        allowNull: !0, // 是否为空
+        type: STRING(13), // 类型
+        comment: '删除时间', // 备注
+      },
     });
   },
 
   down: async (queryInterface, Sequelize) => {
-    /**
-     * Add reverting commands here.
-     *
-     * Example:
-     * await queryInterface.dropTable('users');
-     */
+    await queryInterface.dropTable('mzc-company');
   }
 };

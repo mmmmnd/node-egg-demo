@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 19:53:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-22 15:19:04
+ * @LastEditTime: 2020-07-29 17:23:58
  */
 'use strict';
 
@@ -54,6 +54,12 @@ module.exports = app => {
       type: BOOLEAN, // 类型
       defaultValue: '0', // 默认值
       comment: '分类id', // 备注
+    },
+    serId: {
+      allowNull: !0, // 是否为空
+      type: BOOLEAN, // 类型
+      defaultValue: '0', // 默认值
+      comment: '轮播图id', // 备注
     },
     status: {
       allowNull: !1, // 是否为空
