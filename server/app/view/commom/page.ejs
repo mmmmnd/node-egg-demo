@@ -1,0 +1,61 @@
+<% if(data.pages.total_pages > 1){  
+  const RIGHT_INDEX = 3,LEFT_INDEX = 4;
+  var arr = [],
+    left = 1, //最小值
+    right = data.pages.total_pages, //最大值
+    total_pages = data.pages.total_pages, //分页最后一页
+    current_page = data.pages.current_page; //当前页
+    
+    if(total_pages >= 7){
+      if(current_page > LEFT_INDEX && current_page < total_pages - RIGHT_INDEX){
+        left = Number(current_page) - 2;
+        right = Number(current_page) + 2;
+      }else{
+        if(current_page <= 5){
+          left = 1; 
+          right = 7;
+        }else{
+          right = total_pages;
+          left = total_pages - 6;
+        }
+      }
+    }
+    while (left <= right) {
+      arr.push(left);
+      left++;
+    }
+%>
+<div class="page">
+  <ul>
+    <li class="<%= data.pages.current_page === 1 ? 'disabled' : '' %>">
+      <a href="
+        <%= data.pages.current_page === 1 
+          ? 'javascript:;' 
+          : url + '&page=' + Number(data.pages.current_page - 1) 
+        %>">上一页</a>
+    </li>
+    <% if(data.pages.current_page > LEFT_INDEX){ %>
+    <li><a href="<%= url %>&page=1">1</a></li>
+    <li><a href="javascript:;">...</a></li>
+    <% } %>
+
+    <% for(var item of arr){ %>
+    <li class="<%= data.pages.current_page == item ? 'active': '' %>">
+      <a href="<%= url %>&page=<%= item %>"><%= item %></a>
+    </li>
+    <% } %>
+
+    <% if(data.pages.total_pages - RIGHT_INDEX > data.pages.current_page){ %>
+    <li><a href="javascript:;">...</a></li>
+    <li><a href="<%= url %>&page=<%= data.pages.total_pages %>"><%= data.pages.total_pages %></a></li>
+    <% } %>
+    <li class="<%= data.pages.current_page === data.pages.total_pages ? 'disabled' : '' %>">
+      <a href="
+        <%= data.pages.current_page === data.pages.total_pages 
+          ? 'javascript:;' 
+          : url + '&page=' + Number(data.pages.current_page + 1) 
+        %>">下一页</a>
+    </li>
+  </ul>
+</div>
+<% } %>

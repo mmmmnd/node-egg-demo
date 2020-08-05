@@ -11,7 +11,6 @@
 
 module.exports = app => {
   const { INTEGER, STRING } = app.Sequelize;
-
   const MzcAboutDroptype = app.model.define('mzc-about-droptype', {
     id: {
       allowNull: !1, // 是否为空
@@ -48,11 +47,11 @@ module.exports = app => {
       comment: '删除时间', // 备注
     },
   },
-  {
-    timestamps: !1,
-    tableName: 'mzc-about-droptype',
-    underscored: !1,
-  });
+    {
+      timestamps: !1,
+      tableName: 'mzc-about-droptype',
+      underscored: !1,
+    });
 
   return MzcAboutDroptype;
 };

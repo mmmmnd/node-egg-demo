@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:20:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-18 16:05:33
+ * @LastEditTime: 2020-08-03 09:09:31
 --> 
 <div class="nav-left">
   <div class="row-title">
@@ -18,7 +18,7 @@
     <ul>
       <% data.menuList[pid].children.forEach(item=>{ %>
         <li>
-            <a href="<%= item.url+'?pid='+[pid]+'&cid='+item.id %>" class="<%= '/'+ item.url+'?pid='+[pid]+'&cid='+item.id === ctx.url ? 'active' : '' %>"><%= item.title %></a>
+          <a href="<%= item.url+'?pid='+[pid]+'&cid='+item.id %>" class="<%= pid === ctx.query.pid && item.id == ctx.query.cid ? 'active' : '' %>"><%= item.title %></a>
         </li>
       <% }) %>
     </ul>

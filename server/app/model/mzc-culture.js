@@ -3,15 +3,15 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-07-27 11:34:26
+ * @Date: 2020-07-30 11:10:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-30 11:11:25
+ * @LastEditTime: 2020-07-30 11:12:57
  */
 'use strict';
 
 module.exports = app => {
-  const { INTEGER, STRING, TEXT } = app.Sequelize;
-  const MzcCompany = app.model.define('mzc-company', {
+  const { INTEGER, STRING } = app.Sequelize;
+  const MzcCulture = app.model.define('mzc-culture', {
     id: {
       allowNull: !1, // 是否为空
       autoIncrement: !0, // 自增
@@ -43,53 +43,29 @@ module.exports = app => {
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
       comment: '公司描述', // 备注
     },
-    companyTitle: {
+    cultureTitle: {
       allowNull: !1, // 是否为空
-      type: STRING(20), // 类型
+      type: STRING(60), // 类型
       defaultValue: '', // 默认值
       comment: '标题', // 备注
     },
-    content: {
+    cultureDescription: {
       allowNull: !1, // 是否为空
-      type: TEXT, // 类型
-      defaultValue: '', // 默认值
-      comment: '单页内容', // 备注
-    },
-    image: {
-      allowNull: !0, // 是否为空
       type: STRING, // 类型
       defaultValue: '', // 默认值
-      comment: '图片', // 备注
+      comment: '描述', // 备注,
     },
-    address: {
-      allowNull: !0, // 是否为空
-      type: STRING(60), // 类型
-      defaultValue: '', // 默认值
-      comment: '地址', // 备注
-    },
-    website: {
-      allowNull: !0, // 是否为空
-      type: STRING(60), // 类型
-      defaultValue: '', // 默认值
-      comment: '网站', // 备注
-    },
-    email: {
-      allowNull: !0, // 是否为空
-      type: STRING(60), // 类型
-      defaultValue: '', // 默认值
-      comment: '电子邮箱', // 备注
-    },
-    phone: {
-      allowNull: !0, // 是否为空
-      type: STRING(20), // 类型
-      defaultValue: '', // 默认值
-      comment: '联系电话', // 备注
-    },
-    sort: {
+    url: {
       allowNull: !1, // 是否为空
-      type: STRING(6), // 类型
-      defaultValue: '0', // 默认值
-      comment: '排序', // 备注
+      type: STRING(150), // 类型
+      defaultValue: '#', // 默认值
+      comment: '超链接', // 备注
+    },
+    filepath: {
+      allowNull: !1, // 是否为空
+      type: STRING(150), // 类型
+      defaultValue: '', // 默认值
+      comment: '图片', // 备注
     },
     created_at: {
       allowNull: !0, // 是否为空
@@ -109,9 +85,9 @@ module.exports = app => {
   },
     {
       timestamps: !1,
-      tableName: 'mzc-company',
+      tableName: 'mzc-culture',
       underscored: !1,
     });
 
-  return MzcCompany;
+  return MzcCulture;
 };

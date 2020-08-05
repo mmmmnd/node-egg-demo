@@ -1,0 +1,43 @@
+<!--
+ * @Author: 莫卓才
+ * @eMail: handsome.mo@foxmail.com
+ * @Descripttion: 描述
+ * @version: 1.0.0
+ * @Date: 2020-07-24 09:42:13
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2020-08-05 19:48:19
+-->
+<%- include('/commom/header',{
+  title:data?data.cultureList.data[0].title:"11海南昆仑体育文化股份有限公司",
+  Keywords:data?data.cultureList.data[0].Keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:data?data.cultureList.data[0].companyDescription:"海南昆仑体育文化股份有限公司",
+}) %>
+<%- include('/commom/banner') %>
+
+<div class="content-full">
+  <div class="content main-info">
+
+    <%- include('/commom/column') %>
+    <div class="content-right">
+      <div class="news-list">
+        <ul>
+          <% var url = `culture?pid=${ctx.query.pid}&cid=${ctx.query.cid}`; %>
+          <% data.cultureList.data.forEach(item=>{ %>
+          <li>
+            <img src="<%= item.filepath %>" alt="" class="news-list-img">
+            <div class="news-list-right">
+              <em><%= item.created_at %></em>
+              <h5><a href="<%= url +'&id='+ item.id%>"><%= item.cultureTitle %></a></h5>
+              <p><%= item.cultureDescription %></p>
+            </div>
+          </li>
+          <% }) %>
+        </ul>
+      </div>
+    </div>
+    <%- include('/commom/page',{ url }) %>
+  </div>
+</div>
+<%- include('/commom/serInfo') %>
+
+<%- include('/commom/footer') %>

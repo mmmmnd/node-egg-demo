@@ -1528,24 +1528,18 @@ body.modal-open{
     margin-top:30px;
 }
 .page ul li {
-    width: 34px !important;
-    height:34px !important;
-    text-align:center;
-    line-height:34px;
-    float:left;
-    margin:0 10px !important;
+    text-align: center;
+    line-height: 34px;
+    float: left;
+    margin: 0 10px !important;
     border: 0 !important;
     border-radius: 6px;
     overflow: hidden;
-    padding:0 !important;
+    background: #efeff4;
 }
 .page ul li a {
-    color:#333;
-    background:#efeff4;
-    display:block;
-    width:100%;
-    height:100%;
-    line-height:inherit;
+  display: block;
+  padding: 5px 15px;
 }
 .page ul li a:hover {
     color:#fff;
@@ -1554,6 +1548,14 @@ body.modal-open{
 .page ul li.active {
     color:#fff;
     background:#D9201B;
+}
+.page ul li.active a{
+  color: #fff;
+}
+.page ul li.disabled a{
+  color: #999;
+  cursor: not-allowed;
+  background: #e5e5e5;
 }
 /*info_Public_end*/
 .about img{

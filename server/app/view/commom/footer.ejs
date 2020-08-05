@@ -5,51 +5,52 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:47:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-29 19:36:59
---> 
+ * @LastEditTime: 2020-08-05 19:49:03
+-->
 <div class="content-full footer">
   <div class="content">
-      <div class="footer-nav">
-          <ul>
-            <% data.menuList.forEach((item,index) =>{ %>
-              <li>
-                  <h5><%= item.title %></h5>
-                  <% if(item.children){ %>
-                    <% item.children.forEach(children =>{ %>
-                      <a href="<%= children.url+"?pid="+ index + '&cid=' + children.id %>"><%= children.title %></a>
-                    <% }) %>
-                  <% } %>
-              </li>
-            <% }) %>
-          </ul>
-      </div>
-      <div class="footer-right">
-          <a href="" class="btn wechat-btn">
-              <img src="/public/images/weibo2_icon.png" alt="">
-              官方微博
-              <img src="<%= data.settingList[0].weiboCode %>" alt="" class="footer-code">
-          </a>
-          <a href="" class="btn wechat-btn">
-              <img src="/public/images/wechat2_icon.png" alt="">
-              微信公众号
-              <img src="<%= data.settingList[0].weChatCode %>" alt="" class="footer-code">
-          </a>
-          <a href="" class="btn oa-btn">
-              <img src="/public/images/oa_icon.png" alt="">
-              进入OA系统
-          </a>
-      </div>
+    <div class="footer-nav">
+      <ul>
+        <% data.menuList.forEach((item,index) =>{ %>
+        <li>
+          <h5><%= item.title %></h5>
+          <% if(item.children){ %>
+          <% item.children.forEach(children =>{ %>
+          <a href="<%= children.url+"?pid="+ index + '&cid=' + children.id %>"><%= children.title %></a>
+          <% }) %>
+          <% } %>
+        </li>
+        <% }) %>
+      </ul>
+    </div>
+    <div class="footer-right">
+      <a href="" class="btn wechat-btn">
+        <img src="/public/images/weibo2_icon.png" alt="">
+        官方微博
+        <img src="<%= data.settingList[0].weiboCode %>" alt="" class="footer-code">
+      </a>
+      <a href="" class="btn wechat-btn">
+        <img src="/public/images/wechat2_icon.png" alt="">
+        微信公众号
+        <img src="<%= data.settingList[0].weChatCode %>" alt="" class="footer-code">
+      </a>
+      <a href="" class="btn oa-btn">
+        <img src="/public/images/oa_icon.png" alt="">
+        进入OA系统
+      </a>
+    </div>
   </div>
   <div class="content-full footer-bottom">
-      <div class="content">
-          <p>COPYRIGHT (©) 2020 <%= data.settingList[0].title %> 备案号：<a href="http://beian.miit.gov.cn/" target="_blank"><%= data.settingList[0].record %></a></p>
+    <div class="content">
+      <p>COPYRIGHT (©) 2020 <%= data.settingList[0].title %> 备案号：<a href="http://beian.miit.gov.cn/"
+          target="_blank"><%= data.settingList[0].record %></a></p>
 
-          <select class="form-control footer-control">
-              <option>==友情链接==</option>
-              <option value="http://www.qeyuu.com">旗鱼科技</option>
-              <option value="http://www.qeyuu.com">旗鱼科技</option>
-          </select>
-      </div>
+      <select class="form-control footer-control">
+        <option>==友情链接==</option>
+        <option value="http://www.qeyuu.com">旗鱼科技</option>
+        <option value="http://www.qeyuu.com">旗鱼科技</option>
+      </select>
+    </div>
   </div>
 </div>
 
@@ -96,8 +97,8 @@
     slidesPerView: 'auto',
     spaceBetween: 0,
     navigation: {
-        nextEl: '.swiper-button-next3',
-        prevEl: '.swiper-button-prev3',
+      nextEl: '.swiper-button-next3',
+      prevEl: '.swiper-button-prev3',
     },
   });
 </script>
@@ -106,8 +107,8 @@
     slidesPerView: 4,
     spaceBetween: 15,
     navigation: {
-        nextEl: '.swiper-button-next4',
-        prevEl: '.swiper-button-prev4',
+      nextEl: '.swiper-button-next4',
+      prevEl: '.swiper-button-prev4',
     },
   });
 </script>
@@ -123,21 +124,21 @@
   });
 </script>
 <script type="text/javascript">
-    $("#scrollDiv").Scroll({
-        line:1,
-        speed:500,
-        timer:3000,
-        up:"but_up",
-        down:"but_down"
-    });
+  $("#scrollDiv").Scroll({
+    line: 1,
+    speed: 500,
+    timer: 3000,
+    up: "but_up",
+    down: "but_down"
+  });
 </script>
-<script type="text/javascript">   
+<script type="text/javascript">
 
-    $(".click-jump").click(function() {
-        $('html, body').animate({
-            scrollTop: $('.row1').offset().top
-        });
+  $(".click-jump").click(function () {
+    $('html, body').animate({
+      scrollTop: $('.row1').offset().top
     });
+  });
 
 </script>
 <script>
@@ -154,8 +155,8 @@
     observer: true,
     observeParents: true,
     pagination: {
-        el: '.photo-pagination',
-        clickable: true,
+      el: '.photo-pagination',
+      clickable: true,
     },
   });
 </script>
@@ -163,58 +164,61 @@
   var longitude = <%= data.settingList[0].longitude %>;
   var latitude = <%= data.settingList[0].latitude %>;
   //创建和初始化地图函数：
-  function initMap(){
+  function initMap() {
     createMap();//创建地图
     setMapEvent();//设置地图事件
     addMapControl();//向地图添加控件
     addMapOverlay();//向地图添加覆盖物
   }
-  function createMap(){ 
-    map = new BMap.Map("map"); 
-    map.centerAndZoom(new BMap.Point(longitude,latitude),15);
+  function createMap() {
+    map = new BMap.Map("map");
+    map.centerAndZoom(new BMap.Point(longitude, latitude), 15);
   }
-  function setMapEvent(){
+  function setMapEvent() {
     map.enableScrollWheelZoom();
     map.enableKeyboard();
     map.enableDragging();
     map.enableDoubleClickZoom()
   }
-  function addClickHandler(target,window){
-    target.addEventListener("click",function(){
+  function addClickHandler(target, window) {
+    target.addEventListener("click", function () {
       target.openInfoWindow(window);
     });
   }
-  function addMapOverlay(){
+  function addMapOverlay() {
     var markers = [
-      {content:"电话：0898-65771519邮箱：hnkunlun@vip.163.com",title:"海南昆仑体育文化股份有限公司",imageOffset: {width:-23,height:-21},position:{lat:19.971976,lng:110.492659}}
+      { content: "电话：0898-65771519邮箱：hnkunlun@vip.163.com", title: "海南昆仑体育文化股份有限公司", imageOffset: { width: -23, height: -21 }, position: { lat: 19.971976, lng: 110.492659 } }
     ];
-    for(var index = 0; index < markers.length; index++ ){
-      var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
-      var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap//public/images/icon.png",new BMap.Size(20,25),{
-        imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
-      })});
-      var label = new BMap.Label(markers[index].title,{offset: new BMap.Size(25,5)});
+    for (var index = 0; index < markers.length; index++) {
+      var point = new BMap.Point(markers[index].position.lng, markers[index].position.lat);
+      var marker = new BMap.Marker(point, {
+        icon: new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap//public/images/icon.png", new BMap.Size(20, 25), {
+          imageOffset: new BMap.Size(markers[index].imageOffset.width, markers[index].imageOffset.height)
+        })
+      });
+      var label = new BMap.Label(markers[index].title, { offset: new BMap.Size(25, 5) });
       var opts = {
         width: 200,
         title: markers[index].title,
         enableMessage: false
       };
-      var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
+      var infoWindow = new BMap.InfoWindow(markers[index].content, opts);
       marker.setLabel(label);
-      addClickHandler(marker,infoWindow);
+      addClickHandler(marker, infoWindow);
       map.addOverlay(marker);
     };
   }
   //向地图添加控件
-  function addMapControl(){
-    var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+  function addMapControl() {
+    var scaleControl = new BMap.ScaleControl({ anchor: BMAP_ANCHOR_BOTTOM_LEFT });
     scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
     map.addControl(scaleControl);
-    var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+    var navControl = new BMap.NavigationControl({ anchor: BMAP_ANCHOR_TOP_LEFT, type: BMAP_NAVIGATION_CONTROL_LARGE });
     map.addControl(navControl);
   }
   var map;
-    initMap();
- </script>
+  initMap();
+</script>
 </body>
+
 </html>
