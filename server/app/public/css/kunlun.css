@@ -2223,6 +2223,10 @@ body.modal-open{
      float: right;
      text-align: right;
  }
+ .news-info-bottom a.disabled{
+  color: #999;
+  cursor: not-allowed;
+ }
 @media screen and (max-width:1024px) {
     .banner_info .banner_info {
       height: 120%;

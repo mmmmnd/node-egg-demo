@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:23:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-29 19:41:44
+ * @LastEditTime: 2020-08-06 20:06:07
 --> 
 <% 
   var id;
@@ -14,7 +14,7 @@
 %>
 <div class="ser-info-photo">
   <div class="swiper-wrapper">
-    <% data.advertisingList.forEach(item =>{ %>
+    <% advertisingList.forEach(item =>{ %>
       <% if(item.place === 3 && item.parentId == ctx.query.pid && item.serId == id){ %>
         <% isSwiper = 1; %>
         <div class="swiper-slide">

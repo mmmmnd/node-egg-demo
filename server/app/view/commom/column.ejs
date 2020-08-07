@@ -5,18 +5,18 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:20:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-03 09:09:31
+ * @LastEditTime: 2020-08-06 19:59:44
 --> 
 <div class="nav-left">
   <div class="row-title">
       <div class="title-link"></div>
       <% const pid = ctx.query.pid %>
-      <h5><%= data.menuList[pid].title %></h5>
+      <h5><%= menuList[pid].title %></h5>
   </div>
-  <% if(data.menuList[pid].children){ %>
+  <% if(menuList[pid].children){ %>
   <div class="nav-left-list">
     <ul>
-      <% data.menuList[pid].children.forEach(item=>{ %>
+      <% menuList[pid].children.forEach(item=>{ %>
         <li>
           <a href="<%= item.url+'?pid='+[pid]+'&cid='+item.id %>" class="<%= pid === ctx.query.pid && item.id == ctx.query.cid ? 'active' : '' %>"><%= item.title %></a>
         </li>

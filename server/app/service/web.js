@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-05 19:37:34
+ * @LastEditTime: 2020-08-07 11:30:18
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
@@ -31,7 +31,7 @@ class WebService extends Service {
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
     const data = { advertisingList, menuList, settingList };
-    await ctx.render('index/index.ejs', { data });
+    await ctx.render('index/index.ejs', data);
   }
 
   async about ({ pid = 0, cid = 2 }) {
@@ -47,7 +47,7 @@ class WebService extends Service {
     const aboutDroptypeList = await AboutDroptypeDao.list(ctx, cid); // 下拉菜单
 
     const data = { menuList, settingList, advertisingList, aboutList, aboutDroptypeList };
-    await ctx.render('about/index.ejs', { data });
+    await ctx.render('about/index.ejs', data);
   }
 
   async services ({ pid = 1, cid = 8 }) {
@@ -62,7 +62,7 @@ class WebService extends Service {
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
     const data = { menuList, settingList, servicesList, advertisingList }
-    await ctx.render('services/index.ejs', { data });
+    await ctx.render('services/index.ejs', data);
   }
 
   async company ({ pid = 2, cid = 14 }) {
@@ -77,7 +77,7 @@ class WebService extends Service {
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
     const data = { menuList, settingList, companyList, advertisingList }
-    await ctx.render('company/index.ejs', { data });
+    await ctx.render('company/index.ejs', data);
   }
 
   async culture ({ pid = 3, cid = 17, page = 1 }) {
@@ -92,9 +92,28 @@ class WebService extends Service {
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
     const data = { menuList, settingList, cultureList, pages: cultureList.meta, advertisingList }
-    await ctx.render('culture/index.ejs', { data });
+    await ctx.render('culture/index.ejs', data);
   }
 
+  async culture_info ({ pid = 3, cid = 17, id = 1 }) {
+    const { ctx } = this;
+
+    const err = await error(pid, cid, 21, 16, 3);
+    if (err) return render(ctx);
+
+    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const papeInfo = await CultureDao.info(ctx, cid, id); // 详情页数据
+    const settingList = await SettingDao.list(ctx); // 基本设置
+    const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
+
+    console.log(papeInfo.current);
+    console.log(111111111);
+    await CultureDao.updateClick(ctx,id,++papeInfo.current.click); //点击浏览量
+    console.log(papeInfo.current)
+
+    const data = { menuList, settingList, papeInfo, advertisingList }
+    await ctx.render('info/index.ejs', data);
+  }
 }
 
 /**

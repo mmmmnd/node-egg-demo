@@ -5,12 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-07-30 11:10:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-30 11:12:57
+ * @LastEditTime: 2020-08-06 14:48:21
  */
 'use strict';
 
 module.exports = app => {
-  const { INTEGER, STRING } = app.Sequelize;
+  const { INTEGER, STRING, TEXT, MEDIUMINT } = app.Sequelize;
   const MzcCulture = app.model.define('mzc-culture', {
     id: {
       allowNull: !1, // 是否为空
@@ -66,6 +66,18 @@ module.exports = app => {
       type: STRING(150), // 类型
       defaultValue: '', // 默认值
       comment: '图片', // 备注
+    },
+    content: {
+      allowNull: !0, // 是否为空
+      type: TEXT, // 类型
+      defaultValue: '', // 默认值
+      comment: '内容', // 备注
+    },
+    click: {
+      allowNull: !1, // 是否为空
+      type: MEDIUMINT(8).UNSIGNED, // 类型
+      defaultValue: '0', // 默认值
+      comment: '点击次数', // 备注
     },
     created_at: {
       allowNull: !0, // 是否为空

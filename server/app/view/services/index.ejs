@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-22 09:20:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-24 09:25:11
+ * @LastEditTime: 2020-08-06 20:13:23
 --> 
 
 <%- include('/commom/header',{
-  title:data?data.servicesList[0].title:"海南昆仑体育文化股份有限公司",
-  Keywords:data?data.servicesList[0].Keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:data?data.servicesList[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  title:servicesList?servicesList.title:"海南昆仑体育文化股份有限公司",
+  Keywords:servicesList?servicesList.Keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:servicesList?servicesList.companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <%- include('/commom/banner') %>
@@ -23,14 +23,14 @@
       <div class="content-right">
         <div class="ser-top">
             <div class="ser-top-txt">
-                <h5><%= data.servicesList[0].title %></h5>
-                <p><%= data.servicesList[0].companyDescription %></p>
+                <h5><%= servicesList[0].title %></h5>
+                <p><%= servicesList[0].companyDescription %></p>
             </div>
-            <img src="<%= data.servicesList[0].servicesImage %>" alt="" class="ser-top-img">
+            <img src="<%= servicesList[0].servicesImage %>" alt="" class="ser-top-img">
         </div>
         <%- include('/commom/serInfoPhoto') %>
         <div class="ser-info-text">
-          <%- data.servicesList[0].content %>
+          <%- servicesList.content %>
         </div>
       </div>
   </div>

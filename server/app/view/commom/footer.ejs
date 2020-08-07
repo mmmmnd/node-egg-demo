@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:47:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-05 19:49:03
+ * @LastEditTime: 2020-08-06 20:16:27
 -->
 <div class="content-full footer">
   <div class="content">
     <div class="footer-nav">
       <ul>
-        <% data.menuList.forEach((item,index) =>{ %>
+        <% menuList.forEach((item,index) =>{ %>
         <li>
           <h5><%= item.title %></h5>
           <% if(item.children){ %>
@@ -27,12 +27,12 @@
       <a href="" class="btn wechat-btn">
         <img src="/public/images/weibo2_icon.png" alt="">
         官方微博
-        <img src="<%= data.settingList[0].weiboCode %>" alt="" class="footer-code">
+        <img src="<%= settingList[0].weiboCode %>" alt="" class="footer-code">
       </a>
       <a href="" class="btn wechat-btn">
         <img src="/public/images/wechat2_icon.png" alt="">
         微信公众号
-        <img src="<%= data.settingList[0].weChatCode %>" alt="" class="footer-code">
+        <img src="<%= settingList[0].weChatCode %>" alt="" class="footer-code">
       </a>
       <a href="" class="btn oa-btn">
         <img src="/public/images/oa_icon.png" alt="">
@@ -42,13 +42,13 @@
   </div>
   <div class="content-full footer-bottom">
     <div class="content">
-      <p>COPYRIGHT (©) 2020 <%= data.settingList[0].title %> 备案号：<a href="http://beian.miit.gov.cn/"
-          target="_blank"><%= data.settingList[0].record %></a></p>
+      <p>COPYRIGHT (©) 2020 <%= settingList[0].title %> 备案号：<a href="http://beian.miit.gov.cn/"
+          target="_blank"><%= settingList[0].record %></a></p>
 
       <select class="form-control footer-control">
         <option>==友情链接==</option>
-        <option value="http://www.qeyuu.com">旗鱼科技</option>
-        <option value="http://www.qeyuu.com">旗鱼科技</option>
+        <option value="JavaScript:;">莫氏科技</option>
+        <option value="JavaScript:;">莫氏科技</option>
       </select>
     </div>
   </div>
@@ -161,8 +161,8 @@
   });
 </script>
 <script type="text/javascript">
-  var longitude = <%= data.settingList[0].longitude %>;
-  var latitude = <%= data.settingList[0].latitude %>;
+  var longitude = <%= settingList.longitude %>;
+  var latitude = <%= settingList.latitude %>;
   //创建和初始化地图函数：
   function initMap() {
     createMap();//创建地图

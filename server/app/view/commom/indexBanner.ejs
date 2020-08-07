@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-02 11:55:56
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-17 17:28:31
+ * @LastEditTime: 2020-08-06 20:04:41
 --> 
 <div class="banner">
   <div class="banner-left">
@@ -14,7 +14,7 @@
               <div class="news-k" id="scrollDiv">
                   <strong>通知</strong>
                   <ul class="carousel-inner2">
-                    <% data.advertisingList.forEach((item,index)=>{ %>
+                    <% advertisingList.forEach((item,index)=>{ %>
                       <li class="item active">
                           <div>
                               <a href="<%= item.url %>">
@@ -38,7 +38,7 @@
       </div>
   </div>
   <div class="swiper-wrapper">
-    <% data.advertisingList.forEach((item,index)=>{ %>
+    <% advertisingList.forEach((item,index)=>{ %>
       <% if(item.place === 0){ %>
         <div class="swiper-slide">
           <a href="<%= item.url %>" target="_blank"><img src="<%= item.filepath %>" alt="" class="banner-img"></a>

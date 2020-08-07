@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-05 19:48:31
+ * @LastEditTime: 2020-08-06 20:11:51
 -->
 
 <%- include('/commom/header',{
-  title:data?data.companyList[0].title:"海南昆仑体育文化股份有限公司",
-  Keywords:data?data.companyList[0].Keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:data?data.companyList[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  title:companyList?companyList.title:"海南昆仑体育文化股份有限公司",
+  Keywords:companyList?companyList.Keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:companyList?companyList.companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <%- include('/commom/banner') %>
@@ -22,17 +22,17 @@
     <%- include('/commom/column') %>
     <div class="content-right">
       <div class="nav-right">
-        <% data.companyList.forEach(item => { %>
+        <% companyList.forEach(item => { %>
         <% if(item.category_id == ctx.query.cid){ %>
-        <a href="#<%= item.id %>" class="nav-btn <%= data.companyList[0] == item ?'active':''; %>"
+        <a href="#<%= item.id %>" class="nav-btn <%= companyList[0] == item ?'active':''; %>"
           data-toggle="tab"><%= item.companyTitle %></a>
         <% } %>
         <% }) %>
       </div>
       <div class="tab-content">
-        <% data.companyList.forEach(item => { %>
+        <% companyList.forEach(item => { %>
         <% if(item.category_id == ctx.query.cid){ %>
-        <div class="ser-top tab-pane fade <%= data.companyList[0] == item ?'in active':''; %>" id="<%= item.id %>">
+        <div class="ser-top tab-pane fade <%= companyList[0] == item ?'in active':''; %>" id="<%= item.id %>">
           <div class="ser-top-txt">
             <h5><%= item.companyTitle %></h5>
             <%- item.content %>
