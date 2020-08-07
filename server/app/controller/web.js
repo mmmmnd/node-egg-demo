@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-06 09:11:46
+ * @LastEditTime: 2020-08-07 15:08:11
  */
 'use strict';
 
@@ -34,6 +34,10 @@ class HelloController extends Controller {
   async culture_info () {
     const { query } = this.ctx;
     await this.ctx.service.web.culture_info(query);
+  }
+  async news () {
+    const query = this.ctx.query;
+    await this.ctx.service.web.news(query);
   }
   async error () {
     this.ctx.status = 404;

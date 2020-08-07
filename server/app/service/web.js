@@ -5,11 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-07 11:30:18
+ * @LastEditTime: 2020-08-07 17:19:22
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
 const MenuDao = require('../dao/menu');
+const NewsDao = require('../dao/news');
 const AboutDao = require('../dao/about');
 const CultureDao = require('../dao/culture');
 const companyDao = require('../dao/company');
@@ -106,13 +107,25 @@ class WebService extends Service {
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
-    console.log(papeInfo.current);
-    console.log(111111111);
-    await CultureDao.updateClick(ctx,id,++papeInfo.current.click); //点击浏览量
-    console.log(papeInfo.current)
+    await CultureDao.updateClick(ctx, id, ++papeInfo.current.click); //点击浏览量
 
     const data = { menuList, settingList, papeInfo, advertisingList }
     await ctx.render('info/index.ejs', data);
+  }
+
+  async news ({ pid = 4, cid = 22, page = 1 }) {
+    const { ctx } = this;
+
+    const err = await error(pid, cid, 25, 21, 4);
+    if (err) return render(ctx);
+
+    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const newsList = await NewsDao.list(ctx, cid, page); // culture数据
+    const settingList = await SettingDao.list(ctx); // 基本设置
+    const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
+
+    const data = { menuList, settingList, newsList, pages: newsList.meta, advertisingList }
+    await ctx.render('news/index.ejs', data);
   }
 }
 
