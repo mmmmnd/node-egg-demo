@@ -21,6 +21,7 @@ module.exports = app => {
   router.get('/culture', controller.web.culture);
   router.get('/culture_info', controller.web.culture_info);
   router.get('/news', controller.web.news);
+  router.get('/news_info', controller.web.news_info);
 
 
   // app.resources('home', '/home', app.controller.home);

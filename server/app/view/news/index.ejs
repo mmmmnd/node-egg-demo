@@ -5,12 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-07 15:07:44
+ * @LastEditTime: 2020-08-10 09:54:28
 -->
 <%- include('/commom/header',{
-  title:cultureList?cultureList.data.title:"11海南昆仑体育文化股份有限公司",
-  Keywords:cultureList?cultureList.data.Keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:cultureList?cultureList.data.companyDescription:"海南昆仑体育文化股份有限公司",
+  title:newsList?newsList.data.title:"11海南昆仑体育文化股份有限公司",
+  Keywords:newsList?newsList.data.Keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:newsList?newsList.data.companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 <%- include('/commom/banner') %>
 
@@ -21,9 +21,7 @@
     <div class="content-right">
       <div class="news-list">
         <ul>
-          <% var url = `culture?pid=${ctx.query.pid}&cid=${ctx.query.cid}`; %>
-          <% var urlInfo = `culture_info?pid=${ctx.query.pid}&cid=${ctx.query.cid}`; %>
-          <% cultureList.data.forEach(item=>{ %>
+          <% newsList.data.forEach(item=>{ %>
           <li>
             <img src="<%= item.filepath %>" alt="" class="news-list-img">
             <div class="news-list-right">

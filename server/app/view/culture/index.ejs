@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-06 20:01:56
+ * @LastEditTime: 2020-08-10 09:51:00
 -->
 <%- include('/commom/header',{
   title:cultureList?cultureList.data.title:"11海南昆仑体育文化股份有限公司",
@@ -21,8 +21,6 @@
     <div class="content-right">
       <div class="news-list">
         <ul>
-          <% var url = `culture?pid=${ctx.query.pid}&cid=${ctx.query.cid}`; %>
-          <% var urlInfo = `culture_info?pid=${ctx.query.pid}&cid=${ctx.query.cid}`; %>
           <% cultureList.data.forEach(item=>{ %>
           <li>
             <img src="<%= item.filepath %>" alt="" class="news-list-img">

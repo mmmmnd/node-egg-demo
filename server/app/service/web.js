@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-07 17:19:22
+ * @LastEditTime: 2020-08-10 09:56:15
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
@@ -83,6 +83,8 @@ class WebService extends Service {
 
   async culture ({ pid = 3, cid = 17, page = 1 }) {
     const { ctx } = this;
+    const url = `culture?pid=${pid}&cid=${cid}`;
+    const urlInfo = `culture_info?pid=${pid}&cid=${cid}`;
 
     const err = await error(pid, cid, 21, 16, 3);
     if (err) return render(ctx);
@@ -92,12 +94,13 @@ class WebService extends Service {
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
-    const data = { menuList, settingList, cultureList, pages: cultureList.meta, advertisingList }
+    const data = { menuList, settingList, cultureList, pages: cultureList.meta, advertisingList, url, urlInfo }
     await ctx.render('culture/index.ejs', data);
   }
 
   async culture_info ({ pid = 3, cid = 17, id = 1 }) {
     const { ctx } = this;
+    const urlInfo = `culture_info?pid=${pid}&cid=${cid}`;
 
     const err = await error(pid, cid, 21, 16, 3);
     if (err) return render(ctx);
@@ -109,12 +112,14 @@ class WebService extends Service {
 
     await CultureDao.updateClick(ctx, id, ++papeInfo.current.click); //点击浏览量
 
-    const data = { menuList, settingList, papeInfo, advertisingList }
+    const data = { menuList, settingList, papeInfo, advertisingList, urlInfo }
     await ctx.render('info/index.ejs', data);
   }
 
   async news ({ pid = 4, cid = 22, page = 1 }) {
     const { ctx } = this;
+    const url = `news?pid=${pid}&cid=${cid}`;
+    const urlInfo = `news_info?pid=${pid}&cid=${cid}`;
 
     const err = await error(pid, cid, 25, 21, 4);
     if (err) return render(ctx);
@@ -124,8 +129,26 @@ class WebService extends Service {
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
-    const data = { menuList, settingList, newsList, pages: newsList.meta, advertisingList }
+    const data = { menuList, settingList, newsList, pages: newsList.meta, advertisingList, url, urlInfo }
     await ctx.render('news/index.ejs', data);
+  }
+
+  async news_info ({ pid = 4, cid = 22, id = 1 }) {
+    const { ctx } = this;
+    const urlInfo = `news_info?pid=${pid}&cid=${cid}`;
+
+    const err = await error(pid, cid, 25, 21, 4);
+    if (err) return render(ctx);
+
+    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const papeInfo = await NewsDao.info(ctx, cid, id); // 详情页数据
+    const settingList = await SettingDao.list(ctx); // 基本设置
+    const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
+
+    await NewsDao.updateClick(ctx, id, ++papeInfo.current.click); //点击浏览量
+
+    const data = { menuList, settingList, papeInfo, advertisingList, urlInfo }
+    await ctx.render('info/index.ejs', data);
   }
 }
 

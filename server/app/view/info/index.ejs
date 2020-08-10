@@ -32,17 +32,16 @@
           <%- papeInfo.current.content %>
         </div>
         <div class="news-info-bottom">
-          <% var urlInfo = `culture_info?pid=${ctx.query.pid}&cid=${ctx.query.cid}`; %>
-            <% if(papeInfo.previous){ %>
-              <a href="<%= urlInfo + '&id='+papeInfo.previous.id %>">上一篇：<span><%= papeInfo.previous.cultureTitle %></span></a>
-            <% }else{ %>
-              <a href="javascript:;" class="disabled">上一篇：<span>暂无</span></a>
-            <% } %>
-            <% if(papeInfo.next){ %>
-              <a href="<%= urlInfo + '&id='+papeInfo.next.id %>">下一篇：<span><%= papeInfo.next.cultureTitle %></span></a>
-            <% }else{ %>
-              <a href="javascript:;" class="disabled">下一篇：<span>暂无</span></a>
-            <% } %>
+          <% if(papeInfo.previous){ %>
+            <a href="<%= urlInfo + '&id='+papeInfo.previous.id %>">上一篇：<span><%= papeInfo.previous.cultureTitle %></span></a>
+          <% }else{ %>
+            <a href="javascript:;" class="disabled">上一篇：<span>暂无</span></a>
+          <% } %>
+          <% if(papeInfo.next){ %>
+            <a href="<%= urlInfo + '&id='+papeInfo.next.id %>">下一篇：<span><%= papeInfo.next.cultureTitle %></span></a>
+          <% }else{ %>
+            <a href="javascript:;" class="disabled">下一篇：<span>暂无</span></a>
+          <% } %>
         </div>
       </div>
     </div>
