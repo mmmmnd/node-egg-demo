@@ -57,8 +57,7 @@
       <% if(aboutList[0].dropType ==='4'){ %>
       <div class="about2-list tab-content">
         <% aboutDroptypeList.forEach(val =>{ %>
-        <ul class="tab-pane fade in active <%= aboutDroptypeList[0] == val ?'in active':''; %> "
-          id="<%= val.id %>">
+        <ul class="tab-pane fade in active <%= aboutDroptypeList[0] == val ?'in active':''; %> " id="<%= val.id %>">
           <% aboutList.forEach(item => { %>
           <% if(item.dropTypeId == val.id){ %>
           <li>

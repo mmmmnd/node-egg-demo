@@ -3,25 +3,25 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-07-30 11:26:46
+ * @Date: 2020-08-10 15:33:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-10 15:41:34
+ * @LastEditTime: 2020-08-10 17:04:30
  */
 'use strict';
 const { Op } = require('sequelize')
 /**
- * 新闻
+ * 合作案例
  */
-class NewsDao {
+class CasesDao {
   /**
-   * 关于我们列表
+   * 列表
    * @param { Object } ctx 全局this
    * @param { Number } cid 二级菜单id
    * @param { Number } page 分页
    */
   static async list (ctx, cid, page) {
-    const pageSize = 5;
-    const news = await ctx.model.MzcNews.findAndCountAll({
+    const pageSize = cid == 26 ? 9 : 20;
+    const cases = await ctx.model.MzcCases.findAndCountAll({
       where: {
         category_id: cid,
         delete_at: null
@@ -30,15 +30,15 @@ class NewsDao {
       limit: pageSize,
     })
 
-    if (news.rows.length == 0) throw new Error('没有找到相关信息');
+    if (cases.rows.length == 0) throw new Error('没有找到相关信息');
 
     return {
-      data: news.rows,
+      data: cases.rows,
       meta: {
         current_page: parseInt(page),
         per_page: pageSize,
-        total: news.count,
-        total_pages: Math.ceil(news.count / pageSize),
+        total: cases.count,
+        total_pages: Math.ceil(cases.count / pageSize),
       }
     }
 
@@ -50,21 +50,21 @@ class NewsDao {
    * @param { Number } id 文章id号 
    */
   static async info (ctx, cid, id) {
-    const previous = await ctx.model.MzcNews.findOne({
+    const previous = await ctx.model.MzcCases.findOne({
       where: {
         category_id: cid,
         id: { [Op.lt]: id }
       }
     });
 
-    const current = await ctx.model.MzcNews.findOne({
+    const current = await ctx.model.MzcCases.findOne({
       where: {
         category_id: cid,
         id: id
       }
     });
 
-    const next = await ctx.model.MzcNews.findOne({
+    const next = await ctx.model.MzcCases.findOne({
       where: {
         category_id: cid,
         id: { [Op.gt]: id }
@@ -84,13 +84,13 @@ class NewsDao {
    * @param { Number } click 点击次数
    */
   static async updateClick (ctx, id, click) {
-    const news = await ctx.model.MzcNews.findByPk(id);
+    const cases = await ctx.model.MzcCases.findByPk(id);
 
-    if (!news) throw new Error('没有找到相关文章');
+    if (!cases) throw new Error('没有找到相关文章');
 
-    news.click = click;
-    news.save();
+    cases.click = click;
+    cases.save();
   }
 }
 
-module.exports = NewsDao;
+module.exports = CasesDao;

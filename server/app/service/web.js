@@ -5,12 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-10 09:56:15
+ * @LastEditTime: 2020-08-10 17:11:20
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
 const MenuDao = require('../dao/menu');
 const NewsDao = require('../dao/news');
+const CasesDao = require('../dao/cases');
 const AboutDao = require('../dao/about');
 const CultureDao = require('../dao/culture');
 const companyDao = require('../dao/company');
@@ -146,6 +147,41 @@ class WebService extends Service {
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
     await NewsDao.updateClick(ctx, id, ++papeInfo.current.click); //点击浏览量
+
+    const data = { menuList, settingList, papeInfo, advertisingList, urlInfo }
+    await ctx.render('info/index.ejs', data);
+  }
+
+  async cases ({ pid = 5, cid = 26, id = 1, page = 1 }) {
+    const { ctx } = this;
+    const url = `cases?pid=${pid}&cid=${cid}`;
+    const urlInfo = `cases_info?pid=${pid}&cid=${cid}`;
+
+    const err = await error(pid, cid, 28, 25, 5);
+    if (err) return render(ctx);
+
+    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const casesList = await CasesDao.list(ctx, cid, page); // case数据
+    const settingList = await SettingDao.list(ctx); // 基本设置
+    const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
+
+    const data = { menuList, settingList, casesList, pages: casesList.meta, advertisingList, url, urlInfo }
+    await ctx.render('cases/index.ejs', data);
+  }
+
+  async cases_info ({ pid = 5, cid = 26, id = 1}) {
+    const { ctx } = this;
+    const urlInfo = `cases_info?pid=${pid}&cid=${cid}`;
+
+    const err = await error(pid, cid, 28, 25, 5);
+    if (err) return render(ctx);
+
+    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const papeInfo = await CasesDao.info(ctx, cid, id); // 详情页数据
+    const settingList = await SettingDao.list(ctx); // 基本设置
+    const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
+
+    await CasesDao.updateClick(ctx, id, ++papeInfo.current.click); //点击浏览量
 
     const data = { menuList, settingList, papeInfo, advertisingList, urlInfo }
     await ctx.render('info/index.ejs', data);

@@ -1,0 +1,63 @@
+<!--
+ * @Author: 莫卓才
+ * @eMail: handsome.mo@foxmail.com
+ * @Descripttion: 描述
+ * @version: 1.0.0
+ * @Date: 2020-07-24 09:42:13
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2020-08-10 17:00:28
+-->
+<%- include('/commom/header',{
+  title:casesList?casesList.data.title:"11海南昆仑体育文化股份有限公司",
+  Keywords:casesList?casesList.data.Keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:casesList?casesList.data.companyDescription:"海南昆仑体育文化股份有限公司",
+}) %>
+<%- include('/commom/banner') %>
+
+<div class="content-full">
+  <div class="content main-info">
+
+    <%- include('/commom/column') %>
+    <div class="content-right">
+      <% if(ctx.query.cid === '26'){ %>
+        <div class="case-list">
+          <ul>
+            <% casesList.data.forEach(item=>{ %>
+              <% if(item.category_id == '26'){ %>
+                <li class="row4-slide">
+                  <a href="<%= urlInfo +'&id='+ item.id %>">
+                    <span><%= item.type %></span>
+                    <img src="<%= item.filepath %>" alt="" class="row4-img">
+                    <div class="ser-info-txt">
+                      <h5><%= item.cultureTitle %></h5>
+                      <p><%= item.created_at %></p>
+                    </div>
+                  </a>
+                </li>
+              <% } %>
+            <% }) %>
+          </ul>
+        </div>
+      <% }else{ %>
+        <div class="row5-list case2-list">
+          <ul>
+            <% casesList.data.forEach(item=>{ %>
+              <% if(item.category_id == '27'){ %>
+              <li>
+                <a href="javascript:;">
+                  <img src="<%= item.filepath %>" alt="">
+                </a>
+              </li>
+              <% } %>
+            <% }) %>
+          </ul>
+        </div>
+      <% } %>
+    </div>
+    <%- include('/commom/page',{ url }) %>
+  </div>
+</div>
+
+<%- include('/commom/serInfo') %>
+
+<%- include('/commom/footer') %>

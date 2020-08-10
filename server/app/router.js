@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-07 15:08:01
+ * @LastEditTime: 2020-08-10 17:06:17
  */
 'use strict';
 
@@ -22,6 +22,8 @@ module.exports = app => {
   router.get('/culture_info', controller.web.culture_info);
   router.get('/news', controller.web.news);
   router.get('/news_info', controller.web.news_info);
+  router.get('/cases', controller.web.cases);
+  router.get('/cases_info', controller.web.cases_info);
 
 
   // app.resources('home', '/home', app.controller.home);
