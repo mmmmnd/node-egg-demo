@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-22 09:20:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-06 20:13:23
+ * @LastEditTime: 2020-08-13 17:07:42
 --> 
 
 <%- include('/commom/header',{
-  title:servicesList?servicesList.title:"海南昆仑体育文化股份有限公司",
-  Keywords:servicesList?servicesList.keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:servicesList?servicesList.companyDescription:"海南昆仑体育文化股份有限公司",
+  title:servicesList?servicesList[0].title:"海南昆仑体育文化股份有限公司",
+  Keywords:servicesList?servicesList[0].keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:servicesList?servicesList[0].companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <%- include('/commom/banner') %>

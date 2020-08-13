@@ -8,9 +8,9 @@
  * @LastEditTime: 2020-08-06 20:03:52
 -->
 <%- include('/commom/header',{
-  title:settingList?settingList.title:"海南昆仑体育文化股份有限公司",
-  Keywords:settingList?settingList.keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:settingList?settingList.companyDescription:"海南昆仑体育文化股份有限公司",
+  title:settingList?settingList[0].title:"海南昆仑体育文化股份有限公司",
+  Keywords:settingList?settingList[0].keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:settingList?settingList[0].companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <%- include('/commom/indexBanner') %>
