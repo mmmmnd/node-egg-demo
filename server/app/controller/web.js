@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-10 17:06:32
+ * @LastEditTime: 2020-08-10 17:27:14
  */
 'use strict';
 
@@ -50,6 +50,10 @@ class HelloController extends Controller {
   async cases_info () {
     const { query } = this.ctx;
     await this.ctx.service.web.cases_info(query);
+  }
+  async recruit(){
+    const { query } = this.ctx;
+    await this.ctx.service.web.recruit(query);
   }
   async error () {
     this.ctx.status = 404;

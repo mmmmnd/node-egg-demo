@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-10 17:11:20
+ * @LastEditTime: 2020-08-12 16:50:42
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
@@ -14,11 +14,13 @@ const NewsDao = require('../dao/news');
 const CasesDao = require('../dao/cases');
 const AboutDao = require('../dao/about');
 const CultureDao = require('../dao/culture');
-const companyDao = require('../dao/company');
+const RecruitDao = require('../dao/recruit');
+const CompanyDao = require('../dao/company');
 const SettingDao = require('../dao/setting');
-const servicesDao = require('../dao/services');
+const ServicesDao = require('../dao/services');
 const AdvertisingDao = require('../dao/advertising');
 const AboutDroptypeDao = require('../dao/aboutDroptype');
+const RecruitDroptypeDao = require('../dao/recruitDroptype');
 
 
 const Service = require('egg').Service;
@@ -59,7 +61,7 @@ class WebService extends Service {
     if (err) return render(ctx);
 
     const menuList = await MenuDao.list(ctx); // 导航栏菜单
-    const servicesList = await servicesDao.list(ctx, cid); // services数据
+    const servicesList = await ServicesDao.list(ctx, cid); // services数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
@@ -74,7 +76,7 @@ class WebService extends Service {
     if (err) return render(ctx);
 
     const menuList = await MenuDao.list(ctx); // 导航栏菜单
-    const companyList = await companyDao.list(ctx, cid); // services数据
+    const companyList = await CompanyDao.list(ctx, cid); // services数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
@@ -152,7 +154,7 @@ class WebService extends Service {
     await ctx.render('info/index.ejs', data);
   }
 
-  async cases ({ pid = 5, cid = 26, id = 1, page = 1 }) {
+  async cases ({ pid = 5, cid = 26, page = 1 }) {
     const { ctx } = this;
     const url = `cases?pid=${pid}&cid=${cid}`;
     const urlInfo = `cases_info?pid=${pid}&cid=${cid}`;
@@ -169,7 +171,7 @@ class WebService extends Service {
     await ctx.render('cases/index.ejs', data);
   }
 
-  async cases_info ({ pid = 5, cid = 26, id = 1}) {
+  async cases_info ({ pid = 5, cid = 26, id = 1 }) {
     const { ctx } = this;
     const urlInfo = `cases_info?pid=${pid}&cid=${cid}`;
 
@@ -185,6 +187,23 @@ class WebService extends Service {
 
     const data = { menuList, settingList, papeInfo, advertisingList, urlInfo }
     await ctx.render('info/index.ejs', data);
+  }
+
+  async recruit ({ pid = 6, cid = 29 }) {
+    const { ctx } = this;
+
+    const err = await error(pid, cid, 31, 28, 6);
+    if (err) return render(ctx);
+
+    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+
+    const recruitList = await RecruitDao.list(ctx); // recruit页面数据
+    const recruitDroptypeList = await RecruitDroptypeDao.list(ctx); //  recruit公司数据
+    const settingList = await SettingDao.list(ctx); // 基本设置
+    const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
+
+    const data = { menuList, settingList, recruitList, recruitDroptypeList, advertisingList }
+    await ctx.render('recruit/index.ejs', data);
   }
 }
 

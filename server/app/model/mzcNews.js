@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-30 11:10:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-07 17:21:09
+ * @LastEditTime: 2020-08-12 15:08:47
  */
 'use strict';
 
 module.exports = app => {
   const { INTEGER, STRING, TEXT, MEDIUMINT } = app.Sequelize;
-  const mzcNews = app.model.define('mzc-news', {
+  const MzcNews = app.model.define('mzc-news', {
     id: {
       allowNull: !1, // 是否为空
       autoIncrement: !0, // 自增
@@ -101,5 +101,5 @@ module.exports = app => {
       underscored: !1,
     });
 
-  return mzcNews;
+  return MzcNews;
 };

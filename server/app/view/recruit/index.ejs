@@ -1,0 +1,109 @@
+<!--
+ * @Author: 莫卓才
+ * @eMail: handsome.mo@foxmail.com
+ * @Descripttion: 描述
+ * @version: 1.0.0
+ * @Date: 2020-08-10 17:26:54
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2020-08-13 16:52:22
+-->
+<%- include('/commom/header',{
+  title:recruitList?recruitList.title:"11海南昆仑体育文化股份有限公司",
+  Keywords:recruitList?recruitList.keywords:"海南昆111仑体育文化股份有限公司",
+  companyDescription:recruitList?recruitList.companyDescription:"海南111111昆仑体育文化股份有限公司",
+}) %>
+<style>
+  .dropdown-menu>.active>a,
+  .dropdown-menu>.active>a:focus,
+  .dropdown-menu>.active>a:hover {
+    background-color: #D9201B;
+  }
+</style>
+<%- include('/commom/banner') %>
+
+<div class="content-full">
+  <div class="content main-info">
+
+    <%- include('/commom/column') %>
+    <div class="content-right">
+      <% if(ctx.query.cid == 29){ %>
+        <div class="about">
+          <%- recruitList.content %>
+        </div>
+     <% }else{ %>
+      <div role="presentation" class="dropdown">
+        <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">
+          <%= recruitDroptypeList[0].dropContent %>
+          <span class="caret"></span>
+        </a>
+        <ul id="menu1" class="dropdown-menu" aria-labelledby="myTabDrop1">
+          <% recruitDroptypeList.forEach(item => { %>
+            <li><a href="#<%= item.id %>" tabindex="-1" data-toggle="tab"><%= item.dropContent %></a></li>
+          <% }) %>
+        </ul>
+      </div>
+      <div class="tab-content">
+        <% recruitDroptypeList.forEach(item => { %>
+          <div class="join tab-pane fade <%= item.id == 1 ? 'in active' : ''; %>" id="<%= item.id %>">
+            <div class="join-top">
+              <span><%= item.position %></span>
+              <span><%= item.address %></span>
+              <span><%= item.people %></span>
+              <span><%= item.education %></span>
+              <span><%= item.sex %></span>
+              <span><%= item.created_time %></span>
+            </div>
+            <% item.recruit.forEach(val => { %>
+            <div class="join-main">
+              <div class="panel-group" id="accordion<%= item.id %>" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <div class="panel-heading" role="tab" id="heading<%= val.id %>">
+                    <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" data-parent="#accordion<%= item.id %>"
+                          href="#collapse<%= val.id %>" aria-expanded="false" aria-controls="heading<%= val.id %>">
+                        <div class="join-top">
+                          <span><%= val.position %></span>
+                          <span><%= val.address %></span>
+                          <span><%= val.people %></span>
+                          <span><%= val.education %></span>
+                          <span><%= val.sex %></span>
+                          <span><%= val.created_time %></span>
+                        </div>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapse<%= val.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= val.id %>">
+                    <div class="panel-body">
+                      <%- val.content %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% }) %>
+          </div>
+        <% }) %>
+      </div>
+      <% } %>
+    </div>
+  </div>
+</div>
+<%- include('/commom/serInfo') %>
+
+<%- include('/commom/footer') %>
+<script>
+  $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+    var text = this.innerText;
+    var span = `<b class="caret"></b>`;
+    var ul = $(this).parents('ul.dropdown-menu');
+    ul.find('li').attr('class', '');
+    $('#myTabDrop1').html(text + span);
+  })
+
+  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+    var text = this.innerText;
+    if (text == '全部') {
+      $('.tab-pane').attr('class', 'tab-pane fade in active');
+    }
+  })
+</script>

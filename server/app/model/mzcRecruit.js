@@ -3,15 +3,15 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-08-10 15:27:27
+ * @Date: 2020-08-12 09:28:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-12 15:08:27
+ * @LastEditTime: 2020-08-13 16:53:13
  */
 'use strict';
 
 module.exports = app => {
-  const { INTEGER, STRING, TEXT, MEDIUMINT } = app.Sequelize;
-  const MzcCases = app.model.define('mzc-cases', {
+  const { INTEGER, STRING, TEXT } = app.Sequelize;
+  const MzcRecruit = app.model.define('mzc-recruit', {
     id: {
       allowNull: !1, // 是否为空
       autoIncrement: !0, // 自增
@@ -43,41 +43,46 @@ module.exports = app => {
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
       comment: '公司描述', // 备注
     },
-    cultureTitle: {
-      allowNull: !1, // 是否为空
-      type: STRING(60), // 类型
-      defaultValue: '', // 默认值
-      comment: '标题', // 备注
-    },
-    cultureDescription: {
-      allowNull: !1, // 是否为空
-      type: STRING, // 类型
-      defaultValue: '', // 默认值
-      comment: '描述', // 备注,
-    },
-    type: {
+    position: {
       allowNull: !1, // 是否为空
       type: STRING(20), // 类型
-      defaultValue: '体育赛事', // 默认值
-      comment: '类型', // 备注
+      defaultValue: '职位', // 默认值
+      comment: '职位', // 备注
     },
-    filepath: {
+    address: {
       allowNull: !1, // 是否为空
-      type: STRING(150), // 类型
-      defaultValue: '', // 默认值
-      comment: '图片', // 备注
+      type: STRING(20), // 类型
+      defaultValue: '地址', // 默认值
+      comment: '地址', // 备注
+    },
+    people: {
+      allowNull: !1, // 是否为空
+      type: STRING(5), // 类型
+      defaultValue: '人数', // 默认值
+      comment: '人数', // 备注
+    },
+    education: {
+      allowNull: !1, // 是否为空
+      type: STRING(10), // 类型
+      defaultValue: '学历', // 默认值
+      comment: '学历', // 备注
+    },
+    sex: {
+      allowNull: !1, // 是否为空
+      type: STRING(5), // 类型
+      defaultValue: '性别', // 默认值
+      comment: '性别', // 备注
     },
     content: {
-      allowNull: !0, // 是否为空
+      allowNull: !1, // 是否为空
       type: TEXT, // 类型
       defaultValue: '', // 默认值
       comment: '内容', // 备注
     },
-    click: {
+    created_time: {
       allowNull: !1, // 是否为空
-      type: MEDIUMINT(8).UNSIGNED, // 类型
-      defaultValue: '0', // 默认值
-      comment: '点击次数', // 备注
+      type: STRING(13), // 类型
+      comment: '发布时间', // 备注
     },
     created_at: {
       allowNull: !0, // 是否为空
@@ -97,9 +102,9 @@ module.exports = app => {
   },
     {
       timestamps: !1,
-      tableName: 'mzc-cases',
+      tableName: 'mzc-recruit',
       underscored: !1,
     });
 
-  return MzcCases;
+  return MzcRecruit;
 };
