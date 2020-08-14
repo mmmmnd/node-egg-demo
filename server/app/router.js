@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-12 16:53:30
+ * @LastEditTime: 2020-08-14 08:40:56
  */
 'use strict';
 
@@ -25,7 +25,9 @@ module.exports = app => {
   router.get('/cases', controller.web.cases);
   router.get('/cases_info', controller.web.cases_info);
   router.get('/recruit', controller.web.recruit);
-
+  router.get('/contact', controller.web.contact);
+  router.get('/captcha', controller.web.captcha);
+  router.post('/userInfo', controller.web.contactPost)
 
   app.resources('home', '/home', app.controller.home);
   router.get('*', controller.web.error); // 404

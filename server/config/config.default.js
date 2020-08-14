@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-24 16:05:50
+ * @LastEditTime: 2020-08-14 09:59:11
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -58,6 +58,12 @@ module.exports = appInfo => {
         return next();
       }
     }
+  };
+
+  config.security = {
+    csrf: {
+      enable: false,
+    },
   };
 
   // add your user config here

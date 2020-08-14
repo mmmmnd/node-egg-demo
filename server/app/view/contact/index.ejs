@@ -1,0 +1,131 @@
+<!--
+ * @Author: 莫卓才
+ * @eMail: handsome.mo@foxmail.com
+ * @Descripttion: 描述
+ * @version: 1.0.0
+ * @Date: 2020-08-10 17:26:54
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2020-08-14 16:47:57
+-->
+<%- include('/commom/header',{
+  title:settingList?settingList[0].title:"1",
+  Keywords:settingList?settingList[0].keywords:"海南昆111仑体育文化股份有限公司",
+  companyDescription:settingList?settingList[0].companyDescription:"海南111111昆仑体育文化股份有限公司",
+}) %>
+<%- include('/commom/banner') %>
+
+<div class="content-full">
+  <div class="content main-info">
+
+    <%- include('/commom/column') %>
+    <div class="content-right">
+      <% if(ctx.query.cid == 32){ %>
+      <div class="row7-main contact-info">
+        <div class="row7-left">
+          <div class="cont-top">
+            <div class="row7-icon">
+              <a href="contact2.html" class="cont-icon">
+                <img src="/public/images/mes_icon.png" alt="">
+              </a>
+              <a href="javascript:;" class="cont-icon cont-hover">
+                <img src="/public/images/weibo_icon.png" alt="">
+                <img src="<%= settingList[0].weChatCode %>" alt="" class="qrcode-img">
+              </a>
+              <a href="javascript:;" class="cont-icon cont-hover">
+                <img src="/public/images/wechat_icon.png" alt="">
+                <img src="<%= settingList[0].weChatCode %>" alt="" class="qrcode-img">
+              </a>
+              <a href="javascript:;" class="cont-icon">
+                <img src="/public/images/qq_icon.png" alt="">
+              </a>
+            </div>
+            <h5 class="row7-h5"><%= settingList[0].companyName %></h5>
+          </div>
+          <div class="cont-bottom row">
+            <div class="col-lg-6">
+              <h4>联系方式</h4>
+              <p><%= settingList[0].phone %></p>
+              <p><%= settingList[0].email %></p>
+            </div>
+            <div class="col-lg-6">
+              <h4>详细地址</h4>
+              <p><%= settingList[0].address %></p>
+            </div>
+          </div>
+        </div>
+        <div class="row7-right">
+          <div id="map"></div>
+        </div>
+      </div>
+      <% }else{ %>
+      <form action="" class="cont-mes">
+        <div class="row">
+          <div class="form-group col-lg-4">
+            <label>姓名</label>
+            <input type="text" class="form-control" placeholder="请输入姓名" name="name">
+          </div>
+          <div class="form-group col-lg-4">
+            <label>电话</label>
+            <input type="text" class="form-control" placeholder="请输入电话" name="phone">
+          </div>
+          <div class="form-group col-lg-4">
+            <label>邮箱</label>
+            <input type="text" class="form-control" placeholder="请输入邮箱" name="email">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-lg-12">
+            <label>标题</label>
+            <input type="text" class="form-control" placeholder="请输入标题" name="title">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-lg-12">
+            <label>内容</label>
+            <textarea class="form-control" rows="5" name="content" placeholder="请输入内容"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-12">
+            <label>验证码</label>
+          </div>
+          <div class="form-group col-lg-6">
+            <div class="form-group col-lg-4 yzm-input">
+              <input type="text" class="form-control" placeholder="请输入验证码" name="captcha">
+            </div>
+            <div class="form-group col-lg-4 yzm-img">
+              <img src="/captcha?height=38&amp;width=137&amp;fontSize=50"
+                onclick="this.src='captcha?height=38&amp;width=137&amp;fontSize=50&amp;'+Math.random();">
+            </div>
+            <div class="form-group col-lg-4">
+              <a href="javascript:;" class="mes-btn" onclick="postUserInfo()">提交</a>
+            </div>
+          </div>
+        </div>
+      </form>
+      <% } %>
+    </div>
+  </div>
+</div>
+<%- include('/commom/serInfo') %>
+
+<%- include('/commom/footer') %>
+<script>
+  function postUserInfo() {
+    var name = $('input[name=name]').val();
+    var phone = $('input[name=phone]').val();
+    var email = $('input[name=email]').val();
+    var title = $('input[name=title]').val();
+    var content = $('input[name=content]').val();
+    var captcha = $('input[name=captcha]').val();
+    var data = { name, phone, email, title, content, captcha };
+    $.post('/userInfo', { data }, res => {
+      if (res.code === 0) {
+        alert(res.msg)
+      } else {
+        alert(res.msg);
+        $(".yzm-img img").click();
+      }
+    })
+  }
+</script>

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-12 16:50:42
+ * @LastEditTime: 2020-08-14 10:54:50
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
@@ -22,6 +22,7 @@ const AdvertisingDao = require('../dao/advertising');
 const AboutDroptypeDao = require('../dao/aboutDroptype');
 const RecruitDroptypeDao = require('../dao/recruitDroptype');
 
+const svgCaptcha = require('svg-captcha');
 
 const Service = require('egg').Service;
 
@@ -196,7 +197,6 @@ class WebService extends Service {
     if (err) return render(ctx);
 
     const menuList = await MenuDao.list(ctx); // 导航栏菜单
-
     const recruitList = await RecruitDao.list(ctx); // recruit页面数据
     const recruitDroptypeList = await RecruitDroptypeDao.list(ctx); //  recruit公司数据
     const settingList = await SettingDao.list(ctx); // 基本设置
@@ -205,7 +205,62 @@ class WebService extends Service {
     const data = { menuList, settingList, recruitList, recruitDroptypeList, advertisingList }
     await ctx.render('recruit/index.ejs', data);
   }
+
+  async contact ({ pid = 7, cid = 32 }) {
+    const { ctx } = this;
+
+    const err = await error(pid, cid, 34, 31, 7);
+    if (err) return render(ctx);
+
+    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const settingList = await SettingDao.list(ctx); // 基本设置
+    const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
+
+    const data = { menuList, settingList, advertisingList }
+    await ctx.render('contact/index.ejs', data);
+  }
+
+  async contactPost (params) {
+    const { ctx } = this;
+    const { name, phone, email, title, content, captcha } = params.data;
+    const code = ctx.session.code;
+
+    if (code !== captcha) {
+      return ctx.body = {
+        code: 1,
+        success: false,
+        msg: '验证码错误',
+      }
+    } else {
+      return ctx.body = {
+        code: 0,
+        success: true,
+        msg: '提交成功！',
+      }
+    }
+  }
+
+  async captcha ({ width = 50, height = 100, fontSize = 50 }) {
+    const { ctx } = this;
+
+    const options = {
+      size: 4,
+      ignoreChars: '0oO1ilI',
+      fontSize,
+      width,
+      height,
+      color: true,
+      bacground: '#cc9966'
+    };
+
+    // let captcha = svgCaptcha.createMathExpr(options)
+    let captcha = svgCaptcha.create(options)
+    ctx.session.code = captcha.text.toLowerCase();
+    ctx.response.type = 'image/svg+xml';
+    ctx.body = captcha.data;
+  }
 }
+
 
 /**
  * 判断url导航栏参数

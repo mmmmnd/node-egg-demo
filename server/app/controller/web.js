@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-10 17:27:14
+ * @LastEditTime: 2020-08-14 10:36:12
  */
 'use strict';
 
 const Controller = require('egg').Controller;
 
-class HelloController extends Controller {
+class WebController extends Controller {
   async index () {
     await this.ctx.service.web.index();
   }
@@ -51,9 +51,21 @@ class HelloController extends Controller {
     const { query } = this.ctx;
     await this.ctx.service.web.cases_info(query);
   }
-  async recruit(){
+  async recruit () {
     const { query } = this.ctx;
     await this.ctx.service.web.recruit(query);
+  }
+  async contact () {
+    const { query } = this.ctx;
+    await this.ctx.service.web.contact(query);
+  }
+  async contactPost () {
+    const params = this.ctx.request.body;
+    await this.ctx.service.web.contactPost(params);
+  }
+  async captcha () {
+    const { query } = this.ctx;
+    await this.ctx.service.web.captcha(query);
   }
   async error () {
     this.ctx.status = 404;
@@ -61,4 +73,4 @@ class HelloController extends Controller {
   }
 }
 
-module.exports = HelloController;
+module.exports = WebController;
