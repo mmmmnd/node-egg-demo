@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-14 10:54:50
+ * @LastEditTime: 2020-08-17 17:18:48
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
@@ -220,26 +220,6 @@ class WebService extends Service {
     await ctx.render('contact/index.ejs', data);
   }
 
-  async contactPost (params) {
-    const { ctx } = this;
-    const { name, phone, email, title, content, captcha } = params.data;
-    const code = ctx.session.code;
-
-    if (code !== captcha) {
-      return ctx.body = {
-        code: 1,
-        success: false,
-        msg: '验证码错误',
-      }
-    } else {
-      return ctx.body = {
-        code: 0,
-        success: true,
-        msg: '提交成功！',
-      }
-    }
-  }
-
   async captcha ({ width = 50, height = 100, fontSize = 50 }) {
     const { ctx } = this;
 
@@ -253,8 +233,8 @@ class WebService extends Service {
       bacground: '#cc9966'
     };
 
-    // let captcha = svgCaptcha.createMathExpr(options)
-    let captcha = svgCaptcha.create(options)
+    let captcha = svgCaptcha.createMathExpr(options)
+    // let captcha = svgCaptcha.create(options)
     ctx.session.code = captcha.text.toLowerCase();
     ctx.response.type = 'image/svg+xml';
     ctx.body = captcha.data;

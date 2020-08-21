@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-30 11:26:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-10 15:42:04
+ * @LastEditTime: 2020-08-19 17:14:57
  */
 'use strict';
 const { Op } = require('sequelize')
@@ -24,7 +24,7 @@ class CultureDao {
     const culture = await ctx.model.MzcCulture.findAndCountAll({
       where: {
         category_id: cid,
-        delete_at: null
+        deleted_at: null
       },
       offset: (page - 1) * pageSize,
       limit: pageSize,
@@ -54,6 +54,7 @@ class CultureDao {
     const previous = await ctx.model.MzcCulture.findOne({
       where: {
         category_id: cid,
+        deleted_at: null,
         id: { [Op.lt]: id }
       }
     });
@@ -68,6 +69,7 @@ class CultureDao {
     const next = await ctx.model.MzcCulture.findOne({
       where: {
         category_id: cid,
+        deleted_at: null,
         id: { [Op.gt]: id }
       }
     });

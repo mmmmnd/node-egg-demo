@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-23 20:20:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-12 12:38:58
+ * @LastEditTime: 2020-08-19 17:15:49
  */
 'use strict';
 
@@ -22,6 +22,7 @@ class ServicesDao {
     return await ctx.model.MzcServices.findAll({
       where: {
         category_id: cid,
+        deleted_at: null
       },
     })
   }

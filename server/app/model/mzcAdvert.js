@@ -5,12 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 19:53:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-29 17:23:58
+ * @LastEditTime: 2020-08-19 09:27:42
  */
 'use strict';
 
+const moment = require('moment');
+
 module.exports = app => {
-  const { INTEGER, STRING, BOOLEAN } = app.Sequelize;
+  const { INTEGER, STRING, BOOLEAN, DATE } = app.Sequelize;
   const MzcAdvert = app.model.define('mzc-advert', {
     id: {
       allowNull: !1, // 是否为空
@@ -87,24 +89,32 @@ module.exports = app => {
     },
     created_at: {
       allowNull: !0, // 是否为空
-      type: STRING(13), // 类型
+      type: DATE, // 类型
       comment: '创建时间', // 备注
+      get () {
+        return moment(this.getDataValue('created_at')).format('YYYY-MM-DD');
+      }
     },
     updated_at: {
       allowNull: !0, // 是否为空
-      type: STRING(13), // 类型
+      type: DATE, // 类型
       comment: '修改时间', // 备注
+      get () {
+        return moment(this.getDataValue('updated_at')).valueOf();
+      }
     },
-    delete_at: {
+    deleted_at: {
       allowNull: !0, // 是否为空
-      type: STRING(13), // 类型
+      type: DATE, // 类型
       comment: '删除时间', // 备注
+      get () {
+        return moment(this.getDataValue('deleted_at')).valueOf();
+      }
     },
   },
-  {
-    timestamps: !1,
-    tableName: 'mzc-advert',
-    underscored: !1,
-  });
+    {
+      tableName: 'mzc-advert',
+    });
+
   return MzcAdvert;
 };

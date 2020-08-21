@@ -5,12 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-07-14 20:43:41
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-21 10:51:44
+ * @LastEditTime: 2020-08-19 17:18:47
  */
 'use strict';
 
+const moment = require('moment');
+
 module.exports = app => {
-  const { INTEGER, STRING } = app.Sequelize;
+  const { INTEGER, STRING, DATE } = app.Sequelize;
   const MzcSetting = app.model.define('mzc-setting', {
     id: {
       allowNull: !1, // 是否为空
@@ -99,24 +101,32 @@ module.exports = app => {
     },
     created_at: {
       allowNull: !0, // 是否为空
-      type: STRING(13), // 类型
+      type: DATE, // 类型
       comment: '创建时间', // 备注
+      get () {
+        return moment(this.getDataValue('updated_at')).valueOf();
+      }
     },
     updated_at: {
       allowNull: !0, // 是否为空
-      type: STRING(13), // 类型
+      type: DATE, // 类型
       comment: '修改时间', // 备注
+      get () {
+        return moment(this.getDataValue('updated_at')).valueOf();
+      }
     },
-    delete_at: {
+    deleted_at: {
       allowNull: !0, // 是否为空
-      type: STRING(13), // 类型
+      type: DATE, // 类型
       comment: '删除时间', // 备注
+      get () {
+        return moment(this.getDataValue('deleted_at')).valueOf();
+      }
     },
   }, {
-    timestamps: !1,
     tableName: 'mzc-setting',
-    underscored: !1,
   });
+
   return MzcSetting;
 };
 

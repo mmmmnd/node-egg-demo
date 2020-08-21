@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-14 10:36:12
+ * @LastEditTime: 2020-08-17 16:32:21
  */
 'use strict';
 
@@ -58,10 +58,6 @@ class WebController extends Controller {
   async contact () {
     const { query } = this.ctx;
     await this.ctx.service.web.contact(query);
-  }
-  async contactPost () {
-    const params = this.ctx.request.body;
-    await this.ctx.service.web.contactPost(params);
   }
   async captcha () {
     const { query } = this.ctx;

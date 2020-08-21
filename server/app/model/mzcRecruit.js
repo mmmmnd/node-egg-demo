@@ -5,12 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-08-12 09:28:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-13 16:53:13
+ * @LastEditTime: 2020-08-19 17:18:36
  */
 'use strict';
 
+const moment = require('moment');
+
 module.exports = app => {
-  const { INTEGER, STRING, TEXT } = app.Sequelize;
+  const { INTEGER, STRING, TEXT, DATE } = app.Sequelize;
   const MzcRecruit = app.model.define('mzc-recruit', {
     id: {
       allowNull: !1, // 是否为空
@@ -21,7 +23,7 @@ module.exports = app => {
     },
     category_id: {
       allowNull: !1, // 是否为空
-      type: INTEGER, // 类型
+      type: INTEGER(8).UNSIGNED, // 类型
       defaultValue: '0', // 默认值
       comment: '分类id', // 备注
     },
@@ -81,30 +83,45 @@ module.exports = app => {
     },
     created_time: {
       allowNull: !1, // 是否为空
-      type: STRING(13), // 类型
+      type: DATE, // 类型
       comment: '发布时间', // 备注
+      get () { //方法类型
+        return moment(this.getDataValue('created_time')).format('YYYY-MM-DD');
+      }
     },
     created_at: {
       allowNull: !0, // 是否为空
-      type: STRING(13), // 类型
+      type: DATE, // 类型
       comment: '创建时间', // 备注
+      get () {
+        return moment(this.getDataValue('created_at')).valueOf();
+      }
     },
     updated_at: {
       allowNull: !0, // 是否为空
-      type: STRING(13), // 类型
+      type: DATE, // 类型
       comment: '修改时间', // 备注
+      get () {
+        return moment(this.getDataValue('updated_at')).valueOf();
+      }
     },
-    delete_at: {
+    deleted_at: {
       allowNull: !0, // 是否为空
-      type: STRING(13), // 类型
+      type: DATE, // 类型
       comment: '删除时间', // 备注
+      get () {
+        return moment(this.getDataValue('deleted_at')).valueOf();
+      }
     },
   },
     {
-      timestamps: !1,
       tableName: 'mzc-recruit',
-      underscored: !1,
-    });
+    }, {
+  });
+
+  MzcRecruit.associate = function () {
+    MzcRecruit.belongsTo(app.model.MzcRecruitDroptype, { foreignKey: 'category_id', targetKey: 'id', as: 'recruit' });
+  }
 
   return MzcRecruit;
 };

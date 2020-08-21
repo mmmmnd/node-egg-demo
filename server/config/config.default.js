@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-14 09:59:11
+ * @LastEditTime: 2020-08-19 09:25:15
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -43,20 +43,15 @@ module.exports = appInfo => {
     password: '123456',
     database: 'egg-demo',
     timezone: '+08:00',
+    logging: false,//输出日志信息
     define: {  // model的全局配置
       timestamps: true,   // 添加create,update,delete时间戳
       paranoid: true,   // 添加软删除
       freezeTableName: true,  // 防止修改表名为复数
-      underscored: false  // 防止驼峰式字段被默认转为下划线
-    },
-    dialectOptions: {  // 让读取date类型数据时返回字符串而不是UTC时间
-      dateStrings: true,
-      typeCast (field, next) {
-        if (field.type === "DATETIME") {
-          return field.string();
-        }
-        return next();
-      }
+      underscored: false,  // 防止驼峰式字段被默认转为下划线
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+      deletedAt: 'deleted_at',
     }
   };
 

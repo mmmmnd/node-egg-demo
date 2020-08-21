@@ -14,6 +14,7 @@
  */
 module.exports = app => {
   const { router, controller } = app;
+  // 前端路由
   router.get('/', controller.web.index);
   router.get('/about', controller.web.about);
   router.get('/services', controller.web.services);
@@ -27,7 +28,9 @@ module.exports = app => {
   router.get('/recruit', controller.web.recruit);
   router.get('/contact', controller.web.contact);
   router.get('/captcha', controller.web.captcha);
-  router.post('/userInfo', controller.web.contactPost)
+
+  // message
+  router.post('/api/message/userInfo', controller.message.userInfo)
 
   app.resources('home', '/home', app.controller.home);
   router.get('*', controller.web.error); // 404

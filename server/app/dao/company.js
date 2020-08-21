@@ -22,6 +22,7 @@ class CompanyDao {
     return await ctx.model.MzcCompany.findAll({
       where: {
         category_id: cid,
+        deleted_at: null
       },
     });// 公司简介
   }

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-10 15:33:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-10 17:04:30
+ * @LastEditTime: 2020-08-19 17:14:41
  */
 'use strict';
 const { Op } = require('sequelize')
@@ -24,7 +24,7 @@ class CasesDao {
     const cases = await ctx.model.MzcCases.findAndCountAll({
       where: {
         category_id: cid,
-        delete_at: null
+        deleted_at: null
       },
       offset: (page - 1) * pageSize,
       limit: pageSize,
@@ -53,13 +53,16 @@ class CasesDao {
     const previous = await ctx.model.MzcCases.findOne({
       where: {
         category_id: cid,
+        deleted_at: null,
         id: { [Op.lt]: id }
+
       }
     });
 
     const current = await ctx.model.MzcCases.findOne({
       where: {
         category_id: cid,
+        deleted_at: null,
         id: id
       }
     });
@@ -67,6 +70,7 @@ class CasesDao {
     const next = await ctx.model.MzcCases.findOne({
       where: {
         category_id: cid,
+        deleted_at: null,
         id: { [Op.gt]: id }
       }
     });
