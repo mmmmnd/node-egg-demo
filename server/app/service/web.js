@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-17 17:18:48
+ * @LastEditTime: 2020-08-21 15:06:43
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
@@ -35,7 +35,12 @@ class WebService extends Service {
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
-    const data = { advertisingList, menuList, settingList };
+    const servicesList = await ServicesDao.lists(ctx); // services数据
+    const newsList = await NewsDao.lists(ctx); // services数据
+    const casesList = await CasesDao.lists(ctx, 26); // case数据
+    const casesLists = await CasesDao.lists(ctx, 27); // case数据
+
+    const data = { advertisingList, menuList, settingList, servicesList, newsList, casesList, casesLists };
     await ctx.render('index/index.ejs', data);
   }
 

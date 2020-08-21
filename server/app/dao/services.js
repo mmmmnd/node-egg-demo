@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-23 20:20:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 17:15:49
+ * @LastEditTime: 2020-08-21 11:15:00
  */
 'use strict';
 
@@ -22,6 +22,19 @@ class ServicesDao {
     return await ctx.model.MzcServices.findAll({
       where: {
         category_id: cid,
+        deleted_at: null
+      },
+    })
+  }
+
+  /**
+   * 服务领域列表
+   * @param { Object } ctx 全局this
+   * @param { Number } cid 二级菜单id
+   */
+  static async lists (ctx, cid) {
+    return await ctx.model.MzcServices.findAll({
+      where: {
         deleted_at: null
       },
     })

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-30 11:10:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 09:45:35
+ * @LastEditTime: 2020-08-21 11:30:19
  */
 'use strict';
 
@@ -26,6 +26,12 @@ module.exports = app => {
       type: INTEGER, // 类型
       defaultValue: '0', // 默认值
       comment: '分类id', // 备注
+    },
+    category: {
+      allowNull: !0, // 是否为空
+      type: STRING(20), // 类型
+      defaultValue: '', // 默认值
+      comment: '分类', // 备注
     },
     title: {
       allowNull: !1, // 是否为空

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-10 15:33:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 17:14:41
+ * @LastEditTime: 2020-08-21 15:07:09
  */
 'use strict';
 const { Op } = require('sequelize')
@@ -31,6 +31,34 @@ class CasesDao {
     })
 
     if (cases.rows.length == 0) throw new Error('没有找到相关信息');
+
+    return {
+      data: cases.rows,
+      meta: {
+        current_page: parseInt(page),
+        per_page: pageSize,
+        total: cases.count,
+        total_pages: Math.ceil(cases.count / pageSize),
+      }
+    }
+
+  }
+  /**
+ * 列表
+ * @param { Object } ctx 全局this
+ * @param { Number } cid 二级菜单id
+ * @param { Number } page 分页
+ */
+  static async lists (ctx, cid, page = 1) {
+    const pageSize = cid == 26 ? 5 : 10;
+    const cases = await ctx.model.MzcCases.findAndCountAll({
+      where: {
+        category_id: cid,
+        deleted_at: null
+      },
+      offset: (page - 1) * pageSize,
+      limit: pageSize,
+    })
 
     return {
       data: cases.rows,

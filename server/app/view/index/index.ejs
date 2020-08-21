@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:09:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-06 20:03:52
+ * @LastEditTime: 2020-08-21 15:11:29
 -->
 <%- include('/commom/header',{
   title:settingList?settingList[0].title:"海南昆仑体育文化股份有限公司",
@@ -43,21 +43,11 @@
       </div>
       <div class="ser-nav">
         <ul>
+          <% menuList[1].children.forEach(item=>{ %>
           <li>
-            <a href="service.html">体育赛事</a>
+            <a href="<%= item.url+'?pid='+[1]+'&cid='+item.id %>"><%= item.title %></a>
           </li>
-          <li>
-            <a href="service.html">文化服务</a>
-          </li>
-          <li>
-            <a href="service.html">电竞教育</a>
-          </li>
-          <li>
-            <a href="service.html">体验式培训</a>
-          </li>
-          <li>
-            <a href="service.html">会议会展</a>
-          </li>
+          <% }) %>
         </ul>
       </div>
 
@@ -70,51 +60,19 @@
     <div class="row2-right">
       <div class="swiper-container row2-swiper">
         <div class="swiper-wrapper row2-wrapper">
+          <% servicesList.forEach(item=>{ %>
           <div class="swiper-slide">
             <div class="row2-txt">
-              <h5>体育赛事</h5>
-              <p>经过长期以来的业务发展和积累，公司汇集来自体育、传媒、广告、会展行业的精英人士。国内一流媒体平台达成了战略合作关系。</p>
-              <a href="" class="row2-btn"><img src="/public/images/more_icon.png" alt=""></a>
+              <h5><%= item.category %></h5>
+              <p><%= item.companyDescription %></p>
+              <a href="/services?pid=1&cid=<%= item.category_id %>" class="row2-btn">
+                <img src="/public/images/more_icon.png" alt="">
+              </a>
             </div>
             <div class="row2-border"></div>
-            <img src="/public/images/ser1.png" alt="" class="row2-img">
+            <img src="<%= item.servicesImage %>" alt="" class="row2-img">
           </div>
-          <div class="swiper-slide">
-            <div class="row2-txt">
-              <h5>文化服务</h5>
-              <p>经过长期以来的业务发展和积累，公司汇集来自体育、传媒、广告、会展行业的精英人士。国内一流媒体平台达成了战略合作关系。</p>
-              <a href="" class="row2-btn"><img src="/public/images/more_icon.png" alt=""></a>
-            </div>
-            <div class="row2-border"></div>
-            <img src="/public/images/ser2.png" alt="" class="row2-img">
-          </div>
-          <div class="swiper-slide">
-            <div class="row2-txt">
-              <h5>电竞教育</h5>
-              <p>经过长期以来的业务发展和积累，公司汇集来自体育、传媒、广告、会展行业的精英人士。国内一流媒体平台达成了战略合作关系。</p>
-              <a href="" class="row2-btn"><img src="/public/images/more_icon.png" alt=""></a>
-            </div>
-            <div class="row2-border"></div>
-            <img src="/public/images/ser3.png" alt="" class="row2-img">
-          </div>
-          <div class="swiper-slide">
-            <div class="row2-txt">
-              <h5>体验式培训</h5>
-              <p>经过长期以来的业务发展和积累，公司汇集来自体育、传媒、广告、会展行业的精英人士。国内一流媒体平台达成了战略合作关系。</p>
-              <a href="" class="row2-btn"><img src="/public/images/more_icon.png" alt=""></a>
-            </div>
-            <div class="row2-border"></div>
-            <img src="/public/images/ser4.png" alt="" class="row2-img">
-          </div>
-          <div class="swiper-slide">
-            <div class="row2-txt">
-              <h5>会议会展</h5>
-              <p>经过长期以来的业务发展和积累，公司汇集来自体育、传媒、广告、会展行业的精英人士。国内一流媒体平台达成了战略合作关系。</p>
-              <a href="" class="row2-btn"><img src="/public/images/more_icon.png" alt=""></a>
-            </div>
-            <div class="row2-border"></div>
-            <img src="/public/images/ser1.png" alt="" class="row2-img">
-          </div>
+          <% }) %>
         </div>
       </div>
     </div>
@@ -126,90 +84,28 @@
           <div class="title-link"></div>
           <h5>新闻中心</h5>
         </div>
-        <a href="news.html" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
+        <a href="/news?pid=4&cid=22" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
       </div>
       <div class="row3-swiper">
         <div class="swiper-wrapper">
+          <% newsList.forEach(item=>{ %>
           <div class="swiper-slide row3-slide">
-            <a href="news_info.html">
+            <a href="news_info?pid=4&cid=<%= item.category_id %>&id=<%= item.id %>">
               <div class="row3-img">
-                <span class="news-tab">企业新闻</span>
-                <img src="/public/images/news1.png" alt="">
+                <span class="news-tab"><%= item.category %></span>
+                <img src="<%= item.filepath %>" alt="">
               </div>
               <div class="row3-txt">
-                <h5>近千名越野爱好者挑战“中国版卢比肯路” “岩路·灵鹫山国际森林汽车穿越大赛”今日开幕！</h5>
-                <p>碧海连天远，琼崖尽是春。提起海南人们往往想到度假天堂，旅游成为海南的标签。</p>
+                <h5><%= item.cultureTitle %></h5>
+                <p><%= item.companyDescription %></p>
                 <div class="row3-data">
-                  <p>2020/05/14</p>
+                  <p><%= item.created_at %></p>
                   <img src="/public/images/news_icon.png" alt="">
                 </div>
               </div>
             </a>
           </div>
-          <div class="swiper-slide row3-slide">
-            <a href="news_info.html">
-              <div class="row3-img">
-                <span class="news-tab">企业新闻</span>
-                <img src="/public/images/news2.png" alt="">
-              </div>
-              <div class="row3-txt">
-                <h5>近千名越野爱好者挑战“中国版卢比肯路” “岩路·灵鹫山国际森林汽车穿越大赛”今日开幕！</h5>
-                <p>碧海连天远，琼崖尽是春。提起海南人们往往想到度假天堂，旅游成为海南的标签。</p>
-                <div class="row3-data">
-                  <p>2020/05/14</p>
-                  <img src="/public/images/news_icon.png" alt="">
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="swiper-slide row3-slide">
-            <a href="news_info.html">
-              <div class="row3-img">
-                <span class="news-tab">企业新闻</span>
-                <img src="/public/images/news3.png" alt="">
-              </div>
-              <div class="row3-txt">
-                <h5>近千名越野爱好者挑战“中国版卢比肯路” “岩路·灵鹫山国际森林汽车穿越大赛”今日开幕！</h5>
-                <p>碧海连天远，琼崖尽是春。提起海南人们往往想到度假天堂，旅游成为海南的标签。</p>
-                <div class="row3-data">
-                  <p>2020/05/14</p>
-                  <img src="/public/images/news_icon.png" alt="">
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="swiper-slide row3-slide">
-            <a href="news_info.html">
-              <div class="row3-img">
-                <span class="news-tab">企业新闻</span>
-                <img src="/public/images/news4.png" alt="">
-              </div>
-              <div class="row3-txt">
-                <h5>近千名越野爱好者挑战“中国版卢比肯路” “岩路·灵鹫山国际森林汽车穿越大赛”今日开幕！</h5>
-                <p>碧海连天远，琼崖尽是春。提起海南人们往往想到度假天堂，旅游成为海南的标签。</p>
-                <div class="row3-data">
-                  <p>2020/05/14</p>
-                  <img src="/public/images/news_icon.png" alt="">
-                </div>
-              </div>
-            </a>
-          </div>
-          <div class="swiper-slide row3-slide">
-            <a href="news_info.html">
-              <div class="row3-img">
-                <span class="news-tab">企业新闻</span>
-                <img src="/public/images/news1.png" alt="">
-              </div>
-              <div class="row3-txt">
-                <h5>近千名越野爱好者挑战“中国版卢比肯路” “岩路·灵鹫山国际森林汽车穿越大赛”今日开幕！</h5>
-                <p>碧海连天远，琼崖尽是春。提起海南人们往往想到度假天堂，旅游成为海南的标签。</p>
-                <div class="row3-data">
-                  <p>2020/05/14</p>
-                  <img src="/public/images/news_icon.png" alt="">
-                </div>
-              </div>
-            </a>
-          </div>
+          <% }) %>
         </div>
       </div>
     </div>
@@ -225,63 +121,24 @@
         <div class="title-link"></div>
         <h5>服务案例</h5>
       </div>
-      <a href="case.html" class="more-btn">查看更多<img src="/public/images/more_icon3.png" alt=""></a>
+      <a href="/cases?pid=5&cid=26" class="more-btn">查看更多<img src="/public/images/more_icon3.png" alt=""></a>
     </div>
 
     <div class="row4-swiper">
       <div class="swiper-wrapper">
+        <% casesList.data.forEach(item =>{ %>
         <div class="swiper-slide row4-slide">
-          <a href="case_info.html">
-            <img src="/public/images/case1.png" alt="" class="row4-img">
+          <a href="/cases_info?pid=5&cid=<%= item.category_id %>&id=<%= item.id %>">
+            <img src="<%= item.filepath %>" alt="" class="row4-img">
             <div class="row4-txt">
-              <h5>助力全民健身，广东省“百馆计划”项目正式启动</h5>
-              <p>2020/05/14</p>
+              <h5><%= item.cultureTitle %></h5>
+              <p><%= item.created_at %></p>
             </div>
             <div class="row4-mask"></div>
           </a>
         </div>
-        <div class="swiper-slide row4-slide">
-          <a href="case_info.html">
-            <img src="/public/images/case2.png" alt="" class="row4-img">
-            <div class="row4-txt">
-              <h5>助力全民健身，广东省“百馆计划”项目正式启动</h5>
-              <p>2020/05/14</p>
-            </div>
-            <div class="row4-mask"></div>
-          </a>
-        </div>
-        <div class="swiper-slide row4-slide">
-          <a href="case_info.html">
-            <img src="/public/images/case3.png" alt="" class="row4-img">
-            <div class="row4-txt">
-              <h5>助力全民健身，广东省“百馆计划”项目正式启动</h5>
-              <p>2020/05/14</p>
-            </div>
-            <div class="row4-mask"></div>
-          </a>
-        </div>
-        <div class="swiper-slide row4-slide">
-          <a href="case_info.html">
-            <img src="/public/images/case2.png" alt="" class="row4-img">
-            <div class="row4-txt">
-              <h5>助力全民健身，广东省“百馆计划”项目正式启动</h5>
-              <p>2020/05/14</p>
-            </div>
-            <div class="row4-mask"></div>
-          </a>
-        </div>
-        <div class="swiper-slide row4-slide">
-          <a href="case_info.html">
-            <img src="/public/images/case1.png" alt="" class="row4-img">
-            <div class="row4-txt">
-              <h5>助力全民健身，广东省“百馆计划”项目正式启动</h5>
-              <p>2020/05/14</p>
-            </div>
-            <div class="row4-mask"></div>
-          </a>
-        </div>
+        <% }) %>
       </div>
-      <!-- Add Pagination -->
       <div class="swiper-pagination swiper4-pagination"></div>
     </div>
   </div>
@@ -292,62 +149,19 @@
           <div class="title-link"></div>
           <h5>合作伙伴</h5>
         </div>
-        <a href="case2.html" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
+        <a href="/cases?pid=5&cid=27" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
       </div>
       <h3 class="row5-title">公司汇集来自体育、传媒、广告、<br>会展行业的精英人士</h3>
       <p class="row5-txt">与中视体育娱乐有限公司、爱奇艺、中广天择传媒股份有限公司等国内一流媒体平台达成了战略合作关系</p>
       <div class="row5-list">
         <ul>
+          <% casesLists.data.forEach(item =>{ %>
           <li>
             <a href="javascript:;">
-              <img src="/public/images/coop.png" alt="">
+              <img src="<%= item.filepath %>" alt="">
             </a>
           </li>
-          <li>
-            <a href="javascript:;">
-              <img src="/public/images/coop2.png" alt="">
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <img src="/public/images/coop3.png" alt="">
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <img src="/public/images/coop4.png" alt="">
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <img src="/public/images/coop5.png" alt="">
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <img src="/public/images/coop6.png" alt="">
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <img src="/public/images/coop7.png" alt="">
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <img src="/public/images/coop.png" alt="">
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <img src="/public/images/coop2.png" alt="">
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <img src="/public/images/coop3.png" alt="">
-            </a>
-          </li>
+          <% }) %>
         </ul>
       </div>
     </div>
@@ -365,9 +179,7 @@
                 aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myVideos">公司宣传视频</h4>
           </div>
-          <div class="modal-body">
-
-          </div>
+          <div class="modal-body"></div>
         </div>
       </div>
     </div>
@@ -379,7 +191,7 @@
           <div class="title-link"></div>
           <h5>联系我们</h5>
         </div>
-        <a href="case2.html" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
+        <a href="/contact?pid=7&cid=32" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
       </div>
       <div class="row7-main">
         <div class="row7-left">
@@ -396,17 +208,17 @@
               </a>
               <a href="javascript:;" class="cont-icon"><img src="/public/images/qq_icon.png" alt=""></a>
             </div>
-            <h5 class="row7-h5">海南昆仑体育文化股份有限公司</h5>
+            <h5 class="row7-h5"><%= settingList[0].companyName %></h5>
           </div>
           <div class="cont-bottom row">
             <div class="col-lg-6">
               <h4>联系方式</h4>
-              <p>0898-65771519</p>
-              <p>hnkunlun@vip.163.com</p>
+              <p><%= settingList[0].phone %></p>
+              <p><%= settingList[0].email %></p>
             </div>
             <div class="col-lg-6">
               <h4>详细地址</h4>
-              <p>海南省海口市桂林洋高校区海口经济学院昆仑体育文化大厦</p>
+              <p><%= settingList[0].address %></p>
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-30 11:26:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 09:29:28
+ * @LastEditTime: 2020-08-21 11:17:05
  */
 'use strict';
 const { Op } = require('sequelize')
@@ -14,7 +14,7 @@ const { Op } = require('sequelize')
  */
 class NewsDao {
   /**
-   * 关于我们列表
+   * 新闻列表
    * @param { Object } ctx 全局this
    * @param { Number } cid 二级菜单id
    * @param { Number } page 分页
@@ -41,6 +41,19 @@ class NewsDao {
         total_pages: Math.ceil(news.count / pageSize),
       }
     }
+
+  }
+
+  /**
+   * 新闻列表
+   * @param { Object } ctx 全局this
+   */
+  static async lists (ctx) {
+    return await ctx.model.MzcNews.findAll({
+      where: {
+        deleted_at: null
+      },
+    })
 
   }
   /**
