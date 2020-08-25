@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 16:36:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-21 10:20:47
+ * @LastEditTime: 2020-08-25 17:22:33
  */
 'use strict';
 
@@ -24,7 +24,12 @@ class MessageDao {
     const code = ctx.session.code;
 
     try {
-      if (!captcha) {
+      if (!name || !phone || !email || !title || !remarks) {
+        return {
+          code: 0,
+          msg: '必填信息不能为空',
+        }
+      } else if (!captcha) {
         return {
           code: 0,
           success: params.data,
@@ -37,12 +42,6 @@ class MessageDao {
           msg: '验证码错误',
         }
       } else {
-        if (!name || !phone || !email || !title || !remarks) {
-          return {
-            code: 0,
-            msg: '必填信息不能为空',
-          }
-        }
         await ctx.model.MzcMessage.create({
           name,
           phone,

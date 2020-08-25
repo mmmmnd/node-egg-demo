@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-13 17:09:06
+ * @LastEditTime: 2020-08-25 17:14:59
 -->
 <%- include('/commom/header',{
   title:newsList?newsList.data[0].title:"11海南昆仑体育文化股份有限公司",
@@ -26,7 +26,7 @@
             <img src="<%= item.filepath %>" alt="" class="news-list-img">
             <div class="news-list-right">
               <em><%= item.created_at %></em>
-              <h5><a href="<%= urlInfo +'&id='+ item.id %>"><%= item.cultureTitle %></a></h5>
+              <h5><a href="<%= urlInfo +'/id/'+ item.id %>"><%= item.cultureTitle %></a></h5>
               <p><%= item.cultureDescription %></p>
             </div>
           </li>

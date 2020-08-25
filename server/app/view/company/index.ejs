@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-13 17:06:18
+ * @LastEditTime: 2020-08-25 10:23:14
 -->
 
 <%- include('/commom/header',{
@@ -23,7 +23,7 @@
     <div class="content-right">
       <div class="nav-right">
         <% companyList.forEach(item => { %>
-        <% if(item.category_id == ctx.query.cid){ %>
+        <% if(item.category_id == ctx.params.cid){ %>
         <a href="#<%= item.id %>" class="nav-btn <%= companyList[0] == item ?'active':''; %>"
           data-toggle="tab"><%= item.companyTitle %></a>
         <% } %>
@@ -31,7 +31,7 @@
       </div>
       <div class="tab-content">
         <% companyList.forEach(item => { %>
-        <% if(item.category_id == ctx.query.cid){ %>
+        <% if(item.category_id == ctx.params.cid){ %>
         <div class="ser-top tab-pane fade <%= companyList[0] == item ?'in active':''; %>" id="<%= item.id %>">
           <div class="ser-top-txt">
             <h5><%= item.companyTitle %></h5>

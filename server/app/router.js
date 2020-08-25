@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-14 08:40:56
+ * @LastEditTime: 2020-08-25 17:19:42
  */
 'use strict';
 
@@ -16,17 +16,20 @@ module.exports = app => {
   const { router, controller } = app;
   // 前端路由
   router.get('/', controller.web.index);
-  router.get('/about', controller.web.about);
-  router.get('/services', controller.web.services);
-  router.get('/company', controller.web.company);
-  router.get('/culture', controller.web.culture);
-  router.get('/culture_info', controller.web.culture_info);
-  router.get('/news', controller.web.news);
-  router.get('/news_info', controller.web.news_info);
-  router.get('/cases', controller.web.cases);
-  router.get('/cases_info', controller.web.cases_info);
-  router.get('/recruit', controller.web.recruit);
-  router.get('/contact', controller.web.contact);
+  router.get('/about/pid/:pid/cid/:cid', controller.web.about);
+  router.get('/services/pid/:pid/cid/:cid', controller.web.services);
+  router.get('/company/pid/:pid/cid/:cid', controller.web.company);
+  router.get('/culture/pid/:pid/cid/:cid', controller.web.culture);
+  router.get('/culture/pid/:pid/cid/:cid/page/:page', controller.web.culture);
+  router.get('/culture_info/pid/:pid/cid/:cid/id/:id', controller.web.culture_info);
+  router.get('/news/pid/:pid/cid/:cid', controller.web.news);
+  router.get('/news/pid/:pid/cid/:cid/page/:page', controller.web.news);
+  router.get('/news_info/pid/:pid/cid/:cid/id/:id', controller.web.news_info);
+  router.get('/cases/pid/:pid/cid/:cid', controller.web.cases);
+  router.get('/cases/pid/:pid/cid/:cid/page/:page', controller.web.cases);
+  router.get('/cases_info/pid/:pid/cid/:cid/id/:id', controller.web.cases_info);
+  router.get('/recruit/pid/:pid/cid/:cid', controller.web.recruit);
+  router.get('/contact/pid/:pid/cid/:cid', controller.web.contact);
   router.get('/captcha', controller.web.captcha);
 
   // message

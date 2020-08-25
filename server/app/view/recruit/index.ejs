@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-10 17:26:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-13 17:07:00
+ * @LastEditTime: 2020-08-25 17:18:02
 -->
 <%- include('/commom/header',{
   title:recruitList?recruitList.title:"1",
@@ -26,7 +26,7 @@
 
     <%- include('/commom/column') %>
     <div class="content-right">
-      <% if(ctx.query.cid == 29){ %>
+      <% if(ctx.params.cid == 29){ %>
         <div class="about">
           <%- recruitList.content %>
         </div>

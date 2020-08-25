@@ -5,20 +5,20 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:20:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-06 19:59:44
---> 
+ * @LastEditTime: 2020-08-25 10:23:50
+-->
 <div class="nav-left">
   <div class="row-title">
-      <div class="title-link"></div>
-      <% const pid = ctx.query.pid %>
-      <h5><%= menuList[pid].title %></h5>
+    <div class="title-link"></div>
+    <% const pid = ctx.params.pid %>
+    <h5><%= menuList[pid].title %></h5>
   </div>
   <% if(menuList[pid].children){ %>
   <div class="nav-left-list">
     <ul>
       <% menuList[pid].children.forEach(item=>{ %>
-        <li>
-          <a href="<%= item.url+'?pid='+[pid]+'&cid='+item.id %>" class="<%= pid === ctx.query.pid && item.id == ctx.query.cid ? 'active' : '' %>"><%= item.title %></a>
+      <li>
+          <a href="<%= '/'+item.url+'/pid/'+[pid]+'/cid/'+item.id %>" class="<%= pid === ctx.params.pid && item.id == ctx.params.cid ? 'active' : '' %>"><%= item.title %></a>
         </li>
       <% }) %>
     </ul>

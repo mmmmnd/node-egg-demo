@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-17 16:32:21
+ * @LastEditTime: 2020-08-25 17:19:59
  */
 'use strict';
 
@@ -16,48 +16,48 @@ class WebController extends Controller {
     await this.ctx.service.web.index();
   }
   async about () {
-    const query = this.ctx.query;
-    await this.ctx.service.web.about(query);
+    const params = this.ctx.params
+    await this.ctx.service.web.about(params);
   }
   async services () {
-    const query = this.ctx.query;
-    await this.ctx.service.web.services(query);
+    const params = this.ctx.params
+    await this.ctx.service.web.services(params);
   }
   async company () {
-    const query = this.ctx.query;
-    await this.ctx.service.web.company(query);
+    const params = this.ctx.params
+    await this.ctx.service.web.company(params);
   }
   async culture () {
-    const query = this.ctx.query;
-    await this.ctx.service.web.culture(query);
+    const params = this.ctx.params
+    await this.ctx.service.web.culture(params);
   }
   async culture_info () {
-    const { query } = this.ctx;
-    await this.ctx.service.web.culture_info(query);
+    const params = this.ctx.params
+    await this.ctx.service.web.culture_info(params);
   }
   async news () {
-    const query = this.ctx.query;
-    await this.ctx.service.web.news(query);
+    const params = this.ctx.params
+    await this.ctx.service.web.news(params);
   }
   async news_info () {
-    const { query } = this.ctx;
-    await this.ctx.service.web.news_info(query);
+    const params = this.ctx.params
+    await this.ctx.service.web.news_info(params);
   }
   async cases () {
-    const { query } = this.ctx;
-    await this.ctx.service.web.cases(query);
+    const params = this.ctx.params
+    await this.ctx.service.web.cases(params);
   }
   async cases_info () {
-    const { query } = this.ctx;
-    await this.ctx.service.web.cases_info(query);
+    const params = this.ctx.params
+    await this.ctx.service.web.cases_info(params);
   }
   async recruit () {
-    const { query } = this.ctx;
-    await this.ctx.service.web.recruit(query);
+    const params = this.ctx.params
+    await this.ctx.service.web.recruit(params);
   }
   async contact () {
-    const { query } = this.ctx;
-    await this.ctx.service.web.contact(query);
+    const params = this.ctx.params
+    await this.ctx.service.web.contact(params);
   }
   async captcha () {
     const { query } = this.ctx;

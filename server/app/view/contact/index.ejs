@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-10 17:26:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-21 10:20:22
+ * @LastEditTime: 2020-08-25 17:20:57
 -->
 <%- include('/commom/header',{
   title:settingList?settingList[0].title:"1",
@@ -19,7 +19,7 @@
 
     <%- include('/commom/column') %>
     <div class="content-right">
-      <% if(ctx.query.cid == 32){ %>
+      <% if(ctx.params.cid == 32){ %>
       <div class="row7-main contact-info">
         <div class="row7-left">
           <div class="cont-top">
@@ -95,7 +95,7 @@
             </div>
             <div class="form-group col-lg-4 yzm-img">
               <img src="/captcha?height=38&amp;width=137&amp;fontSize=50"
-                onclick="this.src='captcha?height=38&amp;width=137&amp;fontSize=50&amp;'+Math.random();">
+                onclick="this.src='/captcha?height=38&amp;width=137&amp;fontSize=50&amp;'+Math.random();">
             </div>
             <div class="form-group col-lg-4">
               <a href="javascript:;" class="mes-btn" onclick="postUserInfo()">提交</a>

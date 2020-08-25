@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:23:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-06 20:06:07
+ * @LastEditTime: 2020-08-25 10:24:38
 --> 
 <% var id,isSwiper; if(!id)id = 0; %>
 <div class="ser-info-photo">
   <div class="swiper-wrapper">
     <% advertisingList.forEach(item =>{ %>
-      <% if(item.place === 3 && item.parentId == ctx.query.pid && item.serId == id){ %>
+      <% if(item.place === 3 && item.parentId == ctx.params.pid && item.serId == id){ %>
         <% isSwiper = 1; %>
         <div class="swiper-slide">
           <img src="<%= item.filepath %>" alt="" class="swiper-photo">

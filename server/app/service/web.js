@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-21 15:06:43
+ * @LastEditTime: 2020-08-25 17:14:09
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
@@ -92,8 +92,8 @@ class WebService extends Service {
 
   async culture ({ pid = 3, cid = 17, page = 1 }) {
     const { ctx } = this;
-    const url = `culture?pid=${pid}&cid=${cid}`;
-    const urlInfo = `culture_info?pid=${pid}&cid=${cid}`;
+    const url = `/culture/pid/${pid}/cid/${cid}`;
+    const urlInfo = `/culture_info/pid/${pid}/cid/${cid}`;
 
     const err = await error(pid, cid, 21, 16, 3);
     if (err) return render(ctx);
@@ -109,7 +109,7 @@ class WebService extends Service {
 
   async culture_info ({ pid = 3, cid = 17, id = 1 }) {
     const { ctx } = this;
-    const urlInfo = `culture_info?pid=${pid}&cid=${cid}`;
+    const urlInfo = `/culture_info/pid/${pid}/cid/${cid}`;
 
     const err = await error(pid, cid, 21, 16, 3);
     if (err) return render(ctx);
@@ -127,8 +127,8 @@ class WebService extends Service {
 
   async news ({ pid = 4, cid = 22, page = 1 }) {
     const { ctx } = this;
-    const url = `news?pid=${pid}&cid=${cid}`;
-    const urlInfo = `news_info?pid=${pid}&cid=${cid}`;
+    const url = `/news/pid/${pid}/cid/${cid}`;
+    const urlInfo = `/news_info/pid/${pid}/cid/${cid}`;
 
     const err = await error(pid, cid, 25, 21, 4);
     if (err) return render(ctx);
@@ -144,7 +144,7 @@ class WebService extends Service {
 
   async news_info ({ pid = 4, cid = 22, id = 1 }) {
     const { ctx } = this;
-    const urlInfo = `news_info?pid=${pid}&cid=${cid}`;
+    const urlInfo = `news_info/pid/${pid}/cid/${cid}`;
 
     const err = await error(pid, cid, 25, 21, 4);
     if (err) return render(ctx);
@@ -162,8 +162,8 @@ class WebService extends Service {
 
   async cases ({ pid = 5, cid = 26, page = 1 }) {
     const { ctx } = this;
-    const url = `cases?pid=${pid}&cid=${cid}`;
-    const urlInfo = `cases_info?pid=${pid}&cid=${cid}`;
+    const url = `cases/pid/${pid}/cid/${cid}`;
+    const urlInfo = `cases_info/pid/${pid}/cid/${cid}`;
 
     const err = await error(pid, cid, 28, 25, 5);
     if (err) return render(ctx);
@@ -179,7 +179,7 @@ class WebService extends Service {
 
   async cases_info ({ pid = 5, cid = 26, id = 1 }) {
     const { ctx } = this;
-    const urlInfo = `cases_info?pid=${pid}&cid=${cid}`;
+    const urlInfo = `cases_info/pid/${pid}/cid/${cid}`;
 
     const err = await error(pid, cid, 28, 25, 5);
     if (err) return render(ctx);

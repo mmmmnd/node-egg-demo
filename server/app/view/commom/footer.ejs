@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:47:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-10 15:06:11
+ * @LastEditTime: 2020-08-25 10:25:40
 -->
 <div class="content-full footer">
   <div class="content">
@@ -16,7 +16,7 @@
           <h5><%= item.title %></h5>
           <% if(item.children){ %>
           <% item.children.forEach(children =>{ %>
-          <a href="<%= children.url+"?pid="+ index + '&cid=' + children.id %>"><%= children.title %></a>
+          <a href="<%= '/'+children.url+"/pid/"+ index + '/cid/' + children.id %>"><%= children.title %></a>
           <% }) %>
           <% } %>
         </li>

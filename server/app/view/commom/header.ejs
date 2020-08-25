@@ -5,129 +5,134 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:03:35
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-06 20:15:28
---> 
+ * @LastEditTime: 2020-08-25 09:33:28
+-->
 <!DOCTYPE html>
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <meta name="renderer" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title><%= title %></title>
-    <meta name="Keywords" content="<%= title %>,<%= Keywords %>" />
-    <meta name="description" content="<%= companyDescription %>" />
-    <link href="/public/css/animate.css" rel="stylesheet">
-    <link href="/public/css/swiper.min.css" rel="stylesheet">
-    <link href="/public/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/public/css/kunlun.css" rel="stylesheet">
-    <link rel="icon" href="/public/images/logo_icon.ico" type="image/ico" sizes="16x16">
-    <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=kZi3zOOLjXw2IdsPqVZg4hoSBHbecpgV"></script>
-    <!--[if lte IE 8]>
+  <meta charset="utf-8">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title><%= title %></title>
+  <meta name="Keywords" content="<%= title %>,<%= Keywords %>" />
+  <meta name="description" content="<%= companyDescription %>" />
+  <link href="/public/css/animate.css" rel="stylesheet">
+  <link href="/public/css/swiper.min.css" rel="stylesheet">
+  <link href="/public/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/public/css/kunlun.css" rel="stylesheet">
+  <link rel="icon" href="/public/images/logo_icon.ico" type="image/ico" sizes="16x16">
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=kZi3zOOLjXw2IdsPqVZg4hoSBHbecpgV"></script>
+  <!--[if lte IE 8]>
     <script src="/public/js/ieBetter.js"></script>
     <![endif]-->
 </head>
+
 <body>
- 
-<div class="content-full header">
-  <div class="content">
+
+  <div class="content-full header">
+    <div class="content">
       <a href="/"><img src="<%= settingList[0].logo %>" alt="" class="logo"></a>
       <div class="header-right">
-          <a href="javascript:;" class="language"><img src="/public/images/header_icon.png" alt="" class="language_icon"></a>
-          <a href="javascript:;" class="menu" data-toggle="modal" data-target="#myModal"><img src="/public/images/icons-dark-menu.png" alt="" class="menu_icon"></a>
+        <a href="javascript:;" class="language"><img src="/public/images/header_icon.png" alt=""
+            class="language_icon"></a>
+        <a href="javascript:;" class="menu" data-toggle="modal" data-target="#myModal"><img
+            src="/public/images/icons-dark-menu.png" alt="" class="menu_icon"></a>
       </div>
       <div class="modal fade menu-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-          <a href="javascript:;" class="menu-close" data-dismiss="modal" aria-label="Close"></a>
-          <div class="modal-body">
-              <div class="row menu-main">
-                  <div class="col-lg-3">
-                      <a href="/"><img src="<%= settingList[0].logo %>" alt="" class="modal-logo"></a>
-                      
-                      <p class="modal-p1"><%= settingList[0].companyDescription %></p>
-                      <div class="search">
-                          <input type="text" class="search-input" placeholder="输入检索关键字...">
-                          <a href="javascript:;" class="search-btn" alt="搜索"></a>
-                      </div>
-                  </div>
-                  <div class="col-lg-4">
-                      <ul class="menu-ul">
-                        <% menuList.forEach((item,index) =>{ %>
-                          <li class="menu-li">
-                            <a href="javascript:;"><%= item.title %></a><span class="menu-link"></span>
-                            <div class="submenu-nav">
-                                <ul>
-                                  <% if(item.children){ %>
-                                    <% item.children.forEach(children =>{ %>
-                                      <li class="submenu-li">
-                                        <a href="<%= children.url+"?pid="+ index + '&cid=' + children.id %>"><%= children.title %></a>
-                                      </li>
-                                    <% }) %>
-                                  <% } %>
-                                </ul>
-                            </div>
-                        </li>
-                        <% }) %>
-                      </ul>
-                  </div>
-                  <div class="col-lg-3">
-                      <div class="cont-group">
-                          <h5>地址</h5>
-                          <p><%= settingList[0].address %></p>
-                      </div>
-                      <div class="cont-group">
-                          <h5>电话</h5>
-                          <p><%= settingList[0].phone %></p>
-                      </div>
-                      <div class="cont-group">
-                          <h5>邮箱</h5>
-                          <p><%= settingList[0].email %></p>
-                      </div>
-                  </div>
-                  <div class="col-lg-2">
-                      <a href="javascript:;" class="cont-icon cont-hover">
-                          <img src="/public/images/weibo_icon.png" alt="">
-                          <img src="<%= settingList[0].weChatCode %>" alt="" class="qrcode-img">
-                      </a>
-                      <a href="javascript:;" class="cont-icon cont-hover">
-                          <img src="/public/images/wechat_icon.png" alt="">
-                          <img src="<%= settingList[0].weiboCode %>" alt="" class="qrcode-img">
-                      </a>
-                      <a href="javascript:;" class="cont-icon">
-                        <img src="/public/images/qq_icon.png" alt="">
-                        <img src="<%= settingList[0].weiboCode %>" alt="" class="qrcode-img">
-                      </a>
-                  </div>
-              </div>
-          </div>
-      </div>
-  </div>
-</div>
-<div class="header2">
-  <h3><img src="<%= settingList[0].logo %>" alt=""></h3>
-  <a href="javascript:;" class="right_btn click-sidebar"><img src="/public/images/icons-dark-menu.png" alt=""></a>
+        <a href="javascript:;" class="menu-close" data-dismiss="modal" aria-label="Close"></a>
+        <div class="modal-body">
+          <div class="row menu-main">
+            <div class="col-lg-3">
+              <a href="/"><img src="<%= settingList[0].logo %>" alt="" class="modal-logo"></a>
 
-  <div class="menu_box">
-      <div class="mask2"></div>
-      <div class="sidebar">
-          <img src="<%= settingList[0].logo %>" class="menu-logo" alt="">
-          <form action="">
-              <div class="header_search_box">
-                  <img class="header_search_img" src="/public/images/search_icon2.png" alt="">
-                  <input type="text" class="header_search" placeholder="输入关键词搜索...">
+              <p class="modal-p1"><%= settingList[0].companyDescription %></p>
+              <div class="search">
+                <input type="text" class="search-input" placeholder="输入检索关键字...">
+                <a href="javascript:;" class="search-btn" alt="搜索"></a>
               </div>
-          </form>
-          <a href="javascript:;" class="close-btn"><img src="/public/images/close.png" alt=""></a>
-
-          <div class="menu-list">
-              <ul>
-                <% menuList.forEach(item =>{ %>
-                  <li>
-                    <a href="<%= item.url %>"><%= item.title %></a>
-                  </li>
+            </div>
+            <div class="col-lg-4">
+              <ul class="menu-ul">
+                <% menuList.forEach((item,index) =>{ %>
+                <li class="menu-li">
+                  <a href="javascript:;"><%= item.title %></a><span class="menu-link"></span>
+                  <div class="submenu-nav">
+                    <ul>
+                      <% if(item.children){ %>
+                      <% item.children.forEach(children =>{ %>
+                      <li class="submenu-li">
+                        <a
+                          href="<%= '/'+children.url+"/pid/"+ index + '/cid/' + children.id %>"><%= children.title %></a>
+                      </li>
+                      <% }) %>
+                      <% } %>
+                    </ul>
+                  </div>
+                </li>
                 <% }) %>
               </ul>
+            </div>
+            <div class="col-lg-3">
+              <div class="cont-group">
+                <h5>地址</h5>
+                <p><%= settingList[0].address %></p>
+              </div>
+              <div class="cont-group">
+                <h5>电话</h5>
+                <p><%= settingList[0].phone %></p>
+              </div>
+              <div class="cont-group">
+                <h5>邮箱</h5>
+                <p><%= settingList[0].email %></p>
+              </div>
+            </div>
+            <div class="col-lg-2">
+              <a href="javascript:;" class="cont-icon cont-hover">
+                <img src="/public/images/weibo_icon.png" alt="">
+                <img src="<%= settingList[0].weChatCode %>" alt="" class="qrcode-img">
+              </a>
+              <a href="javascript:;" class="cont-icon cont-hover">
+                <img src="/public/images/wechat_icon.png" alt="">
+                <img src="<%= settingList[0].weiboCode %>" alt="" class="qrcode-img">
+              </a>
+              <a href="javascript:;" class="cont-icon">
+                <img src="/public/images/qq_icon.png" alt="">
+                <img src="<%= settingList[0].weiboCode %>" alt="" class="qrcode-img">
+              </a>
+            </div>
           </div>
-          <p class="compy-txt"><%= title %></p>
+        </div>
       </div>
+    </div>
   </div>
-</div>
+  <div class="header2">
+    <h3><img src="<%= settingList[0].logo %>" alt=""></h3>
+    <a href="javascript:;" class="right_btn click-sidebar"><img src="/public/images/icons-dark-menu.png" alt=""></a>
+
+    <div class="menu_box">
+      <div class="mask2"></div>
+      <div class="sidebar">
+        <img src="<%= settingList[0].logo %>" class="menu-logo" alt="">
+        <form action="">
+          <div class="header_search_box">
+            <img class="header_search_img" src="/public/images/search_icon2.png" alt="">
+            <input type="text" class="header_search" placeholder="输入关键词搜索...">
+          </div>
+        </form>
+        <a href="javascript:;" class="close-btn"><img src="/public/images/close.png" alt=""></a>
+
+        <div class="menu-list">
+          <ul>
+            <% menuList.forEach(item =>{ %>
+            <li>
+              <a href="<%= item.url %>"><%= item.title %></a>
+            </li>
+            <% }) %>
+          </ul>
+        </div>
+        <p class="compy-txt"><%= title %></p>
+      </div>
+    </div>
+  </div>
