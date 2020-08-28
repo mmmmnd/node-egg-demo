@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:09:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-21 15:11:29
+ * @LastEditTime: 2020-08-28 15:49:49
 -->
 <%- include('/commom/header',{
   title:settingList?settingList[0].title:"海南昆仑体育文化股份有限公司",
@@ -25,10 +25,8 @@
           <h5>关于我们</h5>
         </div>
         <h3 class="row-h3">大海之南•昆仑为巅</h3>
-        <p class="row-p">
-          海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。
-        </p>
-        <a href="/about?pid=0&cid=2" class="row-btn">查看详情</a>
+        <p class="row-p"><%= aboutSingleDetail.companyDescription %></p>
+        <a href="/about/pid/0/cid/2" class="row-btn">查看详情</a>
       </div>
       <div class="col-lg-6 row1-right">
         <img src="/public/images/about.png" alt="" class="about-img">
@@ -45,7 +43,7 @@
         <ul>
           <% menuList[1].children.forEach(item=>{ %>
           <li>
-            <a href="<%= item.url+'?pid='+[1]+'&cid='+item.id %>"><%= item.title %></a>
+            <a href="/<%= item.url+'/pid/'+[1]+'/cid/'+item.id %>"><%= item.title %></a>
           </li>
           <% }) %>
         </ul>
@@ -65,7 +63,7 @@
             <div class="row2-txt">
               <h5><%= item.category %></h5>
               <p><%= item.companyDescription %></p>
-              <a href="/services?pid=1&cid=<%= item.category_id %>" class="row2-btn">
+              <a href="/services/pid/1/cid/<%= item.category_id %>" class="row2-btn">
                 <img src="/public/images/more_icon.png" alt="">
               </a>
             </div>
@@ -84,13 +82,13 @@
           <div class="title-link"></div>
           <h5>新闻中心</h5>
         </div>
-        <a href="/news?pid=4&cid=22" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
+        <a href="/news/pid/4/cid/22" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
       </div>
       <div class="row3-swiper">
         <div class="swiper-wrapper">
           <% newsList.forEach(item=>{ %>
           <div class="swiper-slide row3-slide">
-            <a href="news_info?pid=4&cid=<%= item.category_id %>&id=<%= item.id %>">
+            <a href="news_info/pid/4/cid/<%= item.category_id %>/id/<%= item.id %>">
               <div class="row3-img">
                 <span class="news-tab"><%= item.category %></span>
                 <img src="<%= item.filepath %>" alt="">
@@ -121,14 +119,14 @@
         <div class="title-link"></div>
         <h5>服务案例</h5>
       </div>
-      <a href="/cases?pid=5&cid=26" class="more-btn">查看更多<img src="/public/images/more_icon3.png" alt=""></a>
+      <a href="/cases/pid/5/cid/26" class="more-btn">查看更多<img src="/public/images/more_icon3.png" alt=""></a>
     </div>
 
     <div class="row4-swiper">
       <div class="swiper-wrapper">
         <% casesList.data.forEach(item =>{ %>
         <div class="swiper-slide row4-slide">
-          <a href="/cases_info?pid=5&cid=<%= item.category_id %>&id=<%= item.id %>">
+          <a href="/cases_info/pid/5/cid/<%= item.category_id %>/id/<%= item.id %>">
             <img src="<%= item.filepath %>" alt="" class="row4-img">
             <div class="row4-txt">
               <h5><%= item.cultureTitle %></h5>
@@ -149,7 +147,7 @@
           <div class="title-link"></div>
           <h5>合作伙伴</h5>
         </div>
-        <a href="/cases?pid=5&cid=27" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
+        <a href="/cases/pid/5/cid/27" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
       </div>
       <h3 class="row5-title">公司汇集来自体育、传媒、广告、<br>会展行业的精英人士</h3>
       <p class="row5-txt">与中视体育娱乐有限公司、爱奇艺、中广天择传媒股份有限公司等国内一流媒体平台达成了战略合作关系</p>
@@ -191,7 +189,7 @@
           <div class="title-link"></div>
           <h5>联系我们</h5>
         </div>
-        <a href="/contact?pid=7&cid=32" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
+        <a href="/contact/pid/7/cid/32" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
       </div>
       <div class="row7-main">
         <div class="row7-left">

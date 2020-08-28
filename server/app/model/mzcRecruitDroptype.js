@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-12 09:28:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 17:19:07
+ * @LastEditTime: 2020-08-26 15:53:03
  */
 'use strict';
 
@@ -94,7 +94,7 @@ module.exports = app => {
   });
 
   MzcRecruitDroptype.associate = function () {
-    app.model.MzcRecruitDroptype.hasMany(app.model.MzcRecruit, { foreignKey: 'category_id', targetKey: 'id', as: 'recruit' })
+    MzcRecruitDroptype.hasMany(app.model.MzcRecruit, { foreignKey: 'category_id', targetKey: 'id', as: 'recruit' })
   }
 
   return MzcRecruitDroptype;

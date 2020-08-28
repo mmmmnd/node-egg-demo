@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 09:21:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 17:21:13
+ * @LastEditTime: 2020-08-26 16:02:08
  */
 'use strict';
 
@@ -13,7 +13,7 @@ const moment = require('moment');
 
 module.exports = app => {
   const { INTEGER, STRING, DATE } = app.Sequelize;
-  const MzcAboutDroptype = app.model.define('mzc-about-droptype', {
+  const MzcAboutDroptype = app.model.define('mzc-about-drop-type', {
     id: {
       allowNull: !1, // 是否为空
       autoIncrement: !0, // 自增
@@ -21,11 +21,11 @@ module.exports = app => {
       type: INTEGER(8).UNSIGNED, // 类型
       comment: 'ID', // 备注
     },
-    dropType: {
+    dropId: {
       allowNull: !1, // 是否为空
       type: STRING(2), // 类型
       defaultValue: '0', // 默认值
-      comment: '下拉', // 备注 0 -> 不存在
+      comment: 'cid类型', // 备注 0 -> 不存在
     },
     dropContent: {
       allowNull: !1, // 是否为空
@@ -61,6 +61,10 @@ module.exports = app => {
     {
       tableName: 'mzc-about-droptype',
     });
+
+  MzcAboutDroptype.associate = function () {
+    MzcAboutDroptype.hasMany(app.model.MzcAbout, { foreignKey: 'category_id', targetKey: 'id', as: 'info' })
+  }
 
   return MzcAboutDroptype;
 };

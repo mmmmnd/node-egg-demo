@@ -5,26 +5,58 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:40:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 17:14:00
+ * @LastEditTime: 2020-08-28 15:00:59
  */
 'use strict';
+
+const AboutDao = require('./about');
 
 /**
  * 下拉菜单
  */
-class AboutDroptypeDao {
+class AboutDroptypeDao extends AboutDao {
   /**
    * 下拉菜单列表
    * @param { Object } ctx 全局this
-   * @param { Number } cid 二级菜单id
+   * @param { String } cid 二级菜单id
    */
   static async list (ctx, cid) {
-    return await ctx.model.MzcAboutDroptype.findAll({
+    const aboutDroptype = await ctx.model.MzcAboutDroptype.findAll({
       where: {
-        dropType: cid,
-        deleted_at: null
+        dropId: cid,
+        deleted_at: null,
       },
+      include: [{
+        as: 'info',
+        model: ctx.model.MzcAbout,
+        order: [['id', 'ASC']],
+      }],
+      order: [['id', 'ASC']],
     });
+
+    if (cid === '4') {
+      const about = await super.list(ctx, cid);
+
+      aboutDroptype[0].info = about;
+      aboutDroptype[0].dataValues.info = about;
+      aboutDroptype[0]._previousDataValues.info = about;
+    }
+
+    return { ...aboutDroptype }
+
+  }
+  static async detail(ctx,cid = 2){
+    return await ctx.model.MzcAboutDroptype.findOne({
+      where: {
+        dropId: cid,
+        deleted_at: null,
+      },
+      include: [{
+        as: 'info',
+        model: ctx.model.MzcAbout,
+        order: [['id', 'ASC']],
+      }],
+    })
   }
 }
 

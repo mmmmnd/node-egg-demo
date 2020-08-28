@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-28 15:13:55
+ * @LastEditTime: 2020-08-28 15:32:03
  */
 'use strict';
 
@@ -13,7 +13,7 @@ const moment = require('moment');
 
 module.exports = app => {
   const { INTEGER, STRING, BOOLEAN, TEXT, DATE } = app.Sequelize;
-  const MzcAbout = app.model.define('mzc-about', {
+  const MzcAboutSingle = app.model.define('mzc-about-single', {
     id: {
       allowNull: !1, // 是否为空
       autoIncrement: !0, // 自增
@@ -23,9 +23,9 @@ module.exports = app => {
     },
     category_id: {
       allowNull: !1, // 是否为空
-      type: INTEGER(8).UNSIGNED, // 类型
+      type: INTEGER, // 类型
       defaultValue: '0', // 默认值
-      comment: '关联父表id', // 备注
+      comment: '菜单cid', // 备注
     },
     title: {
       allowNull: !1, // 是否为空
@@ -56,12 +56,6 @@ module.exports = app => {
       type: TEXT, // 类型
       defaultValue: '', // 默认值
       comment: '单页内容', // 备注
-    },
-    AvatarImage: {
-      allowNull: !0, // 是否为空
-      type: STRING(40), // 类型
-      defaultValue: '0', // 默认值
-      comment: '图片', // 备注
     },
     satus: {
       allowNull: !1, // 是否为空
@@ -101,12 +95,8 @@ module.exports = app => {
     },
   },
     {
-      tableName: 'mzc-about',
+      tableName: 'mzc-about-single',
     });
 
-  MzcAbout.associate = function () {
-    MzcAbout.belongsTo(app.model.MzcAboutDroptype, { foreignKey: 'category_id', targetKey: 'id', as: 'info' });
-  }
-
-  return MzcAbout;
+  return MzcAboutSingle;
 };

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-25 17:18:17
+ * @LastEditTime: 2020-08-26 09:02:38
 -->
 <%- include('/commom/header',{
   title:casesList?casesList.data[0].title:"11海南昆仑体育文化股份有限公司",
@@ -25,7 +25,7 @@
             <% casesList.data.forEach(item=>{ %>
               <% if(item.category_id == '26'){ %>
                 <li class="row4-slide">
-                  <a href="<%= urlInfo +'/id/'+ item.id %>">
+                  <a href="/<%= urlInfo +'/id/'+ item.id %>">
                     <span><%= item.type %></span>
                     <img src="<%= item.filepath %>" alt="" class="row4-img">
                     <div class="ser-info-txt">

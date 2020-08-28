@@ -5,12 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:44:36
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-13 17:05:26
+ * @LastEditTime: 2020-08-28 15:52:47
 --> 
 <%- include('/commom/header',{
-  title:aboutList?aboutList[0].title:"11海南昆仑体育文化股份有限公司",
-  Keywords:aboutList?aboutList[0].keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:aboutList?aboutList[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  title:aboutSingleDetail?aboutSingleDetail.title:aboutDroptypeList[0].info[0].title,
+  Keywords:aboutSingleDetail?aboutSingleDetail.keywords:aboutDroptypeList[0].info[0].keywords,
+  companyDescription:aboutSingleDetail?aboutSingleDetail.companyDescription:aboutDroptypeList[0].info[0].companyDescription,
 }) %>
 <style>
   .dropdown-menu>.active>a,
@@ -23,100 +23,68 @@
 
 <div class="content-full">
   <div class="content main-info">
-
     <%- include('/commom/column') %>
       <div class="content-right">
-        <% if(!aboutList[0].type){ %>
-
-          <% aboutList.forEach(item => { %>
-            <div class="about">
-              <% if(aboutList[0].aboutTitle){ %>
-                <img src="/public/images/about_img.png" alt="">
-              <% } %>
-                <h5><%= aboutList[0].aboutTitle %></h5>
-                <%- aboutList[0].content %>
-            </div>
-          <% }) %>
-
+        <%# 公司简介 && 企业架构 %>
+        <% if(aboutSingleDetail){ %>
+          <div class="about">
+            <%- aboutSingleDetail.content %>
+          </div>
         <% }else{ %>
-          
-          <% if(aboutDroptypeList[0]){ %>
+          <%# 下拉菜单 %>
+          <% if(aboutDroptypeList[0].dropId != 6){ %>
             <div role="presentation" class="dropdown">
-              <a href="#" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">
+              <a href="#1" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">
                 <%= aboutDroptypeList[0].dropContent %>
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
-                <% aboutDroptypeList.forEach(item =>{ %>
+                <% Object.values(aboutDroptypeList).forEach(item =>{ %>
                   <li><a href="#<%= item.id %>" tabindex="-1" data-toggle="tab"><%= item.dropContent %></a></li>
-                <% }) %>
+                <% }) %> 
               </ul>
             </div>
           <% } %>
-          
-          <% if(aboutList[0].dropType ==='4'){ %>           
+          <%# 管理团队 %>
+          <% if(aboutDroptypeList[0].dropId == 4){ %>
             <div class="about2-list tab-content">
-            <% aboutDroptypeList.forEach(val =>{ %>
-            <ul class="tab-pane fade in active <%= aboutDroptypeList[0] == val ?'in active':''; %> " id="<%= val.id %>">
-              <% aboutList.forEach(item => { %>
-                <% if(item.dropTypeId == val.id){ %>
-                  <li>
-                    <img src="<%= item.dropImage %>" alt="" class="about2-img">
-                    <div class="about2-right">
-                      <h3><%= item.aboutTitle %></h3>
-                      <%- item.content %>
-                    </div>
-                  </li>
-               <% } %>
-              <% }) %>
-            </ul>
-            <% }) %>
-          </div>
-
-         <% }else{ %>
-
-          <div class="honor-main tab-content">
-            <div class="honor-line"></div>
-            <% if(aboutDroptypeList[0]){ %>
-              <% aboutDroptypeList.forEach(val =>{ %>
-                <ul class="tab-pane fade <%= aboutDroptypeList[0] == val ?'in active':''; %>" id="<%= val.id %>">
-                  <% aboutList.forEach(item => { %>
-                    <% if(item.dropTypeId == val.id){ %>
-                      <li class="honor-list">
-                        <i></i>
-                        <div class="honor-right">
-                          <img src="<%= item.dropImage %>" alt="" class="honor-img">
-                          <div class="honor-txt">
-                            <p class="honor-data"><%= item.created_at %></p>
-                            <h5><%= item.aboutTitle %></h5>
-                            <%- item.content %>
-                          </div>
-                        </div>
-                      </li>
-                    <% } %>
+              <% Object.values(aboutDroptypeList).forEach(val =>{ %>
+                <ul class="tab-pane fade <%= aboutDroptypeList[0] == val ?'in active':'' %> " id="<%= val.id %>">
+                  <% val.info.forEach(item =>{ %>
+                    <li>
+                      <img src="<%= item.AvatarImage %>" alt="" class="about2-img">
+                      <div class="about2-right">
+                        <h3><%= item.aboutTitle %></h3>
+                        <%- item.content %>
+                      </div>
+                    </li>
                   <% }) %>
                 </ul>
               <% }) %>
-            <% }else{%>
-              <ul>
-                <% aboutList.forEach(item => { %>
-                <li class="honor-list">
-                  <i></i>
-                  <div class="honor-right">
-                    <img src="<%= item.dropImage %>" alt="" class="honor-img">
-                    <div class="honor-txt">
-                      <p class="honor-data"><%= item.created_at %></p>
-                      <h5><%= item.aboutTitle %></h5>
-                      <%- item.content %>
+            </div>
+          <% }else{ %>
+          <%# 大事记 && 企业荣誉 %>
+            <div class="honor-main tab-content">
+              <div class="honor-line"></div>
+              <% Object.values(aboutDroptypeList).forEach(val =>{ %>
+                <ul class="tab-pane fade <%= aboutDroptypeList[0] == val ?'in active':'' %> " id="<%= val.id %>">
+                  <% val.info.forEach(item =>{ %>
+                  <li class="honor-list">
+                    <i></i>
+                    <div class="honor-right">
+                      <img src="<%= item.AvatarImage %>" alt="" class="honor-img">
+                      <div class="honor-txt">
+                        <p class="honor-data"><%= item.created_at %></p>
+                        <h5><%= item.aboutTitle %></h5>
+                        <%- item.content %>
+                      </div>
                     </div>
-                  </div>
-                </li>
-                <% }) %>
-              </ul>
-            <% } %>
-          </div>
-          
-         <% } %>
+                  </li>
+                  <% }) %>
+                </ul>
+              <% }) %>
+            </div>
+          <% } %>
         <% } %>
       </div>
   </div>
@@ -133,12 +101,5 @@
     var ul = $(this).parents('ul.dropdown-menu');
     ul.find('li').attr('class', '');
     $('#myTabDrop1').html(text + span);
-  })
-
-  $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-    var text = this.innerText;
-    if (text == '全部') {
-      $('.tab-pane').attr('class', 'tab-pane fade in active');
-    }
   })
 </script>

@@ -5,19 +5,19 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-25 17:14:09
+ * @LastEditTime: 2020-08-28 15:50:17
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
 const MenuDao = require('../dao/menu');
 const NewsDao = require('../dao/news');
 const CasesDao = require('../dao/cases');
-const AboutDao = require('../dao/about');
 const CultureDao = require('../dao/culture');
 const RecruitDao = require('../dao/recruit');
 const CompanyDao = require('../dao/company');
 const SettingDao = require('../dao/setting');
 const ServicesDao = require('../dao/services');
+const aboutSingleDao = require('../dao/aboutSingle');
 const AdvertisingDao = require('../dao/advertising');
 const AboutDroptypeDao = require('../dao/aboutDroptype');
 const RecruitDroptypeDao = require('../dao/recruitDroptype');
@@ -35,12 +35,13 @@ class WebService extends Service {
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
-    const servicesList = await ServicesDao.lists(ctx); // services数据
     const newsList = await NewsDao.lists(ctx); // services数据
     const casesList = await CasesDao.lists(ctx, 26); // case数据
     const casesLists = await CasesDao.lists(ctx, 27); // case数据
+    const servicesList = await ServicesDao.lists(ctx); // services数据
+    const aboutSingleDetail = await aboutSingleDao.detail(ctx,2); // about单页数据
 
-    const data = { advertisingList, menuList, settingList, servicesList, newsList, casesList, casesLists };
+    const data = { advertisingList, menuList, settingList, aboutSingleDetail, servicesList, newsList, casesList, casesLists };
     await ctx.render('index/index.ejs', data);
   }
 
@@ -51,12 +52,12 @@ class WebService extends Service {
     if (err) return render(ctx);
 
     const menuList = await MenuDao.list(ctx); // 导航栏菜单
-    const aboutList = await AboutDao.list(ctx, cid); // about单页数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
-    const aboutDroptypeList = await AboutDroptypeDao.list(ctx, cid); // 下拉菜单
+    const aboutSingleDetail = await aboutSingleDao.detail(ctx,cid); // about单页数据
+    const aboutDroptypeList = await AboutDroptypeDao.list(ctx, cid); // about下拉菜单
 
-    const data = { menuList, settingList, advertisingList, aboutList, aboutDroptypeList };
+    const data = { menuList, settingList, advertisingList, aboutSingleDetail, aboutDroptypeList };
     await ctx.render('about/index.ejs', data);
   }
 
