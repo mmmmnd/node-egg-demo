@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 09:25:15
+ * @LastEditTime: 2020-09-01 15:25:05
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -58,7 +58,26 @@ module.exports = appInfo => {
   config.security = {
     csrf: {
       enable: false,
+      ignoreJSON: true
     },
+  };
+
+  config.redis = {
+    client: {
+      port: 6379,          // Redis port
+      host: '127.0.0.1',   // Redis host
+      password: '',
+      db: 0
+    }
+  }
+
+  config.jwt = {
+    secret: "123456"//自定义 token 的加密条件字符串
+  };
+
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   };
 
   // add your user config here

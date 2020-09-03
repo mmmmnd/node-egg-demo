@@ -27,7 +27,7 @@ class HomeService extends Service {
         deleted_at: null,
       }
     });
-    const list =  await this.ctx.model.MzcAboutDroptype.findAll({
+    const list = await this.ctx.model.MzcAboutDroptype.findAll({
       where: {
         deleted_at: null,
       },
@@ -46,8 +46,8 @@ class HomeService extends Service {
     return {
       ...list
     }
-    
-   
+
+
   }
 }
 

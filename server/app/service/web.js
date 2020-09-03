@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-28 15:50:17
+ * @LastEditTime: 2020-09-02 15:40:34
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
@@ -39,7 +39,7 @@ class WebService extends Service {
     const casesList = await CasesDao.lists(ctx, 26); // case数据
     const casesLists = await CasesDao.lists(ctx, 27); // case数据
     const servicesList = await ServicesDao.lists(ctx); // services数据
-    const aboutSingleDetail = await aboutSingleDao.detail(ctx,2); // about单页数据
+    const aboutSingleDetail = await aboutSingleDao.detail(ctx, 2); // about单页数据
 
     const data = { advertisingList, menuList, settingList, aboutSingleDetail, servicesList, newsList, casesList, casesLists };
     await ctx.render('index/index.ejs', data);
@@ -54,7 +54,7 @@ class WebService extends Service {
     const menuList = await MenuDao.list(ctx); // 导航栏菜单
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
-    const aboutSingleDetail = await aboutSingleDao.detail(ctx,cid); // about单页数据
+    const aboutSingleDetail = await aboutSingleDao.detail(ctx, cid); // about单页数据
     const aboutDroptypeList = await AboutDroptypeDao.list(ctx, cid); // about下拉菜单
 
     const data = { menuList, settingList, advertisingList, aboutSingleDetail, aboutDroptypeList };
@@ -239,8 +239,8 @@ class WebService extends Service {
       bacground: '#cc9966'
     };
 
-    let captcha = svgCaptcha.createMathExpr(options)
-    // let captcha = svgCaptcha.create(options)
+    // let captcha = svgCaptcha.createMathExpr(options)
+    let captcha = svgCaptcha.create(options)
     ctx.session.code = captcha.text.toLowerCase();
     ctx.response.type = 'image/svg+xml';
     ctx.body = captcha.data;

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 16:36:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-25 17:22:33
+ * @LastEditTime: 2020-09-02 15:29:39
  */
 'use strict';
 
@@ -20,9 +20,8 @@ class MessageDao {
    * @param { Object } params 前端发送参数
    */
   static async create (ctx, params) {
-    const { name, phone, email, title, remarks, captcha } = params.data;
+    const { name, phone, email, title, remarks, captcha } = params;
     const code = ctx.session.code;
-
     try {
       if (!name || !phone || !email || !title || !remarks) {
         return {
@@ -32,13 +31,13 @@ class MessageDao {
       } else if (!captcha) {
         return {
           code: 0,
-          success: params.data,
+          success: params,
           msg: '验证码为空',
         }
       } else if (code !== captcha) {
         return {
           code: 1,
-          success: params.data,
+          success: params,
           msg: '验证码错误',
         }
       } else {

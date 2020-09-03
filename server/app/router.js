@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-25 17:19:42
+ * @LastEditTime: 2020-09-02 17:33:00
  */
 'use strict';
 
@@ -14,6 +14,8 @@
  */
 module.exports = app => {
   const { router, controller } = app;
+  const jwt = app.middleware.jwt(app.config.jwt); // token验证
+
   // 前端路由
   router.get('/', controller.web.index);
   router.get('/about/pid/:pid/cid/:cid', controller.web.about);
@@ -33,8 +35,15 @@ module.exports = app => {
   router.get('/captcha', controller.web.captcha);
 
   // message
-  router.post('/api/message/userInfo', controller.message.userInfo)
+  router.post('/api/message/userInfo', controller.message.userInfo);
 
+  // admin
+  router.post('/api/admin/userCreate', controller.admin.userCreate);
+  router.post('/api/admin/userVerify', controller.admin.userVerify);
   app.resources('home', '/home', app.controller.home);
   router.get('*', controller.web.error); // 404
+
+  router.post('/home/login', controller.home.login);
+  router.post('/home/indexs', jwt, controller.home.indexs);
+
 };

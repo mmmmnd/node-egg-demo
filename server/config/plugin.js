@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-07-01 15:04:57
+ * @LastEditTime: 2020-09-02 10:45:19
  */
 'use strict';
 
@@ -28,4 +28,18 @@ module.exports = {
     package: 'egg-sequelize',
   },
 
+  redis: {
+    enable: false,
+    package: 'egg-redis',
+  },
+
+  jwt: {
+    enable: true,
+    package: "egg-jwt"
+  },
+
+  cors: {
+    enable: true,
+    package: 'egg-cors',
+  }
 };
