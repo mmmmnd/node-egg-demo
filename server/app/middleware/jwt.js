@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-01 09:47:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-02 15:36:35
+ * @LastEditTime: 2020-09-03 10:43:29
  */
 'use strict'
 
@@ -18,9 +18,9 @@ module.exports = (options) => {
         await next();
       } catch (error) {
         if (error.message === 'jwt expired') {
-          return ctx.body = { message: 'token 已过期! 请重新获取令牌' };
+          return ctx.body = { code: 50014, data: {}, msg: 'token 已过期! 请重新获取令牌' };
         } else if (error.message === 'invalid token') {
-          return ctx.body = { message: 'Token 令牌不合法!' };
+          return ctx.body = { code: 50008, data: {}, msg: 'Token 令牌不合法!' };
         } else {
           return ctx.body = { message: error.message };
         }

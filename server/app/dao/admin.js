@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-02 15:44:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-03 09:11:49
+ * @LastEditTime: 2020-09-03 15:30:28
  */
 'use strict';
 
@@ -67,32 +67,61 @@ class AdminDao {
    * @param { Object || String } params 用户信息
    */
   static async verify (ctx, params) {
-    const admin = await ctx.model.MzcAdmin.findOne({
-      where: {
-        nickname: params.nickname,
-        deleted_at: null
-      }
-    })
+    try {
+      const admin = await ctx.model.MzcAdmin.findOne({
+        where: {
+          nickname: params.nickname,
+          deleted_at: null
+        }
+      })
 
-    if (!admin) return { code: 1, data: '', msg: '用户名不存在' }
+      if (!admin) return { code: 1, data: '', msg: '账号不存在或者密码不正确' }
 
-    const verify = bcrypt.compareSync(params.password, admin.password);
+      const verify = bcrypt.compareSync(params.password, admin.password);
 
-    if (!verify) return { code: 1, data: '', msg: '密码错误' }
+      if (!verify) return { code: 1, data: '', msg: '账号不存在或者密码不正确' }
 
-    const token = ctx.app.jwt.sign({
-      nickname: admin.nickname,
-    }, ctx.app.config.jwt.secret, {
-      expiresIn: '60m',
+      const token = ctx.app.jwt.sign({
+        userId: admin.id,
+      }, ctx.app.config.jwt.secret, {
+        expiresIn: '60m',
+      });
+
+      ctx.set({ 'token': token });
+
+      return {
+        code: 0,
+        data: { token },
+        msg: '登录成功！'
+      };
+
+    } catch (error) {
+      return {
+        code: 1,
+        data: '',
+        msg: error.message
+      };
+    }
+  }
+
+  /**
+   * 查找用户信息
+   * @param { Object } ctx 全局this
+   * @param { String } params token
+   */
+  static async detail (ctx, params) {
+
+    const adminToken = await ctx.app.jwt.verify(params);
+    const admin = await ctx.model.MzcAdmin.findByPk(adminToken.userId, {
+      attributes: { exclude: ['password'] }
     });
-
-    ctx.set({ 'token': token });
 
     return {
       code: 0,
-      data: { token },
-      msg: '登录成功！'
-    };
+      data: admin,
+      msg: '获取用户信息成功！'
+    }
+
   }
 }
 

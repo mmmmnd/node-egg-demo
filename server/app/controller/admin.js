@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-17 16:31:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-02 17:34:00
+ * @LastEditTime: 2020-09-03 10:41:12
  */
 'use strict';
 
@@ -19,6 +19,10 @@ class AdminController extends Controller {
 	async userVerify () {
 		const params = this.ctx.request.body;
 		await this.ctx.service.admin.userVerify(params);
+	}
+	async userDetail () {
+		const { token } = this.ctx.request.header;
+		await this.ctx.service.admin.userDetail(token);
 	}
 }
 

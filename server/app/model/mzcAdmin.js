@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-02 16:17:56
+ * @LastEditTime: 2020-09-03 15:20:22
  */
 'use strict';
 
@@ -41,7 +41,7 @@ module.exports = app => {
 		},
 		AvatarImage: {
 			allowNull: !0, // 是否为空
-			type: STRING(40), // 类型
+			type: STRING(60), // 类型
 			defaultValue: '', // 默认值
 			comment: '头像', // 备注
 		},
@@ -68,7 +68,7 @@ module.exports = app => {
 			type: DATE, // 类型
 			comment: '创建时间', // 备注
 			get () {
-				return moment(this.getDataValue('created_at')).format('YYYY-MM-DD');
+				return moment(this.getDataValue('created_at')).valueOf();
 			}
 		},
 		updated_at: {

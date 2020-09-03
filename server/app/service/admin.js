@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-02 17:34:37
+ * @LastEditTime: 2020-09-03 10:32:22
  */
 'use strict';
 
@@ -25,6 +25,12 @@ class AdminService extends Service {
 		const { ctx } = this;
 		const adminVerify = await AdminDao.verify(ctx, params);
 		return ctx.body = adminVerify;
+	}
+
+	async userDetail (params) {
+		const { ctx } = this;
+		const adminDetail = await AdminDao.detail(ctx, params);
+		return ctx.body = adminDetail;
 	}
 
 }
