@@ -5,40 +5,33 @@
  * @version: 1.0.0
  * @Date: 2020-09-02 15:44:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-03 15:30:28
+ * @LastEditTime: 2020-09-07 17:28:50
  */
 'use strict';
 
+const HttpStatus = require('../utils/httpStatus');
 const bcrypt = require('bcryptjs')
 
 /**
  * 管理员
  */
-class AdminDao {
+class AdminDao extends HttpStatus {
+  constructor() { super(); }
   /**
    * 注册
    * @param { Object } ctx 全局this
    * @param { Object || String } params 用户信息
+   * @param { Class } super 继承父类
    */
   static async cerate (ctx, params) {
     if (!params.nickname) {
-      return {
-        code: 1,
-        data: params,
-        msg: '用户名不能为空',
-      }
+      return await ctx.helper.json(ctx, '用户名不能为空');
+    } else if (!params.password) {
+      return await ctx.helper.json(ctx, '密码不能为空');
     } else if (params.password.length < 6) {
-      return {
-        code: 1,
-        data: params,
-        msg: '密码不能少于6位数',
-      }
+      return await ctx.helper.json(ctx, '密码不能少于6位数');
     } else if (params.password !== params.passwords) {
-      return {
-        code: 1,
-        data: params,
-        msg: '两次密码输入不一致',
-      }
+      return await ctx.helper.json(ctx, '两次密码输入不一致');
     }
 
     try {
@@ -48,25 +41,29 @@ class AdminDao {
           deleted_at: null
         }
       })
-      if (admin) return { code: 1, data: '', msg: '管理员已存在', }
+
+      if (admin) return await ctx.helper.json(ctx, '管理员已存在');
 
       const create = new ctx.model.MzcAdmin;
       create.nickname = params.nickname;
       create.password = params.password;
       create.save();
 
-      return { code: 0, data: '', msg: '管理员注册成功！' }
+      return await ctx.helper.json(ctx, '管理员注册成功', super.CREATED);
 
     } catch (error) {
-      throw new Error(error);
+      return await ctx.helper.json(ctx, error.message, super.INTERNAL_SERVER_ERROR);
     }
   }
   /**
    * 校验颁发token
    * @param { Object } ctx 全局this
    * @param { Object || String } params 用户信息
+   * @param { Class } super 继承父类
    */
   static async verify (ctx, params) {
+    if (!params.nickname || !params.password) return await ctx.helper.json(ctx, '用户名或密码未输入');
+
     try {
       const admin = await ctx.model.MzcAdmin.findOne({
         where: {
@@ -75,32 +72,33 @@ class AdminDao {
         }
       })
 
-      if (!admin) return { code: 1, data: '', msg: '账号不存在或者密码不正确' }
+      if (!admin) return await ctx.helper.json(ctx, '账号不存在或者密码不正确', super.INVALID_REQUEST);
 
       const verify = bcrypt.compareSync(params.password, admin.password);
 
-      if (!verify) return { code: 1, data: '', msg: '账号不存在或者密码不正确' }
+      if (!verify) return await ctx.helper.json(ctx, '账号不存在或者密码不正确', super.INVALID_REQUEST);
 
       const token = ctx.app.jwt.sign({
         userId: admin.id,
       }, ctx.app.config.jwt.secret, {
-        expiresIn: '60m',
+        algorithm: 'HS256',
       });
 
-      ctx.set({ 'token': token });
-
-      return {
-        code: 0,
-        data: { token },
-        msg: '登录成功！'
-      };
+      const redisGetToken = await ctx.app.redis.get('token');
+      if (redisGetToken) {
+        const redisToken = await ctx.app.jwt.verify(redisGetToken, ctx.app.config.jwt.secret, { algorithm: 'HS256' });
+        if (redisToken.userId === admin.id) {
+          return await ctx.helper.json(ctx, '用户已登录！', super.FORBIDDEN);
+        } else {
+          return await ctx.helper.json(ctx, '未知错误！', super.INTERNAL_SERVER_ERROR);
+        }
+      } else {
+        await ctx.app.redis.set('token', token);
+        return await ctx.helper.success(ctx, { token }, '登录成功！');
+      }
 
     } catch (error) {
-      return {
-        code: 1,
-        data: '',
-        msg: error.message
-      };
+      return await ctx.helper.json(ctx, error.message, super.INTERNAL_SERVER_ERROR);
     }
   }
 
@@ -108,18 +106,34 @@ class AdminDao {
    * 查找用户信息
    * @param { Object } ctx 全局this
    * @param { String } params token
+   * @param { Class } super 继承父类
    */
   static async detail (ctx, params) {
 
-    const adminToken = await ctx.app.jwt.verify(params);
+    const adminToken = await ctx.app.jwt.verify(params, ctx.app.config.jwt.secret, {
+      algorithm: 'HS256'
+    });
     const admin = await ctx.model.MzcAdmin.findByPk(adminToken.userId, {
       attributes: { exclude: ['password'] }
     });
 
-    return {
-      code: 0,
-      data: admin,
-      msg: '获取用户信息成功！'
+    return await ctx.helper.success(ctx, admin, '获取用户信息成功！');
+
+  }
+
+  /**
+   * 用户退出登录
+   * @param { Object } ctx 全局this
+   * @param { String } params token
+   * @param { Class } super 继承父类
+   */
+  static async logout (ctx, params) {
+    const redisToken = await ctx.app.redis.get('token');
+    if (redisToken === params) {
+      await ctx.app.redis.del('token')
+      return await ctx.helper.json(ctx, '退出登录成功！', super.OK);
+    } else {
+      return await ctx.helper.json(ctx, '非法请求！', super.INTERNAL_SERVER_ERROR);
     }
 
   }

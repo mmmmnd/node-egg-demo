@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-01 15:25:05
+ * @LastEditTime: 2020-09-07 08:38:34
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -24,9 +24,14 @@ module.exports = appInfo => {
   // use for cookie sign key, should change to your own and keep security
   config.keys = appInfo.name + '_1593516950179_1189';
 
-  // add your middleware config here
-  config.middleware = [];
+  // add your config here
+  // 加载 errorHandler 中间件
+  config.middleware = ['errorHandler']
 
+  // 只对 /api 前缀的 url 路径生效
+  // config.errorHandler = {
+  //   match: '/api',
+  // }
   // ejs
   config.view = {
     mapping: {

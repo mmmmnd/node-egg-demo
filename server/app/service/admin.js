@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-03 10:32:22
+ * @LastEditTime: 2020-09-07 17:33:18
  */
 'use strict';
 
@@ -17,20 +17,22 @@ class AdminService extends Service {
 
 	async userCreate (params) {
 		const { ctx } = this;
-		const adminCreate = await AdminDao.cerate(ctx, params);
-		return ctx.body = adminCreate;
+		await AdminDao.cerate(ctx, params);
 	}
 
 	async userVerify (params) {
 		const { ctx } = this;
-		const adminVerify = await AdminDao.verify(ctx, params);
-		return ctx.body = adminVerify;
+		await AdminDao.verify(ctx, params);
 	}
 
 	async userDetail (params) {
 		const { ctx } = this;
-		const adminDetail = await AdminDao.detail(ctx, params);
-		return ctx.body = adminDetail;
+		await AdminDao.detail(ctx, params);
+	}
+
+	async userLogout (params) {
+		const { ctx } = this;
+		await AdminDao.logout(ctx, params);
 	}
 
 }

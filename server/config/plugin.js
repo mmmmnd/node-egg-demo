@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-02 10:45:19
+ * @LastEditTime: 2020-09-04 11:04:24
  */
 'use strict';
 
@@ -29,7 +29,7 @@ module.exports = {
   },
 
   redis: {
-    enable: false,
+    enable: true,
     package: 'egg-redis',
   },
 

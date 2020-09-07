@@ -5,28 +5,33 @@
  * @version: 1.0.0
  * @Date: 2020-09-01 09:47:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-03 10:43:29
+ * @LastEditTime: 2020-09-07 17:14:30
  */
 'use strict'
 
+const HttpStatus = require('../utils/httpStatus');
+
 module.exports = (options) => {
   return async (ctx, next) => {
-    let { token } = ctx.request.header;
-    if (token) {
+    const redisToken = await ctx.app.redis.get('token');
+    const token = ctx.get('token');
+
+    if (token === redisToken) {
       try {
-        ctx.app.jwt.verify(token, options.secret);
+        await ctx.app.redis.expire('token', 10) // 未响应30分钟后删除token
+        ctx.app.jwt.verify(token, options.secret, { algorithm: 'HS256' });
         await next();
-      } catch (error) {
-        if (error.message === 'jwt expired') {
-          return ctx.body = { code: 50014, data: {}, msg: 'token 已过期! 请重新获取令牌' };
-        } else if (error.message === 'invalid token') {
-          return ctx.body = { code: 50008, data: {}, msg: 'Token 令牌不合法!' };
-        } else {
-          return ctx.body = { message: error.message };
-        }
+      } catch (e) {
+        await ctx.helper.json(ctx, e.message, HttpStatus.INTERNAL_SERVER_ERROR)
       }
+    } else if (!token) {
+      await ctx.helper.json(ctx, '您没有权限访问该接口!', HttpStatus.UNAUTHORIZED)
+    } else if (!redisToken) {
+      await ctx.helper.json(ctx, 'token 已过期! 请重新获取令牌', HttpStatus.UNAUTHORIZED)
+    } else if (token !== redisToken) {
+      await ctx.helper.json(ctx, 'token 信息不一致', HttpStatus.UNAUTHORIZED)
     } else {
-      return ctx.body = { message: '您没有权限访问该接口!' };
+      await ctx.helper.json(ctx, '未知错误！', HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR);
     }
   }
 };
