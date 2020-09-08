@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-02 15:44:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-07 17:28:50
+ * @LastEditTime: 2020-09-08 10:51:25
  */
 'use strict';
 
@@ -88,7 +88,7 @@ class AdminDao extends HttpStatus {
       if (redisGetToken) {
         const redisToken = await ctx.app.jwt.verify(redisGetToken, ctx.app.config.jwt.secret, { algorithm: 'HS256' });
         if (redisToken.userId === admin.id) {
-          return await ctx.helper.json(ctx, '用户已登录！', super.FORBIDDEN);
+          return await ctx.helper.json(ctx, '用户已登录！请半小时后再重新登录', super.FORBIDDEN);
         } else {
           return await ctx.helper.json(ctx, '未知错误！', super.INTERNAL_SERVER_ERROR);
         }
@@ -131,7 +131,7 @@ class AdminDao extends HttpStatus {
     const redisToken = await ctx.app.redis.get('token');
     if (redisToken === params) {
       await ctx.app.redis.del('token')
-      return await ctx.helper.json(ctx, '退出登录成功！', super.OK);
+      return await ctx.helper.json(ctx, '退出登录成功', super.OK, 0);
     } else {
       return await ctx.helper.json(ctx, '非法请求！', super.INTERNAL_SERVER_ERROR);
     }
