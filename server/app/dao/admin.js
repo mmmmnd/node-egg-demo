@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-02 15:44:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-08 10:51:25
+ * @LastEditTime: 2020-09-08 17:44:56
  */
 'use strict';
 
@@ -24,10 +24,8 @@ class AdminDao extends HttpStatus {
    * @param { Class } super 继承父类
    */
   static async cerate (ctx, params) {
-    if (!params.nickname) {
-      return await ctx.helper.json(ctx, '用户名不能为空');
-    } else if (!params.password) {
-      return await ctx.helper.json(ctx, '密码不能为空');
+    if (!params.nickname || !params.password) {
+      return await ctx.helper.json(ctx, '用户名或密码未输入');
     } else if (params.password.length < 6) {
       return await ctx.helper.json(ctx, '密码不能少于6位数');
     } else if (params.password !== params.passwords) {
