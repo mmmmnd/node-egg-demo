@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-03 10:31:06
+ * @LastEditTime: 2020-09-08 10:35:04
  */
 import request from '@/utils/request'
 
@@ -27,7 +27,7 @@ export function getInfo (token) {
 
 export function logout () {
   return request({
-    url: '/vue-admin-template/user/logout',
+    url: '/admin/userLogout',
     method: 'post'
   })
 }

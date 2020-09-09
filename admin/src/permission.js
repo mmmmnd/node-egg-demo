@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-03 10:47:58
+ * @LastEditTime: 2020-09-08 11:19:42
  */
 import router from './router'
 import store from './store'
@@ -47,7 +47,8 @@ router.beforeEach(async (to, from, next) => {
         } catch (error) {
           // 删除令牌并进入登录页面重新登录
           await store.dispatch('user/resetToken')
-          Message.error(error || 'Has Error')
+          // Message.error(`${error}` || 'Has Error')
+          console.log(error)
           next(`/login?redirect=${to.path}`)
           NProgress.done()
         }
