@@ -5,11 +5,11 @@
  * @version: 1.0.0
  * @Date: 2020-09-04 15:04:41
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-11 11:41:24
+ * @LastEditTime: 2020-09-11 11:45:42
  */
 module.exports = {
   /**
-   * 主要返回前端data数组
+   * 主要返回前端data数据
    * @param { Object } ctx //全局this
    * @param { Object } data //返回对象
    * @param { TXT } msg //错误提示语

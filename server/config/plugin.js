@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-04 11:04:24
+ * @LastEditTime: 2020-09-11 15:40:53
  */
 'use strict';
 
@@ -41,5 +41,11 @@ module.exports = {
   cors: {
     enable: true,
     package: 'egg-cors',
+  },
+
+  validate: {
+    enable: true,
+    package: 'egg-validate',
   }
+
 };
