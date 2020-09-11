@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-02 15:44:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-08 17:44:56
+ * @LastEditTime: 2020-09-11 11:40:42
  */
 'use strict';
 
@@ -25,11 +25,11 @@ class AdminDao extends HttpStatus {
    */
   static async cerate (ctx, params) {
     if (!params.nickname || !params.password) {
-      return await ctx.helper.json(ctx, '用户名或密码未输入');
+      return await ctx.helper.json(ctx, '用户名或密码未输入', super.INVALID_REQUEST);
     } else if (params.password.length < 6) {
-      return await ctx.helper.json(ctx, '密码不能少于6位数');
+      return await ctx.helper.json(ctx, '密码不能少于6位数', super.INVALID_REQUEST);
     } else if (params.password !== params.passwords) {
-      return await ctx.helper.json(ctx, '两次密码输入不一致');
+      return await ctx.helper.json(ctx, '两次密码输入不一致', super.UNAUTHORIZED);
     }
 
     try {
@@ -40,7 +40,7 @@ class AdminDao extends HttpStatus {
         }
       })
 
-      if (admin) return await ctx.helper.json(ctx, '管理员已存在');
+      if (admin) return await ctx.helper.json(ctx, '管理员已存在', super.Forbidden);
 
       const create = new ctx.model.MzcAdmin;
       create.nickname = params.nickname;
@@ -60,7 +60,7 @@ class AdminDao extends HttpStatus {
    * @param { Class } super 继承父类
    */
   static async verify (ctx, params) {
-    if (!params.nickname || !params.password) return await ctx.helper.json(ctx, '用户名或密码未输入');
+    if (!params.nickname || !params.password) return await ctx.helper.error(ctx, '用户名或密码未输入');
 
     try {
       const admin = await ctx.model.MzcAdmin.findOne({
@@ -70,28 +70,31 @@ class AdminDao extends HttpStatus {
         }
       })
 
-      if (!admin) return await ctx.helper.json(ctx, '账号不存在或者密码不正确', super.INVALID_REQUEST);
+      if (!admin) return await ctx.helper.error(ctx, '账号不存在或者密码不正确', super.INVALID_REQUEST);
 
       const verify = bcrypt.compareSync(params.password, admin.password);
 
-      if (!verify) return await ctx.helper.json(ctx, '账号不存在或者密码不正确', super.INVALID_REQUEST);
+      if (!verify) return await ctx.helper.error(ctx, '账号不存在或者密码不正确', super.INVALID_REQUEST);
 
+      //颁发token secret -> 加密类型 params -> jwt参数
       const token = ctx.app.jwt.sign({
         userId: admin.id,
-      }, ctx.app.config.jwt.secret, {
-        algorithm: 'HS256',
-      });
+      }, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
 
-      const redisGetToken = await ctx.app.redis.get('token');
+      //获取redis保存的token
+      const redisGetToken = await ctx.app.redis.get(ctx.app.config.usetToken);
       if (redisGetToken) {
-        const redisToken = await ctx.app.jwt.verify(redisGetToken, ctx.app.config.jwt.secret, { algorithm: 'HS256' });
+        //校验token令牌 secret -> 加密类型 params -> jwt参数
+        const redisToken = await ctx.app.jwt.verify(redisGetToken, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
         if (redisToken.userId === admin.id) {
-          return await ctx.helper.json(ctx, '用户已登录！请半小时后再重新登录', super.FORBIDDEN);
+          return await ctx.helper.error(ctx, '用户已登录！请半小时后再重新登录', super.FORBIDDEN);
         } else {
-          return await ctx.helper.json(ctx, '未知错误！', super.INTERNAL_SERVER_ERROR);
+          return await ctx.helper.error(ctx, '未知错误！', super.INTERNAL_SERVER_ERROR);
         }
       } else {
-        await ctx.app.redis.set('token', token);
+        //保存token 设置过期时间
+        await ctx.app.redis.set(ctx.app.config.usetToken, token);
+        await ctx.app.redis.expire(ctx.app.config.usetToken, ctx.app.config.jwt.expired);
         return await ctx.helper.success(ctx, { token }, '登录成功！');
       }
 
@@ -108,9 +111,7 @@ class AdminDao extends HttpStatus {
    */
   static async detail (ctx, params) {
 
-    const adminToken = await ctx.app.jwt.verify(params, ctx.app.config.jwt.secret, {
-      algorithm: 'HS256'
-    });
+    const adminToken = await ctx.app.jwt.verify(params, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
     const admin = await ctx.model.MzcAdmin.findByPk(adminToken.userId, {
       attributes: { exclude: ['password'] }
     });
@@ -126,10 +127,10 @@ class AdminDao extends HttpStatus {
    * @param { Class } super 继承父类
    */
   static async logout (ctx, params) {
-    const redisToken = await ctx.app.redis.get('token');
+    const redisToken = await ctx.app.redis.get(ctx.app.config.usetToken);
     if (redisToken === params) {
-      await ctx.app.redis.del('token')
-      return await ctx.helper.json(ctx, '退出登录成功', super.OK, 0);
+      await ctx.app.redis.del(ctx.app.config.usetToken)
+      return await ctx.helper.json(ctx, '退出登录成功');
     } else {
       return await ctx.helper.json(ctx, '非法请求！', super.INTERNAL_SERVER_ERROR);
     }
