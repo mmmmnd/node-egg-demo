@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-11 15:59:00
+ * @LastEditTime: 2020-09-14 17:57:54
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -87,9 +87,17 @@ module.exports = appInfo => {
     allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
   };
 
-  config.validate = {
-    convert: false,
-    validateRoot: false,
+  config.validatePlus = {
+    resolveError (ctx, errors) {
+      if (errors.length) {
+        ctx.type = 'json';
+        ctx.status = 400;
+        ctx.body = {
+          code: 400,
+          errMsg: errors,
+        };
+      }
+    }
   };
   // add your user config here
   const userConfig = {

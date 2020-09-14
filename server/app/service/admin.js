@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-11 15:13:03
+ * @LastEditTime: 2020-09-14 17:54:10
  */
 'use strict';
 
@@ -18,18 +18,11 @@ class AdminService extends Service {
    * 注册
    * @param { Object || String } params 用户信息
    */
-	async userCreate (params) {
+	async create (params) {
 		const { ctx } = this;
 
-		if (!params.nickname || !params.password) {
-			return await ctx.helper.json(ctx, '用户名或密码未输入', HttpStatus.INVALID_REQUEST);
-		} else if (params.password.length < 6) {
-			return await ctx.helper.json(ctx, '密码不能少于6位数', HttpStatus.INVALID_REQUEST);
-		} else if (params.password !== params.passwords) {
-			return await ctx.helper.json(ctx, '两次密码输入不一致', HttpStatus.UNAUTHORIZED);
-		}
-
 		try {
+
 			const admin = await ctx.model.MzcAdmin.findOne({
 				where: {
 					nickname: params.nickname,
@@ -37,17 +30,16 @@ class AdminService extends Service {
 				}
 			})
 
-			if (admin) return await ctx.helper.json(ctx, '管理员已存在', HttpStatus.Forbidden);
+			if (admin) return ['管理员已存在', HttpStatus.FORBIDDEN];
 
 			const create = new ctx.model.MzcAdmin;
 			create.nickname = params.nickname;
 			create.password = params.password;
 			create.save();
-
-			return await ctx.helper.json(ctx, '管理员注册成功', HttpStatus.CREATED);
+			return ['管理员注册成功', HttpStatus.CREATED];
 
 		} catch (error) {
-			return await ctx.helper.json(ctx, error.message, HttpStatus.INTERNAL_SERVER_ERROR);
+			return [error.message, HttpStatus.INTERNAL_SERVER_ERROR];
 		}
 	}
 
@@ -57,8 +49,6 @@ class AdminService extends Service {
 	 */
 	async userVerify (params) {
 		const { ctx } = this;
-
-		if (!params.nickname || !params.password) return await ctx.helper.error(ctx, '用户名或密码未输入');
 
 		try {
 			const admin = await ctx.model.MzcAdmin.findOne({
