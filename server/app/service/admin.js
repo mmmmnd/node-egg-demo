@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-14 18:18:36
+ * @LastEditTime: 2020-09-15 08:55:38
  */
 'use strict';
 
@@ -48,7 +48,7 @@ class AdminService extends Service {
 	 * 校验颁发token
 	 * @param { Object || String } params 用户信息
 	 */
-	async userVerify (params) {
+	async verify (params) {
 		const { ctx } = this;
 
 		try {
