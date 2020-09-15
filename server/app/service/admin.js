@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-14 17:54:10
+ * @LastEditTime: 2020-09-14 18:18:36
  */
 'use strict';
 
@@ -36,6 +36,7 @@ class AdminService extends Service {
 			create.nickname = params.nickname;
 			create.password = params.password;
 			create.save();
+
 			return ['管理员注册成功', HttpStatus.CREATED];
 
 		} catch (error) {
@@ -58,11 +59,11 @@ class AdminService extends Service {
 				}
 			})
 
-			if (!admin) return await ctx.helper.error(ctx, '账号不存在或者密码不正确', HttpStatus.INVALID_REQUEST);
+			if (!admin) return ['账号不存在或者密码不正确', HttpStatus.INVALID_REQUEST];
 
 			const verify = bcrypt.compareSync(params.password, admin.password);
 
-			if (!verify) return await ctx.helper.error(ctx, '账号不存在或者密码不正确', HttpStatus.INVALID_REQUEST);
+			if (!verify) return ['账号不存在或者密码不正确', HttpStatus.INVALID_REQUEST];
 
 			//颁发token secret -> 加密类型 params -> jwt参数
 			const token = ctx.app.jwt.sign({
@@ -75,9 +76,9 @@ class AdminService extends Service {
 				//校验token令牌 secret -> 加密类型 params -> jwt参数
 				const redisToken = await ctx.app.jwt.verify(redisGetToken, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
 				if (redisToken.userId === admin.id) {
-					return await ctx.helper.error(ctx, '用户已登录！请半小时后再重新登录', HttpStatus.FORBIDDEN);
+					return ['用户已登录！请半小时后再重新登录', HttpStatus.FORBIDDEN];
 				} else {
-					return await ctx.helper.error(ctx, '未知错误！', HttpStatus.INTERNAL_SERVER_ERROR);
+					return ['未知错误！', HttpStatus.INTERNAL_SERVER_ERROR];
 				}
 			} else {
 				//保存token 设置过期时间
