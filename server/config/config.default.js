@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-14 17:57:54
+ * @LastEditTime: 2020-09-16 11:22:36
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -89,12 +89,14 @@ module.exports = appInfo => {
 
   config.validatePlus = {
     resolveError (ctx, errors) {
+      let type = '', msg = '';
       if (errors.length) {
+        for (var item of errors) { type += item.field + ' '; msg += item.message + ' '; }
         ctx.type = 'json';
-        ctx.status = 400;
+        ctx.status = 200;
         ctx.body = {
           code: 400,
-          errMsg: errors,
+          msg: `错误类型${type},错误信息${msg}`,
         };
       }
     }

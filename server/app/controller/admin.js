@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-17 16:31:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-14 17:52:17
+ * @LastEditTime: 2020-09-16 11:44:23
  */
 'use strict';
 const AdminValidators = require('../validators/admin');
@@ -14,31 +14,50 @@ const adminValidators = new AdminValidators();
 const Controller = require('egg').Controller;
 
 class AdminController extends Controller {
+	/**
+	 * 注册
+	 */
 	async create () {
 		const params = this.ctx.request.body;
 
+		//校验用户信息
 		const validators = await this.ctx.validate(adminValidators, params)
 		if (!validators) return false;
 
 		const admin = await this.ctx.service.admin.create(params);
-		await this.ctx.helper.json(...admin)
+		await this.ctx.helper.checkData(admin);
 	}
-	async verify () {
+	/**
+	 * 登录
+	 */
+	async login () {
 		const params = this.ctx.request.body;
 
+		//校验用户信息
 		const { nickname, password } = adminValidators;
 		const validators = await this.ctx.validate({ nickname, password }, params);
 		if (!validators) return false;
 
-		await this.ctx.service.admin.verify(params);
+		const admin = await this.ctx.service.admin.login(params);
+		await this.ctx.helper.checkData(admin);
 	}
-	async detail () {
+	/**
+	 * 当前用户信息
+	 */
+	async current () {
 		const { token } = this.ctx.request.header;
-		await this.ctx.service.admin.detail(token);
+
+		const admin = await this.ctx.service.admin.current(token);
+		await this.ctx.helper.checkData(admin);
 	}
+	/**
+	 * 退出
+	 */
 	async logout () {
 		const { token } = this.ctx.request.header;
-		await this.ctx.service.admin.logout(token);
+
+		const admin = await this.ctx.service.admin.logout(token);
+		await this.ctx.helper.checkData(admin);
 	}
 }
 

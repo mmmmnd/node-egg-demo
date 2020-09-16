@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-18 15:37:40
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-11 17:31:23
+ * @LastEditTime: 2020-09-15 11:31:05
  */
 'use strict'
 
@@ -17,6 +17,7 @@
 // };
 
 const path = require('path');
+// const errors = require('./app/utils/httpException');
 
 class AppBootHook {
   constructor(app) {
@@ -27,9 +28,7 @@ class AppBootHook {
   }
 
   async didLoad () {
-    // 引入validate目录，并注入app实例
-    const directory = path.join(this.app.config.baseDir, 'app/validate');
-    this.app.loader.loadToApp(directory, 'validate');
+    // global.errs = errors;
   }
 }
 

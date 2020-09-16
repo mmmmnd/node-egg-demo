@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-14 17:06:24
+ * @LastEditTime: 2020-09-16 11:42:37
  */
 'use strict';
 
@@ -39,9 +39,10 @@ module.exports = app => {
 
   // admin
   router.post('/api/admin/create', controller.admin.create);
-  router.post('/api/admin/verify', controller.admin.verify);
+  router.post('/api/admin/login', controller.admin.login);
   router.post('/api/admin/logout', jwt, controller.admin.logout);
-  router.get('/api/admin/detail', jwt, controller.admin.detail);
+  router.get('/api/admin/current', jwt, controller.admin.current);
+
   app.resources('home', '/home', app.controller.home);
   router.get('*', controller.web.error); // 404
 
