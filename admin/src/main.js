@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-08 11:17:44
+ * @LastEditTime: 2020-09-16 16:20:32
  */
 import Vue from 'vue'
 
@@ -24,6 +24,8 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import * as filters from './filters' // global filters
+
 /**
  * If you don't want to use mock-server
  * you want to use MockJs for mock api
@@ -41,6 +43,11 @@ if (process.env.NODE_ENV === 'production') {
 // Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 Vue.use(ElementUI)
+
+// register global utility filters
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 
 Vue.config.productionTip = false
 

@@ -56,6 +56,34 @@ export const constantRoutes = [
   },
 
   {
+    path: '/about',
+    component: Layout,
+    redirect: '/about/single',
+    name: 'About',
+    meta: { title: '关于我们', icon: 'el-icon-user-solid' },
+    children: [
+      {
+        path: 'single',
+        name: 'Single',
+        component: () => import('@/views/about/single'),
+        meta: { title: '单页', icon: '' }
+      },
+      {
+        path: 'list',
+        name: 'List',
+        component: () => import('@/views/about/list'),
+        meta: { title: '列表', icon: '' }
+      },
+      {
+        path: 'category',
+        name: 'Category',
+        component: () => import('@/views/about/category'),
+        meta: { title: '分类', icon: '' }
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',

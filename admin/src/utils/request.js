@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-08 10:34:24
+ * @LastEditTime: 2020-09-17 17:10:00
  */
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
@@ -65,10 +65,8 @@ service.interceptors.response.use(
       // 50008：非法令牌； 50012：其他客户端登录； 50014：令牌已过期；
       if (res.code === 50008 || res.code === 50012 || res.code === 50014) {
         // 重新登录
-        MessageBox.confirm(res.msg, '确认登出', {
-          confirmButtonText: '重新登入',
-          cancelButtonText: '取消',
-          type: 'warning'
+        MessageBox.alert(res.msg, '确认登出', {
+          type: 'info'
         }).then(() => {
           store.dispatch('user/resetToken').then(() => {
             location.reload()
@@ -83,7 +81,7 @@ service.interceptors.response.use(
   error => {
     console.log('err' + error) //用于调试
     Message({
-      message: error.msg || 'Error',
+      message: error.msg || error,
       type: 'error',
       duration: 5 * 1000
     })
