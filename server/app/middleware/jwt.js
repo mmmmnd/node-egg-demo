@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-01 09:47:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-16 10:58:23
+ * @LastEditTime: 2020-09-17 15:22:40
  */
 'use strict'
 
@@ -27,9 +27,9 @@ module.exports = (options) => {
     } else if (!token) {
       await ctx.helper.checkData({ msg: '您没有权限访问该接口!', errorStatus: HttpStatus.UNAUTHORIZED })
     } else if (!redisToken) {
-      await ctx.helper.checkData({ msg: 'token 已过期! 请重新获取令牌', errorStatus: HttpStatus.UNAUTHORIZED })
+      await ctx.helper.checkData({ msg: 'token 已过期! 请重新获取令牌', errorStatus: HttpStatus.UNAUTHORIZED, code: 50014 })
     } else if (token !== redisToken) {
-      await ctx.helper.checkData({ msg: 'token 信息不一致', errorStatus: HttpStatus.UNAUTHORIZED })
+      await ctx.helper.checkData({ msg: 'token 信息不一致', errorStatus: HttpStatus.UNAUTHORIZED, code: 50008 })
     } else {
       await ctx.helper.checkData({ msg: '未知错误！', errorStatus: HttpStatus.INTERNAL_SERVER_ERROR });
     }

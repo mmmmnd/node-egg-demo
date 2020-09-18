@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-16 11:44:57
+ * @LastEditTime: 2020-09-17 15:25:06
  */
 'use strict';
 
@@ -75,7 +75,7 @@ class AdminService extends Service {
 				//校验token令牌 secret -> 加密类型 params -> jwt参数
 				const redisToken = await ctx.app.jwt.verify(redisGetToken, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
 				if (redisToken.userId === admin.id) {
-					return { msg: '用户已登录！请半小时后再重新登录', errorStatus: HttpStatus.FORBIDDEN };
+					return { msg: '用户已登录！请半小时后再重新登录', errorStatus: HttpStatus.FORBIDDEN, code: 50012 };
 				} else {
 					return { msg: '未知错误！', errorStatus: HttpStatus.INTERNAL_SERVER_ERROR };
 				}
@@ -116,7 +116,7 @@ class AdminService extends Service {
 		const redisToken = await ctx.app.redis.get(ctx.app.config.usetToken);
 		if (redisToken === params) {
 			await ctx.app.redis.del(ctx.app.config.usetToken)
-			return { msg: '退出登录成功', errorStatus: HttpStatus.OK };
+			return { msg: '退出登录成功', errorStatus: HttpStatus.OK, code: 0 };
 		} else {
 			return { msg: '非法请求！', errorStatus: HttpStatus.INTERNAL_SERVER_ERROR };
 		}

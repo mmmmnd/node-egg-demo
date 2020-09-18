@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-02 10:45:02
+ * @LastEditTime: 2020-09-17 14:44:58
  */
 'use strict';
 
@@ -16,7 +16,10 @@ class HomeController extends Controller {
     const ctx = this.ctx;
     ctx.body = await ctx.service.home.list();
   }
-
+  async edit () {
+    const ctx = this.ctx;
+    ctx.body = await ctx.service.home.list();
+  }
   async login () {
     const { ctx, app } = this;
 

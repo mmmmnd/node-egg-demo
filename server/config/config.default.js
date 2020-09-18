@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-16 11:22:36
+ * @LastEditTime: 2020-09-17 17:25:44
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -29,9 +29,9 @@ module.exports = appInfo => {
   config.middleware = ['errorHandler']
 
   // 只对 /api 前缀的 url 路径生效
-  // config.errorHandler = {
-  //   match: '/api',
-  // }
+  config.errorHandler = {
+    match: '/api',
+  }
   // ejs
   config.view = {
     mapping: {

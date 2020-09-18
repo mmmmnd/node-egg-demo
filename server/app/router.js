@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-16 11:42:37
+ * @LastEditTime: 2020-09-18 16:53:45
  */
 'use strict';
 
@@ -43,10 +43,15 @@ module.exports = app => {
   router.post('/api/admin/logout', jwt, controller.admin.logout);
   router.get('/api/admin/current', jwt, controller.admin.current);
 
+  // menu
+  router.get('/api/menu/index', jwt, controller.menu.index);
+  router.post('/api/menu/update', jwt, controller.menu.update);
+
+
   app.resources('home', '/home', app.controller.home);
   router.get('*', controller.web.error); // 404
 
-  router.post('/home/login', controller.home.login);
-  router.post('/home/indexs', jwt, controller.home.indexs);
+  // router.post('/home/login', controller.home.login);
+  // router.post('/home/indexs', jwt, controller.home.indexs);
 
 };
