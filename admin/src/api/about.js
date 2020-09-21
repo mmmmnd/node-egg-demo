@@ -5,11 +5,11 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:59:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-18 17:30:13
+ * @LastEditTime: 2020-09-21 11:41:34
  */
 import request from '@/utils/request'
 
-export function fetchList (params) {
+export function aboutMenuList (params) {
   return request({
     url: '/menu/index',
     method: 'get',
@@ -17,11 +17,19 @@ export function fetchList (params) {
   })
 }
 
-export function menuUpdate (params) {
+export function aboutMenuUpdate (data) {
   return request({
     url: '/menu/update',
     method: 'post',
-    params
+    data
+  })
+}
+
+export function aboutMenuEdit (data) {
+  return request({
+    url: '/menu/edit',
+    method: 'post',
+    data
   })
 }
 
