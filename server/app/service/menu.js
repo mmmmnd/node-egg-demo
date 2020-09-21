@@ -5,9 +5,11 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-18 17:42:45
+ * @LastEditTime: 2020-09-21 17:31:01
  */
 'use strict';
+
+const GetTree = require('../utils/getTree');
 const Service = require('egg').Service;
 const HttpStatus = require('../utils/httpStatus');
 
@@ -48,7 +50,7 @@ class MenuService extends Service {
     }
   }
   /**
-   * 
+   * 更新
    * @param { String } id 当前id
    * @param { String } key 字段名
    * @param { String } value 字表值
@@ -65,6 +67,41 @@ class MenuService extends Service {
     } catch (error) {
       return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
     }
+  }
+  /**
+   * 修改
+   * @param { Object } params //前端发送修改参 
+   */
+  async edit (params) {
+    const { title, status, sort, id } = params
+    try {
+      await this.ctx.model.MzcMenu.update({
+        title, status, sort
+      }, {
+        where: {
+          id,
+          deleted_at: null
+        },
+      })
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
+  }
+  /**
+  * 导航菜单列表
+  */
+  async list () {
+    const menu = await this.ctx.model.MzcMenu.findAll({
+      where: {
+        status: true,
+        deleted_at: null
+      },
+      order: [
+        ['sort', 'ASC'], ['id', 'ASC']
+      ]
+    });
+    return GetTree.menuList(menu, 0);
   }
 }
 

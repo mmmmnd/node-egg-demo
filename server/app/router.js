@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-18 16:53:45
+ * @LastEditTime: 2020-09-21 11:35:52
  */
 'use strict';
 
@@ -46,6 +46,7 @@ module.exports = app => {
   // menu
   router.get('/api/menu/index', jwt, controller.menu.index);
   router.post('/api/menu/update', jwt, controller.menu.update);
+  router.post('/api/menu/edit', jwt, controller.menu.edit);
 
 
   app.resources('home', '/home', app.controller.home);

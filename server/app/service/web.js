@@ -5,11 +5,11 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:49:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-02 15:40:34
+ * @LastEditTime: 2020-09-21 17:30:32
  */
 'use strict';
 // const getTree = require('../getTree.js').getTree;
-const MenuDao = require('../dao/menu');
+// const MenuDao = require('../dao/menu');
 const NewsDao = require('../dao/news');
 const CasesDao = require('../dao/cases');
 const CultureDao = require('../dao/culture');
@@ -31,7 +31,7 @@ class WebService extends Service {
   async index () {
     const { ctx } = this;
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
@@ -51,7 +51,7 @@ class WebService extends Service {
     const err = await error(pid, cid, 7, 1, 0);
     if (err) return render(ctx);
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
     const aboutSingleDetail = await aboutSingleDao.detail(ctx, cid); // about单页数据
@@ -67,7 +67,7 @@ class WebService extends Service {
     const err = await error(pid, cid, 13, 7, 1);
     if (err) return render(ctx);
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const servicesList = await ServicesDao.list(ctx, cid); // services数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
@@ -82,7 +82,7 @@ class WebService extends Service {
     const err = await error(pid, cid, 16, 13, 2);
     if (err) return render(ctx);
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const companyList = await CompanyDao.list(ctx, cid); // services数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
@@ -99,7 +99,7 @@ class WebService extends Service {
     const err = await error(pid, cid, 21, 16, 3);
     if (err) return render(ctx);
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const cultureList = await CultureDao.list(ctx, cid, page); // culture数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
@@ -115,7 +115,7 @@ class WebService extends Service {
     const err = await error(pid, cid, 21, 16, 3);
     if (err) return render(ctx);
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const papeInfo = await CultureDao.info(ctx, cid, id); // 详情页数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
@@ -134,7 +134,7 @@ class WebService extends Service {
     const err = await error(pid, cid, 25, 21, 4);
     if (err) return render(ctx);
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const newsList = await NewsDao.list(ctx, cid, page); // culture数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
@@ -150,7 +150,7 @@ class WebService extends Service {
     const err = await error(pid, cid, 25, 21, 4);
     if (err) return render(ctx);
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const papeInfo = await NewsDao.info(ctx, cid, id); // 详情页数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
@@ -169,7 +169,7 @@ class WebService extends Service {
     const err = await error(pid, cid, 28, 25, 5);
     if (err) return render(ctx);
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const casesList = await CasesDao.list(ctx, cid, page); // case数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
@@ -185,7 +185,7 @@ class WebService extends Service {
     const err = await error(pid, cid, 28, 25, 5);
     if (err) return render(ctx);
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const papeInfo = await CasesDao.info(ctx, cid, id); // 详情页数据
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
@@ -202,7 +202,7 @@ class WebService extends Service {
     const err = await error(pid, cid, 31, 28, 6);
     if (err) return render(ctx);
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const recruitList = await RecruitDao.list(ctx); // recruit页面数据
     const recruitDroptypeList = await RecruitDroptypeDao.list(ctx); //  recruit公司数据
     const settingList = await SettingDao.list(ctx); // 基本设置
@@ -218,7 +218,7 @@ class WebService extends Service {
     const err = await error(pid, cid, 34, 31, 7);
     if (err) return render(ctx);
 
-    const menuList = await MenuDao.list(ctx); // 导航栏菜单
+    const menuList = await this.ctx.service.menu.list(); // 导航栏菜单
     const settingList = await SettingDao.list(ctx); // 基本设置
     const advertisingList = await AdvertisingDao.list(ctx); // 轮播图广告
 
