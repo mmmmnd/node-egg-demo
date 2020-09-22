@@ -65,6 +65,7 @@
         <template slot-scope="{row}">
           <el-button type="primary"
                      size="mini"
+                     icon="el-icon-edit"
                      @click="handleUpdate(row)">编辑</el-button>
         </template>
 

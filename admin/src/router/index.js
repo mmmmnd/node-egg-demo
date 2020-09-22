@@ -79,7 +79,7 @@ export const constantRoutes = [
         name: 'Category',
         component: () => import('@/views/about/category'),
         meta: { title: '分类', icon: '' }
-      }
+      },
     ]
   },
 
