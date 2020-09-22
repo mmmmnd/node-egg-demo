@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-21 11:35:52
+ * @LastEditTime: 2020-09-22 16:00:28
  */
 'use strict';
 
@@ -48,6 +48,8 @@ module.exports = app => {
   router.post('/api/menu/update', jwt, controller.menu.update);
   router.post('/api/menu/edit', jwt, controller.menu.edit);
 
+  router.get('/api/aboutSingle/index', jwt, controller.aboutSingle.index)
+  router.post('/api/aboutSingle/update', jwt, controller.aboutSingle.update)
 
   app.resources('home', '/home', app.controller.home);
   router.get('*', controller.web.error); // 404

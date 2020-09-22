@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-16 15:44:23
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-21 14:53:47
+ * @LastEditTime: 2020-09-22 14:55:18
  */
 'use strict';
 const Controller = require('egg').Controller;
@@ -16,6 +16,7 @@ class MenuController extends Controller {
    */
   async index () {
     const params = this.ctx.query;
+
     const menu = await this.ctx.service.menu.index(params);
     await this.ctx.helper.checkData(menu);
   }

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 11:51:27
+ * @LastEditTime: 2020-09-22 17:10:41
  */
 'use strict';
 const svgCaptcha = require('svg-captcha');
@@ -31,9 +31,7 @@ class WebController extends Controller {
   async about () {
     const { ctx, service } = this;
     const { pid = 0, cid = 2 } = ctx.params;
-
     const err = error(pid, cid, 7, 1, 0);
-    console.log(err);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单

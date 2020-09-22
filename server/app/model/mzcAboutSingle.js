@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 08:58:37
+ * @LastEditTime: 2020-09-22 16:24:40
  */
 'use strict';
 
@@ -51,10 +51,10 @@ module.exports = app => {
       defaultValue: '', // 默认值
       comment: '单页内容', // 备注
     },
-    satus: {
+    status: {
       allowNull: !1, // 是否为空
       type: BOOLEAN, // 类型
-      defaultValue: '0', // 默认值
+      defaultValue: '1', // 默认值
       comment: '状态', // 备注
     },
     sort: {

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-03 15:20:22
+ * @LastEditTime: 2020-09-22 16:19:43
  */
 'use strict';
 
@@ -57,7 +57,7 @@ module.exports = app => {
 			defaultValue: '', // 默认值
 			comment: '邮箱' // 备注
 		},
-		satus: {
+		status: {
 			allowNull: !1, // 是否为空
 			type: BOOLEAN, // 类型
 			defaultValue: '0', // 默认值

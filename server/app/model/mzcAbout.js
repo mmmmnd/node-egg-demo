@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-28 15:13:55
+ * @LastEditTime: 2020-09-22 16:19:33
  */
 'use strict';
 
@@ -63,7 +63,7 @@ module.exports = app => {
       defaultValue: '0', // 默认值
       comment: '图片', // 备注
     },
-    satus: {
+    status: {
       allowNull: !1, // 是否为空
       type: BOOLEAN, // 类型
       defaultValue: '0', // 默认值

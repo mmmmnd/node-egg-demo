@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-17 17:34:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 09:36:31
+ * @LastEditTime: 2020-09-22 16:12:10
  */
 'use strict';
 
@@ -53,7 +53,7 @@ class MenuService extends Service {
    * 修改
    * @param { String } id 当前id
    * @param { String } key 字段名
-   * @param { String } value 字表值
+   * @param { String } value 字段值
    */
   async update ({ id, key, value }) {
     try {
