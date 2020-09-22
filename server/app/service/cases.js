@@ -3,25 +3,26 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-08-10 15:33:50
+ * @Date: 2020-09-22 09:21:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-21 15:07:09
+ * @LastEditTime: 2020-09-22 09:36:15
  */
 'use strict';
+
 const { Op } = require('sequelize')
+const Service = require('egg').Service;
 /**
  * 合作案例
  */
-class CasesDao {
+class CasesService extends Service {
   /**
    * 列表
-   * @param { Object } ctx 全局this
    * @param { Number } cid 二级菜单id
    * @param { Number } page 分页
    */
-  static async list (ctx, cid, page) {
+  async list (cid, page) {
     const pageSize = cid == 26 ? 9 : 20;
-    const cases = await ctx.model.MzcCases.findAndCountAll({
+    const cases = await this.ctx.model.MzcCases.findAndCountAll({
       where: {
         category_id: cid,
         deleted_at: null
@@ -45,13 +46,12 @@ class CasesDao {
   }
   /**
  * 列表
- * @param { Object } ctx 全局this
  * @param { Number } cid 二级菜单id
  * @param { Number } page 分页
  */
-  static async lists (ctx, cid, page = 1) {
+  async lists (cid, page = 1) {
     const pageSize = cid == 26 ? 5 : 10;
-    const cases = await ctx.model.MzcCases.findAndCountAll({
+    const cases = await this.ctx.model.MzcCases.findAndCountAll({
       where: {
         category_id: cid,
         deleted_at: null
@@ -73,12 +73,11 @@ class CasesDao {
   }
   /**
    * 详情页
-   * @param { Object } ctx 全局this
    * @param { Number } cid 二级菜单id
    * @param { Number } id 文章id号 
    */
-  static async info (ctx, cid, id) {
-    const previous = await ctx.model.MzcCases.findOne({
+  async info (cid, id) {
+    const previous = await this.ctx.model.MzcCases.findOne({
       where: {
         category_id: cid,
         deleted_at: null,
@@ -87,7 +86,7 @@ class CasesDao {
       }
     });
 
-    const current = await ctx.model.MzcCases.findOne({
+    const current = await this.ctx.model.MzcCases.findOne({
       where: {
         category_id: cid,
         deleted_at: null,
@@ -95,7 +94,7 @@ class CasesDao {
       }
     });
 
-    const next = await ctx.model.MzcCases.findOne({
+    const next = await this.ctx.model.MzcCases.findOne({
       where: {
         category_id: cid,
         deleted_at: null,
@@ -111,12 +110,11 @@ class CasesDao {
   }
   /**
    * 点击浏览量
-   * @param { Object } ctx 全局this
    * @param { Number } id 文章id号 
    * @param { Number } click 点击次数
    */
-  static async updateClick (ctx, id, click) {
-    const cases = await ctx.model.MzcCases.findByPk(id);
+  async updateClick (id, click) {
+    const cases = await this.ctx.model.MzcCases.findByPk(id);
 
     if (!cases) throw new Error('没有找到相关文章');
 
@@ -125,4 +123,4 @@ class CasesDao {
   }
 }
 
-module.exports = CasesDao;
+module.exports = CasesService;

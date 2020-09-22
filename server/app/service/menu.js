@@ -3,9 +3,9 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-07-21 11:11:10
+ * @Date: 2020-09-17 17:34:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-21 17:31:01
+ * @LastEditTime: 2020-09-22 09:36:31
  */
 'use strict';
 
@@ -50,7 +50,7 @@ class MenuService extends Service {
     }
   }
   /**
-   * 更新
+   * 修改
    * @param { String } id 当前id
    * @param { String } key 字段名
    * @param { String } value 字表值
@@ -69,7 +69,7 @@ class MenuService extends Service {
     }
   }
   /**
-   * 修改
+   * 编辑
    * @param { Object } params //前端发送修改参 
    */
   async edit (params) {

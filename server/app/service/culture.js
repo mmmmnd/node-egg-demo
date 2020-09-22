@@ -5,23 +5,24 @@
  * @version: 1.0.0
  * @Date: 2020-07-30 11:26:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 17:14:57
+ * @LastEditTime: 2020-09-22 11:08:39
  */
 'use strict';
+
+const Service = require('egg').Service;
 const { Op } = require('sequelize')
 /**
- * 企业文化
+ * 旗下公司
  */
-class CultureDao {
+class CultureService extends Service {
   /**
    * 关于我们列表
-   * @param { Object } ctx 全局this
    * @param { Number } cid 二级菜单id
    * @param { Number } page 分页
    */
-  static async list (ctx, cid, page) {
+  async list (cid, page) {
     const pageSize = 5;
-    const culture = await ctx.model.MzcCulture.findAndCountAll({
+    const culture = await this.ctx.model.MzcCulture.findAndCountAll({
       where: {
         category_id: cid,
         deleted_at: null
@@ -45,13 +46,12 @@ class CultureDao {
   }
   /**
    * 详情页
-   * @param { Object } ctx 全局this
    * @param { Number } cid 二级菜单id
    * @param { Number } id 文章id号 
    */
-  static async info (ctx, cid, id) {
+  async info (cid, id) {
 
-    const previous = await ctx.model.MzcCulture.findOne({
+    const previous = await this.ctx.model.MzcCulture.findOne({
       where: {
         category_id: cid,
         deleted_at: null,
@@ -59,14 +59,14 @@ class CultureDao {
       }
     });
 
-    const current = await ctx.model.MzcCulture.findOne({
+    const current = await this.ctx.model.MzcCulture.findOne({
       where: {
         category_id: cid,
         id: id
       }
     });
 
-    const next = await ctx.model.MzcCulture.findOne({
+    const next = await this.ctx.model.MzcCulture.findOne({
       where: {
         category_id: cid,
         deleted_at: null,
@@ -82,12 +82,11 @@ class CultureDao {
   }
   /**
    * 点击浏览量
-   * @param { Object } ctx 全局this
    * @param { Number } id 文章id号 
    * @param { Number } click 点击次数
    */
-  static async updateClick (ctx, id, click) {
-    const culture = await ctx.model.MzcCulture.findByPk(id);
+  async updateClick (id, click) {
+    const culture = await this.ctx.model.MzcCulture.findByPk(id);
 
     if (!culture) throw new Error('没有找到相关文章');
 
@@ -96,4 +95,4 @@ class CultureDao {
   }
 }
 
-module.exports = CultureDao;
+module.exports = CultureService;

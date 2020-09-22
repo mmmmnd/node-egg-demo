@@ -3,23 +3,23 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-07-23 20:20:07
+ * @Date: 2020-09-22 09:24:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-21 11:15:00
+ * @LastEditTime: 2020-09-22 09:35:03
  */
 'use strict';
-
 /**
  * 服务领域
  */
-class ServicesDao {
+const Service = require('egg').Service;
+
+class ServicesService extends Service {
   /**
    * 服务领域列表
-   * @param { Object } ctx 全局this
    * @param { Number } cid 二级菜单id
    */
-  static async list (ctx, cid) {
-    return await ctx.model.MzcServices.findAll({
+  async list (cid) {
+    return await this.ctx.model.MzcServices.findAll({
       where: {
         category_id: cid,
         deleted_at: null
@@ -29,11 +29,9 @@ class ServicesDao {
 
   /**
    * 服务领域列表
-   * @param { Object } ctx 全局this
-   * @param { Number } cid 二级菜单id
    */
-  static async lists (ctx, cid) {
-    return await ctx.model.MzcServices.findAll({
+  async lists () {
+    return await this.ctx.model.MzcServices.findAll({
       where: {
         deleted_at: null
       },
@@ -41,4 +39,4 @@ class ServicesDao {
   }
 }
 
-module.exports = ServicesDao;
+module.exports = ServicesService;
