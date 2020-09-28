@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:35:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 17:06:26
+ * @LastEditTime: 2020-09-24 17:28:22
  */
 'use strict';
 
@@ -34,14 +34,12 @@ class AboutSingleService extends Service {
       if (aboutSingle.rows.length == 0) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
 
       return {
-        data: {
-          data: aboutSingle.rows,
-          meta: {
-            current_page: parseInt(page),
-            per_page: maxPage,
-            total: aboutSingle.count,
-            total_pages: Math.ceil(aboutSingle.count / maxPage),
-          }
+        data: aboutSingle.rows,
+        meta: {
+          current_page: parseInt(page),
+          per_page: maxPage,
+          total: aboutSingle.count,
+          total_pages: Math.ceil(aboutSingle.count / maxPage),
         }
       }
     } catch (error) {
@@ -51,15 +49,22 @@ class AboutSingleService extends Service {
   /**
    * 详情
    * @param { String } cid 父id
+   * @param { Boolean } edit 后台获取筛选
    */
-  async detail (cid = 2) {
-    return await this.ctx.model.MzcAboutSingle.findOne({
-      where: {
-        category_id: cid,
-        status: true,
-        deleted_at: null,
-      }
+  async detail (cid, edit) {
+    const filter = edit
+      ? { category_id: cid, deleted_at: null }
+      : { category_id: cid, status: true, deleted_at: null };
+
+    const aboutSingle = await this.ctx.model.MzcAboutSingle.findOne({
+      where: filter
     });
+
+    if (edit) {
+      return { data: aboutSingle }
+    } else {
+      return aboutSingle
+    }
   }
   /**
   * 修改

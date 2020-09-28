@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-15 14:44:34
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-16 08:38:50
+ * @LastEditTime: 2020-09-28 16:04:33
  */
 class HttpResolve {
   /**
@@ -35,7 +35,7 @@ class HttpResolve {
    */
   async error ({ ctx, msg = '错误请求', errorStatus = 400, code = 1 }) {
     ctx.status = 200;
-    msg = `状态码：${errorStatus}，信息：${msg}！`;
+    msg = `状态码：${errorStatus}，信息：${msg}`;
     ctx.body = { code, msg };
   }
 }

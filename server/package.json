@@ -7,6 +7,7 @@
     "declarations": true
   },
   "dependencies": {
+    "await-stream-ready": "^1.0.1",
     "bcryptjs": "^2.4.3",
     "egg": "^2.15.1",
     "egg-cors": "^2.2.3",
@@ -18,6 +19,8 @@
     "egg-view-ejs": "^2.0.1",
     "moment": "^2.27.0",
     "mysql2": "^2.1.0",
+    "qiniu": "^7.3.2",
+    "stream-wormhole": "^1.1.0",
     "svg-captcha": "^1.4.0"
   },
   "devDependencies": {

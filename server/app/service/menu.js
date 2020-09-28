@@ -5,10 +5,11 @@
  * @version: 1.0.0
  * @Date: 2020-09-17 17:34:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 16:12:10
+ * @LastEditTime: 2020-09-23 17:22:16
  */
 'use strict';
 
+const { Op } = require('sequelize')
 const GetTree = require('../utils/getTree');
 const Service = require('egg').Service;
 const HttpStatus = require('../utils/httpStatus');
@@ -102,6 +103,17 @@ class MenuService extends Service {
       ]
     });
     return GetTree.menuList(menu, 0);
+  }
+  async details (maxId = 0, minId = 0) {
+    return await this.ctx.model.MzcMenu.findAll({
+      where: {
+        id: {
+          [Op.gte]: minId,
+          [Op.lte]: maxId
+        }
+      }
+    })
+
   }
 }
 

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 16:00:28
+ * @LastEditTime: 2020-09-25 15:40:09
  */
 'use strict';
 
@@ -15,6 +15,7 @@
 module.exports = app => {
   const { router, controller } = app;
   const jwt = app.middleware.jwt(app.config.jwt); // token验证
+  router.prefix = '/api/';
 
   // 前端路由
   router.get('/', controller.web.index);
@@ -48,8 +49,13 @@ module.exports = app => {
   router.post('/api/menu/update', jwt, controller.menu.update);
   router.post('/api/menu/edit', jwt, controller.menu.edit);
 
+  // aboutSingle
   router.get('/api/aboutSingle/index', jwt, controller.aboutSingle.index)
   router.post('/api/aboutSingle/update', jwt, controller.aboutSingle.update)
+  router.get('/api/aboutSingle/detail', jwt, controller.aboutSingle.detail)
+
+  // upload
+  router.post('/api/upload/create', jwt, controller.upload.create);
 
   app.resources('home', '/home', app.controller.home);
   router.get('*', controller.web.error); // 404

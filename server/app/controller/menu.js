@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-16 15:44:23
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 14:55:18
+ * @LastEditTime: 2020-09-23 17:04:18
  */
 'use strict';
 const Controller = require('egg').Controller;
@@ -24,7 +24,7 @@ class MenuController extends Controller {
    * 修改
    */
   async update () {
-    let params = this.ctx.request.body;
+    const params = this.ctx.request.body;
 
     const menu = await this.ctx.service.menu.update(params);
     await this.ctx.helper.checkData(menu);
@@ -33,7 +33,7 @@ class MenuController extends Controller {
    * 编辑
    */
   async edit () {
-    let params = this.ctx.request.body;
+    const params = this.ctx.request.body;
 
     const menu = await this.ctx.service.menu.edit(params)
     await this.ctx.helper.checkData(menu);

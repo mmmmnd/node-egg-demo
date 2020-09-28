@@ -101,6 +101,13 @@ module.exports = appInfo => {
       }
     }
   };
+
+  config.multipart = {
+    fileSize: '50mb',
+    mode: 'stream',
+    fileExtensions: ['.png', '.jpg'], // 扩展几种上传的文件格式
+  };
+
   // add your user config here
   const userConfig = {
     usetToken: 'token',
