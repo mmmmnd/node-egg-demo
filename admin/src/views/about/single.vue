@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-23 11:56:16
+ * @LastEditTime: 2020-09-29 10:48:00
 -->
 <template>
   <div class="app-container">
@@ -24,10 +24,10 @@
       </el-table-column>
       <el-table-column prop="id"
                        align="center"
-                       label="ID"
-                       width="80px">
+                       label="分类"
+                       width="120px">
         <template slot-scope="{row}">
-          <span>{{ row.id }}</span>
+          <span>{{ category[row.id-1].title }}</span>
         </template>
       </el-table-column>
 
@@ -71,7 +71,7 @@
                        label="操作"
                        width="120">
         <template slot-scope="{row}">
-          <router-link :to="'/about/edit/'+row.id">
+          <router-link :to="'/about/edit/'+row.category_id">
             <el-button type="primary"
                        size="mini"
                        icon="el-icon-edit">
@@ -106,21 +106,7 @@ export default {
         page: 1,
         limit: 20
       },
-      temp: {
-        id: undefined,
-        title: '',
-        url: '',
-        sort: 0,
-        status: true
-      },
-      dialogFormVisible: false,
-      rules: {
-        title: [{ required: true, message: '标题为必填项', trigger: 'blur' }],
-        url: [{ required: true, message: 'Url为必填项', trigger: 'blur' }],
-        status: [{ required: true, message: '状态为必填项', trigger: 'change' }],
-        sort: [{ required: true, message: '排序为必选项', trigger: 'change' }],
-      },
-
+      category: []
     }
   },
   created () {
@@ -134,8 +120,9 @@ export default {
       this.listLoading = true
       aboutSingleList(this.listQuery)
         .then(response => {
-          this.list = response.data.data
-          this.total = response.data.meta.total
+          this.list = response.data.aboutSingle.data
+          this.total = response.data.aboutSingle.meta.total
+          this.category = response.data.aboutSingleMenu
           this.listLoading = false
         })
     },
@@ -155,37 +142,6 @@ export default {
           });
         })
     },
-    /**
-     * 编辑
-     */
-    handleUpdate (row) {
-      this.temp = Object.assign({}, row) // copy obj
-      this.dialogFormVisible = true
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
-    },
-    /**
-     * 修改
-     */
-    updateData () {
-      this.$refs['dataForm'].validate((valid) => {
-        if (valid) {
-          const tempData = Object.assign({}, this.temp)
-          aboutMenuEdit(tempData).then(() => {
-            const index = this.list.findIndex(v => v.id === this.temp.id)
-            this.list.splice(index, 1, this.temp)
-            this.dialogFormVisible = false
-            this.$notify({
-              title: '成功',
-              message: '更新成功',
-              type: 'success',
-              duration: 2000
-            })
-          })
-        }
-      })
-    }
   }
 }
 </script>

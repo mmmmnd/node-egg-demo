@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:59:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-23 08:55:06
+ * @LastEditTime: 2020-09-29 10:16:37
  */
 import request from '@/utils/request'
 
@@ -51,8 +51,16 @@ export function aboutSingleUpdate (data) {
 
 export function aboutSingleDetail (id) {
   return request({
-    url: '/aboutSingle/update',
+    url: '/aboutSingle/detail',
     method: 'get',
-    params: { id }
+    params: { cid: id }
+  })
+}
+
+export function aboutSingleEdit (data) {
+  return request({
+    url: '/aboutSingle/edit',
+    method: 'post',
+    data
   })
 }
