@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 14:45:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-24 17:27:10
+ * @LastEditTime: 2020-09-29 10:21:14
  */
 'use strict';
 const Controller = require('egg').Controller;
@@ -37,6 +37,15 @@ class AboutSingleController extends Controller {
     const params = this.ctx.query;
 
     const aboutSingle = await this.ctx.service.aboutSingle.detail(params.cid, true);
+    await this.ctx.helper.checkData(aboutSingle);
+  }
+  /**
+   * 编辑
+   */
+  async edit () {
+    const params = this.ctx.request.body;
+
+    const aboutSingle = await this.ctx.service.aboutSingle.edit(params)
     await this.ctx.helper.checkData(aboutSingle);
   }
 }

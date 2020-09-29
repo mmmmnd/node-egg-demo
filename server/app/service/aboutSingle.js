@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:35:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-24 17:28:22
+ * @LastEditTime: 2020-09-29 10:15:00
  */
 'use strict';
 
@@ -75,6 +75,30 @@ class AboutSingleService extends Service {
   async update ({ id, key, value }) {
     try {
       await this.ctx.model.MzcAboutSingle.update({ [key]: value }, {
+        where: {
+          id,
+          deleted_at: null
+        },
+      })
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
+  }
+  /**
+   * 编辑
+   * @param { String } title 标题
+   * @param { String } keywords 关键词
+   * @param { String } companyDescription 描述
+   * @param { Text } content 内容
+   * @param { Boolean } status 状态
+   * @param { Number } id id
+   */
+  async edit ({ title, keywords, companyDescription, content, status, id }) {
+    try {
+      await this.ctx.model.MzcAboutSingle.update({
+        title, keywords, companyDescription, content, status
+      }, {
         where: {
           id,
           deleted_at: null

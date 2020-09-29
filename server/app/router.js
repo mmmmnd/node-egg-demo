@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-25 15:40:09
+ * @LastEditTime: 2020-09-29 10:00:50
  */
 'use strict';
 
@@ -53,6 +53,7 @@ module.exports = app => {
   router.get('/api/aboutSingle/index', jwt, controller.aboutSingle.index)
   router.post('/api/aboutSingle/update', jwt, controller.aboutSingle.update)
   router.get('/api/aboutSingle/detail', jwt, controller.aboutSingle.detail)
+  router.post('/api/aboutSingle/edit', jwt, controller.aboutSingle.edit)
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-17 17:34:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-23 17:22:16
+ * @LastEditTime: 2020-09-29 10:10:14
  */
 'use strict';
 
@@ -71,10 +71,12 @@ class MenuService extends Service {
   }
   /**
    * 编辑
-   * @param { Object } params //前端发送修改参 
+   * @param { String } title 标题
+   * @param { Boolean } status 状态
+   * @param { Number } sort 排序
+   * @param { Number } id id
    */
-  async edit (params) {
-    const { title, status, sort, id } = params
+  async edit ({ title, status, sort, id }) {
     try {
       await this.ctx.model.MzcMenu.update({
         title, status, sort

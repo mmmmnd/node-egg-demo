@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:11:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-28 16:28:10
+ * @LastEditTime: 2020-09-29 08:38:16
  */
 'use strict';
 
@@ -23,9 +23,7 @@ const imageUrl = "mzc-egg-demo.s3-cn-south-1.qiniucs.com"; // 空间绑定的域
 const accessKey = "U_JuxtUYEQJY-wyccQccUzFm0znY_utat-FZVd-f"; //Access Key
 const secretKey = "zdeP9icr_CdVpudYTEyABG7R-_oPNX4BemfQBKsf"; //Secret Key
 const mac = new qiniu.auth.digest.Mac(accessKey, secretKey);
-const options = {
-  scope: bucket
-};
+const options = { scope: bucket };
 const putPolicy = new qiniu.rs.PutPolicy(options);
 const uploadToken = putPolicy.uploadToken(mac);
 let config = new qiniu.conf.Config();
@@ -72,7 +70,7 @@ class UploadService extends Service {
         );
       });
       if (imgSrc !== "") {
-        return { data: QINIU_URL + filename };
+        return { data: { url: QINIU_URL + filename } };
       } else {
         return { msg: '未知错误', httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
       }
