@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 16:19:33
+ * @LastEditTime: 2020-09-30 08:49:58
  */
 'use strict';
 
@@ -57,16 +57,16 @@ module.exports = app => {
       defaultValue: '', // 默认值
       comment: '单页内容', // 备注
     },
-    AvatarImage: {
+    avatarImage: {
       allowNull: !0, // 是否为空
       type: STRING(40), // 类型
-      defaultValue: '0', // 默认值
+      defaultValue: '', // 默认值
       comment: '图片', // 备注
     },
     status: {
       allowNull: !1, // 是否为空
       type: BOOLEAN, // 类型
-      defaultValue: '0', // 默认值
+      defaultValue: '1', // 默认值
       comment: '状态', // 备注
     },
     sort: {
@@ -80,7 +80,7 @@ module.exports = app => {
       type: DATE, // 类型
       comment: '创建时间', // 备注
       get () {
-        return moment(this.getDataValue('created_at')).format('YYYY-MM-DD');
+        return moment(this.getDataValue('created_at')).valueOf();
       }
     },
     updated_at: {

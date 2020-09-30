@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-29 10:00:50
+ * @LastEditTime: 2020-09-30 09:44:29
  */
 'use strict';
 
@@ -54,6 +54,9 @@ module.exports = app => {
   router.post('/api/aboutSingle/update', jwt, controller.aboutSingle.update)
   router.get('/api/aboutSingle/detail', jwt, controller.aboutSingle.detail)
   router.post('/api/aboutSingle/edit', jwt, controller.aboutSingle.edit)
+
+  // aboutDroptype
+  router.get('/api/aboutDroptype/index', jwt, controller.aboutDroptype.index)
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);

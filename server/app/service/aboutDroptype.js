@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:12:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 10:19:54
+ * @LastEditTime: 2020-09-30 10:02:16
  */
 'use strict';
 
@@ -19,16 +19,17 @@ class AboutDroptypeService extends Service {
    * @param { String } cid 二级菜单id
    */
   async list (cid) {
+    const filter = cid
+      ? { dropId: cid, deleted_at: null }
+      : { deleted_at: null };
+
     const aboutDroptype = await this.ctx.model.MzcAboutDroptype.findAll({
-      where: {
-        dropId: cid,
-        deleted_at: null,
-      },
-      include: [{
+      where: filter,
+      include: cid ? [{
         as: 'info',
         model: this.ctx.model.MzcAbout,
         order: [['id', 'ASC']],
-      }],
+      }] : '',
       order: [['id', 'ASC']],
     });
 

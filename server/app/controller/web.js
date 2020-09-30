@@ -5,9 +5,10 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 17:10:41
+ * @LastEditTime: 2020-09-30 08:51:11
  */
 'use strict';
+const moment = require('moment');
 const svgCaptcha = require('svg-captcha');
 const Controller = require('egg').Controller;
 
@@ -40,7 +41,7 @@ class WebController extends Controller {
     const aboutSingleDetail = await service.aboutSingle.detail(cid); // about单页数据
     const aboutDroptypeList = await service.aboutDroptype.list(cid); // about下拉菜单
 
-    const data = { menuList, settingList, advertisingList, aboutSingleDetail, aboutDroptypeList };
+    const data = { menuList, settingList, advertisingList, aboutSingleDetail, aboutDroptypeList, moment };
     await ctx.render('about/index.ejs', data);
   }
   async services () {

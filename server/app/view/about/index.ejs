@@ -52,7 +52,7 @@
                 <ul class="tab-pane fade <%= aboutDroptypeList[0] == val ?'in active':'' %> " id="<%= val.id %>">
                   <% val.info.forEach(item =>{ %>
                     <li>
-                      <img src="<%= item.AvatarImage %>" alt="" class="about2-img">
+                      <img src="<%= item.avatarImage %>" alt="" class="about2-img">
                       <div class="about2-right">
                         <h3><%= item.aboutTitle %></h3>
                         <%- item.content %>
@@ -72,9 +72,9 @@
                   <li class="honor-list">
                     <i></i>
                     <div class="honor-right">
-                      <img src="<%= item.AvatarImage %>" alt="" class="honor-img">
+                      <img src="<%= item.avatarImage %>" alt="" class="honor-img">
                       <div class="honor-txt">
-                        <p class="honor-data"><%= item.created_at %></p>
+                        <p class="honor-data"><%= moment(item.created_at).format('YYYY-MM-DD') %></p>
                         <h5><%= item.aboutTitle %></h5>
                         <%- item.content %>
                       </div>
