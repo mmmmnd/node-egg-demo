@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:59:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-29 10:16:37
+ * @LastEditTime: 2020-09-29 15:42:07
  */
 import request from '@/utils/request'
 
@@ -62,5 +62,13 @@ export function aboutSingleEdit (data) {
     url: '/aboutSingle/edit',
     method: 'post',
     data
+  })
+}
+
+export function aboutDroptypeList (params) {
+  return request({
+    url: '/aboutDroptype/index',
+    method: 'get',
+    params
   })
 }

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-29 10:48:00
+ * @LastEditTime: 2020-09-29 15:23:38
 -->
 <template>
   <div class="app-container">
@@ -14,7 +14,8 @@
               border
               fit
               highlight-current-row
-              style="width: 100%">
+              style="width: 100%"
+              ref="tableDataRef">
       <el-table-column prop="index"
                        type="index"
                        align="center"
@@ -49,7 +50,8 @@
 
       <el-table-column prop="companyDescription"
                        align="center"
-                       label="描述">
+                       label="描述"
+                       show-overflow-tooltip>
         <template slot-scope="{row}">
           <span class="text-hidden">{{ row.companyDescription }}</span>
         </template>
@@ -64,6 +66,14 @@
                      inactive-color="#ff4949"
                      @change="statusSwitch(row.status,row.id)">
           </el-switch>
+        </template>
+      </el-table-column>
+
+      <el-table-column prop="companyDescription"
+                       align="center"
+                       label="最后修改时间">
+        <template slot-scope="{row}">
+          <span>{{ row.updated_at | formatTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
       </el-table-column>
 
