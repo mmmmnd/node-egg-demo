@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-17 17:34:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-29 10:10:14
+ * @LastEditTime: 2020-10-14 09:22:57
  */
 'use strict';
 
@@ -17,38 +17,17 @@ const HttpStatus = require('../utils/httpStatus');
 class MenuService extends Service {
   /**
    * 获取列表
-   * @param { String } limit 最大限制
-   * @param { String } page 分页
-   * @param { String } pid 父id
    */
-  async index ({ limit = 20, page = 1, pid = 0 }) {
-    const maxPage = Number(limit);
-    try {
-      const menu = await this.ctx.model.MzcMenu.findAndCountAll({
-        where: {
-          pid: 1,
-          deleted_at: null
-        },
-        offset: (page - 1) * maxPage,
-        limit: maxPage,
-      })
-
-      if (menu.rows.length == 0) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
-
-      return {
-        data: {
-          data: menu.rows,
-          meta: {
-            current_page: parseInt(page),
-            per_page: maxPage,
-            total: menu.count,
-            total_pages: Math.ceil(menu.count / maxPage),
-          }
-        }
-      }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+  async index () {
+    const menu = await this.ctx.model.MzcMenu.findAll({
+      where: {
+        deleted_at: null
+      },
+      order: [
+        ['id', 'ASC'], ['pid', 'ASC']
+      ]
+    });
+    return { data: GetTree.menuList(menu) }
   }
   /**
    * 修改
@@ -104,7 +83,7 @@ class MenuService extends Service {
         ['sort', 'ASC'], ['id', 'ASC']
       ]
     });
-    return GetTree.menuList(menu, 0);
+    return GetTree.menuList(menu);
   }
   async details (maxId = 0, minId = 0) {
     return await this.ctx.model.MzcMenu.findAll({
