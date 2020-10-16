@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-29 15:23:38
+ * @LastEditTime: 2020-09-30 16:08:09
 -->
 <template>
   <div class="app-container">
@@ -42,7 +42,7 @@
 
       <el-table-column prop="keywords"
                        align="center"
-                       label="关键词">
+                       label="网站关键词">
         <template slot-scope="{row}">
           <span>{{ row.keywords }}</span>
         </template>
@@ -50,7 +50,7 @@
 
       <el-table-column prop="companyDescription"
                        align="center"
-                       label="描述"
+                       label="网站描述"
                        show-overflow-tooltip>
         <template slot-scope="{row}">
           <span class="text-hidden">{{ row.companyDescription }}</span>

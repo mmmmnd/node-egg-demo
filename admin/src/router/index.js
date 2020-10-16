@@ -84,11 +84,11 @@ export const constantRoutes = [
         meta: { title: '列表', icon: '', noCache: true }
       },
       {
-        path: 'category',
-        name: 'Category',
-        component: () => import('@/views/about/category'),
+        path: 'classify',
+        name: 'classify',
+        component: () => import('@/views/about/classify'),
         meta: { title: '分类', icon: '', noCache: true }
-      },
+      }
     ]
   },
 
@@ -115,14 +115,14 @@ export const constantRoutes = [
   },
 
   {
-    path: '/form',
+    path: '/menu',
     component: Layout,
     children: [
       {
         path: 'index',
-        name: 'Form',
-        component: () => import('@/views/form/index'),
-        meta: { title: 'Form', icon: 'form', noCache: true }
+        name: 'Menu',
+        component: () => import('@/views/menu/index'),
+        meta: { title: '菜单', icon: 'el-icon-menu', noCache: true }
       }
     ]
   },

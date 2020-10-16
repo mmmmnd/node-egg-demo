@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-30 15:50:59
+ * @LastEditTime: 2020-09-30 16:10:48
 -->
 <template>
   <div class="app-container">
@@ -36,7 +36,7 @@
 
       <el-table-column prop="title"
                        align="center"
-                       label="标题">
+                       label="网站标题">
         <template slot-scope="{row}">
           <span>{{ row.title }}</span>
         </template>
@@ -44,7 +44,7 @@
 
       <el-table-column prop="keywords"
                        align="center"
-                       label="关键词">
+                       label="网站关键词">
         <template slot-scope="{row}">
           <span>{{ row.keywords }}</span>
         </template>
@@ -52,7 +52,7 @@
 
       <el-table-column prop="companyDescription"
                        align="center"
-                       label="公司描述"
+                       label="网站描述"
                        show-overflow-tooltip>
         <template slot-scope="{row}">
           <span>{{ row.companyDescription }}</span>
@@ -119,8 +119,16 @@
 
       <el-table-column align="center"
                        label="操作"
-                       width="120">
+                       width="180">
         <template slot-scope="{row}">
+          <router-link :to="'/about/edit/'+row.category_id">
+            <el-button type="primary"
+                       size="mini"
+                       icon="el-icon-view">
+              查看
+            </el-button>
+          </router-link>
+
           <router-link :to="'/about/edit/'+row.category_id">
             <el-button type="primary"
                        size="mini"
