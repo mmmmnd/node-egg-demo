@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-19 10:40:45
+ * @LastEditTime: 2020-10-19 11:24:35
  */
 'use strict';
 const moment = require('moment');
@@ -242,9 +242,9 @@ class WebController extends Controller {
  * @param { String } MaxPid 当前位置索引
  */
 const error = async (pid, cid, _this) => {
-  const menuDetails = await _this.service.menu.details(pid); // 导航栏菜单
-  if (menuDetails.length == 0) return true;
-  const [maxId, minId, MaxPid] = [menuDetails.pop().id, menuDetails[0].id, menuDetails[0].pid];
+  const menuInfo = await _this.service.menu.info(pid); // 导航栏菜单
+  if (menuInfo.length == 0) return true;
+  const [maxId, minId, MaxPid] = [menuInfo.pop().id, menuInfo[0].id, menuInfo[0].pid];
   if (cid > maxId || cid < minId || pid != MaxPid) return true;
 }
 const render = async ctx => {

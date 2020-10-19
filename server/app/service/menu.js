@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-17 17:34:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-19 09:51:19
+ * @LastEditTime: 2020-10-19 11:24:48
  */
 'use strict';
 
@@ -85,14 +85,30 @@ class MenuService extends Service {
     });
     return GetTree.menuList(menu);
   }
-  async details (pid) {
+  /**
+   * 获取模板排序顺序
+   * @param { Number } pid 
+   */
+  async info (pid) {
     return await this.ctx.model.MzcMenu.findAll({
       where: {
         pid,
         deleted_at: null
       }
     })
-
+  }
+  /**
+   * 获取分类详情
+   * @param { Number } maxId 最大id
+   * @param { Number } minId 最小id
+   */
+  async details (maxId = 0, minId = 0) {
+    return await this.ctx.model.MzcMenu.findAll({
+      where: {
+        id: { [Op.gte]: minId, [Op.lte]: maxId },
+        deleted_at: null
+      }
+    })
   }
 }
 
