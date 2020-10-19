@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-30 08:51:11
+ * @LastEditTime: 2020-10-19 10:40:45
  */
 'use strict';
 const moment = require('moment');
@@ -31,8 +31,9 @@ class WebController extends Controller {
   }
   async about () {
     const { ctx, service } = this;
-    const { pid = 0, cid = 2 } = ctx.params;
-    const err = error(pid, cid, 7, 1, 0);
+    const { pid, cid } = ctx.params;
+
+    const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
@@ -46,9 +47,9 @@ class WebController extends Controller {
   }
   async services () {
     const { ctx, service } = this;
-    const { pid = 1, cid = 8 } = ctx.params;
+    const { pid, cid } = ctx.params;
 
-    const err = await error(pid, cid, 13, 7, 1);
+    const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
@@ -61,9 +62,9 @@ class WebController extends Controller {
   }
   async company () {
     const { ctx, service } = this;
-    const { pid = 2, cid = 14 } = ctx.params;
+    const { pid, cid } = ctx.params;
 
-    const err = await error(pid, cid, 16, 13, 2);
+    const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
@@ -76,11 +77,11 @@ class WebController extends Controller {
   }
   async culture () {
     const { ctx, service } = this;
-    const { pid = 3, cid = 17, page = 1 } = ctx.params;
+    const { pid, cid, page = 1 } = ctx.params;
     const url = `/culture/pid/${pid}/cid/${cid}`;
     const urlInfo = `/culture_info/pid/${pid}/cid/${cid}`;
 
-    const err = await error(pid, cid, 21, 16, 3);
+    const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
@@ -93,10 +94,10 @@ class WebController extends Controller {
   }
   async culture_info () {
     const { ctx, service } = this;
-    const { pid = 3, cid = 17, id = 1 } = ctx.params;
+    const { pid, cid, id = 1 } = ctx.params;
     const urlInfo = `/culture_info/pid/${pid}/cid/${cid}`;
 
-    const err = await error(pid, cid, 21, 16, 3);
+    const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
@@ -112,11 +113,11 @@ class WebController extends Controller {
   }
   async news () {
     const { ctx, service } = this;
-    const { pid = 4, cid = 22, page = 1 } = ctx.params;
+    const { pid, cid, page = 1 } = ctx.params;
     const url = `/news/pid/${pid}/cid/${cid}`;
     const urlInfo = `/news_info/pid/${pid}/cid/${cid}`;
 
-    const err = await error(pid, cid, 25, 21, 4);
+    const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
@@ -129,10 +130,10 @@ class WebController extends Controller {
   }
   async news_info () {
     const { ctx, service } = this;
-    const { pid = 4, cid = 22, id = 1 } = ctx.params;
+    const { pid, cid, id = 1 } = ctx.params;
     const urlInfo = `news_info/pid/${pid}/cid/${cid}`;
 
-    const err = await error(pid, cid, 25, 21, 4);
+    const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
@@ -147,11 +148,11 @@ class WebController extends Controller {
   }
   async cases () {
     const { ctx, service } = this;
-    const { pid = 5, cid = 26, page = 1 } = ctx.params;
+    const { pid, cid, page = 1 } = ctx.params;
     const url = `cases/pid/${pid}/cid/${cid}`;
     const urlInfo = `cases_info/pid/${pid}/cid/${cid}`;
 
-    const err = await error(pid, cid, 28, 25, 5);
+    const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
@@ -164,7 +165,7 @@ class WebController extends Controller {
   }
   async cases_info () {
     const { ctx, service } = this;
-    const { pid = 5, cid = 26, id = 1 } = ctx.params;
+    const { pid, cid, id = 1 } = ctx.params;
     const urlInfo = `cases_info/pid/${pid}/cid/${cid}`;
 
     const menuList = await service.menu.list(); // 导航栏菜单
@@ -179,9 +180,9 @@ class WebController extends Controller {
   }
   async recruit () {
     const { ctx, service } = this;
-    const { pid = 6, cid = 29 } = ctx.params;
+    const { pid, cid } = ctx.params;
 
-    const err = await error(pid, cid, 31, 28, 6);
+    const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
@@ -195,9 +196,9 @@ class WebController extends Controller {
   }
   async contact () {
     const { ctx, service } = this;
-    const { pid = 7, cid = 32 } = ctx.params;
+    const { pid, cid } = ctx.params;
 
-    const err = await error(pid, cid, 34, 31, 7);
+    const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
@@ -236,12 +237,15 @@ class WebController extends Controller {
  * 判断url导航栏参数
  * @param { Number } pid 一级导航id
  * @param { Number } cid 二级导航id
- * @param { Number } maxIndex 二级导航最大值
- * @param { Number } minIndex 二级导航最小值
- * @param { String } index 当前位置索引
+ * @param { Number } maxId 二级导航最大值
+ * @param { Number } minId 二级导航最小值
+ * @param { String } MaxPid 当前位置索引
  */
-const error = (pid, cid, maxIndex, minIndex, index) => {
-  if (cid >= maxIndex || cid <= minIndex || pid != index) return true;
+const error = async (pid, cid, _this) => {
+  const menuDetails = await _this.service.menu.details(pid); // 导航栏菜单
+  if (menuDetails.length == 0) return true;
+  const [maxId, minId, MaxPid] = [menuDetails.pop().id, menuDetails[0].id, menuDetails[0].pid];
+  if (cid > maxId || cid < minId || pid != MaxPid) return true;
 }
 const render = async ctx => {
   ctx.status = 404;

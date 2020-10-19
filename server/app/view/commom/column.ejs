@@ -1,27 +1,31 @@
-<!--
+﻿<!--
  * @Author: 莫卓才
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
  * @Date: 2020-07-17 11:20:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-25 10:23:50
+ * @LastEditTime: 2020-10-19 10:50:03
 -->
 <div class="nav-left">
   <div class="row-title">
     <div class="title-link"></div>
     <% const pid = ctx.params.pid %>
-    <h5><%= menuList[pid].title %></h5>
+    <% menuList.forEach(item =>{ %>
+      <% if(item.id == pid){ %>
+        <h5><%= item.title %></h5>
+        <% if(item.children){ %>
+          <div class="nav-left-list">
+            <ul>
+              <% item.children.forEach(children=>{ %>
+                <li>
+                  <a href="<%= '/'+children.url+'/pid/'+[pid]+'/cid/'+children.id %>" class="<%= pid === ctx.params.pid && children.id == ctx.params.cid ? 'active' : '' %>"><%= children.title %></a>
+                </li>
+              <% }) %>
+            </ul>
+          </div>
+        <% } %>
+      <%  } %>
+    <% }) %>
   </div>
-  <% if(menuList[pid].children){ %>
-  <div class="nav-left-list">
-    <ul>
-      <% menuList[pid].children.forEach(item=>{ %>
-      <li>
-          <a href="<%= '/'+item.url+'/pid/'+[pid]+'/cid/'+item.id %>" class="<%= pid === ctx.params.pid && item.id == ctx.params.cid ? 'active' : '' %>"><%= item.title %></a>
-        </li>
-      <% }) %>
-    </ul>
-  </div>
-  <% } %>
 </div>

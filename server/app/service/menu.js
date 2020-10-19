@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-17 17:34:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-14 09:22:57
+ * @LastEditTime: 2020-10-19 09:51:19
  */
 'use strict';
 
@@ -85,13 +85,11 @@ class MenuService extends Service {
     });
     return GetTree.menuList(menu);
   }
-  async details (maxId = 0, minId = 0) {
+  async details (pid) {
     return await this.ctx.model.MzcMenu.findAll({
       where: {
-        id: {
-          [Op.gte]: minId,
-          [Op.lte]: maxId
-        }
+        pid,
+        deleted_at: null
       }
     })
 

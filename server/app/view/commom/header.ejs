@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:03:35
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-25 09:33:28
+ * @LastEditTime: 2020-10-19 09:11:45
 -->
 <!DOCTYPE html>
 <html>
@@ -64,7 +64,7 @@
                       <% item.children.forEach(children =>{ %>
                       <li class="submenu-li">
                         <a
-                          href="<%= '/'+children.url+"/pid/"+ index + '/cid/' + children.id %>"><%= children.title %></a>
+                          href="<%= '/'+children.url+"/pid/"+ item.id + '/cid/' + children.id %>"><%= children.title %></a>
                       </li>
                       <% }) %>
                       <% } %>

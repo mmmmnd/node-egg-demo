@@ -1,11 +1,11 @@
-<!--
+﻿<!--
  * @Author: 莫卓才
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
  * @Date: 2020-07-01 11:47:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-25 10:25:40
+ * @LastEditTime: 2020-10-19 11:08:23
 -->
 <div class="content-full footer">
   <div class="content">
@@ -15,9 +15,9 @@
         <li>
           <h5><%= item.title %></h5>
           <% if(item.children){ %>
-          <% item.children.forEach(children =>{ %>
-          <a href="<%= '/'+children.url+"/pid/"+ index + '/cid/' + children.id %>"><%= children.title %></a>
-          <% }) %>
+            <% item.children.forEach(children =>{ %>
+              <a href="<%= '/'+children.url+"/pid/"+ item + '/cid/' + children.id %>"><%= children.title %></a>
+            <% }) %>
           <% } %>
         </li>
         <% }) %>
@@ -25,26 +25,19 @@
     </div>
     <div class="footer-right">
       <a href="" class="btn wechat-btn">
-        <img src="/public/images/weibo2_icon.png" alt="">
-        官方微博
-        <img src="<%= settingList[0].weiboCode %>" alt="" class="footer-code">
+        <img src="/public/images/weibo2_icon.png" alt="">官方微博<img src="<%= settingList[0].weiboCode %>" alt="" class="footer-code">
       </a>
       <a href="" class="btn wechat-btn">
-        <img src="/public/images/wechat2_icon.png" alt="">
-        微信公众号
-        <img src="<%= settingList[0].weChatCode %>" alt="" class="footer-code">
+        <img src="/public/images/wechat2_icon.png" alt="">微信公众号<img src="<%= settingList[0].weChatCode %>" alt="" class="footer-code">
       </a>
       <a href="" class="btn oa-btn">
-        <img src="/public/images/oa_icon.png" alt="">
-        进入OA系统
+        <img src="/public/images/oa_icon.png" alt="">进入OA系统
       </a>
     </div>
   </div>
   <div class="content-full footer-bottom">
     <div class="content">
-      <p>COPYRIGHT (©) 2020 <%= settingList[0].title %> 备案号：<a href="http://beian.miit.gov.cn/"
-          target="_blank"><%= settingList[0].record %></a></p>
-
+      <p>COPYRIGHT (©) 2020 <%= settingList[0].title %> 备案号：<a href="http://beian.miit.gov.cn/" target="_blank"><%= settingList[0].record %></a></p>
       <select class="form-control footer-control">
         <option>==友情链接==</option>
         <option value="JavaScript:;">莫氏科技</option>
@@ -71,26 +64,26 @@
 <script src="/public/js/kunlun.js"></script>
 <script src="/public/js/jquery.paroller.js"></script>
 <script>
-    $(function () {
-        $(window).paroller();
-    });
+  $(function () {
+    $(window).paroller();
+  });
 </script>
 <script>
-    var swiper = new Swiper('.banner', {
-        pagination: {
-            el: '.banner-pagination',
-        },
-        navigation: {
-            nextEl: '.swiper-button-next2',
-            prevEl: '.swiper-button-prev2',
-        },
-        spaceBetween: 0,
-        centeredSlides: true,
-        autoplay: {
-            delay: 5000,
-            disableOnInteraction: false,
-        },
-    });
+  var swiper = new Swiper('.banner', {
+    pagination: {
+      el: '.banner-pagination',
+    },
+    navigation: {
+      nextEl: '.swiper-button-next2',
+      prevEl: '.swiper-button-prev2',
+    },
+    spaceBetween: 0,
+    centeredSlides: true,
+    autoplay: {
+      delay: 5000,
+      disableOnInteraction: false,
+    },
+  });
 </script>
 <script>
   var swiper = new Swiper('.row2-swiper', {
