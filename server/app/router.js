@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-30 09:44:29
+ * @LastEditTime: 2020-10-21 16:18:12
  */
 'use strict';
 
@@ -57,6 +57,7 @@ module.exports = app => {
 
   // aboutDroptype
   router.get('/api/aboutDroptype/index', jwt, controller.aboutDroptype.index)
+  router.post('/api/aboutDroptype/update', jwt, controller.aboutDroptype.update)
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);

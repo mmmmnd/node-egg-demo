@@ -5,14 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 09:21:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-26 16:02:08
+ * @LastEditTime: 2020-10-19 14:57:50
  */
 'use strict';
 
 const moment = require('moment');
 
 module.exports = app => {
-  const { INTEGER, STRING, DATE } = app.Sequelize;
+  const { INTEGER, STRING, DATE, BOOLEAN } = app.Sequelize;
   const MzcAboutDroptype = app.model.define('mzc-about-drop-type', {
     id: {
       allowNull: !1, // 是否为空
@@ -32,6 +32,18 @@ module.exports = app => {
       type: STRING(20), // 类型
       defaultValue: '', // 默认值
       comment: '下拉内容', // 备注 0 -> 不存在
+    },
+    status: {
+      allowNull: !1, // 是否为空
+      type: BOOLEAN, // 类型
+      defaultValue: '1', // 默认值
+      comment: '状态', // 备注
+    },
+    sort: {
+      allowNull: !0, // 是否为空
+      type: STRING(6), // 类型
+      defaultValue: '0', // 默认值
+      comment: '排序', // 备注
     },
     created_at: {
       allowNull: !0, // 是否为空
