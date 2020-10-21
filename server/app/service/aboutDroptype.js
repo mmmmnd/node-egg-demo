@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:12:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-21 16:54:18
+ * @LastEditTime: 2020-10-21 17:09:56
  */
 'use strict';
 
@@ -76,6 +76,28 @@ class AboutDroptypeService extends Service {
 
       if (!aboutDroptype[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
 
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
+  }
+  /**
+   * 编辑
+   * @param { String } title 标题
+   * @param { Boolean } status 状态
+   * @param { Number } sort 排序
+   * @param { Number } id id
+   */
+  async edit ({ dropContent, status, sort, id }) {
+    try {
+      await this.ctx.model.MzcAboutDroptype.update({
+        dropContent, status, sort
+      }, {
+        where: {
+          id,
+          deleted_at: null
+        },
+      })
       return { httpStatus: HttpStatus.OK }
     } catch (error) {
       return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
