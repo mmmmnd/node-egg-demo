@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-30 16:10:48
+ * @LastEditTime: 2020-10-20 16:15:02
 -->
 <template>
   <div class="app-container">
@@ -15,36 +15,45 @@
               fit
               highlight-current-row
               style="width: 100%"
-              ref="tableDataRef">
-      <el-table-column prop="index"
-                       type="index"
-                       align="center"
-                       label="序号"
-                       width="80px"
-                       sortable>
-      </el-table-column>
+              row-key="treeNewTitle"
+              default-expand-all
+              :tree-props="{children: 'children'}">
       <el-table-column prop="id"
                        align="center"
-                       label="分类"
-                       width="180px">
+                       label="序号"
+                       width="80px">
         <template slot-scope="{row}">
-          <span>{{ row.category }}</span>
-          <el-tag size="mini"
-                  v-if="row.classify">{{ row.classify }}</el-tag>
+          <span>{{ row.id }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column prop="title"
+                       align="left"
+                       label="标题"
+                       width="150px">
+        <template slot-scope="{row}">
+
+          <el-tag v-if="row.treeNewTitle && row.children">{{ row.treeNewTitle }}</el-tag>
+          <span v-else
+                v-html="row.treeNewTitle"></span>
+
         </template>
       </el-table-column>
 
       <el-table-column prop="title"
                        align="center"
-                       label="网站标题">
+                       label="网站标题"
+                       show-overflow-tooltip
+                       width="150px">
         <template slot-scope="{row}">
-          <span>{{ row.title }}</span>
+          <span v-html="row.title"></span>
         </template>
       </el-table-column>
-
       <el-table-column prop="keywords"
                        align="center"
-                       label="网站关键词">
+                       label="网站关键词"
+                       show-overflow-tooltip
+                       width="150px">
         <template slot-scope="{row}">
           <span>{{ row.keywords }}</span>
         </template>
@@ -53,7 +62,8 @@
       <el-table-column prop="companyDescription"
                        align="center"
                        label="网站描述"
-                       show-overflow-tooltip>
+                       show-overflow-tooltip
+                       width="150px">
         <template slot-scope="{row}">
           <span>{{ row.companyDescription }}</span>
         </template>
@@ -62,7 +72,8 @@
       <el-table-column prop="aboutTitle"
                        align="center"
                        label="列表标题"
-                       show-overflow-tooltip>
+                       show-overflow-tooltip
+                       width="150px">
         <template slot-scope="{row}">
           <span>{{ row.aboutTitle }}</span>
         </template>
@@ -76,6 +87,7 @@
           <el-avatar shape="square"
                      :size="100"
                      fit="cover"
+                     v-if="row.avatarImage"
                      :src="row.avatarImage"></el-avatar>
         </template>
       </el-table-column>
@@ -87,6 +99,7 @@
           <el-switch v-model="row.status"
                      active-color="#13ce66"
                      inactive-color="#ff4949"
+                     v-if="row.status"
                      @change="statusSwitch(row.status,row.id)">
           </el-switch>
         </template>
@@ -103,7 +116,8 @@
 
       <el-table-column prop="created_at"
                        align="center"
-                       label="创建时间">
+                       label="创建时间"
+                       width="150px">
         <template slot-scope="{row}">
           <span>{{ row.created_at | formatTime('{y}-{m}-{d} {h}:{i}')  }}</span>
         </template>
@@ -111,7 +125,8 @@
 
       <el-table-column prop="companyDescription"
                        align="center"
-                       label="最后修改时间">
+                       label="最后修改时间"
+                       width="150px">
         <template slot-scope="{row}">
           <span>{{ row.updated_at | formatTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
@@ -119,7 +134,8 @@
 
       <el-table-column align="center"
                        label="操作"
-                       width="180">
+                       width="180"
+                       fixed="right">
         <template slot-scope="{row}">
           <router-link :to="'/about/edit/'+row.category_id">
             <el-button type="primary"
@@ -179,24 +195,9 @@ export default {
       this.listLoading = true
       aboutDroptypeList(this.listQuery)
         .then(response => {
-          this.list = response.data.about.data
-          this.total = response.data.about.meta.total
-          this.category = response.data.aboutSingleMenu
-          this.classify = response.data.aboutDroptype
-          this.listLoading = false
-
-          for (var i in this.list) {
-            for (var j in this.classify) {
-              if (this.list[i].category_id == this.classify[j].id) {
-                for (var n in this.category) {
-                  if (this.classify[j].dropId == this.category[n].id) {
-                    this.list[i].classify = this.classify[j].dropContent;
-                    this.list[i].category = this.category[n].title;
-                  }
-                }
-              }
-            }
-          }
+          this.list = response.data.data;
+          this.total = response.data.meta.total;
+          this.listLoading = false;
         })
 
     },

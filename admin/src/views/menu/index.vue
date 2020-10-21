@@ -217,14 +217,11 @@ export default {
         row.originalTitle = row.title;
         this.alertView('已被编辑', 'success');
       } else if (isSORT) {
-
         row.originalTitle = row.title;
         row.originalNameTitle = row.nameTitle;
         row.originalSort = row.sort;
         this.alertView('已被编辑', 'success');
-      } else {
-        return this.alertView('该选项没有进行任何修改', 'warning');
-      }
+      } else return this.alertView('该选项没有进行任何修改', 'warning');
       /**
        * 修改http请求
        */
