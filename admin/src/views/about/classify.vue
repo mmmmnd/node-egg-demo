@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-21 16:51:47
+ * @LastEditTime: 2020-10-21 17:08:24
 -->
 <template>
   <div class="app-container">
@@ -119,7 +119,7 @@
 </template>
 
 <script>
-import { aboutDroptypeList, aboutDroptypeUpdate } from '@/api/about'
+import { aboutDroptypeList, aboutDroptypeUpdate, aboutDroptypeEdit } from '@/api/about'
 import Pagination from '@/components/Pagination'
 export default {
   components: { Pagination },
@@ -199,7 +199,10 @@ export default {
         row.originalSort = row.sort;
         this.alertView('已被编辑', 'success');
       } else return this.alertView('该选项没有进行任何修改', 'warning');
-
+      /**
+       * 修改http请求
+       */
+      aboutDroptypeEdit(row);
     },
     /**
      * 取消

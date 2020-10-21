@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:59:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-21 16:17:41
+ * @LastEditTime: 2020-10-21 17:06:57
  */
 import request from '@/utils/request'
 
@@ -52,6 +52,14 @@ export function aboutDroptypeList (params) {
 export function aboutDroptypeUpdate (data) {
   return request({
     url: '/aboutDroptype/update',
+    method: 'post',
+    data
+  })
+}
+
+export function aboutDroptypeEdit (data) {
+  return request({
+    url: '/aboutDroptype/edit',
     method: 'post',
     data
   })
