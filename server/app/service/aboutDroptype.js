@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:12:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-22 16:35:58
+ * @LastEditTime: 2020-10-22 17:11:07
  */
 'use strict';
 
@@ -126,6 +126,19 @@ class AboutDroptypeService extends Service {
     } catch (error) {
       return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
     }
+  }
+  /**
+   * 删除
+   * @param { Number } id 
+   */
+  async destroy ({ id }) {
+    const aboutDroptype = await this.ctx.model.MzcAboutDroptype.findByPk(id);
+
+    if (!aboutDroptype) return { httpStatus: HttpStatus.NOT_FOUND, msg: '没有找到相关信息' };
+
+    aboutDroptype.destroy();
+
+    return { httpStatus: HttpStatus.OK }
   }
 }
 

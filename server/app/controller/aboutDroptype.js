@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-29 11:17:48
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-22 15:14:41
+ * @LastEditTime: 2020-10-22 16:49:23
  */
 'use strict';
 
@@ -51,6 +51,15 @@ class AboutDroptypeController extends Controller {
     const params = this.ctx.request.body;
 
     const aboutDroptype = await this.ctx.service.aboutDroptype.add(params)
+    await this.ctx.helper.checkData(aboutDroptype);
+  }
+  /**
+   * 删除
+   */
+  async destroy () {
+    const params = this.ctx.request.body;
+
+    const aboutDroptype = await this.ctx.service.aboutDroptype.destroy(params)
     await this.ctx.helper.checkData(aboutDroptype);
   }
 }
