@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-22 16:32:47
+ * @LastEditTime: 2020-10-22 17:30:23
 -->
 <template>
   <div class="app-container">
@@ -93,7 +93,7 @@
                      type="danger"
                      size="small"
                      icon="el-icon-delete"
-                     @click="handleDel()">
+                     @click="handleDel(row)">
             删除
           </el-button>
         </template>
@@ -164,7 +164,7 @@
 </template>
 
 <script>
-import { aboutDroptypeList, aboutDroptypeUpdate, aboutDroptypeEdit, aboutDroptypeAdd } from '@/api/about'
+import { aboutDroptypeList, aboutDroptypeUpdate, aboutDroptypeEdit, aboutDroptypeAdd, aboutDroptypeDestroy } from '@/api/about'
 import Pagination from '@/components/Pagination'
 export default {
   components: { Pagination },
@@ -301,7 +301,17 @@ export default {
       })
     },
     handleDel (row) {
-
+      this.$confirm('此操作将删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        aboutDroptypeDestroy(row)
+        this.alertView('删除成功!', 'success')
+        this.$router.go(0);
+      }).catch(() => {
+        this.alertView('已取消删除', 'info')
+      });
     },
     createData () {
       this.$refs['dataForm'].validate((valid) => {
