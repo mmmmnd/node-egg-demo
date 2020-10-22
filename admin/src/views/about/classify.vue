@@ -5,10 +5,19 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-21 17:08:24
+ * @LastEditTime: 2020-10-22 16:32:47
 -->
 <template>
   <div class="app-container">
+    <div class="filter-container">
+      <el-button class="filter-item"
+                 style="margin-left: 10px;"
+                 type="primary"
+                 icon="el-icon-plus"
+                 @click="handleCreate">
+        增加
+      </el-button>
+    </div>
     <el-table v-loading="listLoading"
               :data="list"
               border
@@ -29,19 +38,12 @@
 
       <el-table-column prop="nameTitle"
                        align="left"
-                       label="分类标题">
+                       label="标题">
         <template slot-scope="{row}">
 
-          <template v-if="row.edit">
-            <el-input v-model="row.dropContent"
-                      class="edit-input"
-                      size="small" />
-          </template>
-          <template v-else>
-            <el-tag v-if="row.treeNewTitle && row.children">{{ row.treeNewTitle }}</el-tag>
-            <span v-else
-                  v-html="row.treeNewTitle"></span>
-          </template>
+          <el-tag v-if="row.treeNewTitle && row.children">{{ row.treeNewTitle }}</el-tag>
+          <span v-else
+                v-html="row.treeNewTitle"></span>
 
         </template>
       </el-table-column>
@@ -84,27 +86,17 @@
                      type="primary"
                      size="small"
                      icon="el-icon-edit"
-                     @click="row.edit=!row.edit">
+                     @click="handleUpdate()">
             编辑
           </el-button>
-
-          <el-button v-if="row.edit"
-                     type="success"
+          <el-button v-if="!row.children && !row.edit"
+                     type="danger"
                      size="small"
-                     icon="el-icon-check"
-                     @click="confirmEdit(row)">
-            修改
+                     icon="el-icon-delete"
+                     @click="handleDel()">
+            删除
           </el-button>
-          <el-button v-if="row.edit"
-                     type="warning"
-                     size="small"
-                     icon="el-icon-close"
-                     @click="cancelEdit(row)">
-            取消
-          </el-button>
-
         </template>
-
       </el-table-column>
 
     </el-table>
@@ -115,11 +107,64 @@
                 :limit.sync="listQuery.limit"
                 @pagination="getList" />
 
+    <el-dialog :title="textMap[dialogStatus]"
+               :visible.sync="dialogFormVisible">
+      <el-form ref="dataForm"
+               :rules="rules"
+               :model="temp"
+               label-position="right"
+               label-width="100px"
+               style="width: 400px; margin-left:50px;">
+
+        <el-form-item label="上级分类"
+                      prop="dropId">
+          <el-select v-model="temp.dropId"
+                     class="filter-item"
+                     placeholder="请选择上级分类">
+            <el-option v-for="item in list"
+                       :key="item.index"
+                       :label="item.treeNewTitle"
+                       :value="item.index" />
+          </el-select>
+        </el-form-item>
+
+        <el-form-item label="标题"
+                      prop="dropContent">
+          <el-input v-model="temp.dropContent" />
+        </el-form-item>
+
+        <el-form-item label="状态"
+                      prop="status">
+          <el-switch v-model="temp.status"
+                     active-color="#13ce66"
+                     inactive-color="#ff4949">
+          </el-switch>
+        </el-form-item>
+
+        <el-form-item label="排序"
+                      prop="sort">
+          <el-input-number v-model="temp.sort"
+                           controls-position="right"
+                           :min="0"
+                           ref="inputNumber"
+                           size="small"></el-input-number>
+        </el-form-item>
+      </el-form>
+      <div slot="footer"
+           class="dialog-footer">
+
+        <el-button @click="dialogFormVisible = false">取消 </el-button>
+        <el-button type="primary"
+                   @click="dialogStatus==='create'?createData():updateData()">确定 </el-button>
+
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-import { aboutDroptypeList, aboutDroptypeUpdate, aboutDroptypeEdit } from '@/api/about'
+import { aboutDroptypeList, aboutDroptypeUpdate, aboutDroptypeEdit, aboutDroptypeAdd } from '@/api/about'
 import Pagination from '@/components/Pagination'
 export default {
   components: { Pagination },
@@ -132,6 +177,24 @@ export default {
         page: 1,
         limit: 10
       },
+      temp: {
+        dropId: '',
+        dropContent: '',
+        sort: 0,
+        status: true
+      },
+      dialogStatus: '',
+      textMap: {
+        update: '修改',
+        create: '增加'
+      },
+      rules: {
+        dropId: [{ required: true, message: '请选择上级分类', trigger: 'blur' }],
+        dropContent: [{ type: 'string', required: true, message: '请输入分类标题', trigger: 'blur' }],
+        status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
+        sort: [{ type: 'integer', required: true, message: '请选择排序', trigger: 'blur' }]
+      },
+      dialogFormVisible: false,
     }
   },
   created () {
@@ -179,31 +242,31 @@ export default {
     /**
      * 修改
      */
-    confirmEdit (row) {
-      row.edit = false;
-      const [isCONTENT, isSORT] = [row.dropContent !== row.originalDropContent, row.sort !== row.originalSort];
+    // confirmEdit (row) {
+    //   row.edit = false;
+    //   const [isCONTENT, isSORT] = [row.dropContent !== row.originalDropContent, row.sort !== row.originalSort];
 
-      if (isCONTENT) {
-        if (row.dropContent == '') {
-          row.dropContent = row.originalDropContent;
-          row.sort = row.originalSort;
-          return this.alertView('不允许为空！', 'error');
-        }
-        var i = row.treeNewTitle.indexOf(row.originalDropContent),
-          v = row.treeNewTitle.substring(i),
-          item = row.treeNewTitle.replace(v, row.dropContent);
-        row.treeNewTitle = item;
-        row.originalDropContent = row.dropContent;
-        this.alertView('已被编辑', 'success');
-      } else if (isSORT) {
-        row.originalSort = row.sort;
-        this.alertView('已被编辑', 'success');
-      } else return this.alertView('该选项没有进行任何修改', 'warning');
-      /**
-       * 修改http请求
-       */
-      aboutDroptypeEdit(row);
-    },
+    //   if (isCONTENT) {
+    //     if (row.dropContent == '') {
+    //       row.dropContent = row.originalDropContent;
+    //       row.sort = row.originalSort;
+    //       return this.alertView('不允许为空！', 'error');
+    //     }
+    //     var i = row.treeNewTitle.indexOf(row.originalDropContent),
+    //       v = row.treeNewTitle.substring(i),
+    //       item = row.treeNewTitle.replace(v, row.dropContent);
+    //     row.treeNewTitle = item;
+    //     row.originalDropContent = row.dropContent;
+    //     this.alertView('已被编辑', 'success');
+    //   } else if (isSORT) {
+    //     row.originalSort = row.sort;
+    //     this.alertView('已被编辑', 'success');
+    //   } else return this.alertView('该选项没有进行任何修改', 'warning');
+    //   /**
+    //    * 修改http请求
+    //    */
+    //   aboutDroptypeEdit(row);
+    // },
     /**
      * 取消
      */
@@ -212,6 +275,77 @@ export default {
       row.dropContent = row.originalDropContent;
       row.sort = row.originalSort
       return this.alertView('已恢复为原始值', 'warning')
+    },
+    /**
+     * 增加
+     */
+    handleCreate () {
+      this.resetTemp()
+      this.dialogStatus = 'create'
+      this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
+      })
+
+    },
+    /**
+     * 修改
+     */
+    handleUpdate (row) {
+      this.temp = Object.assign({}, row) // copy obj
+      this.temp.timestamp = new Date(this.temp.timestamp)
+      this.dialogStatus = 'update'
+      this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
+      })
+    },
+    handleDel (row) {
+
+    },
+    createData () {
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          aboutDroptypeAdd(this.temp).then(() => {
+            this.dialogFormVisible = false;
+            this.$router.go(0);
+            this.$notify({
+              title: '成功',
+              message: '创建成功',
+              type: 'success',
+              duration: 2000
+            })
+
+          })
+        }
+      })
+    },
+    updateData () {
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          const tempData = Object.assign({}, this.temp)
+          tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
+          updateArticle(tempData).then(() => {
+            const index = this.list.findIndex(v => v.id === this.temp.id)
+            this.list.splice(index, 1, this.temp)
+            this.dialogFormVisible = false
+            this.$notify({
+              title: '成功',
+              message: '更新成功',
+              type: 'success',
+              duration: 2000
+            })
+          })
+        }
+      })
+    },
+    resetTemp () {
+      this.temp = {
+        dropId: '',
+        dropContent: '',
+        sort: 0,
+        status: true
+      }
     },
     /**
      * 弹窗提示

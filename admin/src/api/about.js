@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:59:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-21 17:06:57
+ * @LastEditTime: 2020-10-22 16:40:49
  */
 import request from '@/utils/request'
 
@@ -20,7 +20,7 @@ export function aboutSingleList (params) {
 export function aboutSingleUpdate (data) {
   return request({
     url: '/aboutSingle/update',
-    method: 'post',
+    method: 'put',
     data
   })
 }
@@ -52,7 +52,7 @@ export function aboutDroptypeList (params) {
 export function aboutDroptypeUpdate (data) {
   return request({
     url: '/aboutDroptype/update',
-    method: 'post',
+    method: 'put',
     data
   })
 }
@@ -60,6 +60,14 @@ export function aboutDroptypeUpdate (data) {
 export function aboutDroptypeEdit (data) {
   return request({
     url: '/aboutDroptype/edit',
+    method: 'post',
+    data
+  })
+}
+
+export function aboutDroptypeAdd (data) {
+  return request({
+    url: '/aboutDroptype/add',
     method: 'post',
     data
   })

@@ -20,7 +20,7 @@ export function menuList (params) {
 export function menuUpdate (data) {
   return request({
     url: '/menu/update',
-    method: 'post',
+    method: 'put',
     data
   })
 }
