@@ -5,11 +5,10 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:13:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-30 10:03:13
+ * @LastEditTime: 2020-10-22 15:14:55
  */
 'use strict';
 
-const { Op } = require('sequelize')
 const Service = require('egg').Service;
 const HttpStatus = require('../utils/httpStatus');
 /**
@@ -55,7 +54,7 @@ class AboutService extends Service {
     return await this.ctx.model.MzcAbout.findAll({
       where: {
         deleted_at: null,
-        category_id: { [Op.lte]: cid }
+        dropId: cid
       }
     });
   }

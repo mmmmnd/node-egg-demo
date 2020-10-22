@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-21 17:06:32
+ * @LastEditTime: 2020-10-22 16:43:55
  */
 'use strict';
 
@@ -46,19 +46,20 @@ module.exports = app => {
 
   // menu
   router.get('/api/menu/index', jwt, controller.menu.index);
-  router.post('/api/menu/update', jwt, controller.menu.update);
+  router.put('/api/menu/update', jwt, controller.menu.update);
   router.post('/api/menu/edit', jwt, controller.menu.edit);
 
   // aboutSingle
   router.get('/api/aboutSingle/index', jwt, controller.aboutSingle.index)
-  router.post('/api/aboutSingle/update', jwt, controller.aboutSingle.update)
+  router.put('/api/aboutSingle/update', jwt, controller.aboutSingle.update)
   router.get('/api/aboutSingle/detail', jwt, controller.aboutSingle.detail)
   router.post('/api/aboutSingle/edit', jwt, controller.aboutSingle.edit)
 
   // aboutDroptype
   router.get('/api/aboutDroptype/index', jwt, controller.aboutDroptype.index)
-  router.post('/api/aboutDroptype/update', jwt, controller.aboutDroptype.update)
+  router.put('/api/aboutDroptype/update', jwt, controller.aboutDroptype.update)
   router.post('/api/aboutDroptype/edit', jwt, controller.aboutDroptype.edit);
+  router.post('/api/aboutDroptype/add', jwt, controller.aboutDroptype.add);
 
 
   // upload

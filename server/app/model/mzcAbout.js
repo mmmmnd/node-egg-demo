@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-30 08:49:58
+ * @LastEditTime: 2020-10-22 09:58:48
  */
 'use strict';
 
@@ -26,6 +26,12 @@ module.exports = app => {
       type: INTEGER(8).UNSIGNED, // 类型
       defaultValue: '0', // 默认值
       comment: '关联父表id', // 备注
+    },
+    dropId: {
+      allowNull: !1, // 是否为空
+      type: STRING(2), // 类型
+      defaultValue: '0', // 默认值
+      comment: '菜单id值', // 备注 0 -> 不存在
     },
     title: {
       allowNull: !1, // 是否为空

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-21 16:58:23
+ * @LastEditTime: 2020-10-22 11:27:28
  */
 'use strict';
 
@@ -71,7 +71,7 @@ class GetTree {
         arr.treeNewTitle = arr.treeNewTitle.replace(ICON[0], ICON[1]);
       }
       data.push({
-        id: index + 100, treeNewTitle: item.title, children: item.children
+        id: index + 100, index: item.id, treeNewTitle: item.title, children: item.children
       })
     })
 

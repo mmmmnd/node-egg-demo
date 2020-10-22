@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:12:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-21 17:09:56
+ * @LastEditTime: 2020-10-22 16:35:58
  */
 'use strict';
 
@@ -34,7 +34,7 @@ class AboutDroptypeService extends Service {
     let aboutDroptype = await this.ctx.model.MzcAboutDroptype.findAll({
       include,
       where: filter,
-      order: [['id', 'ASC']],
+      order: [['sort', 'ASC']],
     });
 
     if (cid == 4) {
@@ -46,6 +46,10 @@ class AboutDroptypeService extends Service {
 
     return aboutDroptype
   }
+  /**
+   * 详情
+   * @param { String } cid 二级菜单id
+   */
   async detail (cid = 2) {
     return await this.ctx.model.MzcAboutDroptype.findOne({
       where: {
@@ -98,6 +102,26 @@ class AboutDroptypeService extends Service {
           deleted_at: null
         },
       })
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
+  }
+  /**
+   * 增加
+   * @param { Number } dropId 下拉id
+   * @param { String } dropContent 标题
+   * @param { Boolean } status 状态
+   * @param { Number } sort 排序
+   */
+  async add ({ dropId, dropContent, status, sort }) {
+    try {
+      await this.ctx.model.MzcAboutDroptype.create({
+        dropId,
+        dropContent,
+        status,
+        sort,
+      });
       return { httpStatus: HttpStatus.OK }
     } catch (error) {
       return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
