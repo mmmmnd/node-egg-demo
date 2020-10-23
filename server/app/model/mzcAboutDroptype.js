@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 09:21:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-19 14:57:50
+ * @LastEditTime: 2020-10-23 09:35:09
  */
 'use strict';
 
@@ -23,7 +23,7 @@ module.exports = app => {
     },
     dropId: {
       allowNull: !1, // 是否为空
-      type: STRING(2), // 类型
+      type: INTEGER(2), // 类型
       defaultValue: '0', // 默认值
       comment: 'cid类型', // 备注 0 -> 不存在
     },

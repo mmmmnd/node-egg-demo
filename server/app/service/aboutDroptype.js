@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:12:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-22 17:11:07
+ * @LastEditTime: 2020-10-23 09:40:46
  */
 'use strict';
 
@@ -23,7 +23,7 @@ class AboutDroptypeService extends Service {
 
     const filter = cid
       ? { dropId: cid, status: true, deleted_at: null }
-      : { status: true, deleted_at: null };
+      : { deleted_at: null };
 
     const include = cid ? [{
       as: 'info',
@@ -92,10 +92,10 @@ class AboutDroptypeService extends Service {
    * @param { Number } sort 排序
    * @param { Number } id id
    */
-  async edit ({ dropContent, status, sort, id }) {
+  async edit ({ dropId, dropContent, status, sort, id }) {
     try {
       await this.ctx.model.MzcAboutDroptype.update({
-        dropContent, status, sort
+        dropId, dropContent, status, sort
       }, {
         where: {
           id,

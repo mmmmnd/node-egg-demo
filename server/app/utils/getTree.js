@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-22 11:27:28
+ * @LastEditTime: 2020-10-23 10:56:47
  */
 'use strict';
 
@@ -46,7 +46,7 @@ class GetTree {
    * @param { Object } aboutSingleMenu 菜单
    * @param { Array } data 返回数据
    */
-  static aboutList (about, aboutDroptype, aboutSingleMenu, data = [], arrs = []) {
+  static aboutList (aboutDroptype, aboutSingleMenu, data = [], arrs = []) {
     aboutDroptype = JSON.parse(JSON.stringify(aboutDroptype));//下拉
     aboutSingleMenu = JSON.parse(JSON.stringify(aboutSingleMenu));//菜单
     const ICON = ['&nbsp;&nbsp;&nbsp;&nbsp;├', '&nbsp;&nbsp;&nbsp;&nbsp;└'];
@@ -75,7 +75,7 @@ class GetTree {
       })
     })
 
-    return { data, meta: about.meta }
+    return data
   }
 }
 
