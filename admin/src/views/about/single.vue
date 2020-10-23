@@ -109,7 +109,7 @@ export default {
   components: { Pagination },
   data () {
     return {
-      list: null,
+      list: [],
       total: 0,
       listLoading: true,
       listQuery: {

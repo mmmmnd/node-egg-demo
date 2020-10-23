@@ -133,7 +133,7 @@ import { menuList, menuUpdate, menuEdit } from '@/api/menu'
 export default {
   data () {
     return {
-      list: null,
+      list: [],
       listLoading: true,
     }
   },

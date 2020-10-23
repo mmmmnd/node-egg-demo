@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-20 16:15:02
+ * @LastEditTime: 2020-10-23 10:21:27
 -->
 <template>
   <div class="app-container">
@@ -173,7 +173,7 @@ export default {
   components: { Pagination },
   data () {
     return {
-      list: null,
+      list: [],
       total: 0,
       listLoading: true,
       listQuery: {

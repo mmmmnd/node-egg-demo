@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-22 17:30:23
+ * @LastEditTime: 2020-10-23 10:58:01
 -->
 <template>
   <div class="app-container">
@@ -18,15 +18,14 @@
         增加
       </el-button>
     </div>
-    <el-table v-loading="listLoading"
-              :data="list"
+    <el-table :data="list"
               border
               fit
               highlight-current-row
               style="width: 100%"
               row-key="id"
               default-expand-all
-              :tree-props="{children: 'children'}">
+              :tree-props="{hasChildren: 'hasChildren'}">
       <el-table-column prop="id"
                        align="center"
                        label="序号"
@@ -86,7 +85,7 @@
                      type="primary"
                      size="small"
                      icon="el-icon-edit"
-                     @click="handleUpdate()">
+                     @click="handleUpdate(row)">
             编辑
           </el-button>
           <el-button v-if="!row.children && !row.edit"
@@ -130,7 +129,8 @@
 
         <el-form-item label="标题"
                       prop="dropContent">
-          <el-input v-model="temp.dropContent" />
+          <el-input v-model="temp.dropContent"
+                    placeholder="请输入标题名" />
         </el-form-item>
 
         <el-form-item label="状态"
@@ -170,7 +170,7 @@ export default {
   components: { Pagination },
   data () {
     return {
-      list: null,
+      list: [],
       total: 0,
       listLoading: true,
       listQuery: {
@@ -207,7 +207,7 @@ export default {
     async getList () {
       this.listLoading = true
       const { data } = await aboutDroptypeList(this.listQuery)
-      this.list = data.data.map(v => {
+      this.list = data.map(v => {
 
         if (v.children) {
           v.children.map(item => {
@@ -240,43 +240,6 @@ export default {
         })
     },
     /**
-     * 修改
-     */
-    // confirmEdit (row) {
-    //   row.edit = false;
-    //   const [isCONTENT, isSORT] = [row.dropContent !== row.originalDropContent, row.sort !== row.originalSort];
-
-    //   if (isCONTENT) {
-    //     if (row.dropContent == '') {
-    //       row.dropContent = row.originalDropContent;
-    //       row.sort = row.originalSort;
-    //       return this.alertView('不允许为空！', 'error');
-    //     }
-    //     var i = row.treeNewTitle.indexOf(row.originalDropContent),
-    //       v = row.treeNewTitle.substring(i),
-    //       item = row.treeNewTitle.replace(v, row.dropContent);
-    //     row.treeNewTitle = item;
-    //     row.originalDropContent = row.dropContent;
-    //     this.alertView('已被编辑', 'success');
-    //   } else if (isSORT) {
-    //     row.originalSort = row.sort;
-    //     this.alertView('已被编辑', 'success');
-    //   } else return this.alertView('该选项没有进行任何修改', 'warning');
-    //   /**
-    //    * 修改http请求
-    //    */
-    //   aboutDroptypeEdit(row);
-    // },
-    /**
-     * 取消
-     */
-    cancelEdit (row) {
-      row.edit = false
-      row.dropContent = row.originalDropContent;
-      row.sort = row.originalSort
-      return this.alertView('已恢复为原始值', 'warning')
-    },
-    /**
      * 增加
      */
     handleCreate () {
@@ -286,20 +249,21 @@ export default {
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
-
     },
     /**
      * 修改
      */
     handleUpdate (row) {
       this.temp = Object.assign({}, row) // copy obj
-      this.temp.timestamp = new Date(this.temp.timestamp)
       this.dialogStatus = 'update'
       this.dialogFormVisible = true
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
     },
+    /**
+     * 删除
+     */
     handleDel (row) {
       this.$confirm('此操作将删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
@@ -313,6 +277,9 @@ export default {
         this.alertView('已取消删除', 'info')
       });
     },
+    /**
+     * 添加模块
+     */
     createData () {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
@@ -325,20 +292,20 @@ export default {
               type: 'success',
               duration: 2000
             })
-
           })
         }
       })
     },
+    /**
+     * 修改模块
+     */
     updateData () {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
-          tempData.timestamp = +new Date(tempData.timestamp) // change Thu Nov 30 2017 16:41:05 GMT+0800 (CST) to 1512031311464
-          updateArticle(tempData).then(() => {
-            const index = this.list.findIndex(v => v.id === this.temp.id)
-            this.list.splice(index, 1, this.temp)
-            this.dialogFormVisible = false
+          aboutDroptypeEdit(tempData).then(() => {
+            this.dialogFormVisible = false;
+            this.$router.go(0);
             this.$notify({
               title: '成功',
               message: '更新成功',
@@ -349,6 +316,9 @@ export default {
         }
       })
     },
+    /**
+     * 重置添加表单
+     */
     resetTemp () {
       this.temp = {
         dropId: '',
