@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-23 10:58:01
+ * @LastEditTime: 2020-10-27 10:25:32
 -->
 <template>
   <div class="app-container">
@@ -164,7 +164,7 @@
 </template>
 
 <script>
-import { aboutDroptypeList, aboutDroptypeUpdate, aboutDroptypeEdit, aboutDroptypeAdd, aboutDroptypeDestroy } from '@/api/about'
+import { aboutDroptypeIndex, aboutDroptypeUpdate, aboutDroptypeEdit, aboutDroptypeAdd, aboutDroptypeDestroy } from '@/api/about'
 import Pagination from '@/components/Pagination'
 export default {
   components: { Pagination },
@@ -206,7 +206,7 @@ export default {
      */
     async getList () {
       this.listLoading = true
-      const { data } = await aboutDroptypeList(this.listQuery)
+      const { data } = await aboutDroptypeIndex(this.listQuery)
       this.list = data.map(v => {
 
         if (v.children) {

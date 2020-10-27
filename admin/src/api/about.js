@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:59:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-22 17:28:59
+ * @LastEditTime: 2020-10-27 09:27:51
  */
 import request from '@/utils/request'
 
@@ -41,7 +41,7 @@ export function aboutSingleEdit (data) {
   })
 }
 
-export function aboutDroptypeList (params) {
+export function aboutDroptypeIndex (params) {
   return request({
     url: '/aboutDroptype/index',
     method: 'get',
@@ -77,6 +77,37 @@ export function aboutDroptypeDestroy (data) {
   return request({
     url: '/aboutDroptype/destroy',
     method: 'delete',
+    data
+  })
+}
+
+export function aboutDroptypeList () {
+  return request({
+    url: '/aboutDroptype/list',
+    method: 'get',
+  })
+}
+
+export function aboutIndex (params) {
+  return request({
+    url: '/about/index',
+    method: 'get',
+    params
+  })
+}
+
+export function aboutUpdate (params) {
+  return request({
+    url: '/about/update',
+    method: 'put',
+    params
+  })
+}
+
+export function aboutAdd (data) {
+  return request({
+    url: '/about/add',
+    method: 'post',
     data
   })
 }
