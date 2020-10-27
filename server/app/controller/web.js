@@ -40,7 +40,7 @@ class WebController extends Controller {
     const settingList = await service.setting.list(); // 基本设置
     const advertisingList = await service.advertising.list(); // 轮播图广告
     const aboutSingleDetail = await service.aboutSingle.detail(cid); // about单页数据
-    const aboutDroptypeList = await service.aboutDroptype.list(cid); // about下拉菜单
+    const aboutDroptypeList = await service.aboutDroptype.index(cid); // about下拉菜单
 
     const data = { menuList, settingList, advertisingList, aboutSingleDetail, aboutDroptypeList, moment };
     await ctx.render('about/index.ejs', data);

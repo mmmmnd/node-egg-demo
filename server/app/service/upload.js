@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:11:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-29 08:38:16
+ * @LastEditTime: 2020-10-27 14:45:29
  */
 'use strict';
 
@@ -74,7 +74,7 @@ class UploadService extends Service {
       } else {
         return { msg: '未知错误', httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
       }
-    } catch (err) {
+    } catch (error) {
       await sendToWormhole(stream);
       return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
     }

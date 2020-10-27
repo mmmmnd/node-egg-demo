@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:13:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-22 15:14:55
+ * @LastEditTime: 2020-10-27 16:39:44
  */
 'use strict';
 
@@ -23,7 +23,7 @@ class AboutService extends Service {
   async index ({ limit = 20, page = 1 }) {
     const maxPage = Number(limit);
     try {
-      const about = await this.ctx.model.MzcAbout.findAndCountAll({
+      let about = await this.ctx.model.MzcAbout.findAndCountAll({
         where: {
           deleted_at: null
         },
@@ -33,13 +33,25 @@ class AboutService extends Service {
 
       if (about.rows.length == 0) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
 
+      const aboutDroptype = await this.ctx.service.aboutDroptype.index(); // 下拉分类
+
+      about = JSON.parse(JSON.stringify(about));
+
+      about.rows.map(item => {
+        return aboutDroptype.map(childItem => {
+          if (item.category_id == childItem.id) return item.dropContent = childItem.dropContent;
+        })
+      })
+
       return {
-        data: about.rows,
-        meta: {
-          current_page: parseInt(page),
-          per_page: maxPage,
-          total: about.count,
-          total_pages: Math.ceil(about.count / maxPage),
+        data: {
+          data: about.rows,
+          meta: {
+            current_page: parseInt(page),
+            per_page: maxPage,
+            total: about.count,
+            total_pages: Math.ceil(about.count / maxPage),
+          }
         }
       }
     } catch (error) {
@@ -53,10 +65,57 @@ class AboutService extends Service {
   async list (cid) {
     return await this.ctx.model.MzcAbout.findAll({
       where: {
+        status: true,
         deleted_at: null,
         dropId: cid
       }
     });
+  }
+  /**
+   * 修改
+   * @param { String } id 当前id
+   * @param { String } key 字段名
+   * @param { String } value 字段值
+   */
+  async update ({ id, key, value }) {
+    try {
+      let aboutDroptype = await this.ctx.model.MzcAbout.update({ [key]: value }, {
+        where: {
+          id,
+          deleted_at: null
+        },
+      })
+
+      if (!aboutDroptype[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
+
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
+  }
+  /**
+   * 增加
+   * @param { Object } params 参数
+   */
+  async add (params) {
+    const { category_id, dropId, title, keywords, companyDescription, aboutTitle, content, avatarImage, status, sort } = params;
+    try {
+      await this.ctx.model.MzcAbout.create({
+        category_id,
+        dropId,
+        title,
+        keywords,
+        companyDescription,
+        aboutTitle,
+        content,
+        avatarImage,
+        status,
+        sort
+      });
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
   }
 }
 

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-22 17:21:32
+ * @LastEditTime: 2020-10-27 11:20:49
  */
 'use strict';
 
@@ -55,16 +55,24 @@ module.exports = app => {
   router.get('/api/aboutSingle/detail', jwt, controller.aboutSingle.detail)
   router.post('/api/aboutSingle/edit', jwt, controller.aboutSingle.edit)
 
+  // about
+  router.get('/api/about/index', jwt, controller.about.index)
+  router.put('/api/about/update', jwt, controller.about.update);
+  router.post('/api/about/add', jwt, controller.about.add);
+
   // aboutDroptype
   router.get('/api/aboutDroptype/index', jwt, controller.aboutDroptype.index)
   router.put('/api/aboutDroptype/update', jwt, controller.aboutDroptype.update)
   router.post('/api/aboutDroptype/edit', jwt, controller.aboutDroptype.edit);
   router.post('/api/aboutDroptype/add', jwt, controller.aboutDroptype.add);
+  router.get('/api/aboutDroptype/list', jwt, controller.aboutDroptype.list)
   router.delete('/api/aboutDroptype/destroy', jwt, controller.aboutDroptype.destroy);
 
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);
+
+  router.get('/api/home/edit', controller.home.edit);
 
   app.resources('home', '/home', app.controller.home);
   router.get('*', controller.web.error); // 404

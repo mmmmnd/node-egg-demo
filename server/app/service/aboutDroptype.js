@@ -5,10 +5,11 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:12:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-23 09:40:46
+ * @LastEditTime: 2020-10-27 16:49:49
  */
 'use strict';
 
+const { Op } = require('sequelize')
 const Service = require('egg').Service;
 const HttpStatus = require('../utils/httpStatus');
 /**
@@ -19,7 +20,7 @@ class AboutDroptypeService extends Service {
    * 下拉菜单列表
    * @param { String } cid 二级菜单id
    */
-  async list (cid) {
+  async index (cid) {
 
     const filter = cid
       ? { dropId: cid, status: true, deleted_at: null }
@@ -27,6 +28,7 @@ class AboutDroptypeService extends Service {
 
     const include = cid ? [{
       as: 'info',
+      where: { status: true },
       model: this.ctx.model.MzcAbout,
       order: [['id', 'ASC']],
     }] : '';
@@ -139,6 +141,21 @@ class AboutDroptypeService extends Service {
     aboutDroptype.destroy();
 
     return { httpStatus: HttpStatus.OK }
+  }
+  /**
+   * 列表
+   * @param { Number } id 不显示全部
+   */
+  async list (id = 1) {
+    const aboutDroptype = await this.ctx.model.MzcAboutDroptype.findAll({
+      where: {
+        id: { [Op.gt]: id },
+        deleted_at: null
+      },
+      order: [['sort', 'ASC']],
+    });
+
+    return { data: aboutDroptype }
   }
 }
 
