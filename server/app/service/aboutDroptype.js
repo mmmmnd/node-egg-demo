@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:12:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-27 16:49:49
+ * @LastEditTime: 2020-10-27 17:08:08
  */
 'use strict';
 
@@ -28,9 +28,8 @@ class AboutDroptypeService extends Service {
 
     const include = cid ? [{
       as: 'info',
-      where: { status: true },
       model: this.ctx.model.MzcAbout,
-      order: [['id', 'ASC']],
+      order: [['sort', 'ASC']],
     }] : '';
 
     let aboutDroptype = await this.ctx.model.MzcAboutDroptype.findAll({

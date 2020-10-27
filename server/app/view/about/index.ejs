@@ -51,13 +51,15 @@
               <% Object.values(aboutDroptypeList).forEach(val =>{ %>
                 <ul class="tab-pane fade <%= aboutDroptypeList[0] == val ?'in active':'' %> " id="<%= val.id %>">
                   <% val.info.forEach(item =>{ %>
-                    <li>
-                      <img src="<%= item.avatarImage %>" alt="" class="about2-img">
-                      <div class="about2-right">
-                        <h3><%= item.aboutTitle %></h3>
-                        <%- item.content %>
-                      </div>
-                    </li>
+                    <% if(item.status){ %>
+                      <li>
+                        <img src="<%= item.avatarImage %>" alt="" class="about2-img">
+                        <div class="about2-right">
+                          <h3><%= item.aboutTitle %></h3>
+                          <%- item.content %>
+                        </div>
+                      </li>
+                    <% } %>
                   <% }) %>
                 </ul>
               <% }) %>
@@ -69,7 +71,8 @@
               <% Object.values(aboutDroptypeList).forEach(val =>{ %>
                 <ul class="tab-pane fade <%= aboutDroptypeList[0] == val ?'in active':'' %> " id="<%= val.id %>">
                   <% val.info.forEach(item =>{ %>
-                  <li class="honor-list">
+                    <% if(item.status){ %>
+                      <li class="honor-list">
                     <i></i>
                     <div class="honor-right">
                       <img src="<%= item.avatarImage %>" alt="" class="honor-img">
@@ -79,7 +82,8 @@
                         <%- item.content %>
                       </div>
                     </div>
-                  </li>
+                      </li>
+                    <% } %>
                   <% }) %>
                 </ul>
               <% }) %>
