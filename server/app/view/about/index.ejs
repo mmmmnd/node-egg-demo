@@ -51,15 +51,13 @@
               <% Object.values(aboutDroptypeList).forEach(val =>{ %>
                 <ul class="tab-pane fade <%= aboutDroptypeList[0] == val ?'in active':'' %> " id="<%= val.id %>">
                   <% val.info.forEach(item =>{ %>
-                    <% if(item.status){ %>
-                      <li>
-                        <img src="<%= item.avatarImage %>" alt="" class="about2-img">
-                        <div class="about2-right">
-                          <h3><%= item.aboutTitle %></h3>
-                          <%- item.content %>
-                        </div>
-                      </li>
-                    <% } %>
+                    <li>
+                      <img src="<%= item.avatarImage %>" alt="" class="about2-img">
+                      <div class="about2-right">
+                        <h3><%= item.aboutTitle %></h3>
+                        <%- item.content %>
+                      </div>
+                    </li>
                   <% }) %>
                 </ul>
               <% }) %>
@@ -71,19 +69,17 @@
               <% Object.values(aboutDroptypeList).forEach(val =>{ %>
                 <ul class="tab-pane fade <%= aboutDroptypeList[0] == val ?'in active':'' %> " id="<%= val.id %>">
                   <% val.info.forEach(item =>{ %>
-                    <% if(item.status){ %>
-                      <li class="honor-list">
-                    <i></i>
-                    <div class="honor-right">
-                      <img src="<%= item.avatarImage %>" alt="" class="honor-img">
-                      <div class="honor-txt">
-                        <p class="honor-data"><%= moment(item.created_at).format('YYYY-MM-DD') %></p>
-                        <h5><%= item.aboutTitle %></h5>
-                        <%- item.content %>
-                      </div>
+                    <li class="honor-list">
+                  <i></i>
+                  <div class="honor-right">
+                    <img src="<%= item.avatarImage %>" alt="" class="honor-img">
+                    <div class="honor-txt">
+                      <p class="honor-data"><%= moment(item.created_at).format('YYYY-MM-DD') %></p>
+                      <h5><%= item.aboutTitle %></h5>
+                      <%- item.content %>
                     </div>
-                      </li>
-                    <% } %>
+                  </div>
+                    </li>
                   <% }) %>
                 </ul>
               <% }) %>

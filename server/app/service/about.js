@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:13:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-27 16:39:44
+ * @LastEditTime: 2020-10-28 10:33:10
  */
 'use strict';
 
@@ -68,7 +68,8 @@ class AboutService extends Service {
         status: true,
         deleted_at: null,
         dropId: cid
-      }
+      },
+      order: [['sort', 'DESC']],
     });
   }
   /**

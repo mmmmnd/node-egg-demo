@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:12:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-27 17:08:08
+ * @LastEditTime: 2020-10-28 10:38:03
  */
 'use strict';
 
@@ -19,8 +19,9 @@ class AboutDroptypeService extends Service {
   /**
    * 下拉菜单列表
    * @param { String } cid 二级菜单id
+   * @param { Number } limit 最大限制
    */
-  async index (cid) {
+  async index (cid, limit = 9999) {
 
     const filter = cid
       ? { dropId: cid, status: true, deleted_at: null }
@@ -28,8 +29,10 @@ class AboutDroptypeService extends Service {
 
     const include = cid ? [{
       as: 'info',
+      where: { status: true },
       model: this.ctx.model.MzcAbout,
-      order: [['sort', 'ASC']],
+      order: [['sort', 'DESC']],
+      limit,
     }] : '';
 
     let aboutDroptype = await this.ctx.model.MzcAboutDroptype.findAll({
