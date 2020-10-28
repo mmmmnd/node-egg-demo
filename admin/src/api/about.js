@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:59:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 15:06:03
+ * @LastEditTime: 2020-10-28 16:03:56
  */
 import request from '@/utils/request'
 
@@ -125,5 +125,13 @@ export function aboutEdit (data) {
     url: '/about/edit',
     method: 'post',
     data
+  })
+}
+
+export function aboutFilters (params) {
+  return request({
+    url: '/about/filters',
+    method: 'get',
+    params
   })
 }

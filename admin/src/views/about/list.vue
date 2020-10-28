@@ -5,11 +5,27 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 15:17:41
+ * @LastEditTime: 2020-10-28 16:07:58
 -->
 <template>
   <div class="app-container">
     <div class="filter-container">
+      <el-form label-position="left"
+               style="display: inline-block;">
+        <el-form-item label="选择分类"
+                      style="width: 300px;">
+          <el-select v-model="temp.category_id"
+                     class="filter-item"
+                     placeholder="请选择所属分类"
+                     clearable
+                     @change="handleFilter">
+            <el-option v-for="item in aboutDroptypeList"
+                       :key="item.id"
+                       :label="item.dropContent"
+                       :value="item.id" />
+          </el-select>
+        </el-form-item>
+      </el-form>
       <el-button class="filter-item"
                  style="margin-left: 10px;"
                  type="primary"
@@ -285,7 +301,7 @@
 </template>
 
 <script>
-import { aboutIndex, aboutDroptypeList, aboutUpdate, aboutAdd, aboutDestroy, aboutEdit } from '@/api/about'
+import { aboutIndex, aboutDroptypeList, aboutUpdate, aboutAdd, aboutDestroy, aboutEdit, aboutFilters } from '@/api/about'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 import Tinymce from '@/components/Tinymce'
 export default {
@@ -409,6 +425,15 @@ export default {
       }).catch(() => {
         this.alertView('已取消删除', 'info')
       });
+    },
+    handleFilter (id) {
+      this.listQuery.category_id = id;
+      aboutFilters(this.listQuery)
+        .then(response => {
+          this.list = response.data.data;
+          this.total = response.data.meta.total;
+          this.listLoading = false;
+        })
     },
     /**
      * 添加模块
