@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:13:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 10:33:10
+ * @LastEditTime: 2020-10-28 14:46:01
  */
 'use strict';
 
@@ -99,7 +99,18 @@ class AboutService extends Service {
    * @param { Object } params 参数
    */
   async add (params) {
-    const { category_id, dropId, title, keywords, companyDescription, aboutTitle, content, avatarImage, status, sort } = params;
+    const {
+      category_id,
+      dropId,
+      title,
+      keywords,
+      companyDescription,
+      aboutTitle,
+      content,
+      avatarImage,
+      status,
+      sort
+    } = params;
     try {
       await this.ctx.model.MzcAbout.create({
         category_id,
@@ -117,6 +128,19 @@ class AboutService extends Service {
     } catch (error) {
       return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
     }
+  }
+  /**
+   * 删除
+   * @param { Number } id 
+   */
+  async destroy ({ id }) {
+    const aboutDroptype = await this.ctx.model.MzcAbout.findByPk(id);
+
+    if (!aboutDroptype) return { httpStatus: HttpStatus.NOT_FOUND, msg: '没有找到相关信息' };
+
+    aboutDroptype.destroy();
+
+    return { httpStatus: HttpStatus.OK }
   }
 }
 

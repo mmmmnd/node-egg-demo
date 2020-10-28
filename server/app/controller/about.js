@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-10-23 11:10:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-27 09:27:13
+ * @LastEditTime: 2020-10-28 14:44:52
  */
 'use strict';
 
@@ -37,6 +37,15 @@ class AboutController extends Controller {
     const params = this.ctx.request.body;
 
     const about = await this.ctx.service.about.add(params)
+    await this.ctx.helper.checkData(about);
+  }
+  /**
+   * 删除
+   */
+  async destroy () {
+    const params = this.ctx.request.body;
+
+    const about = await this.ctx.service.about.destroy(params)
     await this.ctx.helper.checkData(about);
   }
 }

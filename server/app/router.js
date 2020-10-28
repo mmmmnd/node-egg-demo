@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-27 11:20:49
+ * @LastEditTime: 2020-10-28 14:46:20
  */
 'use strict';
 
@@ -59,6 +59,7 @@ module.exports = app => {
   router.get('/api/about/index', jwt, controller.about.index)
   router.put('/api/about/update', jwt, controller.about.update);
   router.post('/api/about/add', jwt, controller.about.add);
+  router.delete('/api/about/destroy', jwt, controller.about.destroy);
 
   // aboutDroptype
   router.get('/api/aboutDroptype/index', jwt, controller.aboutDroptype.index)
