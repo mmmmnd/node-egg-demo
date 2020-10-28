@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:13:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 15:07:57
+ * @LastEditTime: 2020-10-28 16:00:47
  */
 'use strict';
 
@@ -20,13 +20,15 @@ class AboutService extends Service {
   * @param { String } limit 最大限制
   * @param { String } page 分页
   */
-  async index ({ limit = 20, page = 1 }) {
+  async index ({ limit = 20, page = 1, category_id }) {
     const maxPage = Number(limit);
+    const filter = category_id
+      ? { category_id, deleted_at: null }
+      : { deleted_at: null };
+
     try {
       let about = await this.ctx.model.MzcAbout.findAndCountAll({
-        where: {
-          deleted_at: null
-        },
+        where: filter,
         offset: (page - 1) * maxPage,
         limit: maxPage,
       })
