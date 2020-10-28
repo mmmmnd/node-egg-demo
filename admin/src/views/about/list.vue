@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 16:07:58
+ * @LastEditTime: 2020-10-28 16:25:53
 -->
 <template>
   <div class="app-container">
@@ -427,6 +427,7 @@ export default {
       });
     },
     handleFilter (id) {
+      this.listLoading = true
       this.listQuery.category_id = id;
       aboutFilters(this.listQuery)
         .then(response => {

@@ -71,13 +71,6 @@ export const constantRoutes = [
         meta: { title: '单页', icon: '' }
       },
       {
-        path: 'edit/:id(\\d+)',
-        component: () => import('@/views/about/edit'),
-        name: 'singleEdit',
-        meta: { title: '单页编辑', noCache: true, activeMenu: '/about/single' },
-        hidden: true
-      },
-      {
         path: 'list',
         name: 'List',
         component: () => import('@/views/about/list'),

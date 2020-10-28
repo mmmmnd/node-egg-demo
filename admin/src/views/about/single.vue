@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-30 16:08:09
+ * @LastEditTime: 2020-10-28 16:54:58
 -->
 <template>
   <div class="app-container">
@@ -28,7 +28,7 @@
                        label="分类"
                        width="120px">
         <template slot-scope="{row}">
-          <span>{{ category[row.id-1].title }}</span>
+          <el-tag>{{ category[row.id-1].title }}</el-tag>
         </template>
       </el-table-column>
 
@@ -79,15 +79,21 @@
 
       <el-table-column align="center"
                        label="操作"
-                       width="120">
+                       width="200px"
+                       fixed="right">
         <template slot-scope="{row}">
-          <router-link :to="'/about/edit/'+row.category_id">
-            <el-button type="primary"
-                       size="mini"
-                       icon="el-icon-edit">
-              编辑
-            </el-button>
-          </router-link>
+          <el-button type="primary"
+                     size="mini"
+                     icon="el-icon-edit"
+                     @click="handleUpdate(row)">
+            编辑
+          </el-button>
+          <el-button type="info"
+                     size="mini"
+                     icon="el-icon-view"
+                     @click="getView(row)">
+            预览
+          </el-button>
         </template>
       </el-table-column>
 
@@ -99,14 +105,77 @@
                 :limit.sync="listQuery.limit"
                 @pagination="getList" />
 
+    <el-dialog :title="textMap[dialogStatus]"
+               :visible.sync="dialogFormVisible">
+      <el-form ref="dataForm"
+               :rules="rules"
+               :model="temp"
+               label-position="right"
+               label-width="100px">
+        <el-row>
+          <el-col :span="12">
+            <el-form-item label="网站标题:"
+                          class="postInfo-container-item"
+                          prop="title">
+              <el-input type="textarea"
+                        :rows="8"
+                        v-model="temp.title"></el-input>
+            </el-form-item>
+            <el-form-item label="网站描述:"
+                          class="postInfo-container-item"
+                          prop="companyDescription">
+              <el-input type="textarea"
+                        :rows="8"
+                        v-model="temp.companyDescription"></el-input>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="网站关键词:"
+                          class="postInfo-container-item"
+                          prop="keywords">
+              <el-input type="textarea"
+                        :rows="8"
+                        v-model="temp.keywords"></el-input>
+            </el-form-item>
+            <el-form-item label="状态:"
+                          class="postInfo-container-item"
+                          prop="status">
+              <el-switch v-model="temp.status"
+                         active-color="#13ce66"
+                         inactive-color="#ff4949"
+                         active-text="开启"
+                         inactive-text="关闭">
+              </el-switch>
+            </el-form-item>
+          </el-col>
+        </el-row>
+        <el-form-item prop="content"
+                      label="列表内容">
+          <Tinymce ref="editor"
+                   v-model="temp.content"
+                   :height="400" />
+        </el-form-item>
+
+      </el-form>
+      <div slot="footer"
+           class="dialog-footer">
+
+        <el-button @click="dialogFormVisible = false">取消</el-button>
+        <el-button type="primary"
+                   @click="dialogStatus==='create'?createData():updateData()">确定</el-button>
+
+      </div>
+    </el-dialog>
+
   </div>
 </template>
 
 <script>
-import { aboutSingleList, aboutSingleUpdate } from '@/api/about'
+import { aboutSingleList, aboutSingleUpdate, aboutSingleEdit } from '@/api/about'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
+import Tinymce from '@/components/Tinymce'
 export default {
-  components: { Pagination },
+  components: { Pagination, Tinymce },
   data () {
     return {
       list: [],
@@ -116,7 +185,28 @@ export default {
         page: 1,
         limit: 20
       },
-      category: []
+      category: [],
+      temp: {
+        title: '',
+        keywords: '',
+        companyDescription: '',
+        content: '',
+        status: true,
+      },
+      dialogStatus: '',
+      progress: true,
+      textMap: {
+        update: '修改',
+        create: '增加'
+      },
+      rules: {
+        title: [{ type: 'string', required: true, message: '请输入网站标题', trigger: 'blur' }],
+        keywords: [{ type: 'string', required: true, message: '请输入网站关键词', trigger: 'blur' }],
+        companyDescription: [{ type: 'string', required: true, message: '请输入网站描述', trigger: 'blur' }],
+        status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
+        content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
+      },
+      dialogFormVisible: false,
     }
   },
   created () {
@@ -151,6 +241,43 @@ export default {
             type: 'success'
           });
         })
+    },
+    /**
+    * 编辑
+    */
+    handleUpdate (row) {
+      this.temp = Object.assign({}, row) // copy obj
+      this.dialogStatus = 'update'
+      this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
+      })
+    },
+    /**
+     * 预览
+     */
+    getView (row) {
+      window.open(process.env.VUE_APP_BASE_SERVER + "/about/pid/1/cid/" + row.category_id, "blank");
+    },
+    /**
+    * 修改模块
+    */
+    updateData () {
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          let tempData = Object.assign({}, this.temp)
+          aboutSingleEdit(tempData).then(() => {
+            this.dialogFormVisible = false;
+            this.$router.go(0);
+            this.$notify({
+              title: '成功',
+              message: '更新成功',
+              type: 'success',
+              duration: 2000
+            })
+          })
+        }
+      })
     },
   }
 }
