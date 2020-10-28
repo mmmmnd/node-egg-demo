@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-27 15:39:10
+ * @LastEditTime: 2020-10-28 14:47:36
 -->
 <template>
   <div class="app-container">
@@ -30,7 +30,8 @@
       <el-table-column prop="id"
                        align="center"
                        label="序号"
-                       width="50px">
+                       width="50px"
+                       fixed="left">
         <template slot-scope="{row}">
           <span>{{ row.id }}</span>
         </template>
@@ -39,7 +40,8 @@
       <el-table-column prop="dropContent"
                        align="center"
                        label="所属分类"
-                       width="120px">
+                       width="120px"
+                       fixed="left">
         <template slot-scope="{row}">
           <el-tag>{{row.dropContent}}</el-tag>
         </template>
@@ -139,7 +141,8 @@
 
       <el-table-column align="center"
                        label="操作"
-                       width="200px">
+                       width="300px"
+                       fixed="right">
         <template slot-scope="{row}">
           <el-button type="primary"
                      size="mini"
@@ -152,6 +155,12 @@
                      icon="el-icon-view"
                      @click="getView(row)">
             预览
+          </el-button>
+          <el-button type="danger"
+                     size="small"
+                     icon="el-icon-delete"
+                     @click="handleDel(row)">
+            删除
           </el-button>
         </template>
       </el-table-column>
@@ -276,7 +285,7 @@
 </template>
 
 <script>
-import { aboutIndex, aboutDroptypeList, aboutUpdate, aboutAdd } from '@/api/about'
+import { aboutIndex, aboutDroptypeList, aboutUpdate, aboutAdd, aboutDestroy } from '@/api/about'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 import Tinymce from '@/components/Tinymce'
 export default {
@@ -354,16 +363,12 @@ export default {
       aboutUpdate(data)
         .then(response => {
           this.listLoading = false
-          this.$notify({
-            title: '成功',
-            message: response.msg,
-            type: 'success'
-          });
+          this.alertView('删除成功!', 'success')
         })
     },
     /**
-    * 增加
-    */
+     * 增加
+     */
     handleCreate () {
       this.resetTemp()
       this.dialogStatus = 'create'
@@ -371,6 +376,28 @@ export default {
       this.$nextTick(() => {
         this.$refs['dataForm'].clearValidate()
       })
+    },
+    /**
+     * 预览
+     */
+    getView (row) {
+      window.open(process.env.VUE_APP_BASE_SERVER + "/about/pid/1/cid/" + row.dropId, "blank");
+    },
+    /**
+     * 删除
+     */
+    handleDel (row) {
+      this.$confirm('此操作将删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        aboutDestroy(row)
+        this.alertView('删除成功!', 'success')
+        this.$router.go(0);
+      }).catch(() => {
+        this.alertView('已取消删除', 'info')
+      });
     },
     /**
      * 添加模块
@@ -392,12 +419,6 @@ export default {
           })
         }
       })
-    },
-    /**
-     * 预览
-     */
-    getView (row) {
-      window.open(process.env.VUE_APP_BASE_SERVER + "/about/pid/1/cid/" + row.dropId, "blank");
     },
     /**
      * 重置添加表单
@@ -434,16 +455,16 @@ export default {
       var i = parseInt(event.percent);
 
       if (!REG.test(file.name))
-        return this.$message({
-          message: '文件格式不支持！',
-          type: 'warning'
-        });
+        return this.$message('文件格式不支持！', 'warning')
 
       this.progress = false;
       this.percentage = i
     },
-    GetMaxDropId () {
-      this.aboutDroptypeList
+    /**
+     * 弹窗提示
+     */
+    alertView (message, type) {
+      return this.$message({ message, type })
     }
   }
 }
