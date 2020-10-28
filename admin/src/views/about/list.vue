@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 14:47:36
+ * @LastEditTime: 2020-10-28 15:17:41
 -->
 <template>
   <div class="app-container">
@@ -285,7 +285,7 @@
 </template>
 
 <script>
-import { aboutIndex, aboutDroptypeList, aboutUpdate, aboutAdd, aboutDestroy } from '@/api/about'
+import { aboutIndex, aboutDroptypeList, aboutUpdate, aboutAdd, aboutDestroy, aboutEdit } from '@/api/about'
 import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
 import Tinymce from '@/components/Tinymce'
 export default {
@@ -378,6 +378,17 @@ export default {
       })
     },
     /**
+     * 编辑
+     */
+    handleUpdate (row) {
+      this.temp = Object.assign({}, row) // copy obj
+      this.dialogStatus = 'update'
+      this.dialogFormVisible = true
+      this.$nextTick(() => {
+        this.$refs['dataForm'].clearValidate()
+      })
+    },
+    /**
      * 预览
      */
     getView (row) {
@@ -416,6 +427,28 @@ export default {
               duration: 2000
             })
             this.$router.go(0);
+          })
+        }
+      })
+    },
+    /**
+     * 修改模块
+     */
+    updateData () {
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          let tempData = Object.assign({}, this.temp)
+          var v = this.aboutDroptypeList.find(item => item.id == tempData.category_id);
+          tempData.dropId = v.dropId;
+          aboutEdit(tempData).then(() => {
+            this.dialogFormVisible = false;
+            this.$router.go(0);
+            this.$notify({
+              title: '成功',
+              message: '更新成功',
+              type: 'success',
+              duration: 2000
+            })
           })
         }
       })

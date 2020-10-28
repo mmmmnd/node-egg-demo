@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:59:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 14:47:13
+ * @LastEditTime: 2020-10-28 15:06:03
  */
 import request from '@/utils/request'
 
@@ -116,6 +116,14 @@ export function aboutDestroy (data) {
   return request({
     url: '/about/destroy',
     method: 'delete',
+    data
+  })
+}
+
+export function aboutEdit (data) {
+  return request({
+    url: '/about/edit',
+    method: 'post',
     data
   })
 }
