@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:13:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 14:46:01
+ * @LastEditTime: 2020-10-28 15:07:57
  */
 'use strict';
 
@@ -141,6 +141,47 @@ class AboutService extends Service {
     aboutDroptype.destroy();
 
     return { httpStatus: HttpStatus.OK }
+  }
+  /**
+  * 编辑
+  * @param { Object } params 参数
+  */
+  async edit (params) {
+    const {
+      id,
+      category_id,
+      dropId,
+      title,
+      keywords,
+      companyDescription,
+      aboutTitle,
+      content,
+      avatarImage,
+      status,
+      sort
+    } = params;
+    try {
+      await this.ctx.model.MzcAbout.update({
+        category_id,
+        dropId,
+        title,
+        keywords,
+        companyDescription,
+        aboutTitle,
+        content,
+        avatarImage,
+        status,
+        sort
+      }, {
+        where: {
+          id,
+          deleted_at: null
+        },
+      })
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
   }
 }
 
