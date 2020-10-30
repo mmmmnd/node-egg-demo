@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 16:03:02
+ * @LastEditTime: 2020-10-30 15:06:21
  */
 'use strict';
 
@@ -71,6 +71,8 @@ module.exports = app => {
   router.get('/api/aboutDroptype/list', jwt, controller.aboutDroptype.list)
   router.delete('/api/aboutDroptype/destroy', jwt, controller.aboutDroptype.destroy);
 
+  // services
+  router.get('/api/services/list', jwt, controller.services.list)
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);

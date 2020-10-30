@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:09:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-28 15:49:49
+ * @LastEditTime: 2020-10-30 15:59:43
 -->
 <%- include('/commom/header',{
   title:settingList?settingList[0].title:"海南昆仑体育文化股份有限公司",
@@ -26,7 +26,7 @@
         </div>
         <h3 class="row-h3">大海之南•昆仑为巅</h3>
         <p class="row-p"><%= aboutSingleDetail.companyDescription %></p>
-        <a href="/about/pid/0/cid/2" class="row-btn">查看详情</a>
+        <a href="/about/pid/1/cid/2" class="row-btn">查看详情</a>
       </div>
       <div class="col-lg-6 row1-right">
         <img src="/public/images/about.png" alt="" class="about-img">
@@ -43,7 +43,7 @@
         <ul>
           <% menuList[1].children.forEach(item=>{ %>
           <li>
-            <a href="/<%= item.url+'/pid/'+[1]+'/cid/'+item.id %>"><%= item.title %></a>
+            <a href="/<%= item.url+'/pid/'+7+'/cid/'+item.id %>"><%= item.title %></a>
           </li>
           <% }) %>
         </ul>
@@ -58,12 +58,12 @@
     <div class="row2-right">
       <div class="swiper-container row2-swiper">
         <div class="swiper-wrapper row2-wrapper">
-          <% servicesList.forEach(item=>{ %>
+          <% servicesList.forEach((item,index)=>{ %>
           <div class="swiper-slide">
             <div class="row2-txt">
-              <h5><%= item.category %></h5>
+              <h5><%= menuList[1].children[index].title %></h5>
               <p><%= item.companyDescription %></p>
-              <a href="/services/pid/1/cid/<%= item.category_id %>" class="row2-btn">
+              <a href="/services/pid/7/cid/<%= item.category_id %>" class="row2-btn">
                 <img src="/public/images/more_icon.png" alt="">
               </a>
             </div>

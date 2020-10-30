@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:24:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 09:35:03
+ * @LastEditTime: 2020-10-30 08:56:07
  */
 'use strict';
 /**
@@ -19,22 +19,12 @@ class ServicesService extends Service {
    * @param { Number } cid 二级菜单id
    */
   async list (cid) {
-    return await this.ctx.model.MzcServices.findAll({
-      where: {
-        category_id: cid,
-        deleted_at: null
-      },
-    })
-  }
+    const filter = cid == undefined
+      ? { deleted_at: null }
+      : { category_id: cid, deleted_at: null };
 
-  /**
-   * 服务领域列表
-   */
-  async lists () {
     return await this.ctx.model.MzcServices.findAll({
-      where: {
-        deleted_at: null
-      },
+      where: filter,
     })
   }
 }

@@ -5,14 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-07-23 18:55:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-21 11:10:35
+ * @LastEditTime: 2020-10-30 16:23:02
  */
 'use strict';
 
 const moment = require('moment');
 
 module.exports = app => {
-  const { INTEGER, STRING, TEXT, DATE } = app.Sequelize;
+  const { INTEGER, STRING, TEXT, BOOLEAN, DATE } = app.Sequelize;
   const MzcServices = app.model.define('mzc-services', {
     id: {
       allowNull: !1, // 是否为空
@@ -27,17 +27,17 @@ module.exports = app => {
       defaultValue: '0', // 默认值
       comment: '分类id', // 备注
     },
-    category: {
-      allowNull: !0, // 是否为空
-      type: STRING(20), // 类型
-      defaultValue: '', // 默认值
-      comment: '分类', // 备注
-    },
     title: {
       allowNull: !1, // 是否为空
       type: STRING(20), // 类型
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
       comment: '网站标题', // 备注
+    },
+    keywords: {
+      allowNull: !1, // 是否为空
+      type: STRING, // 类型
+      defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
+      comment: '公司关键词', // 备注
     },
     companyDescription: {
       allowNull: !1, // 是否为空
@@ -56,6 +56,18 @@ module.exports = app => {
       type: TEXT, // 类型
       defaultValue: '', // 默认值
       comment: '单页内容', // 备注
+    },
+    status: {
+      allowNull: !1, // 是否为空
+      type: BOOLEAN, // 类型
+      defaultValue: '0', // 默认值
+      comment: '状态', // 备注
+    },
+    sort: {
+      allowNull: !1, // 是否为空
+      type: STRING(6), // 类型
+      defaultValue: '0', // 默认值
+      comment: '排序', // 备注
     },
     created_at: {
       allowNull: !0, // 是否为空

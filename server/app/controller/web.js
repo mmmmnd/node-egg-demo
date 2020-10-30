@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-19 11:24:35
+ * @LastEditTime: 2020-10-29 09:44:52
  */
 'use strict';
 const moment = require('moment');
@@ -23,7 +23,7 @@ class WebController extends Controller {
     const newsList = await service.news.lists(); // services数据
     const casesList = await service.cases.lists(26); // case数据
     const casesLists = await service.cases.lists(27); // case数据
-    const servicesList = await service.services.lists(); // services数据
+    const servicesList = await service.services.list(); // services数据
     const aboutSingleDetail = await service.aboutSingle.detail(2); // about单页数据
 
     const data = { advertisingList, menuList, settingList, aboutSingleDetail, servicesList, newsList, casesList, casesLists };
@@ -245,7 +245,7 @@ const error = async (pid, cid, _this) => {
   const menuInfo = await _this.service.menu.info(pid); // 导航栏菜单
   if (menuInfo.length == 0) return true;
   const [maxId, minId, MaxPid] = [menuInfo.pop().id, menuInfo[0].id, menuInfo[0].pid];
-  if (cid > maxId || cid < minId || pid != MaxPid) return true;
+  if (cid > maxId || cid < minId || pid != MaxPid || pid == 0) return true;
 }
 const render = async ctx => {
   ctx.status = 404;

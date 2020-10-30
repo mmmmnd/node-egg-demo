@@ -1,12 +1,12 @@
-<!--
+﻿<!--
  * @Author: 莫卓才
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
  * @Date: 2020-07-22 09:20:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-13 17:07:42
---> 
+ * @LastEditTime: 2020-10-30 14:52:20
+-->
 
 <%- include('/commom/header',{
   title:servicesList?servicesList[0].title:"海南昆仑体育文化股份有限公司",
@@ -14,25 +14,33 @@
   companyDescription:servicesList?servicesList[0].companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 
+<% var id = 
+ctx.params.cid == 8 ?
+1 : ctx.params.cid == 9 ?
+ 2 : ctx.params.cid == 10 ?
+  3 : ctx.params.cid == 11 ?
+   4 : ctx.params.cid == 12 ?
+    5:'';%>
+
 <%- include('/commom/banner') %>
 
 <div class="content-full">
   <div class="content main-info">
 
     <%- include('/commom/column') %>
-      <div class="content-right">
-        <div class="ser-top">
-            <div class="ser-top-txt">
-                <h5><%= servicesList[0].title %></h5>
-                <p><%= servicesList[0].companyDescription %></p>
-            </div>
-            <img src="<%= servicesList[0].servicesImage %>" alt="" class="ser-top-img">
+    <div class="content-right">
+      <div class="ser-top">
+        <div class="ser-top-txt">
+          <h5><%= servicesList[0].title %></h5>
+          <p><%= servicesList[0].companyDescription %></p>
         </div>
-        <%- include('/commom/serInfoPhoto') %>
-        <div class="ser-info-text">
-          <%- servicesList.content %>
-        </div>
+        <img src="<%= servicesList[0].servicesImage %>" alt="" class="ser-top-img">
       </div>
+      <%- include('/commom/serInfoPhoto',{ id }) %>
+      <div class="ser-info-text">
+        <%- servicesList[0].content %>
+      </div>
+    </div>
   </div>
 </div>
 <%- include('/commom/serInfo') %>
@@ -44,10 +52,11 @@
     spaceBetween: 30,
     freeMode: true,
     pagination: {
-        el: '.photo-pagination',
-        clickable: true,
+      el: '.photo-pagination',
+      clickable: true,
     },
   });
 </script>
 </body>
+
 </html>

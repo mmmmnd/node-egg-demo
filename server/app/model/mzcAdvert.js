@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 19:53:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 09:27:42
+ * @LastEditTime: 2020-10-30 16:22:05
  */
 'use strict';
 
@@ -39,35 +39,23 @@ module.exports = app => {
       defaultValue: '', // 默认值
       comment: '图片', // 备注
     },
-    file_type: {
-      allowNull: !1, // 是否为空
-      type: BOOLEAN, // 类型
-      defaultValue: '1', // 默认值
-      comment: '上传类型', // 备注
-    },
     place: {
       allowNull: !1, // 是否为空
       type: INTEGER(6).UNSIGNED, // 类型
       defaultValue: '0', // 默认值
-      comment: '文件类型', // 备注
+      comment: '文件类型 0->首页轮播 1->页面轮播广告 2->页面banner 3->公司轮播介绍', // 备注
     },
     parentId: {
-      allowNull: !0, // 是否为空
-      type: BOOLEAN, // 类型
-      defaultValue: '0', // 默认值
-      comment: '分类id', // 备注
-    },
-    serId: {
-      allowNull: !0, // 是否为空
-      type: BOOLEAN, // 类型
-      defaultValue: '0', // 默认值
-      comment: '轮播图id', // 备注
-    },
-    status: {
       allowNull: !1, // 是否为空
       type: BOOLEAN, // 类型
       defaultValue: '0', // 默认值
-      comment: '状态', // 备注
+      comment: '菜单id', // 备注
+    },
+    serId: {
+      allowNull: !1, // 是否为空
+      type: BOOLEAN, // 类型
+      defaultValue: '0', // 默认值
+      comment: '对应place为1的轮播图广告id顺序', // 备注
     },
     remark: {
       allowNull: !1, // 是否为空
@@ -75,17 +63,17 @@ module.exports = app => {
       defaultValue: '', // 默认值
       comment: '内容', // 备注
     },
+    status: {
+      allowNull: !1, // 是否为空
+      type: BOOLEAN, // 类型
+      defaultValue: '0', // 默认值
+      comment: '状态', // 备注
+    },
     sort: {
       allowNull: !1, // 是否为空
       type: STRING(6), // 类型
       defaultValue: '0', // 默认值
       comment: '排序', // 备注
-    },
-    admin_id: {
-      allowNull: !1, // 是否为空
-      type: INTEGER, // 类型
-      defaultValue: '0', // 默认值
-      comment: '用户上传类型', // 备注
     },
     created_at: {
       allowNull: !0, // 是否为空
