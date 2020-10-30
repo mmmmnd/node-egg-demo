@@ -86,6 +86,19 @@ export const constantRoutes = [
   },
 
   {
+    path: '/services',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Services',
+        component: () => import('@/views/services/index'),
+        meta: { title: '服务领域', icon: 'el-icon-service', noCache: true }
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',

@@ -3,9 +3,9 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-09-09 16:07:28
+ * @Date: 2020-10-29 09:05:41
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-29 08:47:40
+ * @LastEditTime: 2020-10-30 16:24:32
 -->
 <template>
   <div class="app-container">
@@ -34,7 +34,8 @@
 
       <el-table-column prop="title"
                        align="center"
-                       label="网站标题">
+                       label="网站标题"
+                       show-overflow-tooltip>
         <template slot-scope="{row}">
           <span>{{ row.title }}</span>
         </template>
@@ -42,7 +43,8 @@
 
       <el-table-column prop="keywords"
                        align="center"
-                       label="网站关键词">
+                       label="网站关键词"
+                       show-overflow-tooltip>
         <template slot-scope="{row}">
           <span>{{ row.keywords }}</span>
         </template>
@@ -98,12 +100,6 @@
       </el-table-column>
 
     </el-table>
-
-    <pagination v-show="total>0"
-                :total="total"
-                :page.sync="listQuery.page"
-                :limit.sync="listQuery.limit"
-                @pagination="getList" />
 
     <el-dialog :title="textMap[dialogStatus]"
                :visible.sync="dialogFormVisible">
@@ -171,11 +167,10 @@
 </template>
 
 <script>
-import { aboutSingleList, aboutSingleUpdate, aboutSingleEdit } from '@/api/about'
-import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
+import { servicesList, aboutSingleUpdate, aboutSingleEdit } from '@/api/services'
 import Tinymce from '@/components/Tinymce'
 export default {
-  components: { Pagination, Tinymce },
+  components: { Tinymce },
   data () {
     return {
       list: [],
@@ -218,12 +213,12 @@ export default {
      */
     getList () {
       this.listLoading = true
-      aboutSingleList(this.listQuery)
+      servicesList()
         .then(response => {
-          this.list = response.data.aboutSingle.data
-          this.total = response.data.aboutSingle.meta.total
+          this.list = response.data.services
           this.category = response.data.aboutSingleMenu
           this.listLoading = false
+          console.log(this.list);
         })
     },
     /**
@@ -257,7 +252,7 @@ export default {
      * 预览
      */
     getView (row) {
-      window.open(process.env.VUE_APP_BASE_SERVER + "/about/pid/1/cid/" + row.category_id, "blank");
+      window.open(process.env.VUE_APP_BASE_SERVER + "/services/pid/7/cid/" + row.category_id, "blank");
     },
     /**
     * 修改模块
