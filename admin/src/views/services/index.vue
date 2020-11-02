@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-10-29 09:05:41
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-30 16:24:32
+ * @LastEditTime: 2020-11-02 11:00:40
 -->
 <template>
   <div class="app-container">
@@ -167,7 +167,7 @@
 </template>
 
 <script>
-import { servicesList, aboutSingleUpdate, aboutSingleEdit } from '@/api/services'
+import { servicesList, servicesUpdate, aboutSingleEdit } from '@/api/services'
 import Tinymce from '@/components/Tinymce'
 export default {
   components: { Tinymce },
@@ -218,7 +218,6 @@ export default {
           this.list = response.data.services
           this.category = response.data.aboutSingleMenu
           this.listLoading = false
-          console.log(this.list);
         })
     },
     /**
@@ -227,7 +226,7 @@ export default {
     statusSwitch (getSwitch, id) {
       const data = { id, key: 'status', value: getSwitch };
       this.listLoading = true
-      aboutSingleUpdate(data)
+      servicesUpdate(data)
         .then(response => {
           this.listLoading = false
           this.$notify({
