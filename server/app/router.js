@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-30 15:06:21
+ * @LastEditTime: 2020-11-02 10:59:28
  */
 'use strict';
 
@@ -73,6 +73,7 @@ module.exports = app => {
 
   // services
   router.get('/api/services/list', jwt, controller.services.list)
+  router.put('/api/services/update', jwt, controller.services.update)
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);

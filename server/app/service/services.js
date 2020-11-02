@@ -5,13 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:24:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-30 08:56:07
+ * @LastEditTime: 2020-11-02 11:01:38
  */
 'use strict';
 /**
  * 服务领域
  */
 const Service = require('egg').Service;
+const HttpStatus = require('../utils/httpStatus');
 
 class ServicesService extends Service {
   /**
@@ -26,6 +27,28 @@ class ServicesService extends Service {
     return await this.ctx.model.MzcServices.findAll({
       where: filter,
     })
+  }
+  /**
+   * 修改
+   * @param { String } id 当前id
+   * @param { String } key 字段名
+   * @param { String } value 字段值
+   */
+  async update ({ id, key, value }) {
+    try {
+      let services = await this.ctx.model.MzcServices.update({ [key]: value }, {
+        where: {
+          id,
+          deleted_at: null
+        },
+      })
+
+      if (!services[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
+
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
   }
 }
 
