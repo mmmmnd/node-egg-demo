@@ -9,9 +9,9 @@
 -->
 
 <%- include('/commom/header',{
-  title:servicesList?servicesList[0].title:"海南昆仑体育文化股份有限公司",
-  Keywords:servicesList?servicesList[0].keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:servicesList?servicesList[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  title:servicesDetail?servicesDetail[0].title:"海南昆仑体育文化股份有限公司",
+  Keywords:servicesDetail?servicesDetail[0].keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:servicesDetail?servicesDetail[0].companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <% var id = 
@@ -31,14 +31,14 @@ ctx.params.cid == 8 ?
     <div class="content-right">
       <div class="ser-top">
         <div class="ser-top-txt">
-          <h5><%= servicesList[0].title %></h5>
-          <p><%= servicesList[0].companyDescription %></p>
+          <h5><%= servicesDetail[0].title %></h5>
+          <p><%= servicesDetail[0].companyDescription %></p>
         </div>
-        <img src="<%= servicesList[0].servicesImage %>" alt="" class="ser-top-img">
+        <img src="<%= servicesDetail[0].servicesImage %>" alt="" class="ser-top-img">
       </div>
       <%- include('/commom/serInfoPhoto',{ id }) %>
       <div class="ser-info-text">
-        <%- servicesList[0].content %>
+        <%- servicesDetail[0].content %>
       </div>
     </div>
   </div>

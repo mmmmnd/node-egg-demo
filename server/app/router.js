@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-02 10:59:28
+ * @LastEditTime: 2020-11-05 15:56:39
  */
 'use strict';
 
@@ -74,9 +74,17 @@ module.exports = app => {
   // services
   router.get('/api/services/list', jwt, controller.services.list)
   router.put('/api/services/update', jwt, controller.services.update)
+  router.post('/api/services/edit', jwt, controller.services.edit)
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);
+
+  // advert
+  router.post('/api/advert/add', jwt, controller.advert.add)
+  router.put('/api/advert/update', jwt, controller.advert.update)
+  router.get('/api/advert/detail', jwt, controller.advert.detail)
+  router.delete('/api/advert/destroy', jwt, controller.advert.destroy);
+  router.delete('/api/advert/destroy', jwt, controller.advert.destroy);
 
   router.get('/api/home/edit', controller.home.edit);
 

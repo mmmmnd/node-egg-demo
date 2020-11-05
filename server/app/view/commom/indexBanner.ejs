@@ -1,4 +1,4 @@
-<!--
+﻿<!--
  * @Author: 莫卓才
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
@@ -14,7 +14,7 @@
               <div class="news-k" id="scrollDiv">
                   <strong>通知</strong>
                   <ul class="carousel-inner2">
-                    <% advertisingList.forEach((item,index)=>{ %>
+                    <% advertList.forEach((item,index)=>{ %>
                       <li class="item active">
                           <div>
                               <a href="<%= item.url %>">
@@ -38,7 +38,7 @@
       </div>
   </div>
   <div class="swiper-wrapper">
-    <% advertisingList.forEach((item,index)=>{ %>
+    <% advertList.forEach((item,index)=>{ %>
       <% if(item.place === 0){ %>
         <div class="swiper-slide">
           <a href="<%= item.url %>" target="_blank"><img src="<%= item.filepath %>" alt="" class="banner-img"></a>

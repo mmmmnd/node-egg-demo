@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-10-23 11:10:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-02 10:57:52
+ * @LastEditTime: 2020-11-05 15:57:08
  */
 'use strict';
 
@@ -28,6 +28,15 @@ class ServicesController extends Controller {
     const params = this.ctx.request.body;
 
     const services = await this.ctx.service.services.update(params);
+    await this.ctx.helper.checkData(services);
+  }
+  /**
+   * 编辑
+   */
+  async edit () {
+    const params = this.ctx.request.body;
+
+    const services = await this.ctx.service.services.edit(params)
     await this.ctx.helper.checkData(services);
   }
 }

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-25 15:29:03
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-28 16:28:18
+ * @LastEditTime: 2020-11-02 16:24:37
  */
 const Controller = require('egg').Controller;
 
@@ -16,8 +16,8 @@ class UploadController extends Controller {
   async create () {
     const stream = await this.ctx.getFileStream();
 
-    // const upload = await this.ctx.service.upload.create(stream); //本地上传
-    const upload = await this.ctx.service.upload.index(stream) //七牛云上传
+    const upload = await this.ctx.service.upload.create(stream); //本地上传
+    // const upload = await this.ctx.service.upload.index(stream) //七牛云上传
 
     await this.ctx.helper.checkData(upload);
   }

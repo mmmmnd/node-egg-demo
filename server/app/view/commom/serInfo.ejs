@@ -1,26 +1,24 @@
-<!--
+﻿<!--
  * @Author: 莫卓才
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
  * @Date: 2020-07-17 15:37:58
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-06 19:59:56
---> 
+ * @LastEditTime: 2020-11-05 16:35:44
+-->
 <div class="content-full ser-info">
   <div class="swiper-wrapper">
-    <% advertisingList.forEach((item,index)=>{ %>
-      <% if(item.place === 1){ %>
-        <div class="swiper-slide">
-          <a href="<%= item.url %>">
-            <img src="<%= item.filepath %>" alt="" class="ser-info-img">
-            <div class="ser-info-txt">
-              <h5><%= item.title %></h5>
-              <p><%= item.remark %></p>
-            </div>
-          </a>
-        </div>
-        <% } %>
-      <% }) %>
+    <% servicesList.forEach((item,index) => { %>
+      <div class="swiper-slide">
+        <a href="services/pid/7/cid/<% item.category_id %>">
+          <img src="<%= item.servicesImage %>" alt="" class="ser-info-img">
+          <div class="ser-info-txt">
+            <h5><%= menuList[1].children[index].title %></h5>
+            <p><%= item.companyDescription %></p>
+          </div>
+        </a>
+      </div>
+    <% }) %>
   </div>
 </div>

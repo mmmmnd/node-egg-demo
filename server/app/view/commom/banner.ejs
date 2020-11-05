@@ -7,7 +7,7 @@
  * @LastEditors: 莫卓才
  * @LastEditTime: 2020-07-22 20:19:00
 --> 
-<% advertisingList.forEach((item,index)=>{ %>
+<% advertList.forEach((item,index)=>{ %>
   <% if(item.place === 2 && item.parentId == ctx.params.pid){ %>
     <div class="banner-info" style="background: url('<%= item.filepath %>') no-repeat center;" data-paroller-factor="0.5"></div>
   <% } %>
