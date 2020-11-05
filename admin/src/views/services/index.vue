@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-10-29 09:05:41
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-02 11:00:40
+ * @LastEditTime: 2020-11-05 16:07:07
 -->
 <template>
   <div class="app-container">
@@ -101,76 +101,24 @@
 
     </el-table>
 
-    <el-dialog :title="textMap[dialogStatus]"
-               :visible.sync="dialogFormVisible">
-      <el-form ref="dataForm"
-               :rules="rules"
-               :model="temp"
-               label-position="right"
-               label-width="100px">
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="网站标题:"
-                          class="postInfo-container-item"
-                          prop="title">
-              <el-input type="textarea"
-                        :rows="8"
-                        v-model="temp.title"></el-input>
-            </el-form-item>
-            <el-form-item label="网站描述:"
-                          class="postInfo-container-item"
-                          prop="companyDescription">
-              <el-input type="textarea"
-                        :rows="8"
-                        v-model="temp.companyDescription"></el-input>
-            </el-form-item>
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="网站关键词:"
-                          class="postInfo-container-item"
-                          prop="keywords">
-              <el-input type="textarea"
-                        :rows="8"
-                        v-model="temp.keywords"></el-input>
-            </el-form-item>
-            <el-form-item label="状态:"
-                          class="postInfo-container-item"
-                          prop="status">
-              <el-switch v-model="temp.status"
-                         active-color="#13ce66"
-                         inactive-color="#ff4949"
-                         active-text="开启"
-                         inactive-text="关闭">
-              </el-switch>
-            </el-form-item>
-          </el-col>
-        </el-row>
-        <el-form-item prop="content"
-                      label="列表内容">
-          <Tinymce ref="editor"
-                   v-model="temp.content"
-                   :height="400" />
-        </el-form-item>
-
-      </el-form>
-      <div slot="footer"
-           class="dialog-footer">
-
-        <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button type="primary"
-                   @click="dialogStatus==='create'?createData():updateData()">确定</el-button>
-
-      </div>
-    </el-dialog>
-
+    <vEdit ref="newForm"
+           :visible.sync="showDialog"
+           :temp="temp"
+           :dialogStatus="dialogStatus"
+           @uploadOnSuccess="uploadOnSuccess"
+           @handleFileRemove="handleFileRemove"
+           @updateItem="updateItem"
+           @updateData="updateData" />
   </div>
 </template>
 
 <script>
-import { servicesList, servicesUpdate, aboutSingleEdit } from '@/api/services'
-import Tinymce from '@/components/Tinymce'
+import { servicesList, servicesUpdate, servicesEdit } from '@/api/services'
+import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
+
+import vEdit from './component/edit'
 export default {
-  components: { Tinymce },
+  components: { vEdit },
   data () {
     return {
       list: [],
@@ -181,27 +129,9 @@ export default {
         limit: 20
       },
       category: [],
-      temp: {
-        title: '',
-        keywords: '',
-        companyDescription: '',
-        content: '',
-        status: true,
-      },
-      dialogStatus: '',
-      progress: true,
-      textMap: {
-        update: '修改',
-        create: '增加'
-      },
-      rules: {
-        title: [{ type: 'string', required: true, message: '请输入网站标题', trigger: 'blur' }],
-        keywords: [{ type: 'string', required: true, message: '请输入网站关键词', trigger: 'blur' }],
-        companyDescription: [{ type: 'string', required: true, message: '请输入网站描述', trigger: 'blur' }],
-        status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
-        content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
-      },
-      dialogFormVisible: false,
+      showDialog: false,
+      temp: {},
+      dialogStatus: ''
     }
   },
   created () {
@@ -212,11 +142,19 @@ export default {
      * 获取列表
      */
     getList () {
+      const data = { key: 'place', value: 3 };
       this.listLoading = true
       servicesList()
         .then(response => {
           this.list = response.data.services
           this.category = response.data.aboutSingleMenu
+          return advertDetail(data)
+        }).then(response => {
+          var data = response.data.filter(item => item.parentId == this.category[0].pid);
+          this.list.filter(listItem => {
+            var advert = data.filter(item => listItem.id == item.serId)
+            return listItem.advert = advert
+          })
           this.listLoading = false
         })
     },
@@ -237,15 +175,13 @@ export default {
         })
     },
     /**
-    * 编辑
-    */
+     * 编辑
+     */
     handleUpdate (row) {
       this.temp = Object.assign({}, row) // copy obj
       this.dialogStatus = 'update'
-      this.dialogFormVisible = true
-      this.$nextTick(() => {
-        this.$refs['dataForm'].clearValidate()
-      })
+      this.showDialog = true;
+      this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
     },
     /**
      * 预览
@@ -254,30 +190,41 @@ export default {
       window.open(process.env.VUE_APP_BASE_SERVER + "/services/pid/7/cid/" + row.category_id, "blank");
     },
     /**
-    * 修改模块
-    */
-    updateData () {
-      this.$refs['dataForm'].validate((valid) => {
-        if (valid) {
-          let tempData = Object.assign({}, this.temp)
-          aboutSingleEdit(tempData).then(() => {
-            this.dialogFormVisible = false;
-            this.$router.go(0);
-            this.$notify({
-              title: '成功',
-              message: '更新成功',
-              type: 'success',
-              duration: 2000
-            })
-          })
-        }
-      })
+     * 父页面执行 修改
+     */
+    updateData (Obj, cab) {
+      servicesEdit(Obj).then(res => cab(res))
     },
+    /**
+     * 父页面执行 轮播图上传成功
+     */
+    uploadOnSuccess (Obj, cab) {
+      const data = {
+        title: '新增图片',
+        filepath: Obj.e.data.url,
+        place: 3,
+        parentId: this.category[0].pid,
+        serId: Obj.temp.id
+      }
+      advertAdd(data).then(res => cab(res))
+    },
+    /**
+     * 父页面执行 轮播图删除
+     */
+    handleFileRemove (file, cab) {
+      advertDestroy(file).then(res => cab(res))
+    },
+    /**
+     * 父页面执行 修改
+     */
+    updateItem (Obj, cab) {
+      advertUpdate(Obj).then(res => cab(res))
+    }
   }
 }
 </script>
 
-<style scoped>
+<style >
 .edit-input {
   padding-right: 100px;
 }

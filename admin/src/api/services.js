@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-10-30 15:03:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-02 11:05:48
+ * @LastEditTime: 2020-11-05 16:02:48
  */
 import request from '@/utils/request'
 
@@ -20,6 +20,14 @@ export function servicesUpdate (data) {
   return request({
     url: '/services/update',
     method: 'put',
+    data
+  })
+}
+
+export function servicesEdit (data) {
+  return request({
+    url: '/services/edit',
+    method: 'post',
     data
   })
 }
