@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 10:36:05
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-06 11:34:30
+ * @LastEditTime: 2020-11-06 17:04:30
  */
 
 'use strict';
@@ -29,8 +29,8 @@ class ServicesController extends Controller {
   async update () {
     const params = this.ctx.request.body;
 
-    const services = await this.ctx.service.services.update(params);
-    await this.ctx.helper.checkData(services);
+    const company = await this.ctx.service.company.update(params);
+    await this.ctx.helper.checkData(company);
   }
   /**
    * 编辑
@@ -38,8 +38,8 @@ class ServicesController extends Controller {
   async edit () {
     const params = this.ctx.request.body;
 
-    const services = await this.ctx.service.services.edit(params)
-    await this.ctx.helper.checkData(services);
+    const company = await this.ctx.service.company.edit(params)
+    await this.ctx.helper.checkData(company);
   }
 }
 

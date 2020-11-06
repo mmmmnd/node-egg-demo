@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-06 11:31:36
+ * @LastEditTime: 2020-11-06 17:08:49
  */
 'use strict';
 
@@ -78,6 +78,8 @@ module.exports = app => {
 
   // company
   router.get('/api/company/index', jwt, controller.company.index)
+  router.put('/api/company/update', jwt, controller.company.update)
+  router.post('/api/company/edit', jwt, controller.company.edit)
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);
