@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 09:54:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-06 17:10:49
+ * @LastEditTime: 2020-11-06 17:26:59
 -->
 <template>
   <div class="app-container">
@@ -162,7 +162,7 @@
 
       <el-table-column align="center"
                        label="操作"
-                       width="200px"
+                       width="300px"
                        fixed="right">
         <template slot-scope="{row}">
           <el-button type="primary"
@@ -176,6 +176,12 @@
                      icon="el-icon-view"
                      @click="getView(row)">
             预览
+          </el-button>
+          <el-button type="danger"
+                     size="small"
+                     icon="el-icon-delete"
+                     @click="handleDel(row)">
+            删除
           </el-button>
         </template>
       </el-table-column>
@@ -202,7 +208,7 @@
 
 <script>
 
-import { companyIndex, companyUpdate, companyEdit } from '@/api/company'
+import { companyIndex, companyUpdate, companyEdit, companyDestroy } from '@/api/company'
 import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
 
 import Pagination from '@/components/Pagination'
@@ -287,6 +293,22 @@ export default {
       window.open(process.env.VUE_APP_BASE_SERVER + "/services/pid/7/cid/" + row.category_id, "blank");
     },
     /**
+     * 删除
+     */
+    handleDel (row) {
+      this.$confirm('此操作将删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        companyDestroy(row)
+        this.alertView('删除成功!', 'success')
+        this.$router.go(0);
+      }).catch(() => {
+        this.alertView('已取消删除', 'info')
+      });
+    },
+    /**
      * 父页面执行 修改
      */
     updateData (Obj, cab) {
@@ -316,6 +338,12 @@ export default {
      */
     updateItem (Obj, cab) {
       advertUpdate(Obj).then(res => cab(res))
+    },
+    /**
+     * 弹窗提示
+     */
+    alertView (message, type) {
+      return this.$message({ message, type })
     }
   }
 }
