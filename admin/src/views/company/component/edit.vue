@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-05 16:04:20
+ * @LastEditTime: 2020-11-06 16:35:43
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -18,20 +18,45 @@
       <el-row>
 
         <el-col :span="12">
+          <el-form-item label="所属分类"
+                        prop="category_id">
+            <el-select v-model="temp.category_id"
+                       class="filter-item"
+                       placeholder="请选择所属分类"
+                       style="width: 100%;">
+              <el-option v-for="item in category"
+                         :key="item.id"
+                         :label="item.title"
+                         :value="item.id" />
+            </el-select>
+          </el-form-item>
           <el-form-item label="网站标题:"
                         class="postInfo-container-item"
                         prop="title">
             <el-input type="textarea"
-                      :rows="8"
                       v-model="temp.title"></el-input>
           </el-form-item>
-          <el-form-item label="网站描述:"
-                        class="postInfo-container-item"
-                        prop="companyDescription">
-            <el-input type="textarea"
-                      :rows="8"
-                      v-model="temp.companyDescription"></el-input>
+
+          <el-form-item label="公司标题"
+                        class="postInfo-container-item">
+            <el-input v-model="temp.companyTitle"></el-input>
           </el-form-item>
+
+          <el-form-item label="网站"
+                        class="postInfo-container-item">
+            <el-input v-model="temp.website"></el-input>
+          </el-form-item>
+
+          <el-form-item label="电子邮箱"
+                        class="postInfo-container-item">
+            <el-input v-model="temp.email"></el-input>
+          </el-form-item>
+
+          <el-form-item label="联系电话"
+                        class="postInfo-container-item">
+            <el-input v-model="temp.phone"></el-input>
+          </el-form-item>
+
           <el-form-item label="状态:"
                         class="postInfo-container-item"
                         prop="status">
@@ -44,13 +69,25 @@
           </el-form-item>
         </el-col>
         <el-col :span="12">
+          <el-form-item label="网站描述:"
+                        class="postInfo-container-item"
+                        prop="companyDescription">
+            <el-input type="textarea"
+                      v-model="temp.companyDescription"></el-input>
+          </el-form-item>
+
           <el-form-item label="网站关键词:"
                         class="postInfo-container-item"
                         prop="keywords">
             <el-input type="textarea"
-                      :rows="8"
                       v-model="temp.keywords"></el-input>
           </el-form-item>
+
+          <el-form-item label="地址"
+                        class="postInfo-container-item">
+            <el-input v-model="temp.address"></el-input>
+          </el-form-item>
+
           <el-form-item label="图片">
             <el-upload v-if="avatarProgress"
                        class="avatar-uploader"
@@ -59,8 +96,8 @@
                        :show-file-list="false"
                        :on-progress="setAvatarProgress"
                        :on-success="handleAvatarSuccess">
-              <img v-if="temp.servicesImage"
-                   :src="temp.servicesImage"
+              <img v-if="temp.image"
+                   :src="temp.image"
                    class="avatar">
               <i v-else
                  class="el-icon-plus avatar-uploader-icon"></i>
@@ -174,6 +211,10 @@ export default {
     dialogStatus: {
       type: String,
       default: 'update'
+    },
+    category: {
+      type: Array,
+      default: []
     }
   },
   data () {
@@ -187,6 +228,7 @@ export default {
         create: '增加'
       },
       rules: {
+        category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
         title: [{ type: 'string', required: true, message: '请输入网站标题', trigger: 'blur' }],
         keywords: [{ type: 'string', required: true, message: '请输入网站关键词', trigger: 'blur' }],
         companyDescription: [{ type: 'string', required: true, message: '请输入网站描述', trigger: 'blur' }],
@@ -217,7 +259,7 @@ export default {
       if (res.code == 0) {
         this.avatarProgress = true;
         this.percentage = 0;
-        this.temp.servicesImage = res.data.url;
+        this.temp.image = res.data.url;
       }
     },
     /**

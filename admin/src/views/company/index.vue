@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 09:54:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-06 15:52:53
+ * @LastEditTime: 2020-11-06 17:10:49
 -->
 <template>
   <div class="app-container">
@@ -64,7 +64,7 @@
 
       <el-table-column prop="companyTitle"
                        align="center"
-                       label="标题"
+                       label="公司标题"
                        show-overflow-tooltip
                        width="150px">
         <template slot-scope="{row}">
@@ -192,6 +192,7 @@
            :visible.sync="showDialog"
            :temp="temp"
            :dialogStatus="dialogStatus"
+           :category="category"
            @uploadOnSuccess="uploadOnSuccess"
            @handleFileRemove="handleFileRemove"
            @updateItem="updateItem"
@@ -201,8 +202,7 @@
 
 <script>
 
-import { companyIndex } from '@/api/company'
-import { servicesList, servicesUpdate, servicesEdit } from '@/api/services'
+import { companyIndex, companyUpdate, companyEdit } from '@/api/company'
 import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
 
 import Pagination from '@/components/Pagination'
@@ -236,13 +236,21 @@ export default {
       this.listLoading = true
       companyIndex()
         .then(response => {
-          var data = response.data.company.data;
+          var company = response.data.company.data;
           this.category = response.data.aboutSingleMenu;
           this.total = response.data.company.meta.total
-          this.list = data.filter(dataItem => {
-            var menu = this.category.filter(menuItem => dataItem.category_id == menuItem.id)
-            dataItem.menu = menu[0].title;
-            return dataItem
+          this.list = company.filter(companyItem => {
+            var menu = this.category.filter(menuItem => companyItem.category_id === menuItem.id)
+            companyItem.menu = menu[0].title;
+            return companyItem
+          })
+          return advertDetail(data)
+        })
+        .then(response => {
+          var data = response.data.filter(item => item.parentId == this.category[0].pid);
+          this.list.filter(listItem => {
+            var advert = data.filter(item => listItem.id == item.serId)
+            return listItem.advert = advert
           })
           this.listLoading = false
         })
@@ -253,7 +261,7 @@ export default {
     statusSwitch (getSwitch, id) {
       const data = { id, key: 'status', value: getSwitch };
       this.listLoading = true
-      servicesUpdate(data)
+      companyUpdate(data)
         .then(response => {
           this.listLoading = false
           this.$notify({
@@ -282,7 +290,7 @@ export default {
      * 父页面执行 修改
      */
     updateData (Obj, cab) {
-      servicesEdit(Obj).then(res => cab(res))
+      companyEdit(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 轮播图上传成功
