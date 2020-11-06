@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:27:48
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-06 17:07:29
+ * @LastEditTime: 2020-11-06 17:21:12
  */
 'use strict';
 
@@ -102,6 +102,19 @@ class CompanyService extends Service {
     } catch (error) {
       return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
     }
+  }
+  /**
+   * 删除
+   * @param { Number } id 
+   */
+  async destroy ({ id }) {
+    const company = await this.ctx.model.MzcCompany.findByPk(id);
+
+    if (!company) return { httpStatus: HttpStatus.NOT_FOUND, msg: '没有找到相关信息' };
+
+    company.destroy();
+
+    return { httpStatus: HttpStatus.OK }
   }
 
 }
