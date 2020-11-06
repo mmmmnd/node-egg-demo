@@ -1,4 +1,4 @@
-<!--
+﻿<!--
  * @Author: 莫卓才
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
@@ -9,9 +9,9 @@
 -->
 
 <%- include('/commom/header',{
-  title:companyList?companyList[0].title:"海南昆仑体育文化股份有限公司",
-  Keywords:companyList?companyList[0].keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:companyList?companyList[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  title:companyDetail?companyDetail[0].title:"海南昆仑体育文化股份有限公司",
+  Keywords:companyDetail?companyDetail[0].keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:companyDetail?companyDetail[0].companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <%- include('/commom/banner') %>
@@ -22,17 +22,17 @@
     <%- include('/commom/column') %>
     <div class="content-right">
       <div class="nav-right">
-        <% companyList.forEach(item => { %>
+        <% companyDetail.forEach(item => { %>
         <% if(item.category_id == ctx.params.cid){ %>
-        <a href="#<%= item.id %>" class="nav-btn <%= companyList[0] == item ?'active':''; %>"
+        <a href="#<%= item.id %>" class="nav-btn <%= companyDetail[0] == item ?'active':''; %>"
           data-toggle="tab"><%= item.companyTitle %></a>
         <% } %>
         <% }) %>
       </div>
       <div class="tab-content">
-        <% companyList.forEach(item => { %>
+        <% companyDetail.forEach(item => { %>
         <% if(item.category_id == ctx.params.cid){ %>
-        <div class="ser-top tab-pane fade <%= companyList[0] == item ?'in active':''; %>" id="<%= item.id %>">
+        <div class="ser-top tab-pane fade <%= companyDetail[0] == item ?'in active':''; %>" id="<%= item.id %>">
           <div class="ser-top-txt">
             <h5><%= item.companyTitle %></h5>
             <%- item.content %>

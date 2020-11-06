@@ -11,7 +11,7 @@
   <div class="swiper-wrapper">
     <% servicesList.forEach((item,index) => { %>
       <div class="swiper-slide">
-        <a href="services/pid/7/cid/<% item.category_id %>">
+        <a href="/services/pid/7/cid/<%= item.category_id %>">
           <img src="<%= item.servicesImage %>" alt="" class="ser-info-img">
           <div class="ser-info-txt">
             <h5><%= menuList[1].children[index].title %></h5>

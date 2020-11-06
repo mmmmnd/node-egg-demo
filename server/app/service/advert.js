@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:11:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-05 16:10:23
+ * @LastEditTime: 2020-11-05 16:56:31
  */
 'use strict';
 
@@ -23,7 +23,7 @@ class AdvertService extends Service {
     });
   }
   /**
- * 修改
+ * 详情
  * @param { String } key 字段名
  * @param { String } value 字段值
  */

@@ -5,14 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-07-27 11:34:26
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 17:20:28
+ * @LastEditTime: 2020-11-06 15:50:36
  */
 'use strict';
 
 const moment = require('moment');
 
 module.exports = app => {
-  const { INTEGER, STRING, TEXT, DATE } = app.Sequelize;
+  const { INTEGER, STRING, BOOLEAN, TEXT, DATE } = app.Sequelize;
   const MzcCompany = app.model.define('mzc-company', {
     id: {
       allowNull: !1, // 是否为空
@@ -86,6 +86,12 @@ module.exports = app => {
       type: STRING(20), // 类型
       defaultValue: '', // 默认值
       comment: '联系电话', // 备注
+    },
+    status: {
+      allowNull: !1, // 是否为空
+      type: BOOLEAN, // 类型
+      defaultValue: '1', // 默认值
+      comment: '状态', // 备注
     },
     sort: {
       allowNull: !1, // 是否为空
