@@ -99,6 +99,19 @@ export const constantRoutes = [
   },
 
   {
+    path: '/company',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Company',
+        component: () => import('@/views/company/index'),
+        meta: { title: '旗下公司', icon: 'company', noCache: true }
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
