@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 11:54:33
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-06 17:26:23
+ * @LastEditTime: 2020-11-09 09:44:46
  */
 
 import request from '@/utils/request'
@@ -38,6 +38,14 @@ export function companyDestroy (data) {
   return request({
     url: '/company/destroy',
     method: 'delete',
+    data
+  })
+}
+
+export function companyAdd (data) {
+  return request({
+    url: '/company/add',
+    method: 'post',
     data
   })
 }

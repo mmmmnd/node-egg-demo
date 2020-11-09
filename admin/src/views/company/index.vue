@@ -5,10 +5,35 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 09:54:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-06 17:26:59
+ * @LastEditTime: 2020-11-09 10:01:27
 -->
 <template>
   <div class="app-container">
+    <div class="filter-container">
+      <el-form label-position="left"
+               style="display: inline-block;">
+        <el-form-item label="选择分类"
+                      style="width: 300px;">
+          <el-select v-model="temp.category_ids"
+                     class="filter-item"
+                     placeholder="请选择所属分类"
+                     clearable
+                     @change="getList">
+            <el-option v-for="item in category"
+                       :key="item.id"
+                       :label="item.title"
+                       :value="item.id" />
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <el-button class="filter-item"
+                 style="margin-left: 10px;"
+                 type="primary"
+                 icon="el-icon-plus"
+                 @click="handleCreate">
+        增加
+      </el-button>
+    </div>
     <el-table v-loading="listLoading"
               :data="list"
               border
@@ -202,13 +227,14 @@
            @uploadOnSuccess="uploadOnSuccess"
            @handleFileRemove="handleFileRemove"
            @updateItem="updateItem"
-           @updateData="updateData" />
+           @updateData="updateData"
+           @createData="createData" />
   </div>
 </template>
 
 <script>
 
-import { companyIndex, companyUpdate, companyEdit, companyDestroy } from '@/api/company'
+import { companyIndex, companyUpdate, companyEdit, companyDestroy, companyAdd } from '@/api/company'
 import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
 
 import Pagination from '@/components/Pagination'
@@ -235,12 +261,13 @@ export default {
   },
   methods: {
     /**
-     * 获取列表
+     * 获取列表 && 筛选
      */
-    getList () {
+    getList (id) {
       const data = { key: 'place', value: 3 };
       this.listLoading = true
-      companyIndex()
+      this.listQuery.category_id = id ? id : ''
+      companyIndex(this.listQuery)
         .then(response => {
           var company = response.data.company.data;
           this.category = response.data.aboutSingleMenu;
@@ -287,10 +314,18 @@ export default {
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
     },
     /**
+     * 增加
+     */
+    handleCreate () {
+      this.dialogStatus = 'create'
+      this.showDialog = true
+      this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
+    },
+    /**
      * 预览
      */
     getView (row) {
-      window.open(process.env.VUE_APP_BASE_SERVER + "/services/pid/7/cid/" + row.category_id, "blank");
+      window.open(process.env.VUE_APP_BASE_SERVER + "/company/pid/13/cid/" + row.category_id, "blank");
     },
     /**
      * 删除
@@ -313,6 +348,12 @@ export default {
      */
     updateData (Obj, cab) {
       companyEdit(Obj).then(res => cab(res))
+    },
+    /**
+     * 父页面执行 修改
+     */
+    createData (Obj, cab) {
+      companyAdd(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 轮播图上传成功

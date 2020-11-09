@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-06 16:35:43
+ * @LastEditTime: 2020-11-09 09:45:44
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -364,6 +364,27 @@ export default {
         if (valid) {
           let tempData = Object.assign({}, this.temp)
           this.$emit('updateData', tempData, res => {
+            if (res.code == 0) {
+              this.$router.go(0);
+              this.$notify({
+                title: '成功',
+                message: '更新成功',
+                type: 'success',
+                duration: 2000
+              })
+            }
+          })
+        }
+      })
+    },
+    /**
+     * 增加模块
+     */
+    createData () {
+      this.$refs['dataForm'].validate((valid) => {
+        if (valid) {
+          let tempData = Object.assign({}, this.temp)
+          this.$emit('createData', tempData, res => {
             if (res.code == 0) {
               this.$router.go(0);
               this.$notify({
