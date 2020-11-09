@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:27:48
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-06 17:21:12
+ * @LastEditTime: 2020-11-09 10:01:47
  */
 'use strict';
 
@@ -20,14 +20,15 @@ class CompanyService extends Service {
   * @param { String } limit 最大限制
   * @param { String } page 分页
   */
-  async index ({ limit = 20, page = 1 }) {
+  async index ({ limit = 20, page = 1, category_id }) {
     const maxPage = Number(limit);
+    const filter = category_id
+      ? { category_id, deleted_at: null }
+      : { deleted_at: null };
 
     try {
       const company = await this.ctx.model.MzcCompany.findAndCountAll({
-        where: {
-          deleted_at: null
-        },
+        where: filter,
         offset: (page - 1) * maxPage,
         limit: maxPage,
       })
@@ -116,7 +117,22 @@ class CompanyService extends Service {
 
     return { httpStatus: HttpStatus.OK }
   }
+  /**
+   * 增加
+   * @param { Object } params 参数
+   */
+  async add (params) {
+    const { category_id, title, keywords, companyDescription, companyTitle, content, image, address, website, email, phone, status, sort } = params;
 
+    try {
+      await this.ctx.model.MzcCompany.create({
+        category_id, title, keywords, companyDescription, companyTitle, content, image, address, website, email, phone, status, sort
+      });
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
+  }
 }
 
 module.exports = CompanyService;
