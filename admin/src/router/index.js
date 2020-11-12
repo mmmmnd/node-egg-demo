@@ -125,6 +125,19 @@ export const constantRoutes = [
   },
 
   {
+    path: '/news',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'News',
+        component: () => import('@/views/news/index'),
+        meta: { title: '新闻中心', icon: 'news', noCache: true }
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
