@@ -5,12 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-25 17:14:59
+ * @LastEditTime: 2020-11-12 11:51:04
 -->
 <%- include('/commom/header',{
-  title:newsList?newsList.data[0].title:"11海南昆仑体育文化股份有限公司",
-  Keywords:newsList?newsList.data[0].keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:newsList?newsList.data[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  title:newsDetail?newsDetail.data[0].title:"11海南昆仑体育文化股份有限公司",
+  Keywords:newsDetail?newsDetail.data[0].keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:newsDetail?newsDetail.data[0].companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 <%- include('/commom/banner') %>
 
@@ -21,11 +21,11 @@
     <div class="content-right">
       <div class="news-list">
         <ul>
-          <% newsList.data.forEach(item=>{ %>
+          <% newsDetail.data.forEach(item=>{ %>
           <li>
             <img src="<%= item.filepath %>" alt="" class="news-list-img">
             <div class="news-list-right">
-              <em><%= item.created_at %></em>
+              <em><%= moment(item.created_at).format('YYYY-MM-DD') %></em>
               <h5><a href="<%= urlInfo +'/id/'+ item.id %>"><%= item.cultureTitle %></a></h5>
               <p><%= item.cultureDescription %></p>
             </div>

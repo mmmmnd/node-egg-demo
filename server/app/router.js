@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-10 09:12:18
+ * @LastEditTime: 2020-11-12 10:52:00
  */
 'use strict';
 
@@ -89,6 +89,13 @@ module.exports = app => {
   router.delete('/api/culture/destroy', jwt, controller.culture.destroy);
   router.post('/api/culture/edit', jwt, controller.culture.edit);
   router.post('/api/culture/add', jwt, controller.culture.add);
+
+  // news
+  router.get('/api/news/index', jwt, controller.news.index)
+  router.put('/api/news/update', jwt, controller.news.update)
+  router.delete('/api/news/destroy', jwt, controller.news.destroy);
+  router.post('/api/news/edit', jwt, controller.news.edit);
+  router.post('/api/news/add', jwt, controller.news.add);
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:09:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-30 15:59:43
+ * @LastEditTime: 2020-11-12 15:42:37
 -->
 <%- include('/commom/header',{
   title:settingList?settingList[0].title:"海南昆仑体育文化股份有限公司",
@@ -82,22 +82,23 @@
           <div class="title-link"></div>
           <h5>新闻中心</h5>
         </div>
-        <a href="/news/pid/4/cid/22" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
+        <a href="/news/pid/21/cid/22" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
       </div>
       <div class="row3-swiper">
         <div class="swiper-wrapper">
-          <% newsList.forEach(item=>{ %>
+          <% newsList.forEach((item,index) =>{ %>
           <div class="swiper-slide row3-slide">
-            <a href="news_info/pid/4/cid/<%= item.category_id %>/id/<%= item.id %>">
+            <a href="news_info/pid/21/cid/<%= item.category_id %>/id/<%= item.id %>">
               <div class="row3-img">
-                <span class="news-tab"><%= item.category %></span>
+                <% menutitle = menuList[4].children.find(menuItem => { if( menuItem.id === item.category_id ) return menuItem.title }) %>
+                <span class="news-tab"><%= menutitle.title %></span>
                 <img src="<%= item.filepath %>" alt="">
               </div>
               <div class="row3-txt">
                 <h5><%= item.cultureTitle %></h5>
                 <p><%= item.companyDescription %></p>
                 <div class="row3-data">
-                  <p><%= item.created_at %></p>
+                  <p><%= moment(item.created_at).format('YYYY-MM-DD') %></p>
                   <img src="/public/images/news_icon.png" alt="">
                 </div>
               </div>

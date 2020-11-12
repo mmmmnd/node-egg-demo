@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 19:53:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-30 16:22:05
+ * @LastEditTime: 2020-11-12 11:04:29
  */
 'use strict';
 
@@ -71,7 +71,7 @@ module.exports = app => {
     },
     sort: {
       allowNull: !1, // 是否为空
-      type: STRING(6), // 类型
+      type: INTEGER(6), // 类型
       defaultValue: '0', // 默认值
       comment: '排序', // 备注
     },

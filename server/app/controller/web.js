@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-10 10:19:16
+ * @LastEditTime: 2020-11-12 15:46:13
  */
 'use strict';
 const moment = require('moment');
@@ -20,13 +20,13 @@ class WebController extends Controller {
     const settingList = await service.setting.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
 
-    const newsList = await service.news.lists(); // services数据
+    const newsList = await service.news.index({}); // newsList数据
     const casesList = await service.cases.lists(26); // case数据
     const casesLists = await service.cases.lists(27); // case数据
     const servicesList = await service.services.list(); // services数据
     const aboutSingleDetail = await service.aboutSingle.detail(2); // about单页数据
 
-    const data = { advertList, menuList, settingList, aboutSingleDetail, servicesList, newsList, casesList, casesLists };
+    const data = { advertList, menuList, settingList, aboutSingleDetail, servicesList, newsList: newsList.data, casesList, casesLists, moment };
     await ctx.render('index/index.ejs', data);
   }
   async about () {
@@ -126,18 +126,18 @@ class WebController extends Controller {
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
-    const newsList = await service.news.list(cid, page); // culture数据
+    const newsDetail = await service.news.detail(cid, page); // culture数据
     const settingList = await service.setting.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingList, newsList, pages: newsList.meta, advertList, url, urlInfo, servicesList }
+    const data = { menuList, settingList, newsDetail, pages: newsDetail.meta, advertList, url, urlInfo, servicesList, moment }
     await ctx.render('news/index.ejs', data);
   }
   async news_info () {
     const { ctx, service } = this;
     const { pid, cid, id = 1 } = ctx.params;
-    const urlInfo = `news_info/pid/${pid}/cid/${cid}`;
+    const urlInfo = `/news_info/pid/${pid}/cid/${cid}`;
 
     const err = await error(pid, cid, this);
     if (err) return render(ctx);
@@ -150,7 +150,7 @@ class WebController extends Controller {
 
     await service.news.updateClick(id, ++papeInfo.current.click); //点击浏览量
 
-    const data = { menuList, settingList, papeInfo, advertList, urlInfo, servicesList }
+    const data = { menuList, settingList, papeInfo, advertList, urlInfo, servicesList, moment }
     await ctx.render('info/index.ejs', data);
   }
   async cases () {
