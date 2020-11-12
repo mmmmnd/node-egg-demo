@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-06 10:31:45
+ * @LastEditTime: 2020-11-10 10:19:16
  */
 'use strict';
 const moment = require('moment');
@@ -88,12 +88,12 @@ class WebController extends Controller {
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
-    const cultureList = await service.culture.list(cid, page); // culture数据
+    const cultureDetail = await service.culture.detail(cid, page); // culture数据
     const settingList = await service.setting.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingList, cultureList, pages: cultureList.meta, advertList, url, urlInfo, servicesList }
+    const data = { menuList, settingList, cultureDetail, pages: cultureDetail.meta, advertList, url, urlInfo, moment, servicesList }
     await ctx.render('culture/index.ejs', data);
   }
   async culture_info () {
@@ -112,7 +112,7 @@ class WebController extends Controller {
 
     await service.culture.updateClick(id, ++papeInfo.current.click); //点击浏览量
 
-    const data = { menuList, settingList, papeInfo, advertList, urlInfo, servicesList }
+    const data = { menuList, settingList, papeInfo, advertList, urlInfo, servicesList, moment }
     await ctx.render('info/index.ejs', data);
 
   }

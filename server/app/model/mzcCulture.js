@@ -5,14 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-07-30 11:10:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 09:40:07
+ * @LastEditTime: 2020-11-11 15:26:57
  */
 'use strict';
 
 const moment = require('moment');
 
 module.exports = app => {
-  const { INTEGER, STRING, TEXT, MEDIUMINT, DATE } = app.Sequelize;
+  const { INTEGER, STRING, TEXT, MEDIUMINT, DATE, BOOLEAN } = app.Sequelize;
   const MzcCulture = app.model.define('mzc-culture', {
     id: {
       allowNull: !1, // 是否为空
@@ -57,12 +57,6 @@ module.exports = app => {
       defaultValue: '', // 默认值
       comment: '描述', // 备注,
     },
-    url: {
-      allowNull: !1, // 是否为空
-      type: STRING(150), // 类型
-      defaultValue: '#', // 默认值
-      comment: '超链接', // 备注
-    },
     filepath: {
       allowNull: !1, // 是否为空
       type: STRING(150), // 类型
@@ -81,12 +75,24 @@ module.exports = app => {
       defaultValue: '0', // 默认值
       comment: '点击次数', // 备注
     },
+    status: {
+      allowNull: !1, // 是否为空
+      type: BOOLEAN, // 类型
+      defaultValue: '1', // 默认值
+      comment: '状态', // 备注
+    },
+    sort: {
+      allowNull: !1, // 是否为空
+      type: INTEGER(6), // 类型
+      defaultValue: '0', // 默认值
+      comment: '排序', // 备注
+    },
     created_at: {
       allowNull: !0, // 是否为空
       type: DATE, // 类型
       comment: '创建时间', // 备注
       get () {
-        return moment(this.getDataValue('created_at')).format('YYYY-MM-DD');
+        return moment(this.getDataValue('created_at')).valueOf();
       }
     },
     updated_at: {
