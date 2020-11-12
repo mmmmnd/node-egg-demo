@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 09:54:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-10 10:00:16
+ * @LastEditTime: 2020-11-10 11:03:55
 -->
 <template>
   <div class="app-container">
@@ -18,8 +18,7 @@
                      class="filter-item"
                      placeholder="请选择所属分类"
                      clearable
-                     @change="getList"
-                     ref="categoryId">
+                     @change="getList">
             <el-option v-for="item in category"
                        :key="item.id"
                        :label="item.title"
@@ -47,6 +46,7 @@
                        align="center"
                        label="序号"
                        width="50px"
+                       sortable
                        fixed="left">
       </el-table-column>
       <el-table-column prop="id"
@@ -89,17 +89,27 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="companyTitle"
+      <el-table-column prop="cultureTitle"
                        align="center"
-                       label="公司标题"
+                       label="标题"
                        show-overflow-tooltip
                        width="150px">
         <template slot-scope="{row}">
-          <span class="text-hidden">{{ row.companyTitle }}</span>
+          <span class="text-hidden">{{ row.cultureTitle }}</span>
         </template>
       </el-table-column>
 
-      <el-table-column prop="image"
+      <el-table-column prop="cultureDescription"
+                       align="center"
+                       label="摘要"
+                       show-overflow-tooltip
+                       width="150px">
+        <template slot-scope="{row}">
+          <span class="text-hidden">{{ row.cultureDescription }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column prop="filepath"
                        align="center"
                        label="图片"
                        width="80px">
@@ -107,44 +117,7 @@
           <el-avatar shape="square"
                      :size="50"
                      fit="cover"
-                     :src="row.image"></el-avatar>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="address"
-                       align="center"
-                       label="地址"
-                       show-overflow-tooltip
-                       width="150px">
-        <template slot-scope="{row}">
-          <span class="text-hidden">{{ row.address }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="website"
-                       align="center"
-                       label="网站"
-                       width="150px">
-        <template slot-scope="{row}">
-          <span>{{ row.website }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="email"
-                       align="center"
-                       label="电子邮箱"
-                       width="150px">
-        <template slot-scope="{row}">
-          <span>{{ row.email }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="phone"
-                       align="center"
-                       label="联系电话"
-                       width="150px">
-        <template slot-scope="{row}">
-          <span>{{ row.phone }}</span>
+                     :src="row.filepath"></el-avatar>
         </template>
       </el-table-column>
 
@@ -226,17 +199,17 @@
            :temp="temp"
            :dialogStatus="dialogStatus"
            :category="category"
-           @uploadOnSuccess="uploadOnSuccess"
-           @handleFileRemove="handleFileRemove"
            @updateItem="updateItem"
            @updateData="updateData"
            @createData="createData" />
+
   </div>
+
 </template>
 
 <script>
 
-import { companyIndex, companyUpdate, companyEdit, companyDestroy, companyAdd } from '@/api/company'
+import { cultureIndex, cultureUpdate, cultureDestroy, cultureEdit, cultureAdd } from '@/api/culture'
 import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
 
 import Pagination from '@/components/Pagination'
@@ -266,29 +239,21 @@ export default {
      * 获取列表 && 筛选
      */
     getList (id) {
-      const data = { key: 'place', value: 3 };
       this.listLoading = true
       this.listQuery.category_id = typeof id === 'number' ? id : this.temp.categoryId;
-      companyIndex(this.listQuery)
+      cultureIndex(this.listQuery)
         .then(response => {
-          var company = response.data.company.data;
+          var culture = response.data.culture.data;
           this.category = response.data.aboutSingleMenu;
-          this.total = response.data.company.meta.total
-          this.list = company.filter(companyItem => {
-            var menu = this.category.filter(menuItem => companyItem.category_id === menuItem.id)
-            companyItem.menu = menu[0].title;
-            return companyItem
-          })
-          return advertDetail(data)
-        })
-        .then(response => {
-          var data = response.data.filter(item => item.parentId == this.category[0].pid);
-          this.list.filter(listItem => {
-            var advert = data.filter(item => listItem.id == item.serId)
-            return listItem.advert = advert
+          this.total = response.data.culture.meta.total
+          this.list = culture.filter(cultureItem => {
+            var menu = this.category.filter(menuItem => cultureItem.category_id === menuItem.id)
+            cultureItem.menu = menu[0].title;
+            return cultureItem
           })
           this.listLoading = false
         })
+
     },
     /**
      * 切换状态
@@ -296,7 +261,7 @@ export default {
     statusSwitch (getSwitch, id) {
       const data = { id, key: 'status', value: getSwitch };
       this.listLoading = true
-      companyUpdate(data)
+      cultureUpdate(data)
         .then(response => {
           this.listLoading = false
           this.$notify({
@@ -327,7 +292,7 @@ export default {
      * 预览
      */
     getView (row) {
-      window.open(process.env.VUE_APP_BASE_SERVER + "/company/pid/13/cid/" + row.category_id, "blank");
+      window.open(process.env.VUE_APP_BASE_SERVER + "/culture/pid/16/cid/" + row.category_id, "blank");
     },
     /**
      * 删除
@@ -338,7 +303,7 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        companyDestroy(row)
+        cultureDestroy(row)
         this.alertView('删除成功!', 'success')
         this.$router.go(0);
       }).catch(() => {
@@ -349,32 +314,14 @@ export default {
      * 父页面执行 修改
      */
     updateData (Obj, cab) {
-      companyEdit(Obj).then(res => cab(res))
+      console.log(Obj);
+      cultureEdit(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 增加
      */
     createData (Obj, cab) {
-      companyAdd(Obj).then(res => cab(res))
-    },
-    /**
-     * 父页面执行 轮播图上传成功
-     */
-    uploadOnSuccess (Obj, cab) {
-      const data = {
-        title: '新增图片',
-        filepath: Obj.e.data.url,
-        place: 3,
-        parentId: this.category[0].pid,
-        serId: Obj.temp.id
-      }
-      advertAdd(data).then(res => cab(res))
-    },
-    /**
-     * 父页面执行 轮播图删除
-     */
-    handleFileRemove (file, cab) {
-      advertDestroy(file).then(res => cab(res))
+      cultureAdd(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 修改

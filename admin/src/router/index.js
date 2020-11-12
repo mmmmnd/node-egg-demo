@@ -112,6 +112,19 @@ export const constantRoutes = [
   },
 
   {
+    path: '/culture',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Culture',
+        component: () => import('@/views/culture/index'),
+        meta: { title: '企业文化', icon: 'culture', noCache: true }
+      }
+    ]
+  },
+
+  {
     path: '/example',
     component: Layout,
     redirect: '/example/table',
