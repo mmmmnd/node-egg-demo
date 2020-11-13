@@ -1,11 +1,11 @@
-<!--
+﻿<!--
  * @Author: 莫卓才
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
  * @Date: 2020-07-01 11:09:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-12 15:42:37
+ * @LastEditTime: 2020-11-13 10:16:21
 -->
 <%- include('/commom/header',{
   title:settingList?settingList[0].title:"海南昆仑体育文化股份有限公司",
@@ -125,7 +125,7 @@
 
     <div class="row4-swiper">
       <div class="swiper-wrapper">
-        <% casesList.data.forEach(item =>{ %>
+        <% casesDetail.forEach(item =>{ %>
         <div class="swiper-slide row4-slide">
           <a href="/cases_info/pid/5/cid/<%= item.category_id %>/id/<%= item.id %>">
             <img src="<%= item.filepath %>" alt="" class="row4-img">
@@ -154,7 +154,7 @@
       <p class="row5-txt">与中视体育娱乐有限公司、爱奇艺、中广天择传媒股份有限公司等国内一流媒体平台达成了战略合作关系</p>
       <div class="row5-list">
         <ul>
-          <% casesLists.data.forEach(item =>{ %>
+          <% casesInfo.forEach(item =>{ %>
           <li>
             <a href="javascript:;">
               <img src="<%= item.filepath %>" alt="">

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-03 20:59:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-25 10:33:56
+ * @LastEditTime: 2020-11-13 15:09:35
 -->
 <% if(pages.total_pages > 1){  
   const RIGHT_INDEX = 3,LEFT_INDEX = 4;
@@ -40,29 +40,29 @@
       <a href="
         <%= pages.current_page === 1 
           ? 'javascript:;' 
-          : url + '/page=' + Number(pages.current_page - 1) 
+          : '/' + url + '/page/' + Number(pages.current_page - 1) 
         %>">上一页</a>
     </li>
     <% if(pages.current_page > LEFT_INDEX){ %>
-    <li><a href="<%= url %>/page/1">1</a></li>
+    <li><a href="/<%= url %>/page/1">1</a></li>
     <li><a href="javascript:;">...</a></li>
     <% } %>
 
     <% for(var item of arr){ %>
     <li class="<%= pages.current_page == item ? 'active': '' %>">
-      <a href="<%= url %>/page/<%= item %>"><%= item %></a>
+      <a href="/<%= url %>/page/<%= item %>"><%= item %></a>
     </li>
     <% } %>
 
     <% if(pages.total_pages - RIGHT_INDEX > pages.current_page){ %>
     <li><a href="javascript:;">...</a></li>
-    <li><a href="<%= url %>/page/<%= pages.total_pages %>"><%= pages.total_pages %></a></li>
+    <li><a href="/<%= url %>/page/<%= pages.total_pages %>"><%= pages.total_pages %></a></li>
     <% } %>
     <li class="<%= pages.current_page === pages.total_pages ? 'disabled' : '' %>">
       <a href="
         <%= pages.current_page === pages.total_pages 
           ? 'javascript:;' 
-          : url + '&page=' + Number(pages.current_page + 1) 
+          : '/' + url + '/page/' + Number(pages.current_page + 1) 
         %>">下一页</a>
     </li>
   </ul>

@@ -1,4 +1,4 @@
-<!--
+﻿<!--
  * @Author: 莫卓才
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
@@ -30,7 +30,7 @@
                     <img src="<%= item.filepath %>" alt="" class="row4-img">
                     <div class="ser-info-txt">
                       <h5><%= item.cultureTitle %></h5>
-                      <p><%= item.created_at %></p>
+                      <p><%= moment(item.created_at).format('YYYY-MM-DD')%></p>
                     </div>
                   </a>
                 </li>

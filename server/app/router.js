@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-12 10:52:00
+ * @LastEditTime: 2020-11-13 17:16:53
  */
 'use strict';
 
@@ -96,6 +96,12 @@ module.exports = app => {
   router.delete('/api/news/destroy', jwt, controller.news.destroy);
   router.post('/api/news/edit', jwt, controller.news.edit);
   router.post('/api/news/add', jwt, controller.news.add);
+
+  // cases
+  router.get('/api/cases/index', jwt, controller.cases.index)
+  router.put('/api/cases/update', jwt, controller.cases.update)
+  router.delete('/api/cases/destroy', jwt, controller.cases.destroy)
+  router.delete('/api/cases/destroy', jwt, controller.cases.destroy)
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);
