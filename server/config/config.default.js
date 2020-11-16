@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-21 09:24:39
+ * @LastEditTime: 2020-11-16 17:06:06
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -26,7 +26,7 @@ module.exports = appInfo => {
 
   // add your config here
   // 加载 errorHandler 中间件
-  config.middleware = ['errorHandler']
+  config.middleware = ['errorHandler', 'robot']
 
   // 只对 /api 前缀的 url 路径生效
   config.errorHandler = {
@@ -37,6 +37,14 @@ module.exports = appInfo => {
     mapping: {
       '.ejs': 'ejs',
     },
+  };
+
+  config.robot = {
+    ua: [
+      /curl/i,
+      /Baiduspider/i,
+      /sogou spider/i,
+    ]
   };
 
   // sequelize
