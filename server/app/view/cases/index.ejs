@@ -26,7 +26,8 @@
               <% if(item.category_id == '26'){ %>
                 <li class="row4-slide">
                   <a href="/<%= urlInfo +'/id/'+ item.id %>">
-                    <span><%= item.type %></span>
+                    <% menutitle = menuList[1].children.find(menuItem => { if( menuItem.id === item.type ) return menuItem }) %>
+                    <span><%= menutitle.title %></span>
                     <img src="<%= item.filepath %>" alt="" class="row4-img">
                     <div class="ser-info-txt">
                       <h5><%= item.cultureTitle %></h5>

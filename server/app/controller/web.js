@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-13 15:10:46
+ * @LastEditTime: 2020-11-16 10:48:20
  */
 'use strict';
 const moment = require('moment');
@@ -174,7 +174,7 @@ class WebController extends Controller {
   async cases_info () {
     const { ctx, service } = this;
     const { pid, cid, id = 1 } = ctx.params;
-    const urlInfo = `cases_info/pid/${pid}/cid/${cid}`;
+    const urlInfo = `/cases_info/pid/${pid}/cid/${cid}`;
 
     const menuList = await service.menu.list(); // 导航栏菜单
     const papeInfo = await service.cases.info(cid, id); // 详情页数据

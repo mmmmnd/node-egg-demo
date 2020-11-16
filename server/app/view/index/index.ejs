@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:09:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-13 10:16:21
+ * @LastEditTime: 2020-11-16 11:08:47
 -->
 <%- include('/commom/header',{
   title:settingList?settingList[0].title:"海南昆仑体育文化股份有限公司",
@@ -90,7 +90,7 @@
           <div class="swiper-slide row3-slide">
             <a href="news_info/pid/21/cid/<%= item.category_id %>/id/<%= item.id %>">
               <div class="row3-img">
-                <% menutitle = menuList[4].children.find(menuItem => { if( menuItem.id === item.category_id ) return menuItem.title }) %>
+                <% menutitle = menuList[4].children.find(menuItem => { if( menuItem.id === item.category_id ) return menuItem }) %>
                 <span class="news-tab"><%= menutitle.title %></span>
                 <img src="<%= item.filepath %>" alt="">
               </div>

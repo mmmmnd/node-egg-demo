@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-12 16:24:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-13 16:28:15
+ * @LastEditTime: 2020-11-16 11:47:59
 -->
 <template>
   <div class="app-container">
@@ -189,6 +189,7 @@
            :temp="temp"
            :dialogStatus="dialogStatus"
            :category="category"
+           :category_id="listQuery.cid"
            @updateItem="updateItem"
            @updateData="updateData"
            @createData="createData" />
@@ -199,8 +200,7 @@
 
 <script>
 
-import { newsEdit, newsAdd } from '@/api/news'
-import { casesIndex, casesUpdate, casesDestroy } from '@/api/cases'
+import { casesIndex, casesUpdate, casesDestroy, casesEdit, casesAdd } from '@/api/cases'
 import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
 
 import Pagination from '@/components/Pagination'
@@ -275,6 +275,7 @@ export default {
      * 增加
      */
     handleCreate () {
+      this.temp = {}
       this.dialogStatus = 'create'
       this.showDialog = true
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
@@ -305,14 +306,13 @@ export default {
      * 父页面执行 修改
      */
     updateData (Obj, cab) {
-      console.log(Obj);
-      newsEdit(Obj).then(res => cab(res))
+      casesEdit(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 增加
      */
     createData (Obj, cab) {
-      newsAdd(Obj).then(res => cab(res))
+      casesAdd(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 修改

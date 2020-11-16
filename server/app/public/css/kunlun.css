@@ -1436,6 +1436,7 @@ body.modal-open{
 .content-right{
     width: 100%;
     padding-left: 300px; 
+    overflow: hidden;
 }
 .nav-left{
     width: 200px;

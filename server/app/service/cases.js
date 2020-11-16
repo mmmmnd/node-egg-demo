@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:21:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-13 16:25:27
+ * @LastEditTime: 2020-11-16 14:40:27
  */
 'use strict';
 
@@ -84,6 +84,43 @@ class CasesService extends Service {
     return { msg: 1, httpStatus: HttpStatus.OK }
   }
   /**
+   * 编辑
+   * @param { Object } params 参数
+   */
+  async edit (params) {
+    const { id, category_id, title, keywords, companyDescription, cultureTitle, type, filepath, content, status, sort } = params;
+
+    try {
+      await this.ctx.model.MzcCases.update({
+        category_id, title, keywords, companyDescription, cultureTitle, type, filepath, content, status, sort
+      }, {
+        where: {
+          id,
+          deleted_at: null
+        },
+      })
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
+  }
+  /**
+   * 增加
+   * @param { Object } params 参数
+   */
+  async add (params) {
+    const { category_id, title, keywords, companyDescription, cultureTitle, type, filepath, content, status, sort } = params;
+
+    try {
+      await this.ctx.model.MzcCases.create({
+        category_id, title, keywords, companyDescription, cultureTitle, type, filepath, content, status, sort
+      });
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
+  }
+  /**
    * 列表
    * @param { Number } cid 二级菜单id
    * @param { Number } page 分页
@@ -98,6 +135,7 @@ class CasesService extends Service {
       },
       offset: (page - 1) * pageSize,
       limit: pageSize,
+      order: [['sort', 'DESC'], ['id', 'DESC']],
     })
 
     if (cases.rows.length == 0) throw new Error('没有找到相关信息');
@@ -114,9 +152,9 @@ class CasesService extends Service {
 
   }
   /**
- * 详情
- * @param { Number } cid 二级菜单id
- */
+   * 详情
+   * @param { Number } cid 二级菜单id
+   */
   async detail (cid) {
     return await this.ctx.model.MzcCases.findAll({
       where: {
@@ -133,32 +171,24 @@ class CasesService extends Service {
    * @param { Number } id 文章id号 
    */
   async info (cid, id) {
-    const previous = await this.ctx.model.MzcCases.findOne({
+    let current, previous, next;
+    const cases = await this.ctx.model.MzcCases.findAll({
       where: {
         category_id: cid,
         deleted_at: null,
-        id: { [Op.lt]: id }
-
-      }
+        status: true,
+      },
+      order: [['sort', 'DESC'], ['id', 'DESC']],
     });
-
-    const current = await this.ctx.model.MzcCases.findOne({
-      where: {
-        category_id: cid,
-        deleted_at: null,
-        id: id
+    cases.find((item, index) => {
+      if (item.id == id) {
+        current = item;
+        previous = cases[index - 1];
+        next = cases[index + 1];
       }
-    });
+    })
 
-    const next = await this.ctx.model.MzcCases.findOne({
-      where: {
-        category_id: cid,
-        deleted_at: null,
-        id: { [Op.gt]: id }
-      }
-    });
-
-    if (!current) throw new Error('没有找到相关文章');
+    if (!cases) throw new Error('没有找到相关文章');
 
     return {
       previous, current, next,

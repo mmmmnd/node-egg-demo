@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-10 09:13:33
+ * @LastEditTime: 2020-11-16 11:29:27
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -117,17 +117,6 @@
 
     </el-form>
 
-    <el-dialog title=""
-               :visible.sync="isEnlargeImage"
-               :modal-append-to-body="false"
-               top="8%"
-               width="60%"
-               append-to-body>
-      <img @click="isEnlargeImage = false"
-           style="width:100%;"
-           :src="enlargeImage">
-    </el-dialog>
-
     <div slot="footer"
          class="dialog-footer">
 
@@ -178,10 +167,6 @@ export default {
         status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
         content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
       },
-      progress: 0, //上传进度
-      pass: null, //是否上传成功
-      isEnlargeImage: false, //放大图片
-      enlargeImage: '', //放大图片地址
     }
   },
   computed: {
@@ -313,111 +298,5 @@ export default {
 }
 .el-textarea .el-textarea__inner {
   width: 100% !important;
-}
-</style>
-<style lang="scss" scoped>
-.img-list {
-  overflow: hidden;
-  width: 100%;
-
-  // 文件列表
-  .img-li-box {
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    width: 200px;
-    padding: 5px;
-    margin: 5px 20px 20px 0;
-    border: 1px solid #d1dbe5;
-    border-radius: 4px;
-    transition: all 0.3s;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
-
-    // 图片
-    .img-li-b--url {
-      display: block;
-      width: 100%;
-      height: 190px;
-      margin: 0 auto;
-      border-radius: 4px;
-    }
-
-    // 底部
-    .img-li-b--bottom {
-      margin-top: 10px;
-
-      // 名称
-      .img-li-b--name {
-        width: 90%;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        height: 25px;
-        line-height: 25px;
-      }
-    }
-
-    // 删除按钮
-    .img-li-b--delete {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      color: #8492a6;
-      cursor: pointer;
-      font-size: 1.1em;
-    }
-
-    // 放大遮罩层
-    .img-li-b--layer {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 200px;
-      color: #fff;
-      text-align: center;
-      z-index: 5;
-      background-color: rgba(0, 0, 0, 0.4);
-
-      // 放大按钮
-      i {
-        font-size: 1.6em;
-        margin-top: 80px;
-      }
-    }
-
-    .img-li-b--delete,
-    .img-li-b--layer {
-      opacity: 0;
-      transition: all 0.3s;
-    }
-
-    // 悬浮可见删除 or 放大按钮
-    &:hover {
-      .img-li-b--delete,
-      .img-li-b--layer {
-        opacity: 1;
-      }
-    }
-
-    // 上传进度
-    &.img-li-b--progress {
-      text-align: center;
-      padding-top: 50px;
-    }
-  }
-  // 上传按钮
-  .img-li-b--upload {
-    float: left;
-    width: 200px;
-    height: 270px;
-    display: table;
-    text-align: center;
-
-    .img-li-b--upl--field {
-      width: 100%;
-      display: table-cell;
-      vertical-align: middle;
-    }
-  }
 }
 </style>

@@ -5,21 +5,23 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-13 16:40:21
+ * @LastEditTime: 2020-11-16 11:54:12
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
-             :visible.sync="dialogFormVisible">
+             :visible.sync="dialogFormVisible"
+             :width="category_id==27?'18%':''">
     <el-form ref="dataForm"
              :rules="rules"
              :model="temp"
              label-position="right"
-             label-width="100px">
+             label-width="100px"
+             v-if="category_id == 26">
       <el-row>
 
         <el-col :span="12">
           <el-form-item label="所属分类"
-                        prop="category_id">
+                        prop="type">
             <el-select v-model="temp.type"
                        class="filter-item"
                        placeholder="请选择所属分类"
@@ -110,16 +112,52 @@
 
     </el-form>
 
-    <el-dialog title=""
-               :visible.sync="isEnlargeImage"
-               :modal-append-to-body="false"
-               top="8%"
-               width="60%"
-               append-to-body>
-      <img @click="isEnlargeImage = false"
-           style="width:100%;"
-           :src="enlargeImage">
-    </el-dialog>
+    <el-form ref="dataForm"
+             :rules="rules"
+             :model="temp"
+             label-position="right"
+             v-else>
+
+      <el-form-item label="图片">
+        <el-upload v-if="avatarProgress"
+                   class="avatar-uploader"
+                   :headers="{token}"
+                   :action="uploadUrl"
+                   :show-file-list="false"
+                   :on-progress="setAvatarProgress"
+                   :on-success="handleAvatarSuccess">
+          <img v-if="temp.filepath"
+               :src="temp.filepath"
+               class="avatar">
+          <i v-else
+             class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+        <el-progress v-else
+                     type="circle"
+                     :percentage="percentage"></el-progress>
+      </el-form-item>
+
+      <el-form-item label="排序"
+                    prop="sort">
+        <el-input-number v-model="temp.sort"
+                         controls-position="right"
+                         :min="0"
+                         ref="inputNumber"
+                         size="small"></el-input-number>
+      </el-form-item>
+
+      <el-form-item label="状态:"
+                    class="postInfo-container-item"
+                    prop="status">
+        <el-switch v-model="temp.status"
+                   active-color="#13ce66"
+                   inactive-color="#ff4949"
+                   active-text="开启"
+                   inactive-text="关闭">
+        </el-switch>
+      </el-form-item>
+
+    </el-form>
 
     <div slot="footer"
          class="dialog-footer">
@@ -151,6 +189,10 @@ export default {
     category: {
       type: Array,
       default: []
+    },
+    category_id: {
+      type: Number,
+      default: 0
     }
   },
   data () {
@@ -164,10 +206,11 @@ export default {
         create: '增加'
       },
       rules: {
-        category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
+        type: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
         title: [{ type: 'string', required: true, message: '请输入网站标题', trigger: 'blur' }],
         keywords: [{ type: 'string', required: true, message: '请输入网站关键词', trigger: 'blur' }],
         companyDescription: [{ type: 'string', required: true, message: '请输入网站描述', trigger: 'blur' }],
+        cultureTitle: [{ type: 'string', required: true, message: '请输入标题', trigger: 'blur' }],
         status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
         content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
       },
@@ -241,6 +284,7 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           let tempData = Object.assign({}, this.temp)
+          tempData.category_id = this.category_id;
           this.$emit('createData', tempData, res => {
             if (res.code == 0) {
               this.$router.go(0);
@@ -306,111 +350,5 @@ export default {
 }
 .el-textarea .el-textarea__inner {
   width: 100% !important;
-}
-</style>
-<style lang="scss" scoped>
-.img-list {
-  overflow: hidden;
-  width: 100%;
-
-  // 文件列表
-  .img-li-box {
-    overflow: hidden;
-    position: relative;
-    display: inline-block;
-    width: 200px;
-    padding: 5px;
-    margin: 5px 20px 20px 0;
-    border: 1px solid #d1dbe5;
-    border-radius: 4px;
-    transition: all 0.3s;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.12), 0 0 6px 0 rgba(0, 0, 0, 0.04);
-
-    // 图片
-    .img-li-b--url {
-      display: block;
-      width: 100%;
-      height: 190px;
-      margin: 0 auto;
-      border-radius: 4px;
-    }
-
-    // 底部
-    .img-li-b--bottom {
-      margin-top: 10px;
-
-      // 名称
-      .img-li-b--name {
-        width: 90%;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        height: 25px;
-        line-height: 25px;
-      }
-    }
-
-    // 删除按钮
-    .img-li-b--delete {
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      color: #8492a6;
-      cursor: pointer;
-      font-size: 1.1em;
-    }
-
-    // 放大遮罩层
-    .img-li-b--layer {
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 0;
-      height: 200px;
-      color: #fff;
-      text-align: center;
-      z-index: 5;
-      background-color: rgba(0, 0, 0, 0.4);
-
-      // 放大按钮
-      i {
-        font-size: 1.6em;
-        margin-top: 80px;
-      }
-    }
-
-    .img-li-b--delete,
-    .img-li-b--layer {
-      opacity: 0;
-      transition: all 0.3s;
-    }
-
-    // 悬浮可见删除 or 放大按钮
-    &:hover {
-      .img-li-b--delete,
-      .img-li-b--layer {
-        opacity: 1;
-      }
-    }
-
-    // 上传进度
-    &.img-li-b--progress {
-      text-align: center;
-      padding-top: 50px;
-    }
-  }
-  // 上传按钮
-  .img-li-b--upload {
-    float: left;
-    width: 200px;
-    height: 270px;
-    display: table;
-    text-align: center;
-
-    .img-li-b--upl--field {
-      width: 100%;
-      display: table-cell;
-      vertical-align: middle;
-    }
-  }
 }
 </style>
