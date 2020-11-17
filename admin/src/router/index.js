@@ -160,6 +160,19 @@ export const constantRoutes = [
   },
 
   {
+    path: '/recruit',
+    component: Layout,
+    children: [
+      {
+        path: 'index',
+        name: 'Recruit',
+        component: () => import('@/views/recruit/index'),
+        meta: { title: '人力资源', icon: 'hr', noCache: true }
+      }
+    ]
+  },
+
+  {
     path: '/menu',
     component: Layout,
     children: [
