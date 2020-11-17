@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-16 10:29:51
+ * @LastEditTime: 2020-11-17 17:30:56
  */
 'use strict';
 
@@ -101,9 +101,18 @@ module.exports = app => {
   router.get('/api/cases/index', jwt, controller.cases.index)
   router.put('/api/cases/update', jwt, controller.cases.update)
   router.delete('/api/cases/destroy', jwt, controller.cases.destroy)
-  router.delete('/api/cases/destroy', jwt, controller.cases.destroy)
   router.post('/api/cases/edit', jwt, controller.cases.edit);
   router.post('/api/cases/add', jwt, controller.cases.add);
+
+  // recruit
+  router.get('/api/recruit/index', jwt, controller.recruit.index)
+  router.put('/api/recruit/update', jwt, controller.recruit.update)
+  router.delete('/api/recruit/destroy', jwt, controller.recruit.destroy)
+  router.post('/api/recruit/edit', jwt, controller.recruit.edit);
+  router.post('/api/recruit/add', jwt, controller.recruit.add);
+
+  // recruitDroptype
+  router.get('/api/recruitDroptype/index', jwt, controller.recruitDroptype.index)
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);
@@ -118,6 +127,7 @@ module.exports = app => {
 
   app.resources('home', '/home', app.controller.home);
   router.get('*', controller.web.error); // 404
+
 
   // router.post('/home/login', controller.home.login);
   // router.post('/home/indexs', jwt, controller.home.indexs);

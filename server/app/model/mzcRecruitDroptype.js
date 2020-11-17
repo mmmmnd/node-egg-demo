@@ -5,14 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-08-12 09:28:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-26 15:53:03
+ * @LastEditTime: 2020-11-17 10:15:30
  */
 'use strict';
 
 const moment = require('moment');
 
 module.exports = app => {
-  const { INTEGER, STRING, DATE } = app.Sequelize;
+  const { INTEGER, STRING, DATE, BOOLEAN } = app.Sequelize;
   const MzcRecruitDroptype = app.model.define('mzc-recruit-droptype', {
     id: {
       allowNull: !1, // 是否为空
@@ -27,41 +27,17 @@ module.exports = app => {
       defaultValue: '', // 默认值
       comment: '下拉内容', // 备注 0 -> 不存在
     },
-    position: {
+    status: {
       allowNull: !1, // 是否为空
-      type: STRING(20), // 类型
-      defaultValue: '职位', // 默认值
-      comment: '职位', // 备注
+      type: BOOLEAN, // 类型
+      defaultValue: '1', // 默认值
+      comment: '状态', // 备注
     },
-    address: {
-      allowNull: !1, // 是否为空
-      type: STRING(20), // 类型
-      defaultValue: '地址', // 默认值
-      comment: '地址', // 备注
-    },
-    people: {
-      allowNull: !1, // 是否为空
-      type: STRING(5), // 类型
-      defaultValue: '人数', // 默认值
-      comment: '人数', // 备注
-    },
-    education: {
-      allowNull: !1, // 是否为空
-      type: STRING(10), // 类型
-      defaultValue: '学历', // 默认值
-      comment: '学历', // 备注
-    },
-    sex: {
-      allowNull: !1, // 是否为空
-      type: STRING(5), // 类型
-      defaultValue: '性别', // 默认值
-      comment: '性别', // 备注
-    },
-    created_time: {
-      allowNull: !1, // 是否为空
-      type: STRING(5), // 类型
-      defaultValue: '发布时间', // 默认值
-      comment: '发布时间', // 备注
+    sort: {
+      allowNull: !0, // 是否为空
+      type: INTEGER(6), // 类型
+      defaultValue: '0', // 默认值
+      comment: '排序', // 备注
     },
     created_at: {
       allowNull: !0, // 是否为空

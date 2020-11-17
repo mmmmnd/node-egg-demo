@@ -5,14 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-08-12 09:28:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 17:18:36
+ * @LastEditTime: 2020-11-17 10:37:44
  */
 'use strict';
 
 const moment = require('moment');
 
 module.exports = app => {
-  const { INTEGER, STRING, TEXT, DATE } = app.Sequelize;
+  const { INTEGER, STRING, TEXT, DATE, BOOLEAN } = app.Sequelize;
   const MzcRecruit = app.model.define('mzc-recruit', {
     id: {
       allowNull: !1, // 是否为空
@@ -81,13 +81,17 @@ module.exports = app => {
       defaultValue: '', // 默认值
       comment: '内容', // 备注
     },
-    created_time: {
+    status: {
       allowNull: !1, // 是否为空
-      type: DATE, // 类型
-      comment: '发布时间', // 备注
-      get () { //方法类型
-        return moment(this.getDataValue('created_time')).format('YYYY-MM-DD');
-      }
+      type: BOOLEAN, // 类型
+      defaultValue: '1', // 默认值
+      comment: '状态', // 备注
+    },
+    sort: {
+      allowNull: !0, // 是否为空
+      type: INTEGER(6), // 类型
+      defaultValue: '0', // 默认值
+      comment: '排序', // 备注
     },
     created_at: {
       allowNull: !0, // 是否为空
