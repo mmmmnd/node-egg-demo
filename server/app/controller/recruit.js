@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-17 11:47:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-17 17:14:12
+ * @LastEditTime: 2020-11-18 08:44:49
  */
 const Controller = require('egg').Controller;
 
@@ -35,6 +35,24 @@ class RecruitController extends Controller {
     const params = this.ctx.request.body;
 
     const recruit = await this.ctx.service.recruit.destroy(params);
+    await this.ctx.helper.checkData(recruit);
+  }
+  /**
+   * 编辑
+   */
+  async edit () {
+    const params = this.ctx.request.body;
+
+    const recruit = await this.ctx.service.recruit.edit(params)
+    await this.ctx.helper.checkData(recruit);
+  }
+  /**
+   * 增加
+   */
+  async add () {
+    const params = this.ctx.request.body;
+
+    const recruit = await this.ctx.service.recruit.add(params)
     await this.ctx.helper.checkData(recruit);
   }
 }

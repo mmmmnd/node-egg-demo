@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-16 17:13:41
+ * @LastEditTime: 2020-11-18 08:49:08
  */
 'use strict';
 const moment = require('moment');
@@ -201,7 +201,7 @@ class WebController extends Controller {
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingList, recruitDetail, recruitDroptypeList, advertList, servicesList }
+    const data = { menuList, settingList, recruitDetail, recruitDroptypeList, advertList, servicesList, moment }
     await ctx.render('recruit/index.ejs', data);
   }
   async contact () {

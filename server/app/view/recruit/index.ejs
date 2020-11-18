@@ -69,7 +69,7 @@
                           <span><%= val.people %></span>
                           <span><%= val.education %></span>
                           <span><%= val.sex %></span>
-                          <span><%= val.created_at %></span>
+                          <span><%= moment(val.created_at).format('YYYY-MM-DD') %></span>
                         </div>
                       </a>
                     </h4>

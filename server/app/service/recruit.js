@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 11:27:03
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-17 17:12:55
+ * @LastEditTime: 2020-11-18 08:41:34
  */
 'use strict';
 /**
@@ -83,6 +83,43 @@ class RecruitService extends Service {
     recruit.destroy();
 
     return { msg: 1, httpStatus: HttpStatus.OK }
+  }
+  /**
+   * 编辑
+   * @param { Object } params 参数
+   */
+  async edit (params) {
+    const { id, category_id, title, keywords, companyDescription, position, address, people, education, sex, content, status, sort } = params;
+
+    try {
+      await this.ctx.model.MzcRecruit.update({
+        category_id, title, keywords, companyDescription, position, address, people, education, sex, content, status, sort
+      }, {
+        where: {
+          id,
+          deleted_at: null
+        },
+      })
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
+  }
+  /**
+   * 增加
+   * @param { Object } params 参数
+   */
+  async add (params) {
+    const { category_id, title, keywords, companyDescription, position, address, people, education, sex, content, status, sort } = params;
+
+    try {
+      await this.ctx.model.MzcRecruit.create({
+        category_id, title, keywords, companyDescription, position, address, people, education, sex, content, status, sort
+      });
+      return { httpStatus: HttpStatus.OK }
+    } catch (error) {
+      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+    }
   }
   /**
    * 详情
