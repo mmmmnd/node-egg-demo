@@ -162,12 +162,21 @@ export const constantRoutes = [
   {
     path: '/recruit',
     component: Layout,
+    redirect: '/recruit/recruit',
+    name: 'recruit',
+    meta: { title: '人力资源', icon: 'hr' },
     children: [
       {
-        path: 'index',
+        path: 'recruit',
         name: 'Recruit',
         component: () => import('@/views/recruit/index'),
-        meta: { title: '人力资源', icon: 'hr', noCache: true }
+        meta: { title: '列表', icon: '' }
+      },
+      {
+        path: 'recruitList',
+        name: 'RecruitList',
+        component: () => import('@/views/recruit/list'),
+        meta: { title: '分类', icon: '', noCache: true }
       }
     ]
   },

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-16 17:20:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-17 17:23:34
+ * @LastEditTime: 2020-11-18 09:06:37
 -->
 <template>
   <div class="app-container">
@@ -155,8 +155,7 @@
 </template>
 
 <script>
-import { recruitDroptypeIndex, recruitIndex, recruitUpdate, recruitDestroy } from '@/api/recruit'
-import { newsEdit, newsAdd } from '@/api/news'
+import { recruitDroptypeIndex, recruitIndex, recruitUpdate, recruitDestroy, recruitAdd, recruitEdit } from '@/api/recruit'
 import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
 
 import Pagination from '@/components/Pagination'
@@ -207,7 +206,7 @@ export default {
           return recruitDroptypeIndex()
         })
         .then(response => {
-          this.category = response.data;
+          this.category = response.data.data;
           this.list = this.list.filter(listItem =>
             this.category.filter(dataItem => { if (listItem.category_id === dataItem.id) listItem.dropContent = dataItem.dropContent })
           )
@@ -243,6 +242,7 @@ export default {
      * 增加
      */
     handleCreate () {
+      this.temp = {};
       this.dialogStatus = 'create'
       this.showDialog = true
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
@@ -268,13 +268,13 @@ export default {
      */
     updateData (Obj, cab) {
       console.log(Obj);
-      newsEdit(Obj).then(res => cab(res))
+      recruitEdit(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 增加
      */
     createData (Obj, cab) {
-      newsAdd(Obj).then(res => cab(res))
+      recruitAdd(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 修改
