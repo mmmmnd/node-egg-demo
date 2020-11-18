@@ -16,7 +16,7 @@
           <h5><%= item.title %></h5>
           <% if(item.children){ %>
             <% item.children.forEach(children =>{ %>
-              <a href="<%= '/'+children.url+"/pid/"+ item + '/cid/' + children.id %>"><%= children.title %></a>
+              <a href="<%= '/'+ children.url+"/pid/"+ item.id + '/cid/' + children.id %>"><%= children.title %></a>
             <% }) %>
           <% } %>
         </li>
@@ -25,10 +25,10 @@
     </div>
     <div class="footer-right">
       <a href="" class="btn wechat-btn">
-        <img src="/public/images/weibo2_icon.png" alt="">官方微博<img src="<%= settingList[0].weiboCode %>" alt="" class="footer-code">
+        <img src="/public/images/weibo2_icon.png" alt="">官方微博<img src="<%= settingsList.weiboCode %>" alt="" class="footer-code">
       </a>
       <a href="" class="btn wechat-btn">
-        <img src="/public/images/wechat2_icon.png" alt="">微信公众号<img src="<%= settingList[0].weChatCode %>" alt="" class="footer-code">
+        <img src="/public/images/wechat2_icon.png" alt="">微信公众号<img src="<%= settingsList.weChatCode %>" alt="" class="footer-code">
       </a>
       <a href="" class="btn oa-btn">
         <img src="/public/images/oa_icon.png" alt="">进入OA系统
@@ -37,7 +37,7 @@
   </div>
   <div class="content-full footer-bottom">
     <div class="content">
-      <p>COPYRIGHT (©) 2020 <%= settingList[0].title %> 备案号：<a href="http://beian.miit.gov.cn/" target="_blank"><%= settingList[0].record %></a></p>
+      <p>COPYRIGHT (©) 2020 <%= settingsList.title %> 备案号：<a href="http://beian.miit.gov.cn/" target="_blank"><%= settingsList.record %></a></p>
       <select class="form-control footer-control">
         <option>==友情链接==</option>
         <option value="JavaScript:;">莫氏科技</option>
@@ -154,8 +154,8 @@
   });
 </script>
 <script type="text/javascript">
-  var longitude = <%= settingList[0].longitude %>;
-  var latitude = <%= settingList[0].latitude %>;
+  var longitude = <%= settingsList.longitude %>;
+  var latitude = <%= settingsList.latitude %>;
   //创建和初始化地图函数：
   function initMap() {
     createMap();//创建地图

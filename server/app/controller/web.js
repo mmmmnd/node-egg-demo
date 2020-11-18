@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-18 08:49:08
+ * @LastEditTime: 2020-11-18 11:48:15
  */
 'use strict';
 const moment = require('moment');
@@ -17,8 +17,9 @@ class WebController extends Controller {
     const { ctx, service } = this
 
     const menuList = await service.menu.list(); // 导航栏菜单
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
+    const newsDetail = await service.news.detail(24, 1); // 公告
 
     const newsList = await service.news.index({}); // newsList数据
     const casesDetail = await service.cases.detail(26); // case数据
@@ -26,7 +27,7 @@ class WebController extends Controller {
     const servicesList = await service.services.list(); // services数据
     const aboutSingleDetail = await service.aboutSingle.detail(2); // about单页数据
 
-    const data = { advertList, menuList, settingList, aboutSingleDetail, servicesList, newsList: newsList.data, casesDetail, casesInfo, moment };
+    const data = { advertList, menuList, settingsList, aboutSingleDetail, servicesList, newsList: newsList.data, casesDetail, casesInfo, newsDetail: newsDetail.data, moment };
     await ctx.render('index/index.ejs', data);
   }
   async about () {
@@ -34,16 +35,16 @@ class WebController extends Controller {
     const { pid, cid } = ctx.params;
 
     const err = await error(pid, cid, this);
-    if (err) return render(ctx);
+    if (err) return render(ctx); 24
 
     const menuList = await service.menu.list(); // 导航栏菜单
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const aboutSingleDetail = await service.aboutSingle.detail(cid); // about单页数据
     const aboutDroptypeList = await service.aboutDroptype.index(cid); // about下拉菜单
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingList, advertList, aboutSingleDetail, aboutDroptypeList, moment, servicesList };
+    const data = { menuList, settingsList, advertList, aboutSingleDetail, aboutDroptypeList, moment, servicesList };
     await ctx.render('about/index.ejs', data);
   }
   async services () {
@@ -55,11 +56,11 @@ class WebController extends Controller {
 
     const menuList = await service.menu.list(); // 导航栏菜单
     const servicesDetail = await service.services.list(cid); // services数据
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingList, servicesDetail, advertList, servicesList }
+    const data = { menuList, settingsList, servicesDetail, advertList, servicesList }
     await ctx.render('services/index.ejs', data);
   }
   async company () {
@@ -71,11 +72,11 @@ class WebController extends Controller {
 
     const menuList = await service.menu.list(); // 导航栏菜单
     const companyDetail = await service.company.detail(cid); // services数据
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingList, companyDetail, advertList, servicesList }
+    const data = { menuList, settingsList, companyDetail, advertList, servicesList }
     await ctx.render('company/index.ejs', data);
   }
   async culture () {
@@ -89,11 +90,11 @@ class WebController extends Controller {
 
     const menuList = await service.menu.list(); // 导航栏菜单
     const cultureDetail = await service.culture.detail(cid, page); // culture数据
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingList, cultureDetail, pages: cultureDetail.meta, advertList, url, urlInfo, moment, servicesList }
+    const data = { menuList, settingsList, cultureDetail, pages: cultureDetail.meta, advertList, url, urlInfo, moment, servicesList }
     await ctx.render('culture/index.ejs', data);
   }
   async culture_info () {
@@ -106,13 +107,13 @@ class WebController extends Controller {
 
     const menuList = await service.menu.list(); // 导航栏菜单
     const papeInfo = await service.culture.info(cid, id); // 详情页数据
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
     await service.culture.updateClick(id, ++papeInfo.current.click); //点击浏览量
 
-    const data = { menuList, settingList, papeInfo, advertList, urlInfo, servicesList, moment }
+    const data = { menuList, settingsList, papeInfo, advertList, urlInfo, servicesList, moment }
     await ctx.render('info/index.ejs', data);
 
   }
@@ -127,11 +128,11 @@ class WebController extends Controller {
 
     const menuList = await service.menu.list(); // 导航栏菜单
     const newsDetail = await service.news.detail(cid, page); // culture数据
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingList, newsDetail, pages: newsDetail.meta, advertList, url, urlInfo, servicesList, moment }
+    const data = { menuList, settingsList, newsDetail, pages: newsDetail.meta, advertList, url, urlInfo, servicesList, moment }
     await ctx.render('news/index.ejs', data);
   }
   async news_info () {
@@ -144,13 +145,13 @@ class WebController extends Controller {
 
     const menuList = await service.menu.list(); // 导航栏菜单
     const papeInfo = await service.news.info(cid, id); // 详情页数据
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
     await service.news.updateClick(id, ++papeInfo.current.click); //点击浏览量
 
-    const data = { menuList, settingList, papeInfo, advertList, urlInfo, servicesList, moment }
+    const data = { menuList, settingsList, papeInfo, advertList, urlInfo, servicesList, moment }
     await ctx.render('info/index.ejs', data);
   }
   async cases () {
@@ -164,11 +165,11 @@ class WebController extends Controller {
 
     const menuList = await service.menu.list(); // 导航栏菜单
     const casesList = await service.cases.list(cid, page); // case数据
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingList, casesList, pages: casesList.meta, advertList, url, urlInfo, servicesList, moment }
+    const data = { menuList, settingsList, casesList, pages: casesList.meta, advertList, url, urlInfo, servicesList, moment }
     await ctx.render('cases/index.ejs', data);
   }
   async cases_info () {
@@ -178,13 +179,13 @@ class WebController extends Controller {
 
     const menuList = await service.menu.list(); // 导航栏菜单
     const papeInfo = await service.cases.info(cid, id); // 详情页数据
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
     await service.cases.updateClick(id, ++papeInfo.current.click); //点击浏览量
 
-    const data = { menuList, settingList, papeInfo, advertList, urlInfo, servicesList, moment }
+    const data = { menuList, settingsList, papeInfo, advertList, urlInfo, servicesList, moment }
     await ctx.render('info/index.ejs', data);
   }
   async recruit () {
@@ -197,11 +198,11 @@ class WebController extends Controller {
     const menuList = await service.menu.list(); // 导航栏菜单
     const recruitDetail = await service.recruit.detail(); // recruit页面数据
     const recruitDroptypeList = await service.recruitDroptype.list(); //  recruit公司数据
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingList, recruitDetail, recruitDroptypeList, advertList, servicesList, moment }
+    const data = { menuList, settingsList, recruitDetail, recruitDroptypeList, advertList, servicesList, moment }
     await ctx.render('recruit/index.ejs', data);
   }
   async contact () {
@@ -212,11 +213,11 @@ class WebController extends Controller {
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
-    const settingList = await service.setting.list(); // 基本设置
+    const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingList, advertList, servicesList }
+    const data = { menuList, settingsList, advertList, servicesList }
     await ctx.render('contact/index.ejs', data);
   }
   async captcha () {

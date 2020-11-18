@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 19:53:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-12 11:04:29
+ * @LastEditTime: 2020-11-18 11:52:19
  */
 'use strict';
 
@@ -26,12 +26,6 @@ module.exports = app => {
       type: STRING(60), // 类型
       defaultValue: '', // 默认值
       comment: '标题', // 备注
-    },
-    url: {
-      allowNull: !1, // 是否为空
-      type: STRING(150), // 类型
-      defaultValue: '#', // 默认值
-      comment: '超链接', // 备注
     },
     filepath: {
       allowNull: !1, // 是否为空
@@ -56,12 +50,6 @@ module.exports = app => {
       type: BOOLEAN, // 类型
       defaultValue: '0', // 默认值
       comment: '对应place为1的轮播图广告id顺序', // 备注
-    },
-    remark: {
-      allowNull: !1, // 是否为空
-      type: STRING, // 类型
-      defaultValue: '', // 默认值
-      comment: '内容', // 备注
     },
     status: {
       allowNull: !1, // 是否为空

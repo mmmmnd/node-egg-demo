@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:21:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-16 14:40:27
+ * @LastEditTime: 2020-11-18 11:55:52
  */
 'use strict';
 
@@ -162,7 +162,8 @@ class CasesService extends Service {
         status: true,
         deleted_at: null
       },
-      limit: cid == 26 ? 5 : 10
+      limit: cid == 26 ? 5 : 10,
+      order: [['sort', 'DESC'], ['id', 'DESC']],
     })
   }
   /**

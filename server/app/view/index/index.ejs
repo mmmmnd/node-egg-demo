@@ -5,12 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:09:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-16 11:08:47
+ * @LastEditTime: 2020-11-18 11:21:22
 -->
 <%- include('/commom/header',{
-  title:settingList?settingList[0].title:"海南昆仑体育文化股份有限公司",
-  Keywords:settingList?settingList[0].keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:settingList?settingList[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  title:settingsList?settingsList.title:"海南昆仑体育文化股份有限公司",
+  Keywords:settingsList?settingsList.keywords:"海南昆仑体育文化股份有限公司",
+  companyDescription:settingsList?settingsList.companyDescription:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <%- include('/commom/indexBanner') %>
@@ -120,18 +120,18 @@
         <div class="title-link"></div>
         <h5>服务案例</h5>
       </div>
-      <a href="/cases/pid/5/cid/26" class="more-btn">查看更多<img src="/public/images/more_icon3.png" alt=""></a>
+      <a href="/cases/pid/25/cid/26" class="more-btn">查看更多<img src="/public/images/more_icon3.png" alt=""></a>
     </div>
 
     <div class="row4-swiper">
       <div class="swiper-wrapper">
         <% casesDetail.forEach(item =>{ %>
         <div class="swiper-slide row4-slide">
-          <a href="/cases_info/pid/5/cid/<%= item.category_id %>/id/<%= item.id %>">
+          <a href="/cases_info/pid/25/cid/<%= item.category_id %>/id/<%= item.id %>">
             <img src="<%= item.filepath %>" alt="" class="row4-img">
             <div class="row4-txt">
               <h5><%= item.cultureTitle %></h5>
-              <p><%= item.created_at %></p>
+              <p><%= moment(item.created_at).format('YYYY-MM-DD') %></p>
             </div>
             <div class="row4-mask"></div>
           </a>
@@ -148,7 +148,7 @@
           <div class="title-link"></div>
           <h5>合作伙伴</h5>
         </div>
-        <a href="/cases/pid/5/cid/27" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
+        <a href="/cases/pid/25/cid/27" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
       </div>
       <h3 class="row5-title">公司汇集来自体育、传媒、广告、<br>会展行业的精英人士</h3>
       <p class="row5-txt">与中视体育娱乐有限公司、爱奇艺、中广天择传媒股份有限公司等国内一流媒体平台达成了战略合作关系</p>
@@ -178,7 +178,10 @@
                 aria-hidden="true">&times;</span></button>
             <h4 class="modal-title" id="myVideos">公司宣传视频</h4>
           </div>
-          <div class="modal-body"></div>
+          <div class="modal-body">
+            <video id="video" poster="/public/images/video_bg.png" controls="controls" autoplay="autoplay"
+              src="<%= settingsList.mp4 %>" />
+          </div>
         </div>
       </div>
     </div>
@@ -207,17 +210,17 @@
               </a>
               <a href="javascript:;" class="cont-icon"><img src="/public/images/qq_icon.png" alt=""></a>
             </div>
-            <h5 class="row7-h5"><%= settingList[0].companyName %></h5>
+            <h5 class="row7-h5"><%= settingsList.companyName %></h5>
           </div>
           <div class="cont-bottom row">
             <div class="col-lg-6">
               <h4>联系方式</h4>
-              <p><%= settingList[0].phone %></p>
-              <p><%= settingList[0].email %></p>
+              <p><%= settingsList.phone %></p>
+              <p><%= settingsList.email %></p>
             </div>
             <div class="col-lg-6">
               <h4>详细地址</h4>
-              <p><%= settingList[0].address %></p>
+              <p><%= settingsList.address %></p>
             </div>
           </div>
         </div>

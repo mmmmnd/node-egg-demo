@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-18 09:30:26
+ * @LastEditTime: 2020-11-18 15:07:26
  */
 'use strict';
 
@@ -117,6 +117,10 @@ module.exports = app => {
   router.delete('/api/recruitDroptype/destroy', jwt, controller.recruitDroptype.destroy)
   router.post('/api/recruitDroptype/edit', jwt, controller.recruitDroptype.edit);
   router.post('/api/recruitDroptype/add', jwt, controller.recruitDroptype.add);
+
+  // settings
+  router.get('/api/settings/list', jwt, controller.settings.list);
+
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);
 

@@ -8,9 +8,9 @@
  * @LastEditTime: 2020-09-02 15:28:24
 -->
 <%- include('/commom/header',{
-  title:settingList?settingList[0].title:"1",
-  Keywords:settingList?settingList[0].keywords:"海南昆111仑体育文化股份有限公司",
-  companyDescription:settingList?settingList[0].companyDescription:"海南111111昆仑体育文化股份有限公司",
+  title:settingsList?settingsList.title:"1",
+  Keywords:settingsList?settingsList.keywords:"海南昆111仑体育文化股份有限公司",
+  companyDescription:settingsList?settingsList.companyDescription:"海南111111昆仑体育文化股份有限公司",
 }) %>
 <%- include('/commom/banner') %>
 
@@ -29,27 +29,27 @@
               </a>
               <a href="javascript:;" class="cont-icon cont-hover">
                 <img src="/public/images/weibo_icon.png" alt="">
-                <img src="<%= settingList[0].weChatCode %>" alt="" class="qrcode-img">
+                <img src="<%= settingsList.weChatCode %>" alt="" class="qrcode-img">
               </a>
               <a href="javascript:;" class="cont-icon cont-hover">
                 <img src="/public/images/wechat_icon.png" alt="">
-                <img src="<%= settingList[0].weChatCode %>" alt="" class="qrcode-img">
+                <img src="<%= settingsList.weChatCode %>" alt="" class="qrcode-img">
               </a>
               <a href="javascript:;" class="cont-icon">
                 <img src="/public/images/qq_icon.png" alt="">
               </a>
             </div>
-            <h5 class="row7-h5"><%= settingList[0].companyName %></h5>
+            <h5 class="row7-h5"><%= settingsList.companyName %></h5>
           </div>
           <div class="cont-bottom row">
             <div class="col-lg-6">
               <h4>联系方式</h4>
-              <p><%= settingList[0].phone %></p>
-              <p><%= settingList[0].email %></p>
+              <p><%= settingsList.phone %></p>
+              <p><%= settingsList.email %></p>
             </div>
             <div class="col-lg-6">
               <h4>详细地址</h4>
-              <p><%= settingList[0].address %></p>
+              <p><%= settingsList.address %></p>
             </div>
           </div>
         </div>

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:03:35
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-19 09:11:45
+ * @LastEditTime: 2020-11-18 15:05:46
 -->
 <!DOCTYPE html>
 <html>
@@ -33,10 +33,10 @@
 
   <div class="content-full header">
     <div class="content">
-      <a href="/"><img src="<%= settingList[0].logo %>" alt="" class="logo"></a>
+      <a href="/"><img src="<%= settingsList.logo %>" alt="" class="logo"></a>
       <div class="header-right">
-        <a href="javascript:;" class="language"><img src="/public/images/header_icon.png" alt=""
-            class="language_icon"></a>
+        <!-- <a href="javascript:;" class="language"><img src="/public/images/header_icon.png" alt=""
+            class="language_icon"></a> -->
         <a href="javascript:;" class="menu" data-toggle="modal" data-target="#myModal"><img
             src="/public/images/icons-dark-menu.png" alt="" class="menu_icon"></a>
       </div>
@@ -45,9 +45,9 @@
         <div class="modal-body">
           <div class="row menu-main">
             <div class="col-lg-3">
-              <a href="/"><img src="<%= settingList[0].logo %>" alt="" class="modal-logo"></a>
+              <a href="/"><img src="<%= settingsList.menuLogo %>" alt="" class="modal-logo"></a>
 
-              <p class="modal-p1"><%= settingList[0].companyDescription %></p>
+              <p class="modal-p1"><%= settingsList.companyDescription %></p>
               <div class="search">
                 <input type="text" class="search-input" placeholder="输入检索关键字...">
                 <a href="javascript:;" class="search-btn" alt="搜索"></a>
@@ -56,7 +56,7 @@
             <div class="col-lg-4">
               <ul class="menu-ul">
                 <% menuList.forEach((item,index) =>{ %>
-                <li class="menu-li">
+                <li class="menu-li <%= item.id == ctx.params.pid?'active':'' %>">
                   <a href="javascript:;"><%= item.title %></a><span class="menu-link"></span>
                   <div class="submenu-nav">
                     <ul>
@@ -77,29 +77,29 @@
             <div class="col-lg-3">
               <div class="cont-group">
                 <h5>地址</h5>
-                <p><%= settingList[0].address %></p>
+                <p><%= settingsList.address %></p>
               </div>
               <div class="cont-group">
                 <h5>电话</h5>
-                <p><%= settingList[0].phone %></p>
+                <p><%= settingsList.phone %></p>
               </div>
               <div class="cont-group">
                 <h5>邮箱</h5>
-                <p><%= settingList[0].email %></p>
+                <p><%= settingsList.email %></p>
               </div>
             </div>
             <div class="col-lg-2">
               <a href="javascript:;" class="cont-icon cont-hover">
                 <img src="/public/images/weibo_icon.png" alt="">
-                <img src="<%= settingList[0].weChatCode %>" alt="" class="qrcode-img">
+                <img src="<%= settingsList.weChatCode %>" alt="" class="qrcode-img">
               </a>
               <a href="javascript:;" class="cont-icon cont-hover">
                 <img src="/public/images/wechat_icon.png" alt="">
-                <img src="<%= settingList[0].weiboCode %>" alt="" class="qrcode-img">
+                <img src="<%= settingsList.weiboCode %>" alt="" class="qrcode-img">
               </a>
               <a href="javascript:;" class="cont-icon">
                 <img src="/public/images/qq_icon.png" alt="">
-                <img src="<%= settingList[0].weiboCode %>" alt="" class="qrcode-img">
+                <img src="<%= settingsList.weiboCode %>" alt="" class="qrcode-img">
               </a>
             </div>
           </div>
@@ -108,13 +108,13 @@
     </div>
   </div>
   <div class="header2">
-    <h3><img src="<%= settingList[0].logo %>" alt=""></h3>
+    <h3><img src="<%= settingsList.logo %>" alt=""></h3>
     <a href="javascript:;" class="right_btn click-sidebar"><img src="/public/images/icons-dark-menu.png" alt=""></a>
 
     <div class="menu_box">
       <div class="mask2"></div>
       <div class="sidebar">
-        <img src="<%= settingList[0].logo %>" class="menu-logo" alt="">
+        <img src="<%= settingsList.logo %>" class="menu-logo" alt="">
         <form action="">
           <div class="header_search_box">
             <img class="header_search_img" src="/public/images/search_icon2.png" alt="">

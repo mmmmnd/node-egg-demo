@@ -14,13 +14,13 @@
               <div class="news-k" id="scrollDiv">
                   <strong>通知</strong>
                   <ul class="carousel-inner2">
-                    <% advertList.forEach((item,index)=>{ %>
+                    <% newsDetail.forEach(item =>{ %>
                       <li class="item active">
                           <div>
-                              <a href="<%= item.url %>">
-                                  <p><%= item.remark %></p>
-                                  <span><%= item.created_at %></span>
-                              </a>
+                            <a href="/news_info/pid/21/cid/<%= item.category_id %>/id/<%= item.id %>">
+                              <p><%= item.cultureTitle %></p>
+                              <span><%= moment(item.created_at).format('YYYY-MM-DD') %></span>
+                            </a>
                           </div>
                       </li>
                     <% }) %>
