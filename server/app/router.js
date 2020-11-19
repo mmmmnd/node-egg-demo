@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-18 15:07:26
+ * @LastEditTime: 2020-11-18 15:55:11
  */
 'use strict';
 
@@ -120,6 +120,7 @@ module.exports = app => {
 
   // settings
   router.get('/api/settings/list', jwt, controller.settings.list);
+  router.post('/api/settings/edit', jwt, controller.settings.edit);
 
   // upload
   router.post('/api/upload/create', jwt, controller.upload.create);

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:11:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-27 14:45:29
+ * @LastEditTime: 2020-11-19 10:48:54
  */
 'use strict';
 
@@ -84,7 +84,7 @@ class UploadService extends Service {
    * @param { Object } stream 文件流
    */
   async create (stream) {
-    const REG = /\.(png|jpg|gif|jpeg|webp)$/;
+    const REG = /\.(png|jpg|gif|jpeg|webp|mp4)$/;
     const time = moment(Date.now()).format('YYYYMMDD');
     const PATH = `app/public/uploads/${time}`;
     const filename = Date.now() + path.extname(stream.filename).toLocaleLowerCase();
