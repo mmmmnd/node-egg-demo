@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-19 09:36:40
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-19 11:24:47
+ * @LastEditTime: 2020-11-19 11:42:41
 -->
 <template>
   <el-form-item :label="label">
@@ -16,8 +16,7 @@
                :on-progress="setAvatarProgress"
                :on-success="handleAvatarSuccess">
       <img v-if="src"
-           :src="src"
-           class="avatar">
+           :src="src">
       <i v-else
          class="el-icon-plus avatar-uploader-icon"></i>
     </el-upload>

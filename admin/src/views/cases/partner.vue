@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-12 16:24:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-16 11:21:15
+ * @LastEditTime: 2020-11-19 14:55:40
 -->
 <template>
   <div class="app-container">
@@ -199,6 +199,7 @@ export default {
      * 增加
      */
     handleCreate () {
+      this.temp = {}
       this.dialogStatus = 'create'
       this.showDialog = true
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()

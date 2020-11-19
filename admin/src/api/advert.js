@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-04 17:03:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-05 10:50:35
+ * @LastEditTime: 2020-11-19 14:42:31
  */
 import request from '@/utils/request'
 
@@ -37,6 +37,14 @@ export function advertUpdate (data) {
   return request({
     url: '/advert/update',
     method: 'put',
+    data
+  })
+}
+
+export function advertEdit (data) {
+  return request({
+    url: '/advert/edit',
+    method: 'post',
     data
   })
 }
