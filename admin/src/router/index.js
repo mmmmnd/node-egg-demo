@@ -162,7 +162,7 @@ export const constantRoutes = [
   {
     path: '/recruit',
     component: Layout,
-    redirect: '/recruit/recruit',
+    redirect: '/recruit/index',
     name: 'recruit',
     meta: { title: '人力资源', icon: 'hr' },
     children: [
@@ -195,12 +195,23 @@ export const constantRoutes = [
   },
 
   {
-    path: 'external-link',
+    path: '/setting',
     component: Layout,
+    redirect: '/setting/setting',
+    name: 'setting',
+    meta: { title: '设置', icon: 'el-icon-setting' },
     children: [
       {
-        path: 'https://panjiachen.github.io/vue-element-admin-site/#/',
-        meta: { title: 'External Link', icon: 'link', noCache: true }
+        path: 'bsic',
+        name: 'Bsic',
+        component: () => import('@/views/setting/bsic'),
+        meta: { title: '基本设置', icon: '' }
+      },
+      {
+        path: 'advertising',
+        name: 'Advertising',
+        component: () => import('@/views/setting/advertising'),
+        meta: { title: '广告设置', icon: '', noCache: true }
       }
     ]
   },
