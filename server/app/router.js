@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-18 15:55:11
+ * @LastEditTime: 2020-11-19 15:44:55
  */
 'use strict';
 
@@ -36,7 +36,7 @@ module.exports = app => {
   router.get('/captcha', controller.web.captcha);
 
   // message
-  router.post('/api/message/userInfo', controller.message.userInfo);
+  router.post('/api/message/create', controller.message.create);
 
   // admin
   router.post('/api/admin/create', controller.admin.create);
@@ -132,13 +132,6 @@ module.exports = app => {
   router.get('/api/advert/detail', jwt, controller.advert.detail)
   router.delete('/api/advert/destroy', jwt, controller.advert.destroy);
 
-  router.get('/api/home/edit', controller.home.edit);
-
-  app.resources('home', '/home', app.controller.home);
+  // 404
   router.get('*', controller.web.error); // 404
-
-
-  // router.post('/home/login', controller.home.login);
-  // router.post('/home/indexs', jwt, controller.home.indexs);
-
 };

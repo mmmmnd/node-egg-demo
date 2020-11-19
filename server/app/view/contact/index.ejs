@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-10 17:26:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-02 15:28:24
+ * @LastEditTime: 2020-11-19 15:50:02
 -->
 <%- include('/commom/header',{
   title:settingsList?settingsList.title:"1",
@@ -118,9 +118,11 @@
     var title = $('input[name=title]').val();
     var remarks = $('textarea[name=remarks]').val();
     var captcha = $('input[name=captcha]').val();
-    $.post('/api/message/userInfo', { name, phone, email, title, remarks, captcha }, res => {
+
+    $.post('/api/message/create', { name, phone, email, title, remarks, captcha }, res => {
       if (res.code === 0) {
-        alert(res.msg)
+        alert(res.msg);
+        location.reload();
       } else {
         alert(res.msg);
         $(".yzm-img img").click();
