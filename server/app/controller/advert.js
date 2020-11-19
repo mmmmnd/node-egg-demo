@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-10-23 11:10:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-05 10:47:05
+ * @LastEditTime: 2020-11-19 14:40:03
  */
 'use strict';
 
@@ -28,6 +28,15 @@ class AdvertController extends Controller {
     const params = this.ctx.request.body;
 
     const advert = await this.ctx.service.advert.add(params)
+    await this.ctx.helper.checkData(advert);
+  }
+  /**
+   * 编辑
+   */
+  async edit () {
+    const params = this.ctx.request.body;
+
+    const advert = await this.ctx.service.advert.edit(params)
     await this.ctx.helper.checkData(advert);
   }
   /**

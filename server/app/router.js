@@ -126,6 +126,7 @@ module.exports = app => {
   router.post('/api/upload/create', jwt, controller.upload.create);
 
   // advert
+  router.post('/api/advert/edit', jwt, controller.advert.edit);
   router.post('/api/advert/add', jwt, controller.advert.add)
   router.put('/api/advert/update', jwt, controller.advert.update)
   router.get('/api/advert/detail', jwt, controller.advert.detail)

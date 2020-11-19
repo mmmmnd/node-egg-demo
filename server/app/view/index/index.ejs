@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:09:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-18 11:21:22
+ * @LastEditTime: 2020-11-19 11:41:01
 -->
 <%- include('/commom/header',{
   title:settingsList?settingsList.title:"海南昆仑体育文化股份有限公司",
@@ -202,11 +202,11 @@
               <a href="contact2.html" class="cont-icon"><img src="/public/images/mes_icon.png" alt=""></a>
               <a href="javascript:;" class="cont-icon cont-hover">
                 <img src="/public/images/weibo_icon.png" alt="">
-                <img src="/public/images/qrcode2.png" alt="" class="qrcode-img">
+                <img src="<%= settingsList.weiboCode %>" alt="" class="qrcode-img">
               </a>
               <a href="javascript:;" class="cont-icon cont-hover">
                 <img src="/public/images/wechat_icon.png" alt="">
-                <img src="/public/images/qrcode.png" alt="" class="qrcode-img">
+                <img src="<%= settingsList.weChatCode %>" alt="" class="qrcode-img">
               </a>
               <a href="javascript:;" class="cont-icon"><img src="/public/images/qq_icon.png" alt=""></a>
             </div>

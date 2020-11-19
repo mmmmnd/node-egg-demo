@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:11:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-05 16:56:31
+ * @LastEditTime: 2020-11-19 14:45:29
  */
 'use strict';
 
@@ -19,6 +19,10 @@ class AdvertService extends Service {
    */
   async list () {
     return await this.ctx.model.MzcAdvert.findAll({
+      where: {
+        status: true,
+        deleted_at: null
+      },
       order: [['sort', 'DESC']],
     });
   }
@@ -44,7 +48,7 @@ class AdvertService extends Service {
   */
   async add (params) {
     const {
-      title = '',
+      title,
       url = '',
       filepath = '',
       place = '',
@@ -61,6 +65,43 @@ class AdvertService extends Service {
       parentId,
       serId,
       remark
+    });
+
+    return { httpStatus: HttpStatus.OK }
+  }
+  /**
+  * 编辑
+  * @param { Object } params 参数
+  */
+  async edit (params) {
+    const {
+      id,
+      title,
+      url,
+      filepath,
+      place,
+      parentId,
+      serId,
+      remark,
+      status,
+      sort
+    } = params;
+
+    await this.ctx.model.MzcAdvert.update({
+      title,
+      url,
+      filepath,
+      place,
+      parentId,
+      serId,
+      remark,
+      status,
+      sort
+    }, {
+      where: {
+        id,
+        deleted_at: null
+      },
     });
 
     return { httpStatus: HttpStatus.OK }
