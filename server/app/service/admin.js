@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-17 15:25:06
+ * @LastEditTime: 2020-11-23 09:07:27
  */
 'use strict';
 
@@ -14,10 +14,10 @@ const Service = require('egg').Service;
 const HttpStatus = require('../utils/httpStatus');
 
 class AdminService extends Service {
-  /**
-   * 注册
-   * @param { Object || String } params 用户信息
-   */
+	/**
+	 * 注册
+	 * @param { Object || String } params 用户信息
+	 */
 	async create (params) {
 		const { ctx } = this;
 
@@ -70,18 +70,20 @@ class AdminService extends Service {
 			}, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
 
 			//获取redis保存的token
-			const redisGetToken = await ctx.app.redis.get(ctx.app.config.usetToken);
+			const redisGetToken = await ctx.app.redis.hget(ctx.app.config.usetToken, ctx.app.config.usetToken + admin.id,);
 			if (redisGetToken) {
 				//校验token令牌 secret -> 加密类型 params -> jwt参数
 				const redisToken = await ctx.app.jwt.verify(redisGetToken, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
-				if (redisToken.userId === admin.id) {
-					return { msg: '用户已登录！请半小时后再重新登录', errorStatus: HttpStatus.FORBIDDEN, code: 50012 };
-				} else {
-					return { msg: '未知错误！', errorStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-				}
+
+				return redisToken.userId === admin.id
+					? { msg: '用户已登录！请半小时后再重新登录', errorStatus: HttpStatus.FORBIDDEN, code: 50012 }
+					: { msg: '未知错误！', errorStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+
 			} else {
 				//保存token 设置过期时间
-				await ctx.app.redis.set(ctx.app.config.usetToken, token);
+				// await ctx.app.redis.set(ctx.app.config.usetToken + admin.id, token);
+				await ctx.app.redis.hset(ctx.app.config.usetToken, ctx.app.config.usetToken + admin.id, token);
+
 				await ctx.app.redis.expire(ctx.app.config.usetToken, ctx.app.config.jwt.expired);
 				return { data: { token }, msg: '登录成功！' };
 			}
@@ -92,9 +94,9 @@ class AdminService extends Service {
 	}
 
 	/**
-   * 查找用户信息
-   * @param { String } params token
-   */
+	 * 查找用户信息
+	 * @param { String } params token
+	 */
 	async current (params) {
 		const { ctx } = this;
 
@@ -107,9 +109,9 @@ class AdminService extends Service {
 	}
 
 	/**
-   * 退出
-   * @param { String } params token
-   */
+	 * 退出
+	 * @param { String } params token
+	 */
 	async logout (params) {
 		const { ctx } = this;
 
