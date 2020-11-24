@@ -5,33 +5,31 @@
  * @version: 1.0.0
  * @Date: 2020-09-01 09:47:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-17 15:22:40
+ * @LastEditTime: 2020-11-24 15:59:55
  */
 'use strict'
-
 const HttpStatus = require('../utils/httpStatus');
 
 module.exports = (options) => {
   return async (ctx, next) => {
-    const redisToken = await ctx.app.redis.get(ctx.app.config.usetToken);
-    const token = ctx.get(ctx.app.config.usetToken);
+    try {
+      const token = await ctx.get(ctx.app.config.usetToken);
+      const userToken = await ctx.app.jwt.verify(token, options.secret, ctx.app.config.jwt.params); //校验token
+      const redisToken = await ctx.app.redis.hget(ctx.app.config.usetToken, ctx.app.config.usetToken + userToken.userId); //获取userToken
 
-    if (token === redisToken) {
-      try {
-        await ctx.app.redis.expire(ctx.app.config.usetToken, ctx.app.config.jwt.expired) // 未响应30分钟后删除token
-        ctx.app.jwt.verify(token, options.secret, ctx.app.config.jwt.params);
+      if (token === redisToken) {
+        await ctx.app.redis.expire(ctx.app.config.usetToken + userToken.userId, ctx.app.config.expired) // 未响应30分钟后删除token
         await next();
-      } catch (e) {
-        await ctx.helper.checkData({ msg: e.message, errorStatus: HttpStatus.INTERNAL_SERVER_ERROR })
-      }
-    } else if (!token) {
-      await ctx.helper.checkData({ msg: '您没有权限访问该接口!', errorStatus: HttpStatus.UNAUTHORIZED })
-    } else if (!redisToken) {
-      await ctx.helper.checkData({ msg: 'token 已过期! 请重新获取令牌', errorStatus: HttpStatus.UNAUTHORIZED, code: 50014 })
-    } else if (token !== redisToken) {
-      await ctx.helper.checkData({ msg: 'token 信息不一致', errorStatus: HttpStatus.UNAUTHORIZED, code: 50008 })
-    } else {
-      await ctx.helper.checkData({ msg: '未知错误！', errorStatus: HttpStatus.INTERNAL_SERVER_ERROR });
+      } else if (redisToken !== token)
+        await ctx.helper.checkData({ msg: 'token 已过期! 请重新获取令牌', errorStatus: HttpStatus.UNAUTHORIZED, code: 50014 })
+
+    } catch (error) {
+      if (error.message == 'jwt must be provided')
+        await ctx.helper.checkData({ msg: '您没有权限访问该接口!', errorStatus: HttpStatus.UNAUTHORIZED })
+      else if (error.message == 'invalid signature')
+        await ctx.helper.checkData({ msg: 'token信息不一致！', errorStatus: HttpStatus.UNAUTHORIZED, code: 50008 })
+      else
+        await ctx.helper.checkData({ msg: error.message, errorStatus: HttpStatus.INTERNAL_SERVER_ERROR });
     }
   }
 };

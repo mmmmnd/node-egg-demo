@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-23 09:07:27
+ * @LastEditTime: 2020-11-24 15:39:51
  */
 'use strict';
 
@@ -81,10 +81,8 @@ class AdminService extends Service {
 
 			} else {
 				//保存token 设置过期时间
-				// await ctx.app.redis.set(ctx.app.config.usetToken + admin.id, token);
 				await ctx.app.redis.hset(ctx.app.config.usetToken, ctx.app.config.usetToken + admin.id, token);
-
-				await ctx.app.redis.expire(ctx.app.config.usetToken, ctx.app.config.jwt.expired);
+				await ctx.app.redis.expire(ctx.app.config.usetToken, ctx.app.config.expired);
 				return { data: { token }, msg: '登录成功！' };
 			}
 
@@ -115,9 +113,10 @@ class AdminService extends Service {
 	async logout (params) {
 		const { ctx } = this;
 
-		const redisToken = await ctx.app.redis.get(ctx.app.config.usetToken);
+		const userToken = await ctx.app.jwt.verify(params, ctx.app.config.jwt.secret, ctx.app.config.jwt.params); //校验token
+		const redisToken = await ctx.app.redis.hget(ctx.app.config.usetToken, ctx.app.config.usetToken + userToken.userId); //获取userToken
 		if (redisToken === params) {
-			await ctx.app.redis.del(ctx.app.config.usetToken)
+			await ctx.app.redis.hdel(ctx.app.config.usetToken, ctx.app.config.usetToken + userToken.userId);
 			return { msg: '退出登录成功', errorStatus: HttpStatus.OK, code: 0 };
 		} else {
 			return { msg: '非法请求！', errorStatus: HttpStatus.INTERNAL_SERVER_ERROR };
