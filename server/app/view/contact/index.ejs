@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-10 17:26:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-19 15:50:02
+ * @LastEditTime: 2020-11-25 09:39:50
 -->
 <%- include('/commom/header',{
   title:settingsList?settingsList.title:"1",
@@ -25,18 +25,18 @@
           <div class="cont-top">
             <div class="row7-icon">
               <a href="contact2.html" class="cont-icon">
-                <img src="/public/images/mes_icon.png" alt="">
+                <img src="" alt="" data-src="/public/images/mes_icon.png">
               </a>
               <a href="javascript:;" class="cont-icon cont-hover">
-                <img src="/public/images/weibo_icon.png" alt="">
-                <img src="<%= settingsList.weChatCode %>" alt="" class="qrcode-img">
+                <img src="" alt="" data-src="/public/images/weibo_icon.png">
+                <img src="" alt="" class="qrcode-img" data-src="<%= settingsList.weChatCode %>">
               </a>
               <a href="javascript:;" class="cont-icon cont-hover">
-                <img src="/public/images/wechat_icon.png" alt="">
-                <img src="<%= settingsList.weChatCode %>" alt="" class="qrcode-img">
+                <img src="" alt="" data-src="/public/images/wechat_icon.png">
+                <img src="" alt="" class="qrcode-img" data-src="<%= settingsList.weChatCode %>">
               </a>
               <a href="javascript:;" class="cont-icon">
-                <img src="/public/images/qq_icon.png" alt="">
+                <img src="" alt="" data-src="/public/images/qq_icon.png">
               </a>
             </div>
             <h5 class="row7-h5"><%= settingsList.companyName %></h5>
@@ -94,11 +94,11 @@
               <input type="text" class="form-control" placeholder="请输入计算结果" name="captcha">
             </div>
             <div class="form-group col-lg-4 yzm-img">
-              <img src="/captcha?height=38&amp;width=137&amp;fontSize=50"
-                onclick="this.src='/captcha?height=38&amp;width=137&amp;fontSize=50&amp;'+Math.random();">
+              <img src="" onclick="this.src='/captcha?height=38&amp;width=137&amp;fontSize=50&amp;'+Math.random();"
+                data-src="/captcha?height=38&amp;width=137&amp;fontSize=50">
             </div>
             <div class="form-group col-lg-4">
-              <a href="javascript:;" class="mes-btn" onclick="postUserInfo()">提交</a>
+              <a href="javascript:;" class="mes-btn" id="mes-btn">提交</a>
             </div>
           </div>
         </div>
@@ -110,23 +110,3 @@
 <%- include('/commom/serInfo') %>
 
 <%- include('/commom/footer') %>
-<script>
-  function postUserInfo() {
-    var name = $('input[name=name]').val();
-    var phone = $('input[name=phone]').val();
-    var email = $('input[name=email]').val();
-    var title = $('input[name=title]').val();
-    var remarks = $('textarea[name=remarks]').val();
-    var captcha = $('input[name=captcha]').val();
-
-    $.post('/api/message/create', { name, phone, email, title, remarks, captcha }, res => {
-      if (res.code === 0) {
-        alert(res.msg);
-        location.reload();
-      } else {
-        alert(res.msg);
-        $(".yzm-img img").click();
-      }
-    })
-  }
-</script>

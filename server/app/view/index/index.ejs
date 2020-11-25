@@ -29,7 +29,7 @@
         <a href="/about/pid/1/cid/2" class="row-btn">查看详情</a>
       </div>
       <div class="col-lg-6 row1-right">
-        <img src="/public/images/about.png" alt="" class="about-img">
+        <img src="" alt="" class="about-img" data-src="/public/images/about.png">
       </div>
     </div>
   </div>
@@ -64,11 +64,11 @@
               <h5><%= menuList[1].children[index].title %></h5>
               <p><%= item.companyDescription %></p>
               <a href="/services/pid/7/cid/<%= item.category_id %>" class="row2-btn">
-                <img src="/public/images/more_icon.png" alt="">
+                <img src="" alt="" data-src="/public/images/more_icon.png">
               </a>
             </div>
             <div class="row2-border"></div>
-            <img src="<%= item.servicesImage %>" alt="" class="row2-img">
+            <img src="" alt="" class="row2-img" data-src="<%= item.servicesImage %>">
           </div>
           <% }) %>
         </div>
@@ -82,7 +82,7 @@
           <div class="title-link"></div>
           <h5>新闻中心</h5>
         </div>
-        <a href="/news/pid/21/cid/22" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
+        <a href="/news/pid/21/cid/22" class="more-btn">查看更多<img src="" alt="" data-src="/public/images/more_icon2.png"></a>
       </div>
       <div class="row3-swiper">
         <div class="swiper-wrapper">
@@ -92,14 +92,14 @@
               <div class="row3-img">
                 <% menutitle = menuList[4].children.find(menuItem => { if( menuItem.id === item.category_id ) return menuItem }) %>
                 <span class="news-tab"><%= menutitle.title %></span>
-                <img src="<%= item.filepath %>" alt="">
+                <img src="" alt="" data-src="<%= item.filepath %>">
               </div>
               <div class="row3-txt">
                 <h5><%= item.cultureTitle %></h5>
                 <p><%= item.companyDescription %></p>
                 <div class="row3-data">
                   <p><%= moment(item.created_at).format('YYYY-MM-DD') %></p>
-                  <img src="/public/images/news_icon.png" alt="">
+                  <img src="" alt="" data-src="/public/images/news_icon.png">
                 </div>
               </div>
             </a>
@@ -120,7 +120,7 @@
         <div class="title-link"></div>
         <h5>服务案例</h5>
       </div>
-      <a href="/cases/pid/25/cid/26" class="more-btn">查看更多<img src="/public/images/more_icon3.png" alt=""></a>
+      <a href="/cases/pid/25/cid/26" class="more-btn">查看更多<img src="" alt="" data-src="/public/images/more_icon3.png"></a>
     </div>
 
     <div class="row4-swiper">
@@ -128,7 +128,7 @@
         <% casesDetail.forEach(item =>{ %>
         <div class="swiper-slide row4-slide">
           <a href="/cases_info/pid/25/cid/<%= item.category_id %>/id/<%= item.id %>">
-            <img src="<%= item.filepath %>" alt="" class="row4-img">
+            <img src="" alt="" class="row4-img" data-src="<%= item.filepath %>">
             <div class="row4-txt">
               <h5><%= item.cultureTitle %></h5>
               <p><%= moment(item.created_at).format('YYYY-MM-DD') %></p>
@@ -157,7 +157,7 @@
           <% casesInfo.forEach(item =>{ %>
           <li>
             <a href="javascript:;">
-              <img src="<%= item.filepath %>" alt="">
+              <img src="" alt="" data-src="<%= item.filepath %>">
             </a>
           </li>
           <% }) %>
@@ -167,9 +167,9 @@
   </div>
   <div class="content-full row6">
     <a href="javascript:;" class="video-btn" data-toggle="modal" data-target="#videos">
-      <img src="/public/images/play_icon.png" alt="">
+      <img src="" alt="" data-src="/public/images/play_icon.png">
     </a>
-    <img src="/public/images/video_bg.png" alt="" class="video-img">
+    <img src="" alt="" class="video-img" data-src="/public/images/video_bg.png">
     <div class="modal fade" id="videos" tabindex="-1" role="dialog" aria-labelledby="myVideos">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -193,22 +193,22 @@
           <div class="title-link"></div>
           <h5>联系我们</h5>
         </div>
-        <a href="/contact/pid/7/cid/32" class="more-btn">查看更多<img src="/public/images/more_icon2.png" alt=""></a>
+        <a href="/contact/pid/7/cid/32" class="more-btn">查看更多<img src="" alt="" data-src="/public/images/more_icon2.png"></a>
       </div>
       <div class="row7-main">
         <div class="row7-left">
           <div class="cont-top">
             <div class="row7-icon">
-              <a href="contact2.html" class="cont-icon"><img src="/public/images/mes_icon.png" alt=""></a>
+              <a href="contact2.html" class="cont-icon"><img src="" alt="" data-src="/public/images/mes_icon.png"></a>
               <a href="javascript:;" class="cont-icon cont-hover">
-                <img src="/public/images/weibo_icon.png" alt="">
-                <img src="<%= settingsList.weiboCode %>" alt="" class="qrcode-img">
+                <img src="" alt="" data-src="/public/images/weibo_icon.png">
+                <img src="" alt="" class="qrcode-img" data-src="<%= settingsList.weiboCode %>">
               </a>
               <a href="javascript:;" class="cont-icon cont-hover">
-                <img src="/public/images/wechat_icon.png" alt="">
-                <img src="<%= settingsList.weChatCode %>" alt="" class="qrcode-img">
+                <img src="" alt="" data-src="/public/images/wechat_icon.png">
+                <img src="" alt="" class="qrcode-img" data-src="<%= settingsList.weChatCode %>">
               </a>
-              <a href="javascript:;" class="cont-icon"><img src="/public/images/qq_icon.png" alt=""></a>
+              <a href="javascript:;" class="cont-icon"><img src="" alt="" data-src="/public/images/qq_icon.png"></a>
             </div>
             <h5 class="row7-h5"><%= settingsList.companyName %></h5>
           </div>

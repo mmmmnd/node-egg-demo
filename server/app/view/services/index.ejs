@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-22 09:20:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-30 14:52:20
+ * @LastEditTime: 2020-11-25 08:33:22
 -->
 
 <%- include('/commom/header',{
@@ -34,7 +34,7 @@ ctx.params.cid == 8 ?
           <h5><%= servicesDetail[0].title %></h5>
           <p><%= servicesDetail[0].companyDescription %></p>
         </div>
-        <img src="<%= servicesDetail[0].servicesImage %>" alt="" class="ser-top-img">
+        <img src="" alt="" class="ser-top-img" data-src="<%= servicesDetail[0].servicesImage %>">
       </div>
       <%- include('/commom/serInfoPhoto',{ id }) %>
       <div class="ser-info-text">

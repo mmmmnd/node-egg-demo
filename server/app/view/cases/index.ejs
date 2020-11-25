@@ -28,7 +28,7 @@
                   <a href="/<%= urlInfo +'/id/'+ item.id %>">
                     <% menutitle = menuList[1].children.find(menuItem => { if( menuItem.id === item.type ) return menuItem }) %>
                     <span><%= menutitle.title %></span>
-                    <img src="<%= item.filepath %>" alt="" class="row4-img">
+                    <img src="" alt="" class="row4-img" data-src="<%= item.filepath %>">
                     <div class="ser-info-txt">
                       <h5><%= item.cultureTitle %></h5>
                       <p><%= moment(item.created_at).format('YYYY-MM-DD')%></p>
@@ -46,7 +46,7 @@
               <% if(item.category_id == '27'){ %>
               <li>
                 <a href="javascript:;">
-                  <img src="<%= item.filepath %>" alt="">
+                  <img src="" alt="" data-src="<%= item.filepath %>">
                 </a>
               </li>
               <% } %>

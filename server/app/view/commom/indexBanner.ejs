@@ -41,12 +41,12 @@
     <% advertList.forEach((item,index)=>{ %>
       <% if(item.place === 0){ %>
         <div class="swiper-slide">
-          <a href="<%= item.url %>" target="_blank"><img src="<%= item.filepath %>" alt="" class="banner-img"></a>
+          <a href="<%= item.url %>" target="_blank"><img src="" alt="" class="banner-img" data-src="<%= item.filepath %>"></a>
         </div>
       <% } %>
     <% }) %>
   </div>
   <div class="banner-right">
-      <a href="javascript:;" class="click-jump"><img src="/public/images/bottom_icon.png" alt=""></a>
+      <a href="javascript:;" class="click-jump"><img src="" alt="" data-src="/public/images/bottom_icon.png"></a>
   </div>
 </div>

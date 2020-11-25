@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:23:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-25 10:24:38
+ * @LastEditTime: 2020-11-25 08:36:47
 --> 
 <% var isSwiper;%>
 <div class="ser-info-photo">
@@ -14,7 +14,7 @@
       <% if(item.place === 3 && item.parentId == ctx.params.pid && item.serId == id){ %>
         <% isSwiper = 1; %>
         <div class="swiper-slide">
-          <img src="<%= item.filepath %>" alt="" class="swiper-photo">
+          <img src="" alt="" class="swiper-photo" data-src="<%= item.filepath %>">
           <h5><%= item.title %></h5>
         </div>
       <% } %>

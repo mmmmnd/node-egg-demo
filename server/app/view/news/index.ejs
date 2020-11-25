@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-12 11:51:04
+ * @LastEditTime: 2020-11-25 08:32:40
 -->
 <%- include('/commom/header',{
   title:newsDetail?newsDetail.data[0].title:"11海南昆仑体育文化股份有限公司",
@@ -23,7 +23,7 @@
         <ul>
           <% newsDetail.data.forEach(item=>{ %>
           <li>
-            <img src="<%= item.filepath %>" alt="" class="news-list-img">
+            <img src="" alt="" class="news-list-img" data-src="<%= item.filepath %>">
             <div class="news-list-right">
               <em><%= moment(item.created_at).format('YYYY-MM-DD') %></em>
               <h5><a href="<%= urlInfo +'/id/'+ item.id %>"><%= item.cultureTitle %></a></h5>
