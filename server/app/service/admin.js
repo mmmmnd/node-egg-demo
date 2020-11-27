@@ -5,10 +5,11 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-24 15:39:51
+ * @LastEditTime: 2020-11-27 17:51:00
  */
 'use strict';
 
+const moment = require('moment');
 const bcrypt = require('bcryptjs')
 const Service = require('egg').Service;
 const HttpStatus = require('../utils/httpStatus');
@@ -35,6 +36,7 @@ class AdminService extends Service {
 			const create = new ctx.model.MzcAdmin;
 			create.nickname = params.nickname;
 			create.password = params.password;
+			create.register_ip = this.ctx.ip;
 			create.save();
 
 			return { msg: '管理员注册成功', httpStatus: HttpStatus.CREATED };
@@ -83,6 +85,13 @@ class AdminService extends Service {
 				//保存token 设置过期时间
 				await ctx.app.redis.hset(ctx.app.config.usetToken, ctx.app.config.usetToken + admin.id, token);
 				await ctx.app.redis.expire(ctx.app.config.usetToken, ctx.app.config.expired);
+
+				// 添加最后一次ip 次数 时间
+				admin.last_login_ip = this.ctx.ip;
+				admin.login_count = ++admin.login_count;
+				admin.last_login_time = moment().format('YYYY-MM-DD H:mm:ss');
+				admin.save();
+
 				return { data: { token }, msg: '登录成功！' };
 			}
 

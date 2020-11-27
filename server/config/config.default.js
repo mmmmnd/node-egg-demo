@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-24 15:54:47
+ * @LastEditTime: 2020-11-27 15:05:43
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -117,6 +117,10 @@ module.exports = appInfo => {
     mode: 'stream',
     fileExtensions: ['.png', '.jpg'], // 扩展几种上传的文件格式
   };
+
+  // 获取用户真实ip地址
+  config.proxy = true;
+  config.maxIpsCount = 1;
 
   // add your user config here
   const userConfig = {

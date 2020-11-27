@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-22 16:19:43
+ * @LastEditTime: 2020-11-27 17:54:09
  */
 'use strict';
 
@@ -39,7 +39,7 @@ module.exports = app => {
 				this.setDataValue("password", psw);
 			},
 		},
-		AvatarImage: {
+		avatar_image: {
 			allowNull: !0, // 是否为空
 			type: STRING(60), // 类型
 			defaultValue: '', // 默认值
@@ -62,6 +62,35 @@ module.exports = app => {
 			type: BOOLEAN, // 类型
 			defaultValue: '0', // 默认值
 			comment: '状态', // 备注
+		},
+		login_count: {
+			type: INTEGER(6), // 类型
+			allowNull: !0, // 是否为空
+			defaultValue: '0', // 默认值
+			comment: '登录次数' // 备注
+		},
+		register_ip: {
+			type: STRING(60), // 类型
+			allowNull: !0, // 是否为空
+			defaultValue: '', // 默认值
+			comment: '注册ip' // 备注
+		},
+		last_login_ip: {
+			type: STRING(60), // 类型
+			allowNull: !0, // 是否为空
+			defaultValue: '', // 默认值
+			comment: '上一次登录ip' // 备注
+		},
+		last_login_time: {
+			allowNull: !0, // 是否为空
+			type: DATE, // 类型
+			comment: '上一次登录时间', // 备注
+			get () {
+				return moment(this.getDataValue('last_login_time')).valueOf();
+			},
+			set (val) {
+				this.setDataValue('last_login_time', val)
+			}
 		},
 		created_at: {
 			allowNull: !0, // 是否为空
