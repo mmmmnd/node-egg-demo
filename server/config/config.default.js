@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-27 15:05:43
+ * @LastEditTime: 2020-11-29 21:16:13
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -53,8 +53,8 @@ module.exports = appInfo => {
     host: '127.0.0.1',
     port: 3306,
     username: 'root',
-    password: '123456',
-    database: 'egg-demo',
+    password: '',
+    database: 'local-egg-demo',
     timezone: '+08:00',
     logging: false,//输出日志信息
     define: {  // model的全局配置
