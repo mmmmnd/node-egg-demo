@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-08 11:19:42
+ * @LastEditTime: 2020-11-30 15:54:12
  */
 import router from './router'
 import store from './store'
@@ -41,7 +41,9 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           // 获取用户信息
-          await store.dispatch('user/getInfo')
+          const data = await store.dispatch('user/getInfo')
+          await store.dispatch('permission/generateRoutes', data)
+
 
           next()
         } catch (error) {

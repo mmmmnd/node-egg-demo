@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-17 17:10:00
+ * @LastEditTime: 2020-11-30 10:43:52
  */
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
@@ -16,7 +16,7 @@ import { getToken } from '@/utils/auth'
 const service = axios.create({
   baseURL: process.env.VUE_APP_BASE_API, // url = base url + request url
   // withCredentials: true, // 跨域请求时发送cookie
-  timeout: 5000 //请求超时
+  // timeout: 5000 //请求超时
 })
 
 

@@ -1,3 +1,12 @@
+/*
+ * @Author: 莫卓才
+ * @eMail: handsome.mo@foxmail.com
+ * @Descripttion: 描述
+ * @version: 1.0.0
+ * @Date: 2020-08-31 10:33:51
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2020-11-30 15:38:06
+ */
 import Vue from 'vue'
 import Router from 'vue-router'
 
@@ -30,7 +39,7 @@ import Layout from '@/layout'
 /**
  * constantRoutes
  * 没有权限要求的基本页面
- * 可以访问所有角色
+ * 游客
  */
 export const constantRoutes = [
   {
