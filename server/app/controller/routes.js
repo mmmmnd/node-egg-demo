@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-30 16:53:55
+ * @LastEditTime: 2020-12-01 00:11:42
  */
 
 'use strict';
@@ -16,11 +16,8 @@ class RoutesController extends Controller {
    * 获取列表
    */
   async index () {
-    // const admin = { nickname: 'admin', role: 1, roles: [20, 21, 22, 23, 24] }
-    const params = this.ctx.request.body;
-
     const admin = await this.ctx.service.admin.list();
-    const routes = await this.ctx.service.routes.index(params, admin);
+    const routes = await this.ctx.service.routes.index(admin);
     await this.ctx.helper.checkData(routes);
   }
 }

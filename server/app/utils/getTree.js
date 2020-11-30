@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-30 18:30:43
+ * @LastEditTime: 2020-12-01 00:12:48
  */
 'use strict';
 
@@ -78,44 +78,26 @@ class GetTree {
     return data
   }
 
-  // static routesList (items, arrs = [], params = {}, admin) {
-  //   items = JSON.parse(JSON.stringify(items));
-  //   items.filter(father => {
-  //     father.roles = []
-  //     if (admin) {
-  //       admin.filter(adminItem => {
-  //         if (father.role >= adminItem.role && adminItem.role !== 0) {
-  //           return father.roles.push(adminItem.nickname)
-  //         }
-  //       })
-  //     }
+  static routesList (items, arrs = [], admin) {
+    admin && items.filter(father => {
+      father.roles = []
 
-  //   });
-
-  //   return items
-  // }
-
-  static routesList (items, arrs = [], params = {}, admin) {
-    items = JSON.parse(JSON.stringify(items));
+      admin.filter(adminItem => {
+        var roles = adminItem.roles.split(",");
+        father.role >= adminItem.role && adminItem.role !== 0 && father.roles.push(adminItem.nickname)
+        roles.filter(roleItem => father.id == roleItem && father.roles.push(adminItem.nickname))
+      });
+    });
 
     items.filter(father => {
       const arr = [];
-
-      father.roles = []
-
-      admin && admin.filter(adminItem => {
-        if (father.role >= adminItem.role && adminItem.role !== 0) {
-          return father.roles.push(adminItem.nickname)
-        }
-      })
-
       items.filter(child => {
         father.id === child.pid && arr.push({
           path: child.path,
           name: child.name,
           component: child.redirect,
           hidden: father.hidden,
-          meta: { title: child.title, icon: child.icon, noCache: child.noCache, roles: father.roles }
+          meta: { title: child.title, icon: child.icon, noCache: child.noCache, roles: child.roles }
         })
       });
 
