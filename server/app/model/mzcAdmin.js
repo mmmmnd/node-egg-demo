@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-29 15:51:58
+ * @LastEditTime: 2020-11-30 11:31:51
  */
 'use strict';
 
@@ -25,9 +25,9 @@ module.exports = app => {
 		role: {
 			allowNull: !1, // 是否为空
 			type: INTEGER(1), // 类型
-			defaultValue: '4', // 默认值
+			defaultValue: '0', // 默认值
 			comment: '群组 1-> 超级管理 2-> 管理 3-> 编辑 4-> 游客', // 备注
-		},	
+		},
 		roles: {
 			allowNull: !1, // 是否为空
 			type: STRING(60), // 类型

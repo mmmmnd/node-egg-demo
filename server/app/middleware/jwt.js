@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-01 09:47:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-29 20:42:46
+ * @LastEditTime: 2020-11-30 14:57:59
  */
 'use strict'
 const HttpStatus = require('../utils/httpStatus');
@@ -15,7 +15,7 @@ module.exports = (options) => {
     try {
       const token = await ctx.get(ctx.app.config.usetToken);
       const userToken = await ctx.app.jwt.verify(token, options.secret, ctx.app.config.jwt.params); //校验token
-      const redisToken = await ctx.app.redis.hget(ctx.app.config.usetToken, ctx.app.config.usetToken + userToken.userId); //获取userToken
+      const redisToken = await ctx.app.redis.get(ctx.app.config.usetToken + userToken.userId); //获取userToken
 
       if (token === redisToken) {
         await ctx.app.redis.expire(ctx.app.config.usetToken + userToken.userId, ctx.app.config.expired) // 未响应30分钟后删除token

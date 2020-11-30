@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-27 17:51:00
+ * @LastEditTime: 2020-11-30 17:00:07
  */
 'use strict';
 
@@ -72,7 +72,7 @@ class AdminService extends Service {
 			}, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
 
 			//获取redis保存的token
-			const redisGetToken = await ctx.app.redis.hget(ctx.app.config.usetToken, ctx.app.config.usetToken + admin.id,);
+			const redisGetToken = await ctx.app.redis.get(ctx.app.config.usetToken + admin.id,);
 			if (redisGetToken) {
 				//校验token令牌 secret -> 加密类型 params -> jwt参数
 				const redisToken = await ctx.app.jwt.verify(redisGetToken, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
@@ -83,8 +83,8 @@ class AdminService extends Service {
 
 			} else {
 				//保存token 设置过期时间
-				await ctx.app.redis.hset(ctx.app.config.usetToken, ctx.app.config.usetToken + admin.id, token);
-				await ctx.app.redis.expire(ctx.app.config.usetToken, ctx.app.config.expired);
+				await ctx.app.redis.set(ctx.app.config.usetToken + admin.id, token);
+				await ctx.app.redis.expire(ctx.app.config.usetToken + admin.id, ctx.app.config.expired);
 
 				// 添加最后一次ip 次数 时间
 				admin.last_login_ip = this.ctx.ip;
@@ -123,14 +123,25 @@ class AdminService extends Service {
 		const { ctx } = this;
 
 		const userToken = await ctx.app.jwt.verify(params, ctx.app.config.jwt.secret, ctx.app.config.jwt.params); //校验token
-		const redisToken = await ctx.app.redis.hget(ctx.app.config.usetToken, ctx.app.config.usetToken + userToken.userId); //获取userToken
+		const redisToken = await ctx.app.redis.get(ctx.app.config.usetToken + userToken.userId); //获取userToken
 		if (redisToken === params) {
-			await ctx.app.redis.hdel(ctx.app.config.usetToken, ctx.app.config.usetToken + userToken.userId);
+			await ctx.app.redis.del(ctx.app.config.usetToken + userToken.userId);
 			return { msg: '退出登录成功', errorStatus: HttpStatus.OK, code: 0 };
 		} else {
 			return { msg: '非法请求！', errorStatus: HttpStatus.INTERNAL_SERVER_ERROR };
 		}
 
+	}
+	/**
+	 * 获取用户数据
+	 */
+	async list () {
+		return await this.ctx.model.MzcAdmin.findAll({
+			where: {
+				deleted_at: null
+			},
+			attributes: { exclude: ['password'] }
+		});
 	}
 
 }

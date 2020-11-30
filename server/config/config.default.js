@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-29 21:16:13
+ * @LastEditTime: 2020-11-30 09:04:41
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -53,7 +53,7 @@ module.exports = appInfo => {
     host: '127.0.0.1',
     port: 3306,
     username: 'root',
-    password: '',
+    password: '123456',
     database: 'local-egg-demo',
     timezone: '+08:00',
     logging: false,//输出日志信息

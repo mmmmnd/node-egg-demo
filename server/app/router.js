@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-28 22:16:51
+ * @LastEditTime: 2020-11-30 15:55:12
  */
 'use strict';
 
@@ -132,7 +132,7 @@ module.exports = app => {
   router.get('/api/advert/detail', jwt, controller.advert.detail)
   router.delete('/api/advert/destroy', jwt, controller.advert.destroy);
 
-  router.get('/api/routes/index',jwt,controller.routes.index)
+  router.post('/api/routes/index', jwt, controller.routes.index)
   // 404
   router.get('*', controller.web.error); // 404
 };

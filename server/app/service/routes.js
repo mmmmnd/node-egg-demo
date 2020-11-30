@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-29 21:48:25
+ * @LastEditTime: 2020-11-30 18:02:27
  */
 'use strict';
 
@@ -16,35 +16,50 @@ const HttpStatus = require('../utils/httpStatus');
 
 class RoutesService extends Service {
 
-	async index(params){
-		const permissionsRoutes = [];
+	async index (params, admin) {
+		var permissionsRoutes = [];
+		var data1 = [];
+		var data2 = [];
 		const constantRoutes = await this.ctx.model.MzcRoutes.findAll({
 			where: {
-				role: { [Op.gte]: 4 },
+				role: 0,
+				deleted_at: null
 			},
-			attributes: { exclude: ['created_at','updated_at','deleted_at'] }
+			attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] }
 		});
 
-		const data1 = await this.ctx.model.MzcRoutes.findAll({
+
+		data1 = await this.ctx.model.MzcRoutes.findAll({
 			where: {
-				role: { [Op.gte]: 3 },
+				role: { [Op.ne]: 0 },
 			},
-			attributes: { exclude: ['created_at','updated_at','deleted_at'] }
+			attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] }
 		});
 
-		const data2 = await this.ctx.model.MzcRoutes.findAll({
-			where: {
-				id:params.roles,
-			},
-			attributes: { exclude: ['created_at','updated_at','deleted_at'] }
-		});
-		permissionsRoutes.push(...data1,...data2);
+		// if (params.role !== 0) {
+		// 	data1 = await this.ctx.model.MzcRoutes.findAll({
+		// 		where: {
+		// 			role: { [Op.gte]: params.role },
+		// 		},
+		// 		attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] }
+		// 	});
+		// 	if (params.roles !== '0') {
+		// 		data2 = await this.ctx.model.MzcRoutes.findAll({
+		// 			where: {
+		// 				id: params.roles,
+		// 			},
+		// 			attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] }
+		// 		});
+		// 	}
 
-		return { 
+		// 	permissionsRoutes.push(...data1, ...data2);
+		// }
+
+		return {
 			data: {
-				constantRoutes:GetTree.routesList(constantRoutes),
-				permissionsRoutes:GetTree.routesList(permissionsRoutes),
-			} 
+				constantRoutes: GetTree.routesList(constantRoutes),
+				permissionsRoutes: GetTree.routesList(data1, [], params, admin),
+			}
 		}
 	}
 }

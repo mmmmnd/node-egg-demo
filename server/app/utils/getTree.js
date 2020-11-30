@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-29 21:42:28
+ * @LastEditTime: 2020-11-30 18:30:43
  */
 'use strict';
 
@@ -78,39 +78,61 @@ class GetTree {
     return data
   }
 
-  static routesList(items, arrs = []){
+  // static routesList (items, arrs = [], params = {}, admin) {
+  //   items = JSON.parse(JSON.stringify(items));
+  //   items.filter(father => {
+  //     father.roles = []
+  //     if (admin) {
+  //       admin.filter(adminItem => {
+  //         if (father.role >= adminItem.role && adminItem.role !== 0) {
+  //           return father.roles.push(adminItem.nickname)
+  //         }
+  //       })
+  //     }
+
+  //   });
+
+  //   return items
+  // }
+
+  static routesList (items, arrs = [], params = {}, admin) {
     items = JSON.parse(JSON.stringify(items));
 
     items.filter(father => {
-    let branchArr = items.filter(child => {
-        if (father.id === child.pid) {
-          return {
-            path:child.path,
-            name:child.name,
-            component:child.redirect,
-            meta:{title:child.title,icon:child.icon,noCache:child.noCache}
-          }
-        }
-      });
-      
-      branchArr.length ? father.children = branchArr : '';
+      const arr = [];
 
-      if(father.pid === 0){
-        arrs.push({
-          id:father.id,
-          path: father.path,
-          redirect: father.redirect,
-          name: father.name,
-          hidden:father.hidden,
-          meta: { title:father.title, icon: father.icon },
-          children: father.children
+      father.roles = []
+
+      admin && admin.filter(adminItem => {
+        if (father.role >= adminItem.role && adminItem.role !== 0) {
+          return father.roles.push(adminItem.nickname)
+        }
+      })
+
+      items.filter(child => {
+        father.id === child.pid && arr.push({
+          path: child.path,
+          name: child.name,
+          component: child.redirect,
+          hidden: father.hidden,
+          meta: { title: child.title, icon: child.icon, noCache: child.noCache, roles: father.roles }
         })
-      }
+      });
+
+      arr.length ? father.children = arr : ''
+
+      father.pid === 0 && arrs.push({
+        id: father.id,
+        path: father.path,
+        redirect: father.redirect,
+        name: father.name,
+        hidden: father.hidden,
+        meta: { title: father.title, icon: father.icon, roles: father.roles },
+        children: father.children
+      })
     });
 
-  arrs.sort((a,b) => a.id - b.id )
-  
-  return arrs
+    return arrs.sort((a, b) => a.id - b.id)
   }
 }
 

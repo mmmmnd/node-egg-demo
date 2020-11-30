@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-25 15:11:32
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-29 20:43:34
+ * @LastEditTime: 2020-11-30 15:00:49
  */
 /** */
 'use strict';
@@ -27,7 +27,7 @@ module.exports = appInfo => {
     host: '127.0.0.1',
     port: 3306,
     username: 'root',
-    password: '',
+    password: '123456',
     database: 'local-egg-demo',
     timezone: '+08:00',
     logging: false,//输出日志信息
@@ -42,14 +42,6 @@ module.exports = appInfo => {
     }
   };
 
-  config.jwt = {
-    secret: "123456",//自定义 token 的加密条件字符串
-    params: {
-      algorithm: 'HS256',
-      expiresIn: 60 * 4 * 60,
-    }
-  };
-  
   return {
     ...config,
   };
