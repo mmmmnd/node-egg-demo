@@ -5,14 +5,20 @@
  * @version: 1.0.0
  * @Date: 2020-11-30 09:23:14
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-30 15:55:27
+ * @LastEditTime: 2020-12-01 10:47:57
  */
 import request from '@/utils/request'
 
-export function routesIndex (data) {
+export function routesRoles () {
   return request({
-    url: '/routes/index',
-    method: 'post',
-    data
+    url: '/routes/roles',
+    method: 'get',
+  })
+}
+
+export function routesConstant () {
+  return request({
+    url: '/routes/constant',
+    method: 'get',
   })
 }
