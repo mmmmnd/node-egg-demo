@@ -1,3 +1,12 @@
+/*
+ * @Author: 莫卓才
+ * @eMail: handsome.mo@foxmail.com
+ * @Descripttion: 描述
+ * @version: 1.0.0
+ * @Date: 2020-08-31 10:33:51
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2020-12-03 09:49:59
+ */
 const getters = {
   sidebar: state => state.app.sidebar,
   device: state => state.app.device,

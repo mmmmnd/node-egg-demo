@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-01 16:44:30
+ * @LastEditTime: 2020-12-03 17:37:33
  */
 import router from './router'
 import store from './store'
@@ -14,6 +14,7 @@ import NProgress from 'nprogress' // 进度条
 import 'nprogress/nprogress.css' // 进度栏样式
 import { getToken } from '@/utils/auth' // 从cookie获取令牌
 import getPageTitle from '@/utils/get-page-title'
+import { constantRoutes } from '@/router'
 
 NProgress.configure({ showSpinner: false }) //进度条 配置
 
@@ -39,14 +40,13 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           // 获取用户信息
-          await store.dispatch('permission/generateRoutes')
-          // await store.dispatch('user/getInfo')
-          // const permissionsRoutes = await store.dispatch('permission/generateRoutes')
+          const { roles } = await store.dispatch('user/getInfo')
+          const asyncRoutes = await store.dispatch('permission/generateRoutes', roles)
 
-          // router.addRoutes(constantRoutes)
-          // router.addRoutes(permissionsRoutes)
-
-          next()
+          router.addRoutes(asyncRoutes)
+          router.options.routes = constantRoutes.concat(asyncRoutes)
+          console.log(router.options.routes)
+          next({ ...to, replace: true })
         } catch (error) {
           // 删除令牌并进入登录页面重新登录
           await store.dispatch('user/resetToken')
@@ -61,9 +61,9 @@ router.beforeEach(async (to, from, next) => {
     /* 没有 token*/
 
     /* 游客权限 */
-    const constantRoutes = await store.dispatch('permission/constantRoutes')
-    console.log(constantRoutes)
-    router.addRoutes(constantRoutes)
+    // const constantRoutes = await store.dispatch('permission/constantRoutes')
+    // console.log(constantRoutes)
+    // router.addRoutes(constantRoutes)
     if (whiteList.indexOf(to.path) !== -1) {
       // 在免费登录白名单中，直接进入
       next()

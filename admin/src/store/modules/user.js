@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-23 11:42:36
+ * @LastEditTime: 2020-12-02 11:22:36
  */
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
@@ -62,10 +62,10 @@ const actions = {
           return reject('验证失败，请重新登录!')
         }
 
-        const { nickname, AvatarImage } = data
+        const { nickname, avatar_image } = data
 
         commit('SET_NAME', nickname)
-        commit('SET_AVATAR', AvatarImage)
+        commit('SET_AVATAR', avatar_image)
         resolve(data)
       }).catch(error => {
         reject(error)
