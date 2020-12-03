@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-03 16:31:43
+ * @LastEditTime: 2020-12-03 22:43:29
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -226,7 +226,7 @@ export const constantRoutes = [
   // },
 
   // 404 page must be placed at the end !!!
-  { path: '*', redirect: '/404', hidden: true }
+  // { path: '*', redirect: '/404', hidden: true }
 ]
 
 const createRouter = () => new Router({

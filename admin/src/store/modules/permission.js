@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-03 17:50:06
+ * @LastEditTime: 2020-12-03 23:54:18
  */
 import { asyncRoutes, constantRoutes } from '@/router'
 import { routesRoles } from '@/api/routes'
@@ -33,25 +33,39 @@ function hasPermission (roles, route) {
 
 export function generaMenu (routes = [], data) {
   data.forEach(item => {
+
     const menu = {
       path: item.path,
-      component: item.children ? Layout : loadView(item.component),
+      component: item.children ? Layout : componentsMap[item.component],
       redirect: item.redirect,
       hidden: item.hidden,
       children: [],
       name: item.name,
       meta: item.meta
     }
-    if (item.children) {
-      generaMenu(menu.children, item.children)
-    }
+    item.children && generaMenu(menu.children, item.children)
+
     routes.push(menu)
   })
   return routes;
 }
 
-export const loadView = (view) => { // 路由懒加载
-  return (resolve) => require([`@${view.replace(/^\/*/g, '')}`], resolve)
+export const componentsMap = {
+  '/views/dashboard/index': () => import('@/views/dashboard/index'),
+  '/views/about/single': () => import('@/views/about/single'),
+  '/views/about/list': () => import('@/views/about/list'),
+  '/views/about/classify': () => import('@/views/about/classify'),
+  '/views/services/index': () => import('@/views/services/index'),
+  '/views/company/index': () => import('@/views/company/index'),
+  '/views/culture/index': () => import('@/views/culture/index'),
+  '/views/news/index': () => import('@/views/news/index'),
+  '/views/cases/case': () => import('@/views/cases/case'),
+  '/views/cases/partner': () => import('@/views/cases/partner'),
+  '/views/recruit/index': () => import('@/views/recruit/index'),
+  '/views/recruit/list': () => import('@/views/recruit/list'),
+  '/views/menu/index': () => import('@/views/menu/index'),
+  '/views/setting/bsic': () => import('@/views/setting/bsic'),
+  '/views/setting/advertising': () => import('@/views/setting/advertising'),
 }
 
 
@@ -100,6 +114,7 @@ const actions = {
         } else {
           const loadMenuData = generaMenu([], data)
           const asyncRoutes = filterAsyncRoutes(loadMenuData, roles)
+          asyncRoutes.push({ path: '*', redirect: '/404', hidden: true });
           commit('SET_ROUTES', asyncRoutes)
           resolve(asyncRoutes)
         }
