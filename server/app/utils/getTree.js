@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-01 00:12:48
+ * @LastEditTime: 2020-12-04 15:54:43
  */
 'use strict';
 
@@ -78,16 +78,7 @@ class GetTree {
     return data
   }
 
-  static routesList (items, arrs = [], admin) {
-    admin && items.filter(father => {
-      father.roles = []
-
-      admin.filter(adminItem => {
-        var roles = adminItem.roles.split(",");
-        father.role >= adminItem.role && adminItem.role !== 0 && father.roles.push(adminItem.nickname)
-        roles.filter(roleItem => father.id == roleItem && father.roles.push(adminItem.nickname))
-      });
-    });
+  static routesList (items, arrs = []) {
 
     items.filter(father => {
       const arr = [];
@@ -97,7 +88,7 @@ class GetTree {
           name: child.name,
           component: child.redirect,
           hidden: father.hidden,
-          meta: { title: child.title, icon: child.icon, noCache: child.noCache, roles: child.roles }
+          meta: { title: child.title, icon: child.icon, noCache: child.noCache }
         })
       });
 
@@ -109,7 +100,7 @@ class GetTree {
         redirect: father.redirect,
         name: father.name,
         hidden: father.hidden,
-        meta: { title: father.title, icon: father.icon, roles: father.roles },
+        meta: { title: father.title, icon: father.icon },
         children: father.children
       })
     });

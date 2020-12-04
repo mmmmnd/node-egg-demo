@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-04 14:41:32
+ * @LastEditTime: 2020-12-04 15:04:31
  */
 'use strict';
 
@@ -69,6 +69,8 @@ class AdminService extends Service {
 			//颁发token secret -> 加密类型 params -> jwt参数
 			const token = await ctx.app.jwt.sign({
 				userId: admin.id,
+				userRole: admin.role,
+				userRoles: admin.roles,
 			}, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
 
 			//获取redis保存的token
@@ -105,9 +107,9 @@ class AdminService extends Service {
 	 * @param { String } params token
 	 */
 	async current () {
-		const [ctx, userToken] = [this.ctx, global.userToken];
+		const [ctx, userInfo] = [this.ctx, global.userInfo];
 
-		const admin = await ctx.model.MzcAdmin.findByPk(userToken.userId, {
+		const admin = await ctx.model.MzcAdmin.findByPk(userInfo.userId, {
 			attributes: { exclude: ['password'] }
 		});
 
@@ -118,10 +120,10 @@ class AdminService extends Service {
 	 * 退出
 	 */
 	async logout () {
-		const [ctx, userToken] = [this.ctx, global.userToken];
+		const [ctx, userInfo] = [this.ctx, global.userInfo];
 
-		if (userToken) {
-			await ctx.app.redis.del(this.ctx.app.config.usetToken + userToken.userId);
+		if (userInfo) {
+			await ctx.app.redis.del(this.ctx.app.config.usetToken + userInfo.userId);
 			return { msg: '退出登录成功', errorStatus: HttpStatus.OK, code: 0 };
 		} else {
 			return { msg: '非法请求！', errorStatus: HttpStatus.INTERNAL_SERVER_ERROR };

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-04 11:41:31
+ * @LastEditTime: 2020-12-04 15:49:18
  */
 'use strict';
 
@@ -17,16 +17,40 @@ class RoutesService extends Service {
 
   /**
    * 角色权限
-   * @param { Array } admin 用户数据
+   * @param { Array } userInfo 用户数据
    */
-  async roles (admin) {
-    const permissionsRoutes = await this.ctx.model.MzcRoutes.findAll({
+  async roles ({ userRole, userRoles }) {
+
+    const permissionsRoutes = []
+
+    /**
+     * 群组
+     */
+    const role = await this.ctx.model.MzcRoutes.findAll({
       where: {
-        role: { [Op.ne]: 0 },
+        role: { [Op.gte]: userRole },
       },
       attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
     });
-    return { data: GetTree.routesList(permissionsRoutes, [], admin) };
+
+    permissionsRoutes.push(...role)
+
+    /**
+     * 单独权限
+     */
+    if (userRoles) {
+      userRoles = userRoles.split(',')
+      const roles = await this.ctx.model.MzcRoutes.findAll({
+        where: {
+          id: userRoles,
+        },
+        attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
+      });
+
+      permissionsRoutes.push(...roles)
+    }
+
+    return { data: GetTree.routesList(permissionsRoutes) };
   }
 }
 
