@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-17 16:31:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-27 16:13:25
+ * @LastEditTime: 2020-12-04 11:52:47
  */
 'use strict';
 const AdminValidators = require('../validators/admin');
@@ -54,9 +54,7 @@ class AdminController extends Controller {
 	 * 退出
 	 */
 	async logout () {
-		const { token } = this.ctx.request.header;
-
-		const admin = await this.ctx.service.admin.logout(token);
+		const admin = await this.ctx.service.admin.logout();
 		await this.ctx.helper.checkData(admin);
 	}
 }

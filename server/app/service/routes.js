@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-01 10:38:16
+ * @LastEditTime: 2020-12-04 11:41:31
  */
 'use strict';
 
@@ -27,19 +27,6 @@ class RoutesService extends Service {
       attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
     });
     return { data: GetTree.routesList(permissionsRoutes, [], admin) };
-  }
-  /**
-   * 游客权限
-   */
-  async constant () {
-    const constantRoutes = await this.ctx.model.MzcRoutes.findAll({
-      where: {
-        role: 0,
-        deleted_at: null,
-      },
-      attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
-    });
-    return { data: GetTree.routesList(constantRoutes) };
   }
 }
 
