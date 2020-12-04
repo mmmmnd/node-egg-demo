@@ -5,45 +5,32 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-03 23:54:18
+ * @LastEditTime: 2020-12-04 16:53:27
  */
-import { asyncRoutes, constantRoutes } from '@/router'
+import { constantRoutes } from '@/router'
 import { routesRoles } from '@/api/routes'
 import Layout from '@/layout'
-
-/**
- * Use meta.role to determine if the current user has permission
- * @param roles
- * @param route
- */
-function hasPermission (roles, route) {
-  if (route.meta && route.meta.roles) {
-    return roles.some(role => route.meta.roles.includes(role))
-  } else {
-    return true
-  }
-}
-
-
 
 /**
  * 后台查询的菜单数据拼装成路由格式的数据
  * @param routes
  */
 
-export function generaMenu (routes = [], data) {
+export function generaMenu (data, routes = []) {
   data.forEach(item => {
 
     const menu = {
       path: item.path,
-      component: item.children ? Layout : componentsMap[item.component],
+      component: item.children ? Layout : componentsMap[item.component] || componentsMap[item.redirect],
       redirect: item.redirect,
       hidden: item.hidden,
-      children: [],
       name: item.name,
       meta: item.meta
     }
-    item.children && generaMenu(menu.children, item.children)
+    if (item.children) {
+      menu.children = []
+      generaMenu(item.children, menu.children)
+    }
 
     routes.push(menu)
   })
@@ -51,41 +38,23 @@ export function generaMenu (routes = [], data) {
 }
 
 export const componentsMap = {
-  '/views/dashboard/index': () => import('@/views/dashboard/index'),
-  '/views/about/single': () => import('@/views/about/single'),
-  '/views/about/list': () => import('@/views/about/list'),
-  '/views/about/classify': () => import('@/views/about/classify'),
-  '/views/services/index': () => import('@/views/services/index'),
-  '/views/company/index': () => import('@/views/company/index'),
-  '/views/culture/index': () => import('@/views/culture/index'),
-  '/views/news/index': () => import('@/views/news/index'),
-  '/views/cases/case': () => import('@/views/cases/case'),
-  '/views/cases/partner': () => import('@/views/cases/partner'),
-  '/views/recruit/index': () => import('@/views/recruit/index'),
-  '/views/recruit/list': () => import('@/views/recruit/list'),
-  '/views/menu/index': () => import('@/views/menu/index'),
-  '/views/setting/bsic': () => import('@/views/setting/bsic'),
-  '/views/setting/advertising': () => import('@/views/setting/advertising'),
-}
-
-
-/**
- * Filter asynchronous routing tables by recursion
- * @param routes asyncRoutes
- * @param roles
- */
-export function filterAsyncRoutes (routes, roles) {
-  const res = []
-  routes.forEach(route => {
-    const tmp = { ...route }
-    if (hasPermission(roles, tmp)) {
-      if (tmp.children) {
-        tmp.children = filterAsyncRoutes(tmp.children, roles)
-      }
-      res.push(tmp)
-    }
-  })
-  return res
+  login: () => import('@/views/login/index'),
+  404: () => import('@/views/404'),
+  dashboard: () => import('@/views/dashboard/index'),
+  aboutSingle: () => import('@/views/about/single'),
+  aboutList: () => import('@/views/about/list'),
+  aboutClassify: () => import('@/views/about/classify'),
+  servicesIndex: () => import('@/views/services/index'),
+  companyIndex: () => import('@/views/company/index'),
+  cultureIndex: () => import('@/views/culture/index'),
+  newsIndex: () => import('@/views/news/index'),
+  casesCase: () => import('@/views/cases/case'),
+  casesPartner: () => import('@/views/cases/partner'),
+  recruitIndex: () => import('@/views/recruit/index'),
+  recruitList: () => import('@/views/recruit/list'),
+  menuIndex: () => import('@/views/menu/index'),
+  settingBsic: () => import('@/views/setting/bsic'),
+  settingAdvertising: () => import('@/views/setting/advertising'),
 }
 
 const state = {
@@ -112,9 +81,9 @@ const actions = {
             type: 0
           })
         } else {
-          const loadMenuData = generaMenu([], data)
-          const asyncRoutes = filterAsyncRoutes(loadMenuData, roles)
+          const asyncRoutes = generaMenu(data)
           asyncRoutes.push({ path: '*', redirect: '/404', hidden: true });
+          console.log(asyncRoutes)
           commit('SET_ROUTES', asyncRoutes)
           resolve(asyncRoutes)
         }

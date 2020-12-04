@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-03 17:37:33
+ * @LastEditTime: 2020-12-04 16:04:47
  */
 import router from './router'
 import store from './store'
@@ -40,12 +40,10 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           // 获取用户信息
-          const { roles } = await store.dispatch('user/getInfo')
-          const asyncRoutes = await store.dispatch('permission/generateRoutes', roles)
-
+          await store.dispatch('user/getInfo')
+          const asyncRoutes = await store.dispatch('permission/generateRoutes')
           router.addRoutes(asyncRoutes)
           router.options.routes = constantRoutes.concat(asyncRoutes)
-          console.log(router.options.routes)
           next({ ...to, replace: true })
         } catch (error) {
           // 删除令牌并进入登录页面重新登录
@@ -61,9 +59,6 @@ router.beforeEach(async (to, from, next) => {
     /* 没有 token*/
 
     /* 游客权限 */
-    // const constantRoutes = await store.dispatch('permission/constantRoutes')
-    // console.log(constantRoutes)
-    // router.addRoutes(constantRoutes)
     if (whiteList.indexOf(to.path) !== -1) {
       // 在免费登录白名单中，直接进入
       next()
