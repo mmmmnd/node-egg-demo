@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-04 15:54:43
+ * @LastEditTime: 2020-12-06 00:27:51
  */
 'use strict';
 
@@ -77,35 +77,41 @@ class GetTree {
 
     return data
   }
+  /**
+   * 后台菜单
+   * @param { Array } items 菜单列表
+   * @param { number} id 父id
+   */
+  static routesList (items, id = 0) {
+    const children = this._childrensRoutes(items, id)
 
-  static routesList (items, arrs = []) {
+    children.filter(item => {
+      if (this.routesList(items, item.id).length > 0) item.children = this.routesList(items, item.id)
+    });
 
-    items.filter(father => {
-      const arr = [];
-      items.filter(child => {
-        father.id === child.pid && arr.push({
-          path: child.path,
-          name: child.name,
-          component: child.redirect,
-          hidden: father.hidden,
-          meta: { title: child.title, icon: child.icon, noCache: child.noCache }
-        })
-      });
+    return children
+  }
+  /**
+   * 后台菜单 私有方法
+   * @param { Array } items 菜单列表
+   * @param { number} id 父id
+   * @param { Array } arr 返回数组
+   */
+  static _childrensRoutes (items, id, arr = []) {
 
-      arr.length ? father.children = arr : ''
-
-      father.pid === 0 && arrs.push({
-        id: father.id,
-        path: father.path,
-        redirect: father.redirect,
-        name: father.name,
-        hidden: father.hidden,
-        meta: { title: father.title, icon: father.icon },
-        children: father.children
+    items.filter(child => {
+      child.pid === id && arr.push({
+        id: child.id,
+        path: child.path,
+        name: child.name,
+        component: child.redirect,
+        hidden: child.hidden,
+        sort: child.sort,
+        meta: { title: child.title, icon: child.icon, noCache: child.noCache }
       })
     });
 
-    return arrs.sort((a, b) => a.id - b.id)
+    return arr.sort((a, b) => b.sort - a.sort)
   }
 }
 

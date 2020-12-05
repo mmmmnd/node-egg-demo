@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-25 15:11:32
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-01 00:15:08
+ * @LastEditTime: 2020-12-05 15:36:36
  */
 /** */
 'use strict';
@@ -27,7 +27,7 @@ module.exports = appInfo => {
     host: '127.0.0.1',
     port: 3306,
     username: 'root',
-    password: '123456',
+    password: '',
     database: 'local-egg-demo',
     timezone: '+08:00',
     logging: false,//输出日志信息
