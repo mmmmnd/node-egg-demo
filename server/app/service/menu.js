@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-17 17:34:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-19 11:24:48
+ * @LastEditTime: 2020-12-07 15:43:03
  */
 'use strict';
 
@@ -27,7 +27,7 @@ class MenuService extends Service {
         ['id', 'ASC'], ['pid', 'ASC']
       ]
     });
-    return { data: GetTree.menuList(menu) }
+    return { data: GetTree.menuList(menu, 'menu') }
   }
   /**
    * 修改
@@ -83,7 +83,7 @@ class MenuService extends Service {
         ['sort', 'ASC'], ['id', 'ASC']
       ]
     });
-    return GetTree.menuList(menu);
+    return GetTree.menuList(menu, 'menu');
   }
   /**
    * 获取模板排序顺序

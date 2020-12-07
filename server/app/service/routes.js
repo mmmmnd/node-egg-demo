@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-05 22:04:40
+ * @LastEditTime: 2020-12-07 15:47:01
  */
 'use strict';
 
@@ -50,7 +50,7 @@ class RoutesService extends Service {
       permissionsRoutes.push(...roles)
     }
 
-    return { data: GetTree.routesList(permissionsRoutes) };
+    return { data: GetTree.menuList(permissionsRoutes, 'router') };
   }
 }
 

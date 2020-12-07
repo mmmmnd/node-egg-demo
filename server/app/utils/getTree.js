@@ -5,40 +5,73 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-06 00:27:51
+ * @LastEditTime: 2020-12-07 18:42:09
  */
 'use strict';
 
 class GetTree {
   /**
    * 菜单列表
-   * @param { String } items 遍历对象
-   * @param { Array } arrs 返回数组
+   * @param { Array } items 数组对象
+   * @param { String } type 类型
+   * @param { Number } id 父id
    */
-  static menuList (items, arrs = []) {
-    const ICON = ['&nbsp;&nbsp;&nbsp;&nbsp;├', '&nbsp;&nbsp;&nbsp;&nbsp;└'];
+  static menuList (items, type, about, id = 0) {
     items = JSON.parse(JSON.stringify(items));
-
-    arrs = items.filter(father => {
-      let branchArr = items.filter(child => {
-        if (father.id === child.pid) {
-          child.nameTitle = ICON[0] + child.title
-          return child;
-        }
-      });
-      branchArr.length ? father.children = branchArr : '';
-      return father.pid === 0;
+    const parents = this._getMenuType(items, id, type)
+    parents.filter(parent => {
+      const children = this.menuList(items, type, parent.id)
+      if (children.length > 0) parent['children'] = type == 'menu' ? this._setIcon(children) : children
     });
 
-    arrs.map(item => {
-      if (item.children) {
-        var arr = item.children[item.children.length - 1];
-        arr.nameTitle = arr.nameTitle.replace(ICON[0], ICON[1]);
-        return arr;
-      }
-    })
+    return parents
+  }
 
-    return arrs
+  /**
+  * 后台菜单 私有方法
+  * @param { Array } items 菜单列表
+  * @param { String } type 类型
+  * @param { Number } id 父id
+  * @param { Array } arrs 返回数组
+  */
+  static _getMenuType (items, id, type, arrs = []) {
+    switch (type) {
+      /**
+       * 前台菜单
+       */
+      case 'router':
+        items.filter(item => item.pid === id && arrs.push({
+          id: item.id,
+          path: item.path,
+          name: item.name,
+          component: item.redirect,
+          hidden: item.hidden,
+          sort: item.sort,
+          meta: { title: item.title, icon: item.icon, noCache: item.noCache }
+        })
+        );
+
+        return arrs.sort((a, b) => b.sort - a.sort)
+      /**
+       * 页面菜单
+       */
+      case 'menu':
+        items.filter(item => item.pid === id && arrs.push(item));
+
+        return arrs
+    }
+  }
+  /**
+   * 追加树状符合
+   * @param { Array } items 数组对象
+   */
+  static _setIcon (items) {
+    const [iconFirst, iconLast, item] = ['&nbsp;&nbsp;&nbsp;&nbsp;├', '&nbsp;&nbsp;&nbsp;&nbsp;└', items[items.length - 1]];
+
+    items.forEach(item => item.nameTitle = iconFirst + item.title)
+    item.nameTitle = iconLast + item.title
+
+    return items;
   }
   /**
    * 
@@ -77,41 +110,39 @@ class GetTree {
 
     return data
   }
-  /**
-   * 后台菜单
-   * @param { Array } items 菜单列表
-   * @param { number} id 父id
-   */
-  static routesList (items, id = 0) {
-    const children = this._childrensRoutes(items, id)
+  // static aboutLista (items, type, about, id = 0) {
+  //   var parents = JSON.parse(JSON.stringify(items));
+  //   about = JSON.parse(JSON.stringify(about));
+  //   if (id !== 0) parents = this._getMenuTypea(about, id)
+  //   parents.filter(parent => {
+  //     const children = this.aboutLista(items, type, about, parent.id)
+  //     if (children.length > 0) parent['children'] = this._setIcon(children)
+  //   });
 
-    children.filter(item => {
-      if (this.routesList(items, item.id).length > 0) item.children = this.routesList(items, item.id)
-    });
+  //   return parents
+  // }
+  // static _getMenuTypea (about, id, arrs = []) {
+  //   about.filter(item => item.dropId === id && arrs.push(item));
+  //   return arrs;
+  // }
+  static aboutLista (items, type, about) {
+    items = JSON.parse(JSON.stringify(items));
+    about = JSON.parse(JSON.stringify(about));
 
-    return children
+    items.forEach(item => {
+      const childrenAbout = this._childrenAbout(about, item.dropId);
+      if (childrenAbout.length > 0) {
+        item['children'] = childrenAbout
+      }
+    })
+    return items;
   }
-  /**
-   * 后台菜单 私有方法
-   * @param { Array } items 菜单列表
-   * @param { number} id 父id
-   * @param { Array } arr 返回数组
-   */
-  static _childrensRoutes (items, id, arr = []) {
-
-    items.filter(child => {
-      child.pid === id && arr.push({
-        id: child.id,
-        path: child.path,
-        name: child.name,
-        component: child.redirect,
-        hidden: child.hidden,
-        sort: child.sort,
-        meta: { title: child.title, icon: child.icon, noCache: child.noCache }
-      })
-    });
-
-    return arr.sort((a, b) => b.sort - a.sort)
+  static _childrenAbout (items, id, arrs = []) {
+    console.log(items);
+    items.forEach(item => {
+      if (item.dropId === id) arrs.push(arr)
+    })
+    return arrs;
   }
 }
 
