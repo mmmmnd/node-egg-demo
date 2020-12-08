@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 09:21:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-12 11:04:00
+ * @LastEditTime: 2020-12-08 11:19:39
  */
 'use strict';
 
@@ -27,7 +27,7 @@ module.exports = app => {
       defaultValue: '0', // 默认值
       comment: 'cid类型', // 备注 0 -> 不存在
     },
-    dropContent: {
+    title: {
       allowNull: !1, // 是否为空
       type: STRING(20), // 类型
       defaultValue: '', // 默认值

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-04 15:04:31
+ * @LastEditTime: 2020-12-08 09:23:41
  */
 'use strict';
 
@@ -91,7 +91,7 @@ class AdminService extends Service {
 				// 添加最后一次ip 次数 时间
 				admin.last_login_ip = this.ctx.ip;
 				admin.login_count = ++admin.login_count;
-				admin.last_login_time = moment().format('YYYY-MM-DD H:mm:ss');
+				admin.last_login_time = moment(new Date()).format("YYYY-MM-DD HH:mm:ss")
 				admin.save();
 
 				return { data: { token }, msg: '登录成功！' };
