@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-08 16:37:50
+ * @LastEditTime: 2020-12-11 10:52:35
  */
 'use strict';
 
@@ -61,7 +61,7 @@ class GetTree {
           component: item.redirect,
           hidden: item.hidden,
           sort: item.sort,
-          meta: { title: item.title, icon: item.icon, noCache: item.noCache }
+          meta: { title: item.title, icon: item.icon, noCache: item.noCache, breadcrumb: item.breadcrumb }
         })
         );
 
