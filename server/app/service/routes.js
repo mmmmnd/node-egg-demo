@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-07 15:47:01
+ * @LastEditTime: 2020-12-11 15:27:52
  */
 'use strict';
 
@@ -19,7 +19,8 @@ class RoutesService extends Service {
    * 角色权限
    * @param { Array } userInfo 用户数据
    */
-  async roles ({ userRole, userRoles }) {
+  async roles ({ userRoles, userRole }) {
+    userRoles = userRoles.split(',')
 
     const permissionsRoutes = []
 
@@ -28,7 +29,7 @@ class RoutesService extends Service {
      */
     const role = await this.ctx.model.MzcRoutes.findAll({
       where: {
-        role: { [Op.gte]: userRole },
+        role: { [Op.gte]: userRoles },
       },
       attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
     });

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-11 11:07:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-11 11:11:55
+ * @LastEditTime: 2020-12-11 14:45:25
  */
 'use strict';
 
@@ -29,15 +29,21 @@ module.exports = app => {
       defaultValue: '0', // 默认值
     },
     menu_id: {
-      allowNull: !0, // 是否为空
+      allowNull: !1, // 是否为空
       type: STRING(60), // 类型
       comment: '菜单id', // 备注
       defaultValue: '', // 默认值
     },
     api_id: {
-      allowNull: !0, // 是否为空
+      allowNull: !1, // 是否为空
       type: STRING(60), // 类型
       comment: '接口id', // 备注
+      defaultValue: '', // 默认值
+    },
+    describe: {
+      allowNull: !1, // 是否为空    
+      type: STRING(60), // 类型
+      comment: '描述', // 备注
       defaultValue: '', // 默认值
     },
     status: {

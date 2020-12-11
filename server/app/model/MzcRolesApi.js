@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-11 11:16:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-11 11:17:44
+ * @LastEditTime: 2020-12-11 14:45:47
  */
 /*
  * @Author: 莫卓才
@@ -32,7 +32,7 @@ module.exports = app => {
       comment: 'ID', // 备注
     },
     user_id: {
-      allowNull: !0, // 是否为空
+      allowNull: !1, // 是否为空
       type: INTEGER(8).UNSIGNED, // 类型
       comment: '群组id', // 备注
       defaultValue: '0', // 默认值

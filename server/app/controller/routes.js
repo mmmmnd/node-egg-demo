@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-04 15:19:35
+ * @LastEditTime: 2020-12-11 16:02:14
  */
 
 'use strict';
@@ -18,7 +18,9 @@ class RoutesController extends Controller {
   async roles () {
     const { userInfo } = global
 
-    const routes = await this.ctx.service.routes.roles(userInfo);
+    const roles = await this.ctx.service.roles.detail(userInfo.userRolesId);
+    const rolesMenu = await this.ctx.service.rolesMenu.detail(userInfo.userRolesId);
+    const routes = await this.ctx.service.routes.roles(roles, rolesMenu);
     await this.ctx.helper.checkData(routes);
   }
 }

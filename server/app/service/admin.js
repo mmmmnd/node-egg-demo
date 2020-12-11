@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-11 11:01:23
+ * @LastEditTime: 2020-12-11 15:41:45
  */
 'use strict';
 
@@ -69,6 +69,7 @@ class AdminService extends Service {
 			//颁发token secret -> 加密类型 params -> jwt参数
 			const token = await ctx.app.jwt.sign({
 				userId: admin.id,
+				userRolesId: admin.roles_id
 			}, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
 
 			//获取redis保存的token

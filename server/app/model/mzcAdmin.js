@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-11 11:01:02
+ * @LastEditTime: 2020-12-11 15:41:56
  */
 'use strict';
 
@@ -22,7 +22,7 @@ module.exports = app => {
 			type: INTEGER(8).UNSIGNED, // 类型
 			comment: 'ID', // 备注
 		},
-		roles: {
+		roles_id: {
 			allowNull: !1, // 是否为空
 			type: INTEGER(4), // 类型
 			defaultValue: 0, // 默认值
