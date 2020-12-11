@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-27 10:25:32
+ * @LastEditTime: 2020-12-08 16:30:55
 -->
 <template>
   <div class="app-container">
@@ -40,9 +40,9 @@
                        label="标题">
         <template slot-scope="{row}">
 
-          <el-tag v-if="row.treeNewTitle && row.children">{{ row.treeNewTitle }}</el-tag>
+          <el-tag v-if="row.title && row.children">{{ row.title }}</el-tag>
           <span v-else
-                v-html="row.treeNewTitle"></span>
+                v-html="row.title"></span>
 
         </template>
       </el-table-column>
@@ -122,7 +122,7 @@
                      placeholder="请选择上级分类">
             <el-option v-for="item in list"
                        :key="item.index"
-                       :label="item.treeNewTitle"
+                       :label="item.title"
                        :value="item.index" />
           </el-select>
         </el-form-item>

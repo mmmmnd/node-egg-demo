@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-04 16:53:27
+ * @LastEditTime: 2020-12-08 18:18:34
  */
 import { constantRoutes } from '@/router'
 import { routesRoles } from '@/api/routes'
@@ -21,8 +21,8 @@ export function generaMenu (data, routes = []) {
 
     const menu = {
       path: item.path,
-      component: item.children ? Layout : componentsMap[item.component] || componentsMap[item.redirect],
-      redirect: item.redirect,
+      component: item.children ? Layout : componentsMap[item.component],
+      redirect: item.children ? item.component : '',
       hidden: item.hidden,
       name: item.name,
       meta: item.meta
