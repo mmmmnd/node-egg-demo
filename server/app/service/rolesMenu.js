@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-11 15:51:16
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-11 15:52:39
+ * @LastEditTime: 2020-12-14 17:22:45
  */
 'use strict';
 /**
@@ -19,10 +19,8 @@ class RolesService extends Service {
    * @param { Number } roles_id 群组id
    */
   async detail (user_id) {
-    return await this.ctx.model.MzcRolesMenu.findAll({
-      where: {
-        user: user_id
-      }
+    return await this.ctx.model.MzcRolesMenu.findOne({
+      where: { user_id }
     })
   }
 }

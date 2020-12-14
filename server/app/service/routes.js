@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-11 15:27:52
+ * @LastEditTime: 2020-12-14 18:29:26
  */
 'use strict';
 
@@ -16,12 +16,15 @@ const HttpStatus = require('../utils/httpStatus');
 class RoutesService extends Service {
 
   /**
-   * 角色权限
-   * @param { Array } userInfo 用户数据
+   * 角色菜单权限
+   * @param { String } roles 群组
+   * @param { String } rolesMenu 个人
    */
-  async roles ({ userRoles, userRole }) {
-    userRoles = userRoles.split(',')
+  async roles (roles, rolesMenu) {
+    roles = JSON.parse(JSON.stringify(roles));
 
+    const userRoles = roles.menu_id.indexOf(',') > -1 ? roles.menu_id.split(',') : roles.menu_id
+    console.log(userRoles)
     const permissionsRoutes = []
 
     /**
@@ -29,7 +32,7 @@ class RoutesService extends Service {
      */
     const role = await this.ctx.model.MzcRoutes.findAll({
       where: {
-        role: { [Op.gte]: userRoles },
+        id: userRoles,
       },
       attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
     });
@@ -39,11 +42,12 @@ class RoutesService extends Service {
     /**
      * 单独权限
      */
-    if (userRoles) {
-      userRoles = userRoles.split(',')
+    if (rolesMenu) {
+      rolesMenu = JSON.parse(JSON.stringify(rolesMenu));
+      userRole = rolesMenu.menu_id.split(',')
       const roles = await this.ctx.model.MzcRoutes.findAll({
         where: {
-          id: userRoles,
+          id: userRole,
         },
         attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
       });
