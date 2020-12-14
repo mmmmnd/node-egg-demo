@@ -65,6 +65,7 @@ class GetTree {
         })
         );
 
+        arrs.sort((a, b) => a.id - b.id)
         return arrs.sort((a, b) => b.sort - a.sort)
       /**
        * 页面菜单

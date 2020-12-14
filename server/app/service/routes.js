@@ -19,40 +19,35 @@ class RoutesService extends Service {
    * 角色菜单权限
    * @param { String } roles 群组
    * @param { String } rolesMenu 个人
+   * @param { Array } permissionsRoutes 路由菜单
    */
-  async roles (roles, rolesMenu) {
-    roles = JSON.parse(JSON.stringify(roles));
-
-    const userRoles = roles.menu_id.indexOf(',') > -1 ? roles.menu_id.split(',') : roles.menu_id
-    console.log(userRoles)
-    const permissionsRoutes = []
-
+  async roles (roles, rolesMenu, permissionsRoutes = []) {
+    const userRoles = roles.menu_id.split(',')
     /**
      * 群组
      */
-    const role = await this.ctx.model.MzcRoutes.findAll({
+    const rolesRoutes = await this.ctx.model.MzcRoutes.findAll({
       where: {
         id: userRoles,
       },
       attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
     });
 
-    permissionsRoutes.push(...role)
+    permissionsRoutes.push(...rolesRoutes)
 
-    /**
-     * 单独权限
-     */
     if (rolesMenu) {
-      rolesMenu = JSON.parse(JSON.stringify(rolesMenu));
-      userRole = rolesMenu.menu_id.split(',')
-      const roles = await this.ctx.model.MzcRoutes.findAll({
+      const userRole = rolesMenu.menu_id.split(',')
+      /**
+       * 单独权限
+       */
+      const roleRole = await this.ctx.model.MzcRoutes.findAll({
         where: {
           id: userRole,
         },
         attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
       });
 
-      permissionsRoutes.push(...roles)
+      permissionsRoutes.push(...roleRole)
     }
 
     return { data: GetTree.menuList(permissionsRoutes, 'router') };
