@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-01 09:47:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-05 20:43:55
+ * @LastEditTime: 2020-12-15 19:08:57
  */
 'use strict'
 const HttpStatus = require('../utils/httpStatus');
@@ -13,17 +13,23 @@ const HttpStatus = require('../utils/httpStatus');
 module.exports = (options) => {
   return async (ctx, next) => {
     try {
+      const pathName = ctx.URL.pathname
       const token = await ctx.get(ctx.app.config.usetToken);
       const userInfo = await ctx.app.jwt.verify(token, options.secret, ctx.app.config.jwt.params); //校验token
       const redisToken = await ctx.app.redis.get(ctx.app.config.usetToken + userInfo.userId); //获取userToken
 
       if (token === redisToken) {
         global.userInfo = userInfo
-        await ctx.app.redis.expire(ctx.app.config.usetToken + userInfo.userId, ctx.app.config.expired) // 未响应30分钟后删除token
-        await next();
+        const isPathName = await ctx.service.api.check(pathName, userInfo) //校验接口权限
+        if (isPathName) {
+          await ctx.app.redis.expire(ctx.app.config.usetToken + userInfo.userId, ctx.app.config.expired) // 未响应30分钟后删除token
+          await next();
+        } else {
+          await ctx.helper.checkData({ msg: '无权操作 非法请求！相关信息已被记录，请注意行为（别以为我不知道你想干嘛）！！！如有疑惑请联系开发者 -> handsome.mo@foxmail.com', errorStatus: HttpStatus.UNAUTHORIZED })
+        }
       } else if (redisToken !== token) {
         global.userInfo = '';
-        await ctx.helper.checkData({ msg: 'token 已过期! 请重新获取令牌', errorStatus: HttpStatus.UNAUTHORIZED, code: 50014 }) //redist Token 过期 
+        await ctx.helper.checkData({ msg: 'token 已过期! 请重新获取令牌', errorStatus: HttpStatus.UNAUTHORIZED, code: 50014 }) //redis Token 过期 
       }
     } catch (error) {
       global.userInfo = '';

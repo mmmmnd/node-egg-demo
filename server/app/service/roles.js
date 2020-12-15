@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-11 15:33:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-14 17:22:58
+ * @LastEditTime: 2020-12-15 16:07:06
  */
 'use strict';
 /**
@@ -13,14 +13,15 @@
  */
 const Service = require('egg').Service;
 const HttpStatus = require('../utils/httpStatus');
+
 class RolesService extends Service {
   /**
    * 详情
-   * @param { Number } roles_id 群组id
+   * @param { Number } id 群组id
    */
-  async detail (roles_id) {
+  async detail (id) {
     return await this.ctx.model.MzcRoles.findOne({
-      where: { roles_id }
+      where: { id }
     })
 
   }

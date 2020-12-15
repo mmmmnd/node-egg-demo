@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-11 11:07:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-11 14:45:25
+ * @LastEditTime: 2020-12-15 16:23:29
  */
 'use strict';
 
@@ -20,13 +20,7 @@ module.exports = app => {
       autoIncrement: !0, // 自增
       primaryKey: !0, // 主键
       type: INTEGER(8).UNSIGNED, // 类型
-      comment: 'ID', // 备注
-    },
-    roles_id: {
-      allowNull: !1, // 是否为空
-      type: INTEGER(8).UNSIGNED, // 类型
       comment: '群组id', // 备注
-      defaultValue: '0', // 默认值
     },
     menu_id: {
       allowNull: !1, // 是否为空
