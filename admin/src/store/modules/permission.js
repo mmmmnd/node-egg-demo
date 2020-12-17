@@ -5,10 +5,10 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-08 18:18:34
+ * @LastEditTime: 2020-12-17 16:07:31
  */
 import { constantRoutes } from '@/router'
-import { routesRoles } from '@/api/routes'
+import { routesIndex } from '@/api/routes'
 import Layout from '@/layout'
 
 /**
@@ -52,9 +52,10 @@ export const componentsMap = {
   casesPartner: () => import('@/views/cases/partner'),
   recruitIndex: () => import('@/views/recruit/index'),
   recruitList: () => import('@/views/recruit/list'),
-  menuIndex: () => import('@/views/menu/index'),
+  menusIndex: () => import('@/views/menu/index'),
   settingBsic: () => import('@/views/setting/bsic'),
   settingAdvertising: () => import('@/views/setting/advertising'),
+  permissionsRoles: () => import('@/views/permissions/roles'),
 }
 
 const state = {
@@ -73,7 +74,7 @@ const actions = {
   generateRoutes ({ commit }, roles) {
     return new Promise(resolve => {
       // 先查询后台并返回左侧菜单数据并把数据添加到路由
-      routesRoles().then(response => {
+      routesIndex().then(response => {
         const data = response.data
         if (response.code !== 0) {
           this.$message({
@@ -83,7 +84,6 @@ const actions = {
         } else {
           const asyncRoutes = generaMenu(data)
           asyncRoutes.push({ path: '*', redirect: '/404', hidden: true });
-          console.log(asyncRoutes)
           commit('SET_ROUTES', asyncRoutes)
           resolve(asyncRoutes)
         }
