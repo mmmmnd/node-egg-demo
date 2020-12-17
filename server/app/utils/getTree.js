@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-11 10:52:35
+ * @LastEditTime: 2020-12-17 18:28:08
  */
 'use strict';
 
@@ -24,9 +24,9 @@ class GetTree {
       about = JSON.parse(JSON.stringify(about));
 
       items.forEach((item, index) => {
-        const childrenAbout = this._getMenuType(about, item.id, type);
-        item.index = item.id, item.id = index + 100
-        if (childrenAbout.length > 0) item['children'] = this._setIcon(childrenAbout)
+        const children = this._getMenuType(about, item.id, type);
+        if (type === 'about') { item.index = item.id, item.id = index + 100 }
+        if (children.length > 0) item['children'] = type == 'about' ? this._setIcon(children) : children
       })
 
       return items
@@ -81,6 +81,13 @@ class GetTree {
         items.forEach(item => item.dropId === id && item.id !== 1 && arrs.push(item));
 
         return arrs
+      /**
+       * 接口菜单
+       */
+      case 'roles':
+        items.forEach(item => item.pid === id && arrs.push(item));
+
+        return arrs
     }
   }
   /**
@@ -94,6 +101,16 @@ class GetTree {
     item.nameTitle = iconLast + item.title
 
     return items;
+  }
+  /**
+   * 
+   * @param {*} api 接口列表
+   * @param {*} rolesApi 群组接口
+   * @param {*} roles 群组
+   * @param {*} routes 菜单
+   */
+  static checkedList (api, rolesApi, roles, routes) {
+    console.log(api)
   }
 }
 

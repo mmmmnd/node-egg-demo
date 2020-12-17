@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-11 15:33:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-15 16:07:06
+ * @LastEditTime: 2020-12-17 17:58:45
  */
 'use strict';
 /**
@@ -16,6 +16,36 @@ const HttpStatus = require('../utils/httpStatus');
 
 class RolesService extends Service {
   /**
+  * 获取列表
+  * @param { String } limit 最大限制
+  * @param { String } page 分页
+  */
+  async index ({ limit = 20, page = 1 }) {
+    const maxPage = Number(limit);
+    const roles = await this.ctx.model.MzcRoles.findAndCountAll({
+      where: {
+        deleted_at: null
+      },
+      offset: (page - 1) * maxPage,
+      limit: maxPage,
+    })
+
+    if (roles.rows.length == 0) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
+
+    return {
+      data: {
+        data: roles.rows,
+        meta: {
+          current_page: Number(page),
+          per_page: maxPage,
+          total: roles.count,
+          total_pages: Math.ceil(roles.count / maxPage),
+        }
+      }
+    }
+
+  }
+  /**
    * 详情
    * @param { Number } id 群组id
    */
@@ -23,7 +53,6 @@ class RolesService extends Service {
     return await this.ctx.model.MzcRoles.findOne({
       where: { id }
     })
-
   }
 }
 

@@ -5,14 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-12-15 10:50:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-15 19:02:19
+ * @LastEditTime: 2020-12-17 18:27:21
  */
 'use strict';
 /**
  * 接口
  */
 const Service = require('egg').Service;
-const await = require('await-stream-ready/lib/await');
 const HttpStatus = require('../utils/httpStatus');
 
 class ApiService extends Service {
@@ -35,7 +34,7 @@ class ApiService extends Service {
     const whiteList = [
       '/api/admin/logout',
       '/api/admin/current',
-      '/api/routes/roles'
+      '/api/routes/index'
     ]; // 白名单
     if (whiteList.includes(urlPathName)) return true
 
@@ -48,7 +47,32 @@ class ApiService extends Service {
 
     return roles.api_id.includes(apiId.id) || rolesApi.api_id.includes(apiId.id)
   }
+  /**
+   * 获取接口列表
+   */
+  async index (id) {
+    return await this.ctx.model.MzcApi.findAll({
+      where: {
+        deleted_at: null
+      }
+    })
 
+  }
+  /**
+   * 获取群组已选中的接口
+   * @param { Number } roles 群组
+   */
+  async detailId (roles) {
+    for (var role of roles) {
+      console.log(role)
+    }
+    return await this.ctx.model.MzcApi.findAll({
+      where: {
+        id,
+        deleted_at: null
+      }
+    })
+  }
 }
 
 module.exports = ApiService;

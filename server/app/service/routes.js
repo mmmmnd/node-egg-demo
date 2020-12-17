@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-14 18:29:26
+ * @LastEditTime: 2020-12-16 16:16:04
  */
 'use strict';
 
@@ -21,7 +21,7 @@ class RoutesService extends Service {
    * @param { String } rolesMenu 个人
    * @param { Array } permissionsRoutes 路由菜单
    */
-  async roles (roles, rolesMenu, permissionsRoutes = []) {
+  async index (roles, rolesMenu, permissionsRoutes = []) {
     const userRoles = roles.menu_id.split(',')
     /**
      * 群组
@@ -51,6 +51,24 @@ class RoutesService extends Service {
     }
 
     return { data: GetTree.menuList(permissionsRoutes, 'router') };
+  }
+  /**
+   * 详情
+   * @param { String } key 
+   * @param { String || Number } value 
+   */
+  async detail (key, value) {
+
+    const routes = await this.ctx.model.MzcRoutes.findAll({
+      where: {
+        [key]: value,
+        deleted_at: null
+      }
+    });
+
+    if (!routes[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
+
+    return routes
   }
 }
 
