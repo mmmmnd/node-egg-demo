@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-16 15:12:11
+ * @LastEditTime: 2020-12-18 15:08:28
  */
 'use strict';
 
@@ -137,7 +137,6 @@ module.exports = app => {
 
   // roles
   router.get('/api/roles/index', jwt, controller.roles.index)
-  router.get('/api/roles/routesDetail', jwt, controller.roles.routesDetail)
 
   // 404
   router.get('*', controller.web.error); // 404

@@ -5,12 +5,10 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 10:00:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-17 18:20:27
+ * @LastEditTime: 2020-12-18 15:08:21
  */
 'use strict';
 
-const await = require('await-stream-ready/lib/await');
-const GetTree = require('../utils/getTree');
 const Controller = require('egg').Controller;
 
 class RolesController extends Controller {
@@ -20,12 +18,7 @@ class RolesController extends Controller {
   async index () {
     const params = this.ctx.query;
 
-    const api = await this.ctx.service.api.index() //接口列表
     const roles = await this.ctx.service.roles.index(params) //群组
-    const rolesApi = await this.ctx.service.api.detailId(roles) //群组接口
-    const routes = await this.ctx.service.routes.detail('pid', 0) //菜单名称
-    const data = GetTree.checkedList(api, rolesApi, roles, routes)
-
     await this.ctx.helper.checkData(roles);
   }
   /**
@@ -63,17 +56,6 @@ class RolesController extends Controller {
 
     const roles = await this.ctx.service.roles.add(params)
     await this.ctx.helper.checkData(roles);
-  }
-  /**
-   * 角色接口
-   */
-  async routesDetail () {
-
-    const api = await this.ctx.service.api.index()
-    const routes = await this.ctx.service.routes.detail('pid', 0)
-    const data = GetTree.menuList(routes, 'roles', api);
-
-    await this.ctx.helper.checkData({ data });
   }
 }
 

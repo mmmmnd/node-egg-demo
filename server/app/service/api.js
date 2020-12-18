@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-15 10:50:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-17 18:27:21
+ * @LastEditTime: 2020-12-18 15:07:42
  */
 'use strict';
 /**
@@ -50,7 +50,7 @@ class ApiService extends Service {
   /**
    * 获取接口列表
    */
-  async index (id) {
+  async index () {
     return await this.ctx.model.MzcApi.findAll({
       where: {
         deleted_at: null
@@ -60,12 +60,9 @@ class ApiService extends Service {
   }
   /**
    * 获取群组已选中的接口
-   * @param { Number } roles 群组
+   * @param { Number } roles 群组api_id
    */
-  async detailId (roles) {
-    for (var role of roles) {
-      console.log(role)
-    }
+  async detailId (id) {
     return await this.ctx.model.MzcApi.findAll({
       where: {
         id,
