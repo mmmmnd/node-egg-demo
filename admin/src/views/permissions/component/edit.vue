@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-17 17:18:02
+ * @LastEditTime: 2020-12-18 16:15:30
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -36,28 +36,28 @@
                    inactive-text="关闭">
         </el-switch>
       </el-form-item>
-
+      <hr class="el-divider">
       <el-form-item label="接口权限"
                     class="postInfo-container-item"
                     prop="position">
 
-        <el-form-item v-for="(apiOption,index) of apiOptions"
+        <el-form-item v-for="(routesApi,index) of temp.routesApis"
                       :key="index"
-                      :label="apiOption.title+'：'">
+                      :label="routesApi.title+'：'">
 
-          <el-checkbox v-model="apiOption.checkedAll"
-                       :indeterminate="apiOption.isIndeterminate"
-                       @change="handleCheckAllChange($event, apiOption)"
+          <el-checkbox v-model="routesApi.checkAll"
+                       :indeterminate="routesApi.indeterminate"
+                       @change="handleCheckAllChange($event, routesApi)"
                        style="display: block;">全选</el-checkbox>
 
-          <el-checkbox-group v-model="checkedMenuApi"
+          <el-checkbox-group v-model="routesApi.checkeRoles"
                              style="display: inline-block">
-            <el-checkbox v-for="children of apiOption.children"
-                         :key="children.id"
-                         :label="children.id"
+            <el-checkbox v-for="checkeAll of routesApi.checkeAlls"
+                         :key="checkeAll.id"
+                         :label="checkeAll.id"
                          name="type"
-                         @change="onChangeCheck(children)">
-              {{children.describe}}
+                         @change="onChangeCheck(routesApi)">
+              {{checkeAll.describe}}
             </el-checkbox>
           </el-checkbox-group>
 
@@ -93,14 +93,6 @@ export default {
     dialogStatus: {
       type: String,
       default: 'update'
-    },
-    apiOptions: {
-      type: Array,
-      default: []
-    },
-    checkedApi: {
-      type: Array,
-      default: []
     }
   },
   data () {
@@ -121,15 +113,6 @@ export default {
       //   status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
       //   content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
       // },
-      checkedAll: false,
-      isIndeterminate: true,
-      checkedMenuApi: this.checkedApi,
-      checkedArr: {}
-    }
-  },
-  watch: {
-    checkedApi (newVal) {
-      this.checkedMenuApi = newVal;
     }
   },
   computed: {
@@ -143,33 +126,17 @@ export default {
     }
   },
   methods: {
-    handleCheckAllChange (checked, apiOption, arrs = []) {
-      console.log(apiOption)
-      // if (checked) {
-      //   this.checkedArr = []
-      //   for (var child of apiOption.children) this.checkedArr.push(child.id);
-      //   this.checkedMenuApi.push(...this.checkedArr)
-      //   this.checkedMenuApi = [...new Set(this.checkedMenuApi)]
-      // } else {
-      //   this.checkedMenuApi = [...new Set(this.checkedMenuApi)]
-      //   this.checkedArr.filter(item => this.checkedMenuApi.splice(
-      //     this.checkedMenuApi.indexOf(item), 1)
-      //   )
-      //   console.log(this.checkedArr)
-      //   console.log(this.checkedMenuApi)
-      // }
-      // apiOption.isIndeterminate = false;
-      // apiOption.checkedAll = checked;
+    handleCheckAllChange (checked, routesApi, data = []) {
+      checked && routesApi.checkeAlls.forEach(item => data.push(item.id))
 
-      for (var child of apiOption.children) arrs.push(child.id);
-      this.checkedArr[apiOption.id] = arrs;
-      console.log(this.checkedArr)
+      routesApi.checkeRoles = checked ? data : []
+      routesApi.indeterminate = false
+      routesApi.checkAll = checked
     },
 
-    onChangeCheck (value) {
-
-      // this.checkAll = checkedCount === this.cities.length;
-      // this.isIndeterminate = checkedCount > 0 && checkedCount < this.cities.length;
+    onChangeCheck (routesApi) {
+      routesApi.indeterminate = !!routesApi.checkeRoles.length && (routesApi.checkeRoles.length < routesApi.checkeAlls.length)
+      routesApi.checkAll = routesApi.checkeRoles.length === routesApi.checkeAlls.length
     },
     /**
      * 修改模块
@@ -266,5 +233,10 @@ export default {
 }
 .el-textarea .el-textarea__inner {
   width: 100% !important;
+}
+.el-divider {
+  border: none;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e8e8e8;
 }
 </style>

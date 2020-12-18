@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 10:29:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-17 11:12:09
+ * @LastEditTime: 2020-12-18 15:17:44
 -->
 <template>
   <div class="app-container">
@@ -82,8 +82,6 @@
            :visible.sync="showDialog"
            :temp="temp"
            :dialogStatus="dialogStatus"
-           :apiOptions="apiOptions"
-           :checkedApi="checkedApi"
            @updateItem="updateItem"
            @updateData="updateData"
            @createData="createData" />
@@ -95,7 +93,7 @@
 <script>
 import { recruitDroptypeIndex, recruitIndex, recruitUpdate, recruitDestroy, recruitAdd, recruitEdit } from '@/api/recruit'
 import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
-import { rolesIndex, rolesRoutesDetail } from '@/api/permissions'
+import { rolesIndex } from '@/api/permissions'
 
 import Pagination from '@/components/Pagination'
 import vEdit from './component/edit'
@@ -112,9 +110,7 @@ export default {
       },
       showDialog: false,
       temp: {},
-      dialogStatus: '',
-      apiOptions: [], // 接口菜单
-      checkedApi: [] // 群组选中的接口
+      dialogStatus: ''
     }
   }
   ,
@@ -141,10 +137,6 @@ export default {
         .then(response => {
           this.list = response.data.data;
           this.total = response.data.meta.total
-          return rolesRoutesDetail()
-        }).then(response => {
-          this.apiOptions = response.data
-          this.listLoading = false
         })
     },
     /**
@@ -168,7 +160,6 @@ export default {
      */
     handleUpdate (row) {
       this.temp = Object.assign({}, row) // copy obj
-      this.checkedApi = this.temp.api_id.split(',').map(Number)
       this.dialogStatus = 'update'
       this.showDialog = true;
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
