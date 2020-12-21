@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 10:00:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-18 15:08:21
+ * @LastEditTime: 2020-12-21 17:29:35
  */
 'use strict';
 
@@ -18,43 +18,7 @@ class RolesController extends Controller {
   async index () {
     const params = this.ctx.query;
 
-    const roles = await this.ctx.service.roles.index(params) //群组
-    await this.ctx.helper.checkData(roles);
-  }
-  /**
-   * 修改
-   */
-  async update () {
-    const params = this.ctx.request.body;
-
-    const roles = await this.ctx.service.roles.update(params);
-    await this.ctx.helper.checkData(roles);
-  }
-  /**
-   * 删除
-   */
-  async destroy () {
-    const params = this.ctx.request.body;
-
-    const roles = await this.ctx.service.roles.destroy(params);
-    await this.ctx.helper.checkData(roles);
-  }
-  /**
-   * 编辑
-   */
-  async edit () {
-    const params = this.ctx.request.body;
-
-    const roles = await this.ctx.service.roles.edit(params)
-    await this.ctx.helper.checkData(roles);
-  }
-  /**
-   * 增加
-   */
-  async add () {
-    const params = this.ctx.request.body;
-
-    const roles = await this.ctx.service.roles.add(params)
+    const roles = await this.ctx.service.roles.index(params)
     await this.ctx.helper.checkData(roles);
   }
 }

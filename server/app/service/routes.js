@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-16 16:16:04
+ * @LastEditTime: 2020-12-21 17:30:38
  */
 'use strict';
 
@@ -69,6 +69,18 @@ class RoutesService extends Service {
     if (!routes[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
 
     return routes
+  }
+  /**
+   * 获取列表
+   */
+  async list () {
+    const routes = await this.ctx.model.MzcRoutes.findAll({
+      where: {
+        deleted_at: null
+      },
+    });
+
+    return { data: GetTree.menuList(routes, 'menu') }
   }
 }
 
