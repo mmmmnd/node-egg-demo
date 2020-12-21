@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 10:29:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-18 15:17:44
+ * @LastEditTime: 2020-12-21 17:06:21
 -->
 <template>
   <div class="app-container">
@@ -81,6 +81,8 @@
     <vEdit ref="newForm"
            :visible.sync="showDialog"
            :temp="temp"
+           :apiList="apiList"
+           :routesList="routesList"
            :dialogStatus="dialogStatus"
            @updateItem="updateItem"
            @updateData="updateData"
@@ -93,7 +95,7 @@
 <script>
 import { recruitDroptypeIndex, recruitIndex, recruitUpdate, recruitDestroy, recruitAdd, recruitEdit } from '@/api/recruit'
 import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
-import { rolesIndex } from '@/api/permissions'
+import { rolesIndex, apiIndex, routesList } from '@/api/permissions'
 
 import Pagination from '@/components/Pagination'
 import vEdit from './component/edit'
@@ -110,7 +112,9 @@ export default {
       },
       showDialog: false,
       temp: {},
-      dialogStatus: ''
+      dialogStatus: '',
+      apiList: [],
+      routesList: []
     }
   }
   ,
@@ -137,7 +141,16 @@ export default {
         .then(response => {
           this.list = response.data.data;
           this.total = response.data.meta.total
+          return apiIndex()
         })
+        .then(response => {
+          this.apiList = response.data;
+          return routesList()
+        })
+        .then(response => {
+          this.routesList = response.data;
+        })
+
     },
     /**
      * 切换状态
@@ -160,6 +173,12 @@ export default {
      */
     handleUpdate (row) {
       this.temp = Object.assign({}, row) // copy obj
+      this.$nextTick(() => {
+        const api_id = this.temp.api_id.split(',').map(Number)
+        const menu_id = this.temp.menu_id.split(',').map(Number)
+        this.$refs.newForm.$refs.apiTree.setCheckedKeys(api_id)
+        this.$refs.newForm.$refs.routesTree.setCheckedKeys(menu_id)
+      })
       this.dialogStatus = 'update'
       this.showDialog = true;
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()

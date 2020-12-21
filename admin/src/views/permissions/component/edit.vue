@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-18 16:15:30
+ * @LastEditTime: 2020-12-21 17:13:53
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -37,33 +37,38 @@
         </el-switch>
       </el-form-item>
       <hr class="el-divider">
-      <el-form-item label="接口权限"
-                    class="postInfo-container-item"
-                    prop="position">
 
-        <el-form-item v-for="(routesApi,index) of temp.routesApis"
-                      :key="index"
-                      :label="routesApi.title+'：'">
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="接口权限"
+                        class="postInfo-container-item"
+                        prop="position">
+            <div class="grid-content bg-purple">
+              <el-tree :data="apiList"
+                       ref="apiTree"
+                       show-checkbox
+                       node-key="id"
+                       :props="apiListProps">
+              </el-tree>
+            </div>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="菜单权限"
+                        class="postInfo-container-item"
+                        prop="position">
+            <div class="grid-content bg-purple-light">
+              <el-tree :data="routesList"
+                       ref="routesTree"
+                       show-checkbox
+                       node-key="id"
+                       :props="routesListProps">
+              </el-tree>
+            </div>
+          </el-form-item>
+        </el-col>
+      </el-row>
 
-          <el-checkbox v-model="routesApi.checkAll"
-                       :indeterminate="routesApi.indeterminate"
-                       @change="handleCheckAllChange($event, routesApi)"
-                       style="display: block;">全选</el-checkbox>
-
-          <el-checkbox-group v-model="routesApi.checkeRoles"
-                             style="display: inline-block">
-            <el-checkbox v-for="checkeAll of routesApi.checkeAlls"
-                         :key="checkeAll.id"
-                         :label="checkeAll.id"
-                         name="type"
-                         @change="onChangeCheck(routesApi)">
-              {{checkeAll.describe}}
-            </el-checkbox>
-          </el-checkbox-group>
-
-        </el-form-item>
-
-      </el-form-item>
     </el-form>
 
     <div slot="footer"
@@ -93,6 +98,14 @@ export default {
     dialogStatus: {
       type: String,
       default: 'update'
+    },
+    apiList: {
+      type: Array,
+      default: []
+    },
+    routesList: {
+      type: Array,
+      default: []
     }
   },
   data () {
@@ -105,6 +118,14 @@ export default {
         update: '修改',
         create: '增加'
       },
+      apiListProps: {
+        children: 'children',
+        label: 'describe'
+      },
+      routesListProps: {
+        children: 'children',
+        label: 'title'
+      }
       // rules: {
       //   category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
       //   title: [{ type: 'string', required: true, message: '请输入网站标题', trigger: 'blur' }],
@@ -126,18 +147,6 @@ export default {
     }
   },
   methods: {
-    handleCheckAllChange (checked, routesApi, data = []) {
-      checked && routesApi.checkeAlls.forEach(item => data.push(item.id))
-
-      routesApi.checkeRoles = checked ? data : []
-      routesApi.indeterminate = false
-      routesApi.checkAll = checked
-    },
-
-    onChangeCheck (routesApi) {
-      routesApi.indeterminate = !!routesApi.checkeRoles.length && (routesApi.checkeRoles.length < routesApi.checkeAlls.length)
-      routesApi.checkAll = routesApi.checkeRoles.length === routesApi.checkeAlls.length
-    },
     /**
      * 修改模块
      */
