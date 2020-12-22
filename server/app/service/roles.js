@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-11 15:33:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-21 16:44:27
+ * @LastEditTime: 2020-12-22 18:25:40
  */
 'use strict';
 /**
@@ -54,6 +54,17 @@ class RolesService extends Service {
     return await this.ctx.model.MzcRoles.findOne({
       where: { id }
     })
+  }
+  /**
+   * 增加
+   * @param { Object } params 参数
+   */
+  async add ({ menu_id = '', api_id = '', roles_name, describe, status, sort }) {
+    await this.ctx.model.MzcRoles.create({
+      menu_id, api_id, roles_name, describe, status, sort
+    });
+
+    return { httpStatus: HttpStatus.OK }
   }
 }
 

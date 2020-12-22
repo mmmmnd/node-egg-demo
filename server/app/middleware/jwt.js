@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-01 09:47:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-15 20:11:22
+ * @LastEditTime: 2020-12-22 17:45:45
  */
 'use strict'
 const HttpStatus = require('../utils/httpStatus');
@@ -39,8 +39,10 @@ module.exports = (options) => {
         await ctx.helper.checkData({ msg: '您没有权限访问该接口!', errorStatus: HttpStatus.UNAUTHORIZED })
       else if (error.message == 'invalid signature')
         await ctx.helper.checkData({ msg: 'token信息不一致！', errorStatus: HttpStatus.UNAUTHORIZED, code: 50008 })
-      else if (error.message == 'jwt expired')
+      else if (error.message == 'jwt expired') {
+        await ctx.app.redis.del(ctx.app.config.usetToken + userInfo.userId);
         await ctx.helper.checkData({ msg: 'token 已过期! 请重新获取令牌', errorStatus: HttpStatus.UNAUTHORIZED, code: 50014 }) //token 过期
+      }
       else
         await ctx.helper.checkData({ msg: error.message, errorStatus: HttpStatus.INTERNAL_SERVER_ERROR });
     }

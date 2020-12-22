@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-15 16:32:55
+ * @LastEditTime: 2020-12-22 17:46:51
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -56,7 +56,7 @@ module.exports = appInfo => {
     password: '123456',
     database: 'local-egg-demo',
     timezone: '+08:00',
-    logging: false,//输出日志信息
+    logging: true,//输出日志信息
     define: {  // model的全局配置
       timestamps: true,   // 添加create,update,delete时间戳
       paranoid: true,   // 添加软删除
@@ -88,7 +88,7 @@ module.exports = appInfo => {
     secret: "123456",//自定义 token 的加密条件字符串
     params: {
       algorithm: 'HS256',
-      expiresIn: 60 * 4 * 60,
+      expiresIn: 60 * 60 * 4,
     }
   };
 
@@ -125,7 +125,7 @@ module.exports = appInfo => {
   // add your user config here
   const userConfig = {
     usetToken: 'token',
-    expired: 30 * 60,
+    expired: 60 * 60 * 4,
   };
 
   return {

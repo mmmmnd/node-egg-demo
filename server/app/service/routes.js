@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-21 17:30:38
+ * @LastEditTime: 2020-12-22 20:22:06
  */
 'use strict';
 
@@ -21,36 +21,20 @@ class RoutesService extends Service {
    * @param { String } rolesMenu 个人
    * @param { Array } permissionsRoutes 路由菜单
    */
-  async index (roles, rolesMenu, permissionsRoutes = []) {
-    const userRoles = roles.menu_id.split(',')
+  async index (roles, rolesMenu) {
+    if (rolesMenu == null) rolesMenu = { menu_id: '[]' }
+    const userRoles = [...JSON.parse(roles.menu_id), ...JSON.parse(rolesMenu.menu_id)]
     /**
-     * 群组
-     */
+    * 群组和个人菜单合集
+    */
     const rolesRoutes = await this.ctx.model.MzcRoutes.findAll({
       where: {
-        id: userRoles,
+        id: [...new Set(userRoles)], //去重
       },
       attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
     });
 
-    permissionsRoutes.push(...rolesRoutes)
-
-    if (rolesMenu) {
-      const userRole = rolesMenu.menu_id.split(',')
-      /**
-       * 单独权限
-       */
-      const roleRole = await this.ctx.model.MzcRoutes.findAll({
-        where: {
-          id: userRole,
-        },
-        attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
-      });
-
-      permissionsRoutes.push(...roleRole)
-    }
-
-    return { data: GetTree.menuList(permissionsRoutes, 'router') };
+    return { data: GetTree.menuList(rolesRoutes, 'router') };
   }
   /**
    * 详情

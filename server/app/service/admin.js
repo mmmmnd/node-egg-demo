@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-11 15:41:45
+ * @LastEditTime: 2020-12-22 17:42:37
  */
 'use strict';
 
@@ -66,6 +66,10 @@ class AdminService extends Service {
 
 			if (!login) return { msg: '账号不存在或者密码不正确', errorStatus: HttpStatus.INVALID_REQUEST };
 
+			const adminRoles = await this.ctx.service.roles.detail(admin.roles_id);
+
+			if (!adminRoles.status) return { msg: `当前[${adminRoles.roles_name}]角色已被禁用，有疑惑请联系系统管理员`, errorStatus: HttpStatus.UNAUTHORIZED };
+
 			//颁发token secret -> 加密类型 params -> jwt参数
 			const token = await ctx.app.jwt.sign({
 				userId: admin.id,
@@ -73,7 +77,7 @@ class AdminService extends Service {
 			}, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
 
 			//获取redis保存的token
-			const redisGetToken = await ctx.app.redis.get(ctx.app.config.usetToken + admin.id,);
+			const redisGetToken = await ctx.app.redis.get(ctx.app.config.usetToken + admin.id);
 			if (redisGetToken) {
 				//校验token令牌 secret -> 加密类型 params -> jwt参数
 				const redisToken = await ctx.app.jwt.verify(redisGetToken, ctx.app.config.jwt.secret, ctx.app.config.jwt.params);
@@ -88,7 +92,7 @@ class AdminService extends Service {
 				await ctx.app.redis.expire(ctx.app.config.usetToken + admin.id, ctx.app.config.expired);
 
 				// 添加最后一次ip 次数 时间
-				admin.last_login_ip = this.ctx.ip;
+				admin.last_login_ip = ctx.ip;
 				admin.login_count = ++admin.login_count;
 				admin.last_login_time = moment(new Date()).format("YYYY-MM-DD HH:mm:ss")
 				admin.save();
@@ -97,7 +101,7 @@ class AdminService extends Service {
 			}
 
 		} catch (error) {
-			return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
+			return { msg: error.message, errorStatus: HttpStatus.INTERNAL_SERVER_ERROR };
 		}
 	}
 
