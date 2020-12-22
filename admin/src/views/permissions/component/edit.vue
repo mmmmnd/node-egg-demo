@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-21 17:13:53
+ * @LastEditTime: 2020-12-22 18:30:54
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -17,13 +17,13 @@
       <el-form-item label="角色名称:"
                     class="postInfo-container-item"
                     prop="title">
-        <el-input v-model="temp.title"></el-input>
+        <el-input v-model="temp.roles_name"></el-input>
       </el-form-item>
 
       <el-form-item label="描述"
                     class="postInfo-container-item"
                     prop="position">
-        <el-input v-model="temp.position"></el-input>
+        <el-input v-model="temp.describe"></el-input>
       </el-form-item>
 
       <el-form-item label="状态:"
@@ -47,6 +47,7 @@
               <el-tree :data="apiList"
                        ref="apiTree"
                        show-checkbox
+                       accordion
                        node-key="id"
                        :props="apiListProps">
               </el-tree>
@@ -61,6 +62,7 @@
               <el-tree :data="routesList"
                        ref="routesTree"
                        show-checkbox
+                       accordion
                        node-key="id"
                        :props="routesListProps">
               </el-tree>
@@ -151,8 +153,6 @@ export default {
      * 修改模块
      */
     updateData () {
-      console.log(this.temp)
-      return false;
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           let tempData = Object.assign({}, this.temp)
@@ -176,10 +176,12 @@ export default {
     createData () {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          let tempData = Object.assign({}, this.temp)
+          this.temp.api_id = JSON.stringify(this.$refs.apiTree.getCheckedKeys().filter(item => item < 1000))
+          this.temp.menu_id = JSON.stringify(this.$refs.routesTree.getCheckedKeys())
+          const tempData = Object.assign({}, this.temp)
           this.$emit('createData', tempData, res => {
             if (res.code == 0) {
-              this.$router.go(0);
+              // this.$router.go(0);
               this.$notify({
                 title: '成功',
                 message: '更新成功',

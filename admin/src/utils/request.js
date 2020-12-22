@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-30 10:43:52
+ * @LastEditTime: 2020-12-22 17:23:15
  */
 import axios from 'axios'
 import { MessageBox, Message } from 'element-ui'
@@ -80,6 +80,7 @@ service.interceptors.response.use(
   },
   error => {
     console.log('err' + error) //用于调试
+    console.log(error)
     Message({
       message: error.msg || error,
       type: 'error',

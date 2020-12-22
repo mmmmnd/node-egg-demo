@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 10:29:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-21 17:06:21
+ * @LastEditTime: 2020-12-22 18:24:27
 -->
 <template>
   <div class="app-container">
@@ -24,7 +24,28 @@
               @row-click="clickRowHandle"
               ref="table">
       <el-table-column type="expand">
-
+        <el-form label-position=""
+                 inline
+                 class="demo-table-expand">
+          <el-form-item label="接口权限">
+            <el-tree :data="apiList"
+                     ref="apiTree"
+                     show-checkbox
+                     accordion
+                     node-key="id"
+                     :props="apiDisabledProps">
+            </el-tree>
+          </el-form-item>
+          <el-form-item label="菜单权限">
+            <el-tree :data="routesList"
+                     ref="routesTree"
+                     show-checkbox
+                     accordion
+                     node-key="id"
+                     :props="routesDisabledProps">
+            </el-tree>
+          </el-form-item>
+        </el-form>
       </el-table-column>
       <el-table-column label="id"
                        prop="id"
@@ -95,7 +116,7 @@
 <script>
 import { recruitDroptypeIndex, recruitIndex, recruitUpdate, recruitDestroy, recruitAdd, recruitEdit } from '@/api/recruit'
 import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
-import { rolesIndex, apiIndex, routesList } from '@/api/permissions'
+import { rolesIndex, apiIndex, routesList, rolesAdd } from '@/api/permissions'
 
 import Pagination from '@/components/Pagination'
 import vEdit from './component/edit'
@@ -113,8 +134,18 @@ export default {
       showDialog: false,
       temp: {},
       dialogStatus: '',
-      apiList: [],
-      routesList: []
+      apiList: [], //接口
+      routesList: [], //菜单
+      apiDisabledProps: {
+        children: 'children',
+        label: 'describe',
+        disabled: 'status'
+      },
+      routesDisabledProps: {
+        children: 'children',
+        label: 'title',
+        disabled: 'status'
+      }
     }
   }
   ,
@@ -123,13 +154,18 @@ export default {
   },
   methods: {
     clickRowHandle (row, column, event) {
-      const table = this.$refs.table;
-      this.list.map(item => {
-        if (row.id != item.id) {
-          table.toggleRowExpansion(item, false)
-        }
-      })
+      const { table } = this.$refs
+      this.list.map(item => row.id != item.id && table.toggleRowExpansion(item, false))
       table.toggleRowExpansion(row)
+      this.$nextTick(() => {
+        const { apiTree, routesTree } = this.$refs
+        if (apiTree && routesTree) {
+          var api_id = row.api_id.split(',').map(Number)
+          var menu_id = row.menu_id.split(',').map(Number)
+          this.$refs.apiTree.setCheckedKeys(api_id)
+          this.$refs.routesTree.setCheckedKeys(menu_id)
+        }
+      });
     },
     /**
      * 获取列表 && 筛选
@@ -187,7 +223,16 @@ export default {
      * 增加
      */
     handleCreate () {
-      this.temp = {};
+      this.temp = {
+        status: true,
+        roles_name: '',
+        describe: '',
+        sort: 0
+      };
+      this.$nextTick(() => {
+        this.$refs.newForm.$refs.apiTree.setCheckedKeys([])
+        this.$refs.newForm.$refs.routesTree.setCheckedKeys([])
+      })
       this.dialogStatus = 'create'
       this.showDialog = true
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
@@ -212,14 +257,13 @@ export default {
      * 父页面执行 修改
      */
     updateData (Obj, cab) {
-      console.log(Obj);
       recruitEdit(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 增加
      */
     createData (Obj, cab) {
-      recruitAdd(Obj).then(res => cab(res))
+      rolesAdd(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 修改
@@ -242,7 +286,6 @@ export default {
   font-size: 0;
 }
 .demo-table-expand label {
-  width: 90px;
   color: #99a9bf;
 }
 .demo-table-expand .el-form-item {
