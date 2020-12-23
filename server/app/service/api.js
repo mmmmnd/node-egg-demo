@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-15 10:50:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-21 14:59:06
+ * @LastEditTime: 2020-12-23 09:19:21
  */
 'use strict';
 /**
@@ -42,8 +42,11 @@ class ApiService extends Service {
     var roles = await this.ctx.service.roles.detail(userInfo.userRolesId); // 群组接口权限
     var rolesApi = await this.ctx.service.rolesApi.detail(userInfo.userId); // 个人接口权限
 
-    if (roles === null) { roles = {}; roles.api_id = '' }
-    if (rolesApi === null) { rolesApi = {}; rolesApi.api_id = '' }
+    if (!roles) { roles = {}; roles.api_id = '[]' }
+    if (!rolesApi) { rolesApi = {}; rolesApi.api_id = '[]' }
+
+    roles.api_id = JSON.parse(roles.api_id)
+    rolesApi.api_id = JSON.parse(rolesApi.api_id)
 
     return roles.api_id.includes(apiId.id) || rolesApi.api_id.includes(apiId.id)
   }
