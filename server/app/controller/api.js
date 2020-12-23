@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-21 11:35:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-21 17:22:23
+ * @LastEditTime: 2020-12-23 11:49:44
  */
 'use strict';
 
@@ -18,8 +18,8 @@ class AdvertController extends Controller {
    */
   async index () {
     const api = await this.ctx.service.api.index()
-    const routes = await this.ctx.service.routes.detail('pid', 0)
-    const data = GetTree.aboutAndApiList(routes, api, 'api');
+    const routes = await this.ctx.service.routes.list('apiGetRoutes')
+    const data = GetTree.apiList(routes, api);
 
     await this.ctx.helper.checkData({ data });
   }

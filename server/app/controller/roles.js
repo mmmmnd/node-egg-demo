@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 10:00:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-22 10:57:09
+ * @LastEditTime: 2020-12-23 09:38:30
  */
 'use strict';
 
@@ -28,6 +28,24 @@ class RolesController extends Controller {
     const params = this.ctx.request.body;
 
     const roles = await this.ctx.service.roles.add(params)
+    await this.ctx.helper.checkData(roles);
+  }
+  /**
+   * 更新
+   */
+  async update () {
+    const params = this.ctx.request.body;
+
+    const roles = await this.ctx.service.roles.update(params)
+    await this.ctx.helper.checkData(roles);
+  }
+  /**
+   * 编辑
+   */
+  async edit () {
+    const params = this.ctx.request.body;
+
+    const roles = await this.ctx.service.roles.edit(params)
     await this.ctx.helper.checkData(roles);
   }
 }

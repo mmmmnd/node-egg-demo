@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-22 15:01:33
+ * @LastEditTime: 2020-12-23 16:00:14
  */
 'use strict';
 
@@ -34,18 +34,43 @@ class GetTree {
    * @param { Array } items 数组对象
    * @param { Array } about about分类
    */
-  static aboutAndApiList (items, about, type) {
+  static aboutList (items, about) {
     items = JSON.parse(JSON.stringify(items));
     about = JSON.parse(JSON.stringify(about));
 
     items.forEach((item, index) => {
-      const children = this._getMenuType(about, item.id, type);
-      item.index = item.id, item.id = index + 1000, item.describe = item.title
-      if (children.length > 0) item['children'] = type == 'about' ? this._setIcon(children) : children
-
+      const children = this._getMenuType(about, item.id, 'about');
+      item.index = item.id, item.id = index + 100
+      if (children.length > 0) item['children'] = this._setIcon(children)
     })
 
     return items
+  }
+  /**
+    * 接口列表
+    * @param { Array } routes 菜单
+    * @param { Array } apis 接口列表
+    */
+  static apiList (routes, apis, id = 0) {
+    routes = JSON.parse(JSON.stringify(routes));
+    apis = JSON.parse(JSON.stringify(apis));
+
+    const parents = this._getMenuType(routes, id, 'menu')
+    parents.forEach(parent => {
+      const childrens = this.apiList(routes, apis, parent.id);
+      if (childrens.length > 0) {
+        childrens.forEach(children => {
+          const apiChildren = this._getMenuType(apis, children.id, 'apiList')
+          children['id'] = children['id'] + 1000
+          children['describe'] = children['title']
+          children['children'] = apiChildren
+        })
+        parent['id'] = parent['id'] + 1000
+        parent['describe'] = parent['title']
+        parent['children'] = childrens
+      }
+    })
+    return parents
   }
   /**
   * 后台菜单 私有方法
@@ -91,6 +116,13 @@ class GetTree {
        * 接口菜单
        */
       case 'api':
+        items.forEach(item => item.pid === id && arrs.push(item));
+
+        return arrs
+      /**
+       * 接口菜单
+       */
+      case 'apiList':
         items.forEach(item => item.pid === id && arrs.push(item));
 
         return arrs

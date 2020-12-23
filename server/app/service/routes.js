@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-22 20:22:06
+ * @LastEditTime: 2020-12-23 16:45:45
  */
 'use strict';
 
@@ -37,34 +37,18 @@ class RoutesService extends Service {
     return { data: GetTree.menuList(rolesRoutes, 'router') };
   }
   /**
-   * 详情
-   * @param { String } key 
-   * @param { String || Number } value 
-   */
-  async detail (key, value) {
-
-    const routes = await this.ctx.model.MzcRoutes.findAll({
-      where: {
-        [key]: value,
-        deleted_at: null
-      }
-    });
-
-    if (!routes[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
-
-    return routes
-  }
-  /**
    * 获取列表
    */
-  async list () {
+  async list (type) {
     const routes = await this.ctx.model.MzcRoutes.findAll({
       where: {
         deleted_at: null
       },
     });
 
-    return { data: GetTree.menuList(routes, 'menu') }
+    return type !== 'apiGetRoutes'
+      ? { data: GetTree.menuList(routes, 'menu') }
+      : routes
   }
 }
 

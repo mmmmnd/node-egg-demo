@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-22 17:46:51
+ * @LastEditTime: 2020-12-23 14:52:37
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -88,7 +88,7 @@ module.exports = appInfo => {
     secret: "123456",//自定义 token 的加密条件字符串
     params: {
       algorithm: 'HS256',
-      expiresIn: 60 * 60 * 4,
+      expiresIn: 60 * 60 * 6,
     }
   };
 
@@ -125,7 +125,7 @@ module.exports = appInfo => {
   // add your user config here
   const userConfig = {
     usetToken: 'token',
-    expired: 60 * 60 * 4,
+    expired: 60 * 60 * 0.5,
   };
 
   return {

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-22 17:42:37
+ * @LastEditTime: 2020-12-23 09:41:01
  */
 'use strict';
 
@@ -68,7 +68,7 @@ class AdminService extends Service {
 
 			const adminRoles = await this.ctx.service.roles.detail(admin.roles_id);
 
-			if (!adminRoles.status) return { msg: `当前[${adminRoles.roles_name}]角色已被禁用，有疑惑请联系系统管理员`, errorStatus: HttpStatus.UNAUTHORIZED };
+			if (!adminRoles.status) return { msg: `当前[${adminRoles.roles_name}]角色已被禁用，有疑惑请联系系统管理员`, errorStatus: HttpStatus.FORBIDDEN };
 
 			//颁发token secret -> 加密类型 params -> jwt参数
 			const token = await ctx.app.jwt.sign({

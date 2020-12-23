@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-21 17:00:35
+ * @LastEditTime: 2020-12-23 10:23:51
  */
 
 'use strict';
@@ -13,7 +13,7 @@ const Controller = require('egg').Controller;
 
 class RoutesController extends Controller {
   /**
-   * 群组权限列表
+   * 群组菜单权限列表
    */
   async index () {
     const { userInfo } = global
