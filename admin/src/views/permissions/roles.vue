@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 10:29:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-22 18:24:27
+ * @LastEditTime: 2020-12-23 11:08:54
 -->
 <template>
   <div class="app-container">
@@ -82,12 +82,12 @@
                      @click.stop.prevent="handleUpdate(row)">
             编辑
           </el-button>
-          <el-button type="danger"
+          <!-- <el-button type="danger"
                      size="small"
                      icon="el-icon-delete"
                      @click.stop.prevent="handleDel(row)">
             删除
-          </el-button>
+          </el-button> -->
         </template>
       </el-table-column>
 
@@ -114,9 +114,7 @@
 </template>
 
 <script>
-import { recruitDroptypeIndex, recruitIndex, recruitUpdate, recruitDestroy, recruitAdd, recruitEdit } from '@/api/recruit'
-import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
-import { rolesIndex, apiIndex, routesList, rolesAdd } from '@/api/permissions'
+import { rolesIndex, apiIndex, routesList, rolesAdd, rolesUpdate, rolesEdit } from '@/api/permissions'
 
 import Pagination from '@/components/Pagination'
 import vEdit from './component/edit'
@@ -153,6 +151,9 @@ export default {
     this.getList()
   },
   methods: {
+    /**
+     * 点击展开
+     */
     clickRowHandle (row, column, event) {
       const { table } = this.$refs
       this.list.map(item => row.id != item.id && table.toggleRowExpansion(item, false))
@@ -160,15 +161,18 @@ export default {
       this.$nextTick(() => {
         const { apiTree, routesTree } = this.$refs
         if (apiTree && routesTree) {
-          var api_id = row.api_id.split(',').map(Number)
-          var menu_id = row.menu_id.split(',').map(Number)
+          if (!row.api_id) row.api_id = '[]';
+          if (!row.menu_id) row.menu_id = '[]'
+
+          const api_id = JSON.parse(row.api_id)
+          const menu_id = JSON.parse(row.menu_id)
           this.$refs.apiTree.setCheckedKeys(api_id)
           this.$refs.routesTree.setCheckedKeys(menu_id)
         }
       });
     },
     /**
-     * 获取列表 && 筛选
+     * 获取列表
      */
     getList (id) {
       this.listLoading = true
@@ -194,7 +198,7 @@ export default {
     statusSwitch (getSwitch, id) {
       const data = { id, key: 'status', value: getSwitch };
       this.listLoading = true
-      recruitUpdate(data)
+      rolesUpdate(data)
         .then(response => {
           this.listLoading = false
           this.$notify({
@@ -210,8 +214,12 @@ export default {
     handleUpdate (row) {
       this.temp = Object.assign({}, row) // copy obj
       this.$nextTick(() => {
-        const api_id = this.temp.api_id.split(',').map(Number)
-        const menu_id = this.temp.menu_id.split(',').map(Number)
+
+        if (!this.temp.api_id) this.temp.api_id = '[]';
+        if (!this.temp.menu_id) this.temp.menu_id = '[]'
+
+        const api_id = JSON.parse(this.temp.api_id)
+        const menu_id = JSON.parse(this.temp.menu_id)
         this.$refs.newForm.$refs.apiTree.setCheckedKeys(api_id)
         this.$refs.newForm.$refs.routesTree.setCheckedKeys(menu_id)
       })
@@ -257,7 +265,7 @@ export default {
      * 父页面执行 修改
      */
     updateData (Obj, cab) {
-      recruitEdit(Obj).then(res => cab(res))
+      rolesEdit(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 增加
@@ -269,7 +277,7 @@ export default {
      * 父页面执行 修改
      */
     updateItem (Obj, cab) {
-      advertUpdate(Obj).then(res => cab(res))
+      rolesUpdate(Obj).then(res => cab(res))
     },
     /**
      * 弹窗提示

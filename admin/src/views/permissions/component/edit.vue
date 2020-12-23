@@ -5,24 +5,25 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-22 18:30:54
+ * @LastEditTime: 2020-12-23 11:08:44
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
              :visible.sync="dialogFormVisible">
     <el-form ref="dataForm"
+             :rules="rules"
              :model="temp"
              label-position="right"
              label-width="100px">
       <el-form-item label="角色名称:"
                     class="postInfo-container-item"
-                    prop="title">
+                    prop="roles_name">
         <el-input v-model="temp.roles_name"></el-input>
       </el-form-item>
 
       <el-form-item label="描述"
                     class="postInfo-container-item"
-                    prop="position">
+                    prop="describe">
         <el-input v-model="temp.describe"></el-input>
       </el-form-item>
 
@@ -42,7 +43,7 @@
         <el-col :span="12">
           <el-form-item label="接口权限"
                         class="postInfo-container-item"
-                        prop="position">
+                        prop="api">
             <div class="grid-content bg-purple">
               <el-tree :data="apiList"
                        ref="apiTree"
@@ -57,7 +58,7 @@
         <el-col :span="12">
           <el-form-item label="菜单权限"
                         class="postInfo-container-item"
-                        prop="position">
+                        prop="routes">
             <div class="grid-content bg-purple-light">
               <el-tree :data="routesList"
                        ref="routesTree"
@@ -127,15 +128,12 @@ export default {
       routesListProps: {
         children: 'children',
         label: 'title'
-      }
-      // rules: {
-      //   category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
-      //   title: [{ type: 'string', required: true, message: '请输入网站标题', trigger: 'blur' }],
-      //   keywords: [{ type: 'string', required: true, message: '请输入网站关键词', trigger: 'blur' }],
-      //   companyDescription: [{ type: 'string', required: true, message: '请输入网站描述', trigger: 'blur' }],
-      //   status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
-      //   content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
-      // },
+      },
+      rules: {
+        roles_name: [{ type: 'string', required: true, message: '请输入角色名称', trigger: 'change' }],
+        describe: [{ type: 'string', required: true, message: '请输入具体描述', trigger: 'blur' }],
+        status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
+      },
     }
   },
   computed: {
@@ -155,6 +153,8 @@ export default {
     updateData () {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
+          this.temp.api_id = JSON.stringify(this.$refs.apiTree.getCheckedKeys().filter(item => item < 1000))
+          this.temp.menu_id = JSON.stringify(this.$refs.routesTree.getCheckedKeys())
           let tempData = Object.assign({}, this.temp)
           this.$emit('updateData', tempData, res => {
             if (res.code == 0) {
@@ -181,7 +181,7 @@ export default {
           const tempData = Object.assign({}, this.temp)
           this.$emit('createData', tempData, res => {
             if (res.code == 0) {
-              // this.$router.go(0);
+              this.$router.go(0);
               this.$notify({
                 title: '成功',
                 message: '更新成功',
@@ -192,13 +192,6 @@ export default {
           })
         }
       })
-    },
-    /**
-     * 排序
-     */
-    handleChange (value, item) {
-      const Obj = { id: item.id, key: 'sort', value }
-      this.$emit('updateItem', Obj, res => { })
     },
     /**
      * 弹窗提示
