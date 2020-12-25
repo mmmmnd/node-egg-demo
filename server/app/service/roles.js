@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-11 15:33:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-23 09:51:34
+ * @LastEditTime: 2020-12-25 11:23:15
  */
 'use strict';
 /**
@@ -112,6 +112,19 @@ class RolesService extends Service {
     if (!roles[0]) return { httpStatus: HttpStatus.INVALID_REQUEST, msg: '没有找到相关信息' };
 
     return { httpStatus: HttpStatus.OK }
+  }
+  /**
+   * 下拉
+   */
+  async list () {
+    const roles = await this.ctx.model.MzcRoles.findAll({
+      where: {
+        status: true,
+        deleted_at: null
+      },
+    })
+
+    return { data: roles }
   }
 }
 

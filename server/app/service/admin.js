@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 10:22:28
+ * @LastEditTime: 2020-12-25 17:35:41
  */
 'use strict';
 
@@ -19,25 +19,22 @@ class AdminService extends Service {
 	 * 注册
 	 * @param { Object || String } params 用户信息
 	 */
-	async create (params) {
+	async create ({ nickname, password }) {
 		const { ctx } = this;
 
 		try {
-
 			const admin = await ctx.model.MzcAdmin.findOne({
 				where: {
-					nickname: params.nickname,
+					nickname: nickname,
 					deleted_at: null
 				}
 			})
 
 			if (admin) return { msg: '管理员已存在', httpStatus: HttpStatus.FORBIDDEN };
 
-			const create = new ctx.model.MzcAdmin;
-			create.nickname = params.nickname;
-			create.password = params.password;
-			create.register_ip = this.ctx.ip;
-			create.save();
+			await this.ctx.model.MzcAdmin.create({
+				nickname, password, register_ip: ctx.ip
+			});
 
 			return { msg: '管理员注册成功', httpStatus: HttpStatus.CREATED };
 		} catch (error) {
@@ -65,6 +62,8 @@ class AdminService extends Service {
 			const login = bcrypt.compareSync(params.password, admin.password);
 
 			if (!login) return { msg: '账号不存在或者密码不正确', errorStatus: HttpStatus.INVALID_REQUEST };
+
+			if (!admin.status) return { msg: `当前账号已被禁用，有疑惑请联系系统管理员`, errorStatus: HttpStatus.FORBIDDEN };
 
 			const adminRoles = await this.ctx.service.roles.detail(admin.roles_id);
 
@@ -135,6 +134,8 @@ class AdminService extends Service {
 	}
 	/**
 	 * 获取用户数据
+	 * @param { String } limit 最大限制
+	 * @param { String } page 分页
 	 */
 	async list ({ limit = 20, page = 1 }) {
 		const maxPage = Number(limit);
@@ -160,6 +161,63 @@ class AdminService extends Service {
 				}
 			}
 		}
+	}
+	/**
+	 * 编辑
+	 * @param { Object } params 参数
+	 */
+	async edit (params) {
+		const { id, roles_id, menu_id, api_id, nickname, user_name, avatar_image, phone, email, status } = params;
+
+		await this.ctx.model.MzcAdmin.update({
+			roles_id, menu_id, api_id, nickname, user_name, avatar_image, phone, email, status
+		}, {
+			where: {
+				id,
+				deleted_at: null
+			},
+		})
+		return { httpStatus: HttpStatus.OK }
+	}
+	/**
+	 * 增加
+	 * @param { Object } params 参数
+	 */
+	async add (params) {
+		const { roles_id, menu_id, api_id, nickname, user_name, password, avatar_image, phone, email, status } = params;
+
+		const admin = await this.ctx.model.MzcAdmin.findOne({
+			where: {
+				nickname: nickname,
+				deleted_at: null
+			}
+		})
+
+		if (admin) return { msg: '管理员已存在', httpStatus: HttpStatus.FORBIDDEN };
+
+		await this.ctx.model.MzcAdmin.create({
+			roles_id, menu_id, api_id, nickname, user_name, password, avatar_image, phone, email, status, register_ip: this.ctx.ip
+		});
+
+		return { httpStatus: HttpStatus.OK }
+	}
+	/**
+	 * 修改
+	 * @param { String } id 当前id
+	 * @param { String } key 字段名
+	 * @param { String } value 字段值
+	 */
+	async update ({ id, key, value }) {
+		const admin = await this.ctx.model.MzcAdmin.update({ [key]: value }, {
+			where: {
+				id,
+				deleted_at: null
+			},
+		})
+
+		if (!admin[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
+
+		return { httpStatus: HttpStatus.OK }
 	}
 }
 

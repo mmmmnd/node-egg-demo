@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-17 16:31:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 09:57:46
+ * @LastEditTime: 2020-12-25 17:12:29
  */
 'use strict';
 const AdminValidators = require('../validators/admin');
@@ -62,6 +62,33 @@ class AdminController extends Controller {
 		const params = this.ctx.query;
 
 		const admin = await this.ctx.service.admin.list(params);
+		await this.ctx.helper.checkData(admin);
+	}
+	/**
+	 * 编辑
+	 */
+	async edit () {
+		const params = this.ctx.request.body;
+
+		const admin = await this.ctx.service.admin.edit(params);
+		await this.ctx.helper.checkData(admin);
+	}
+	/**
+	 * 增加
+	 */
+	async add () {
+		const params = this.ctx.request.body;
+
+		const admin = await this.ctx.service.admin.add(params);
+		await this.ctx.helper.checkData(admin);
+	}
+	/**
+	 * 更新
+	 */
+	async update () {
+		const params = this.ctx.request.body;
+
+		const admin = await this.ctx.service.admin.update(params);
 		await this.ctx.helper.checkData(admin);
 	}
 }

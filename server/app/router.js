@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-24 18:22:22
+ * @LastEditTime: 2020-12-25 17:28:33
  */
 'use strict';
 
@@ -43,6 +43,10 @@ module.exports = app => {
   router.post('/api/admin/login', controller.admin.login);
   router.post('/api/admin/logout', jwt, controller.admin.logout);
   router.get('/api/admin/current', jwt, controller.admin.current);
+  router.get('/api/admin/list', jwt, controller.admin.list)
+  router.post('/api/admin/edit', jwt, controller.admin.edit)
+  router.post('/api/admin/add', jwt, controller.admin.add)
+  router.put('/api/admin/update', jwt, controller.admin.update)
 
   // menu
   router.get('/api/menu/index', jwt, controller.menu.index);
@@ -144,9 +148,7 @@ module.exports = app => {
   router.post('/api/roles/add', jwt, controller.roles.add)
   router.put('/api/roles/update', jwt, controller.roles.update)
   router.post('/api/roles/edit', jwt, controller.roles.edit)
-
-  // user 
-  router.get('/api/admin/list', jwt, controller.admin.list)
+  router.get('/api/roles/list', jwt, controller.roles.list)
 
   // 404
   router.get('*', controller.web.error); // 404
