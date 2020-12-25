@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-23 10:23:51
+ * @LastEditTime: 2020-12-25 10:06:38
  */
 
 'use strict';
@@ -19,8 +19,8 @@ class RoutesController extends Controller {
     const { userInfo } = global
 
     const roles = await this.ctx.service.roles.detail(userInfo.userRolesId); // 获取群组权限
-    const rolesMenu = await this.ctx.service.rolesMenu.detail(userInfo.userId); // 获取单独权限
-    const routes = await this.ctx.service.routes.index(roles, rolesMenu);
+    const adminMenu = await this.ctx.service.admin.current(); // 获取单独权限
+    const routes = await this.ctx.service.routes.index(roles, adminMenu.data);
     await this.ctx.helper.checkData(routes);
   }
   /**

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-11 15:41:56
+ * @LastEditTime: 2020-12-25 10:31:06
  */
 'use strict';
 
@@ -28,12 +28,30 @@ module.exports = app => {
 			defaultValue: 0, // 默认值
 			comment: '用户群组', // 备注
 		},
+		menu_id: {
+			allowNull: !1, // 是否为空    
+			type: STRING, // 类型
+			comment: '菜单id', // 备注
+			defaultValue: '', // 默认值
+		},
+		api_id: {
+			allowNull: !1, // 是否为空    
+			type: STRING, // 类型
+			comment: '接口id', // 备注
+			defaultValue: '', // 默认值
+		},
 		nickname: {
 			allowNull: !1, // 是否为空
 			type: STRING(10), // 类型
 			defaultValue: '', // 默认值
 			unique: true,// 唯一性
-			comment: '昵称', // 备注
+			comment: '账号', // 备注
+		},
+		user_name: {
+			allowNull: !0, // 是否为空
+			type: STRING(10), // 类型
+			defaultValue: '', // 默认值
+			comment: '用户名', // 备注
 		},
 		password: {
 			allowNull: !1,// 是否为空

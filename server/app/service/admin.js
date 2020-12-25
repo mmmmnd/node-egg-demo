@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-23 09:41:01
+ * @LastEditTime: 2020-12-25 10:22:28
  */
 'use strict';
 
@@ -136,15 +136,31 @@ class AdminService extends Service {
 	/**
 	 * 获取用户数据
 	 */
-	async list () {
-		return await this.ctx.model.MzcAdmin.findAll({
+	async list ({ limit = 20, page = 1 }) {
+		const maxPage = Number(limit);
+		const admin = await this.ctx.model.MzcAdmin.findAndCountAll({
 			where: {
 				deleted_at: null
 			},
+			offset: (page - 1) * maxPage,
+			limit: maxPage,
 			attributes: { exclude: ['password'] }
-		});
-	}
+		})
 
+		if (admin.rows.length == 0) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
+
+		return {
+			data: {
+				data: admin.rows,
+				meta: {
+					current_page: parseInt(page),
+					per_page: maxPage,
+					total: admin.count,
+					total_pages: Math.ceil(admin.count / maxPage),
+				}
+			}
+		}
+	}
 }
 
 module.exports = AdminService;

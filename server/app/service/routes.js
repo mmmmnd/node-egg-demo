@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-23 16:45:45
+ * @LastEditTime: 2020-12-25 10:26:35
  */
 'use strict';
 
@@ -22,7 +22,8 @@ class RoutesService extends Service {
    * @param { Array } permissionsRoutes 路由菜单
    */
   async index (roles, rolesMenu) {
-    if (rolesMenu == null) rolesMenu = { menu_id: '[]' }
+    if (!roles.menu_id) roles.menu_id = '[]'
+    if (!rolesMenu.menu_id) rolesMenu.menu_id = '[]'
     const userRoles = [...JSON.parse(roles.menu_id), ...JSON.parse(rolesMenu.menu_id)]
     /**
     * 群组和个人菜单合集

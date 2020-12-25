@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-15 10:50:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-23 09:19:21
+ * @LastEditTime: 2020-12-25 10:26:59
  */
 'use strict';
 /**
@@ -39,16 +39,16 @@ class ApiService extends Service {
     if (whiteList.includes(urlPathName)) return true
 
     const apiId = await this.detail(urlPathName); // 查找接口id
-    var roles = await this.ctx.service.roles.detail(userInfo.userRolesId); // 群组接口权限
-    var rolesApi = await this.ctx.service.rolesApi.detail(userInfo.userId); // 个人接口权限
+    const roles = await this.ctx.service.roles.detail(userInfo.userRolesId); // 群组接口权限
+    const adminApi = await this.ctx.service.admin.current(); // 个人接口权限
 
-    if (!roles) { roles = {}; roles.api_id = '[]' }
-    if (!rolesApi) { rolesApi = {}; rolesApi.api_id = '[]' }
+    if (!roles.api_id) roles.api_id = '[]'
+    if (!adminApi.data.api_id) adminApi.data.api_id = '[]'
 
     roles.api_id = JSON.parse(roles.api_id)
-    rolesApi.api_id = JSON.parse(rolesApi.api_id)
+    adminApi.data.api_id = JSON.parse(adminApi.data.api_id)
 
-    return roles.api_id.includes(apiId.id) || rolesApi.api_id.includes(apiId.id)
+    return roles.api_id.includes(apiId.id) || adminApi.data.api_id.includes(apiId.id)
   }
   /**
    * 获取接口列表
