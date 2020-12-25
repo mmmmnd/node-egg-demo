@@ -3,9 +3,9 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-12-16 10:29:18
+ * @Date: 2020-12-23 17:42:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 17:24:18
+ * @LastEditTime: 2020-12-25 17:24:10
 -->
 <template>
   <div class="app-container">
@@ -51,13 +51,56 @@
                        prop="id"
                        align="center">
       </el-table-column>
-      <el-table-column label="角色名称"
+      <el-table-column label="角色"
                        prop="roles_name"
                        align="center">
       </el-table-column>
-      <el-table-column label="描述"
-                       prop="describe"
+      <el-table-column label="账号"
+                       prop="nickname"
                        align="center">
+      </el-table-column>
+      <el-table-column label="用户名"
+                       prop="user_name"
+                       align="center">
+      </el-table-column>
+      <el-table-column label="头像"
+                       prop="user_name"
+                       align="center">
+        <template slot-scope="{row}">
+          <el-avatar shape="square"
+                     :size="50"
+                     fit="cover"
+                     v-if="row.avatar_image"
+                     :src="row.avatar_image"></el-avatar>
+        </template>
+      </el-table-column>
+      <el-table-column label="电话"
+                       prop="phone"
+                       align="center">
+      </el-table-column>
+
+      <el-table-column label="邮箱"
+                       prop="email"
+                       align="center">
+      </el-table-column>
+
+      <el-table-column label="登录次数"
+                       prop="login_count"
+                       align="center">
+      </el-table-column>
+
+      <el-table-column label="上一次登录ip"
+                       prop="last_login_ip"
+                       align="center">
+      </el-table-column>
+
+      <el-table-column label="上一次登录时间"
+                       prop="last_login_time"
+                       align="center"
+                       width="150px">
+        <template slot-scope="{row}">
+          <span>{{ row.last_login_time | formatTime('{y}-{m}-{d} {h}:{i}')  }}</span>
+        </template>
       </el-table-column>
 
       <el-table-column label="状态"
@@ -93,26 +136,27 @@
                 :limit.sync="listQuery.limit"
                 @pagination="getList" />
 
-    <roleEdit ref="newForm"
-              :visible.sync="showDialog"
-              :temp="temp"
-              :apiList="apiList"
-              :routesList="routesList"
-              :dialogStatus="dialogStatus"
-              @updateData="updateData"
-              @createData="createData" />
+    <adminsEdit ref="newForm"
+                :visible.sync="showDialog"
+                :temp="temp"
+                :apiList="apiList"
+                :routesList="routesList"
+                :dialogStatus="dialogStatus"
+                :select="select"
+                @updateData="updateData"
+                @createData="createData" />
 
   </div>
 
 </template>
 
 <script>
-import { rolesIndex, apiIndex, routesList, rolesAdd, rolesUpdate, rolesEdit } from '@/api/permissions'
+import { adminList, adminEdit, adminAdd, adminUpdate, apiIndex, routesList, rolesList } from '@/api/permissions'
 
 import Pagination from '@/components/Pagination'
-import roleEdit from './component/rolesEdit'
+import adminsEdit from './component/adminEdit'
 export default {
-  components: { Pagination, roleEdit },
+  components: { Pagination, adminsEdit },
   data () {
     return {
       list: [],
@@ -127,6 +171,7 @@ export default {
       dialogStatus: '',
       apiList: [], //接口
       routesList: [], //菜单
+      select: [], //下拉
       apiDisabledProps: {
         children: 'children',
         label: 'describe',
@@ -170,7 +215,7 @@ export default {
     getList (id) {
       this.listLoading = true
       this.listQuery.id = typeof id === 'number' ? id : this.temp.id;
-      rolesIndex(this.listQuery)
+      adminList(this.listQuery)
         .then(response => {
           this.list = response.data.data;
           this.total = response.data.meta.total
@@ -182,8 +227,16 @@ export default {
         })
         .then(response => {
           this.routesList = response.data;
+          return rolesList()
         })
-
+        .then(response => {
+          this.select = response.data
+          this.list.filter(listItem => {
+            this.select.filter(selectItem => {
+              if (listItem.roles_id === selectItem.id) listItem.roles_name = selectItem.roles_name
+            })
+          })
+        })
     },
     /**
      * 切换状态
@@ -191,7 +244,7 @@ export default {
     statusSwitch (getSwitch, id) {
       const data = { id, key: 'status', value: getSwitch };
       this.listLoading = true
-      rolesUpdate(data)
+      adminUpdate(data)
         .then(response => {
           this.listLoading = false
           this.$notify({
@@ -242,13 +295,13 @@ export default {
      * 父页面执行 修改
      */
     updateData (Obj, cab) {
-      rolesEdit(Obj).then(res => cab(res))
+      adminEdit(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 增加
      */
     createData (Obj, cab) {
-      rolesAdd(Obj).then(res => cab(res))
+      adminAdd(Obj).then(res => cab(res))
     },
     /**
      * 弹窗提示

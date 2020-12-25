@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-17 16:07:31
+ * @LastEditTime: 2020-12-24 16:50:40
  */
 import { constantRoutes } from '@/router'
 import { routesIndex } from '@/api/routes'
@@ -56,6 +56,7 @@ export const componentsMap = {
   settingBsic: () => import('@/views/setting/bsic'),
   settingAdvertising: () => import('@/views/setting/advertising'),
   permissionsRoles: () => import('@/views/permissions/roles'),
+  permissionsAdmin: () => import('@/views/permissions/admin'),
 }
 
 const state = {
