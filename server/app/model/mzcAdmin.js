@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 10:31:06
+ * @LastEditTime: 2020-12-28 09:24:46
  */
 'use strict';
 
@@ -65,7 +65,7 @@ module.exports = app => {
 		},
 		avatar_image: {
 			allowNull: !0, // 是否为空
-			type: STRING(60), // 类型
+			type: STRING(80), // 类型
 			defaultValue: '', // 默认值
 			comment: '头像', // 备注
 		},

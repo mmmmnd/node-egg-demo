@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-23 16:00:14
+ * @LastEditTime: 2020-12-28 10:06:58
  */
 'use strict';
 
@@ -87,9 +87,11 @@ class GetTree {
       case 'router':
         items.filter(item => item.pid === id && arrs.push({
           id: item.id,
+          pid: item.pid,
           path: item.path,
           name: item.name,
-          component: item.redirect,
+          component: item.component,
+          redirect: item.redirect,
           hidden: item.hidden,
           sort: item.sort,
           meta: { title: item.title, icon: item.icon, noCache: item.noCache, breadcrumb: item.breadcrumb }

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 21:19:39
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-21 17:42:34
+ * @LastEditTime: 2020-12-28 10:03:54
  */
 'use strict';
 
@@ -40,10 +40,16 @@ module.exports = app => {
       comment: '路由名字', // 备注
       defaultValue: '', // 默认值
     },
-    redirect: {
+    component: {
       allowNull: !0, // 是否为空
       type: STRING(60), // 类型
       comment: '文件路径', // 备注
+      defaultValue: '', // 默认值
+    },
+    redirect: {
+      allowNull: !0, // 是否为空
+      type: STRING(60), // 类型
+      comment: '重定向', // 备注
       defaultValue: '', // 默认值
     },
     title: {
