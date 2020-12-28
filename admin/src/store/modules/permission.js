@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-24 16:50:40
+ * @LastEditTime: 2020-12-28 10:20:14
  */
 import { constantRoutes } from '@/router'
 import { routesIndex } from '@/api/routes'
@@ -18,11 +18,10 @@ import Layout from '@/layout'
 
 export function generaMenu (data, routes = []) {
   data.forEach(item => {
-
     const menu = {
       path: item.path,
-      component: item.children ? Layout : componentsMap[item.component],
-      redirect: item.children ? item.component : '',
+      component: item.pid == 0 ? Layout : componentsMap[item.component],
+      redirect: item.children ? item.redirect : '',
       hidden: item.hidden,
       name: item.name,
       meta: item.meta
@@ -57,6 +56,9 @@ export const componentsMap = {
   settingAdvertising: () => import('@/views/setting/advertising'),
   permissionsRoles: () => import('@/views/permissions/roles'),
   permissionsAdmin: () => import('@/views/permissions/admin'),
+  permissionsPower: () => import('@/views/permissions/power'),
+  permissionsPowerApi: () => import('@/views/permissions/power/api'),
+  permissionsPowerMenu: () => import('@/views/permissions/power/menu'),
 }
 
 const state = {

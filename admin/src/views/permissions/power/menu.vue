@@ -3,9 +3,9 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-12-23 17:42:50
+ * @Date: 2020-12-28 09:32:38
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-28 10:14:06
+ * @LastEditTime: 2020-12-28 09:33:06
 -->
 <template>
   <div class="app-container">
@@ -154,7 +154,7 @@
 import { adminList, adminEdit, adminAdd, adminUpdate, apiIndex, routesList, rolesList } from '@/api/permissions'
 
 import Pagination from '@/components/Pagination'
-import adminsEdit from './component/adminEdit'
+import adminsEdit from '../component/adminEdit'
 export default {
   components: { Pagination, adminsEdit },
   data () {
@@ -219,6 +219,7 @@ export default {
       adminList(this.listQuery)
         .then(response => {
           _response = response;
+
           return apiIndex()
         })
         .then(response => {
@@ -263,7 +264,7 @@ export default {
       this.temp = Object.assign({}, row) // copy obj
       this.$nextTick(() => {
 
-        if (!this.temp.api_id) this.temp.api_id = '[]'
+        if (!this.temp.api_id) this.temp.api_id = '[]';
         if (!this.temp.menu_id) this.temp.menu_id = '[]'
 
         const api_id = JSON.parse(this.temp.api_id)

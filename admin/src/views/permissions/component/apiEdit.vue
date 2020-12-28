@@ -3,9 +3,9 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-11-03 14:42:18
+ * @Date: 2020-12-28 16:14:39
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-28 09:23:12
+ * @LastEditTime: 2020-12-28 17:27:12
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -15,120 +15,33 @@
              :model="temp"
              label-position="right"
              label-width="100px">
-      <el-form-item label="角色:"
-                    class="postInfo-container-item"
-                    prop="roles_id">
-        <el-select v-model="temp.roles_id"
-                   class="filter-item"
-                   placeholder="请选择角色"
-                   style="width: 100%;">
-          <el-option v-for="item in select"
-                     :key="item.id"
-                     :label="item.roles_name"
-                     :value="item.id" />
-        </el-select>
+      <el-form-item label="所属分类:"
+                    class="postInfo-container-item">
+        <el-cascader :options="select"
+                     :props="props"
+                     v-model="temp.title"
+                     @change="handleChange">
+          <template slot-scope="{ node, data }">
+            <span>{{ data.title }}</span>
+            <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
+          </template>
+        </el-cascader>
+
       </el-form-item>
 
-      <el-form-item label="账号"
+      <el-form-item label="Api"
                     class="postInfo-container-item"
                     prop="nickname">
-        <el-input v-model="temp.nickname"
+        <el-input v-model="temp.api"
                   placeholder="请输入账号"
                   :disabled="dialogStatus === 'update'?true:false"></el-input>
       </el-form-item>
 
-      <el-form-item label="密码"
-                    class="postInfo-container-item"
-                    prop="password"
-                    v-if="dialogStatus === 'create'?true:false">
-        <el-input v-model="temp.password"
-                  show-password
-                  placeholder="请输入密码"></el-input>
-      </el-form-item>
-
-      <el-form-item label="用户名"
+      <el-form-item label="识别码"
                     class="postInfo-container-item">
-        <el-input v-model="temp.user_name"
-                  placeholder="请输入用户名"></el-input>
+        <el-input v-model="temp.code"
+                  placeholder="请输入识别码"></el-input>
       </el-form-item>
-
-      <el-form-item label="电话"
-                    prop="phone"
-                    align="center">
-        <el-input v-model="temp.phone"
-                  placeholder="请输入电话"></el-input>
-      </el-form-item>
-
-      <el-form-item label="邮箱"
-                    prop="email"
-                    align="center">
-        <el-input v-model="temp.email"
-                  placeholder="请输入邮箱"></el-input>
-      </el-form-item>
-
-      <el-form-item label="头像">
-        <el-upload v-if="avatarProgress"
-                   class="avatar-uploader"
-                   :headers="{token}"
-                   :action="uploadUrl"
-                   :show-file-list="false"
-                   :on-progress="setAvatarProgress"
-                   :on-success="handleAvatarSuccess">
-          <img v-if="temp.avatar_image"
-               :src="temp.avatar_image"
-               class="avatar">
-          <i v-else
-             class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
-        <el-progress v-else
-                     type="circle"
-                     :percentage="percentage"></el-progress>
-      </el-form-item>
-
-      <el-form-item label="状态:"
-                    class="postInfo-container-item"
-                    prop="status">
-        <el-switch v-model="temp.status"
-                   active-color="#13ce66"
-                   inactive-color="#ff4949"
-                   active-text="开启"
-                   inactive-text="关闭">
-        </el-switch>
-      </el-form-item>
-      <hr class="el-divider">
-
-      <el-row>
-        <el-col :span="12">
-          <el-form-item label="接口权限"
-                        class="postInfo-container-item"
-                        prop="api">
-            <div class="grid-content bg-purple">
-              <el-tree :data="apiList"
-                       ref="apiTree"
-                       show-checkbox
-                       accordion
-                       node-key="id"
-                       :props="apiListProps">
-              </el-tree>
-            </div>
-          </el-form-item>
-        </el-col>
-        <el-col :span="12">
-          <el-form-item label="菜单权限"
-                        class="postInfo-container-item"
-                        prop="routes">
-            <div class="grid-content bg-purple-light">
-              <el-tree :data="routesList"
-                       ref="routesTree"
-                       show-checkbox
-                       accordion
-                       node-key="id"
-                       :props="routesListProps">
-              </el-tree>
-            </div>
-          </el-form-item>
-        </el-col>
-      </el-row>
 
     </el-form>
 
@@ -191,6 +104,10 @@ export default {
         children: 'children',
         label: 'title'
       },
+      props: {
+        value: 'id',
+        label: 'title'
+      },
       rules: {
         roles_id: [{ required: true, message: '请选择角色', trigger: 'change' }],
         nickname: [{ type: 'string', required: true, message: '请输入账号', trigger: 'blur' }],
@@ -210,6 +127,9 @@ export default {
     }
   },
   methods: {
+    handleChange (value) {
+      console.log(value);
+    },
     /**
      * 上传成功钩子
      */
