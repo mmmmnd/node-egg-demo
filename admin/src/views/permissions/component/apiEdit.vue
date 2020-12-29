@@ -5,22 +5,23 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 16:14:39
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-28 17:27:12
+ * @LastEditTime: 2020-12-29 18:52:00
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
-             :visible.sync="dialogFormVisible">
+             :visible.sync="dialogFormVisible"
+             v-if="dialogFormVisible">
     <el-form ref="dataForm"
              :rules="rules"
              :model="temp"
              label-position="right"
              label-width="100px">
       <el-form-item label="所属分类:"
-                    class="postInfo-container-item">
+                    class="postInfo-container-item"
+                    prop="selectArr">
         <el-cascader :options="select"
                      :props="props"
-                     v-model="temp.title"
-                     @change="handleChange">
+                     v-model="temp.selectArr">
           <template slot-scope="{ node, data }">
             <span>{{ data.title }}</span>
             <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
@@ -29,16 +30,24 @@
 
       </el-form-item>
 
+      <el-form-item label="描述"
+                    class="postInfo-container-item"
+                    prop="describe">
+        <el-input v-model="temp.describe"
+                  placeholder="请输入描述"></el-input>
+      </el-form-item>
+
       <el-form-item label="Api"
                     class="postInfo-container-item"
-                    prop="nickname">
+                    prop="api">
         <el-input v-model="temp.api"
                   placeholder="请输入账号"
                   :disabled="dialogStatus === 'update'?true:false"></el-input>
       </el-form-item>
 
       <el-form-item label="识别码"
-                    class="postInfo-container-item">
+                    class="postInfo-container-item"
+                    prop="code">
         <el-input v-model="temp.code"
                   placeholder="请输入识别码"></el-input>
       </el-form-item>
@@ -73,14 +82,6 @@ export default {
       type: String,
       default: 'update'
     },
-    apiList: {
-      type: Array,
-      default: []
-    },
-    routesList: {
-      type: Array,
-      default: []
-    },
     select: {
       type: Array,
       default: []
@@ -96,23 +97,15 @@ export default {
         update: '修改',
         create: '增加'
       },
-      apiListProps: {
-        children: 'children',
-        label: 'describe'
-      },
-      routesListProps: {
-        children: 'children',
-        label: 'title'
-      },
       props: {
         value: 'id',
         label: 'title'
       },
       rules: {
-        roles_id: [{ required: true, message: '请选择角色', trigger: 'change' }],
-        nickname: [{ type: 'string', required: true, message: '请输入账号', trigger: 'blur' }],
-        password: [{ type: 'string', required: true, message: '请输入密码', trigger: 'blur' }],
-        status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
+        selectArr: [{ type: 'array', required: true, message: '请选择所属分类', trigger: 'change' }],
+        describe: [{ type: 'string', required: true, message: '请输入描述', trigger: 'blur' }],
+        api: [{ type: 'string', required: true, message: '请输入账号', trigger: 'blur' }],
+        code: [{ type: 'string', required: true, message: '请输入密码', trigger: 'blur' }],
       },
     }
   },
@@ -127,9 +120,6 @@ export default {
     }
   },
   methods: {
-    handleChange (value) {
-      console.log(value);
-    },
     /**
      * 上传成功钩子
      */
@@ -161,9 +151,8 @@ export default {
     updateData () {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          this.temp.api_id = JSON.stringify(this.$refs.apiTree.getCheckedKeys().filter(item => item < 1000))
-          this.temp.menu_id = JSON.stringify(this.$refs.routesTree.getCheckedKeys())
-          let tempData = Object.assign({}, this.temp)
+          const tempData = Object.assign({}, this.temp)
+          tempData.pid = tempData.selectArr[tempData.selectArr.length - 1]
           this.$emit('updateData', tempData, res => {
             if (res.code == 0) {
               this.$router.go(0);
@@ -184,9 +173,8 @@ export default {
     createData () {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          this.temp.api_id = JSON.stringify(this.$refs.apiTree.getCheckedKeys().filter(item => item < 1000))
-          this.temp.menu_id = JSON.stringify(this.$refs.routesTree.getCheckedKeys())
           const tempData = Object.assign({}, this.temp)
+          tempData.pid = tempData.selectArr[tempData.selectArr.length - 1]
           this.$emit('createData', tempData, res => {
             if (res.code == 0) {
               this.$router.go(0);

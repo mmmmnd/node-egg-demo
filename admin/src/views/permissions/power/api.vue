@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 09:32:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-28 17:27:22
+ * @LastEditTime: 2020-12-29 18:47:32
 -->
 <template>
   <div class="app-container">
@@ -23,21 +23,26 @@
               style="width: 100%;margin-bottom: 20px;"
               row-key="id"
               border
-              :tree-props="{children: 'children', hasChildren: 'hasChildren'}">
-      <el-table-column prop="describe"
+              :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+              @row-click="treeTable"
+              default-expand-all
+              ref="treeTable">
+      <el-table-column prop="nameTitle"
                        label="分类"
-                       align="left"
-                       sortable>
+                       align="left">
+        <template slot-scope="{row}">
+          <el-tag v-if="row.pid === 0">{{ row.nameTitle }}</el-tag>
+          <span v-else
+                v-html="row.nameTitle"></span>
+        </template>
       </el-table-column>
       <el-table-column prop="api"
                        label="Api"
-                       align="center"
-                       sortable>
+                       align="center">
       </el-table-column>
       <el-table-column prop="code"
                        label="识别码"
-                       align="center"
-                       sortable>
+                       align="center">
       </el-table-column>
       <el-table-column align="center"
                        label="操作"
@@ -60,27 +65,25 @@
                 :limit.sync="listQuery.limit"
                 @pagination="getList" />
 
-    <apiEdit ref="newForm"
-             :visible.sync="showDialog"
-             :temp="temp"
-             :apiList="apiList"
-             :routesList="routesList"
-             :dialogStatus="dialogStatus"
-             :select="select"
-             @updateData="updateData"
-             @createData="createData" />
+    <apisEdit ref="newForm"
+              :visible.sync="showDialog"
+              :temp="temp"
+              :dialogStatus="dialogStatus"
+              :select="select"
+              @updateData="updateData"
+              @createData="createData" />
 
   </div>
 
 </template>
 
 <script>
-import { adminList, adminEdit, adminAdd, adminUpdate, apiIndex, routesList, rolesList } from '@/api/permissions'
+import { apiIndex, routesList, apiAdd, apiEdit } from '@/api/permissions'
 
 import Pagination from '@/components/Pagination'
-import apiEdit from '../component/apiEdit'
+import apisEdit from '../component/apiEdit'
 export default {
-  components: { Pagination, apiEdit, routesList },
+  components: { Pagination, apisEdit },
   data () {
     return {
       list: [],
@@ -93,8 +96,6 @@ export default {
       showDialog: false,
       temp: {},
       dialogStatus: '',
-      apiList: [], //接口
-      routesList: [], //菜单
       select: [], //下拉
     }
   }
@@ -103,6 +104,10 @@ export default {
     this.getList()
   },
   methods: {
+    treeTable (row, column, event) {
+      const { treeTable } = this.$refs
+      treeTable.toggleRowExpansion(row)
+    },
     /**
      * 获取列表
      */
@@ -119,35 +124,10 @@ export default {
         })
     },
     /**
-     * 切换状态
-     */
-    statusSwitch (getSwitch, id) {
-      const data = { id, key: 'status', value: getSwitch };
-      this.listLoading = true
-      adminUpdate(data)
-        .then(response => {
-          this.listLoading = false
-          this.$notify({
-            title: '成功',
-            message: response.msg,
-            type: 'success'
-          });
-        })
-    },
-    /**
      * 编辑
      */
     handleUpdate (row) {
       this.temp = Object.assign({}, row) // copy obj
-      this.$nextTick(() => {
-        if (!this.temp.api_id) this.temp.api_id = '[]';
-        if (!this.temp.menu_id) this.temp.menu_id = '[]'
-
-        const api_id = JSON.parse(this.temp.api_id)
-        const menu_id = JSON.parse(this.temp.menu_id)
-        this.$refs.newForm.$refs.apiTree.setCheckedKeys(api_id)
-        this.$refs.newForm.$refs.routesTree.setCheckedKeys(menu_id)
-      })
       this.dialogStatus = 'update'
       this.showDialog = true;
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
@@ -160,12 +140,9 @@ export default {
         status: true,
         roles_name: '',
         describe: '',
-        sort: 0
+        sort: 0,
+        selectArr: []
       };
-      this.$nextTick(() => {
-        this.$refs.newForm.$refs.apiTree.setCheckedKeys([])
-        this.$refs.newForm.$refs.routesTree.setCheckedKeys([])
-      })
       this.dialogStatus = 'create'
       this.showDialog = true
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
@@ -174,13 +151,13 @@ export default {
      * 父页面执行 修改
      */
     updateData (Obj, cab) {
-      adminEdit(Obj).then(res => cab(res))
+      apiEdit(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 增加
      */
     createData (Obj, cab) {
-      adminAdd(Obj).then(res => cab(res))
+      apiAdd(Obj).then(res => cab(res))
     },
     /**
      * 弹窗提示

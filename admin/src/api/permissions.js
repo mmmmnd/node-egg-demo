@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 11:01:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 17:30:33
+ * @LastEditTime: 2020-12-29 16:19:20
  */
 import request from '@/utils/request'
 
@@ -91,6 +91,22 @@ export function adminUpdate (data) {
   return request({
     url: '/admin/update',
     method: 'put',
+    data
+  })
+}
+
+export function apiAdd (data) {
+  return request({
+    url: '/api/add',
+    method: 'post',
+    data
+  })
+}
+
+export function apiEdit (data) {
+  return request({
+    url: '/api/edit',
+    method: 'post',
     data
   })
 }
