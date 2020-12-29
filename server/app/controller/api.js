@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-21 11:35:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-23 11:49:44
+ * @LastEditTime: 2020-12-29 16:13:39
  */
 'use strict';
 
@@ -22,6 +22,24 @@ class AdvertController extends Controller {
     const data = GetTree.apiList(routes, api);
 
     await this.ctx.helper.checkData({ data });
+  }
+  /**
+   * 增加
+   */
+  async add () {
+    const params = this.ctx.request.body;
+
+    const api = await this.ctx.service.api.add(params)
+    await this.ctx.helper.checkData(api);
+  }
+  /**
+   * 编辑
+   */
+  async edit () {
+    const params = this.ctx.request.body;
+
+    const api = await this.ctx.service.api.edit(params)
+    await this.ctx.helper.checkData(api);
   }
 }
 

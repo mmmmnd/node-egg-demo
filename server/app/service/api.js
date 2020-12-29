@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-15 10:50:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 10:26:59
+ * @LastEditTime: 2020-12-29 16:17:49
  */
 'use strict';
 /**
@@ -72,6 +72,46 @@ class ApiService extends Service {
         deleted_at: null
       }
     })
+  }
+  /**
+   * 增加
+   * @param { Number } pid 父id
+   * @param { String } api 接口
+   * @param { String } describe 描述
+   * @param { String } code 描述
+   * @param { Boolean } status 状态
+   * @param { Number } sort 排序
+   */
+  async add ({ pid, api, describe, code, status = 1, sort = 0 }) {
+    await this.ctx.model.MzcApi.create({
+      pid, api, describe, code, status, sort
+    });
+
+    return { httpStatus: HttpStatus.OK }
+  }
+  /**
+   * 修改
+   * @param { Number } id 群组id
+   * @param { Number } pid 父id
+   * @param { String } api 接口
+   * @param { String } describe 描述
+   * @param { String } code 描述
+   * @param { Boolean } status 状态
+   * @param { Number } sort 排序
+   */
+  async edit ({ id, pid, api, describe, code, status = 1, sort = 0 }) {
+    const Api = await this.ctx.model.MzcApi.update({
+      pid, api, describe, code, status, sort
+    }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
+
+    if (!Api[0]) return { httpStatus: HttpStatus.INVALID_REQUEST, msg: '没有找到相关信息' };
+
+    return { httpStatus: HttpStatus.OK }
   }
 }
 

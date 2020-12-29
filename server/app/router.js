@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 17:28:33
+ * @LastEditTime: 2020-12-29 16:08:13
  */
 'use strict';
 
@@ -142,6 +142,8 @@ module.exports = app => {
 
   // api
   router.get('/api/api/index', jwt, controller.api.index)
+  router.post('/api/api/add', jwt, controller.api.add)
+  router.post('/api/api/edit', jwt, controller.api.edit)
 
   // roles
   router.get('/api/roles/index', jwt, controller.roles.index)

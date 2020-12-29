@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-28 10:06:58
+ * @LastEditTime: 2020-12-29 16:06:32
  */
 'use strict';
 
@@ -57,17 +57,23 @@ class GetTree {
 
     const parents = this._getMenuType(routes, id, 'menu')
     parents.forEach(parent => {
+      parent['nameTitle'] = parent['title']
       const childrens = this.apiList(routes, apis, parent.id);
       if (childrens.length > 0) {
-        childrens.forEach(children => {
-          const apiChildren = this._getMenuType(apis, children.id, 'apiList')
-          children['id'] = children['id'] + 1000
-          children['describe'] = children['title']
-          children['children'] = apiChildren
-        })
+        parent['index'] = parent['id']
         parent['id'] = parent['id'] + 1000
         parent['describe'] = parent['title']
-        parent['children'] = childrens
+        childrens.forEach(children => {
+          const apiChildren = this._getMenuType(apis, children.id, 'apiList')
+          children['index'] = children['id']
+          children['id'] = children['id'] + 1000
+          children['describe'] = children['title']
+          apiChildren.filter(apiItem => {
+            apiItem.selectArr = [parent['index'], children['index']]; apiItem['title'] = apiItem['describe']
+          })
+          if (apiChildren.length > 0) children['children'] = this._setIcon(apiChildren)
+        })
+        parent['children'] = this._setIcon(childrens)
       }
     })
     return parents
