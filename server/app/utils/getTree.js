@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-29 16:06:32
+ * @LastEditTime: 2020-12-30 18:11:04
  */
 'use strict';
 
@@ -30,7 +30,7 @@ class GetTree {
   }
 
   /**
-   * 关于我们 and 接口列表
+   * 关于我们
    * @param { Array } items 数组对象
    * @param { Array } about about分类
    */
@@ -46,38 +46,56 @@ class GetTree {
 
     return items
   }
+
+  static apiList (routes, apis, id = 0) {
+    apis = JSON.parse(JSON.stringify(apis));
+
+    const routess = this.menuList(routes, 'apiList')
+
+    const parents = this._getMenuType(routess, id, 'menu')
+    parents.forEach(parent => {
+      const childrens = this.apiList(routess, apis, parent.id);
+      parent.index = parent.id, parent.id = parent.id + 1000
+      if (childrens.length > 0) parent['children'] = childrens
+    })
+
+    return parents
+  }
   /**
     * 接口列表
     * @param { Array } routes 菜单
     * @param { Array } apis 接口列表
     */
-  static apiList (routes, apis, id = 0) {
-    routes = JSON.parse(JSON.stringify(routes));
-    apis = JSON.parse(JSON.stringify(apis));
+  //  static apiList (routes, apis, id = 0) {
+  //   routes = JSON.parse(JSON.stringify(routes));
+  //   apis = JSON.parse(JSON.stringify(apis));
 
-    const parents = this._getMenuType(routes, id, 'menu')
-    parents.forEach(parent => {
-      parent['nameTitle'] = parent['title']
-      const childrens = this.apiList(routes, apis, parent.id);
-      if (childrens.length > 0) {
-        parent['index'] = parent['id']
-        parent['id'] = parent['id'] + 1000
-        parent['describe'] = parent['title']
-        childrens.forEach(children => {
-          const apiChildren = this._getMenuType(apis, children.id, 'apiList')
-          children['index'] = children['id']
-          children['id'] = children['id'] + 1000
-          children['describe'] = children['title']
-          apiChildren.filter(apiItem => {
-            apiItem.selectArr = [parent['index'], children['index']]; apiItem['title'] = apiItem['describe']
-          })
-          if (apiChildren.length > 0) children['children'] = this._setIcon(apiChildren)
-        })
-        parent['children'] = this._setIcon(childrens)
-      }
-    })
-    return parents
-  }
+  //   const parents = this._getMenuType(routes, id, 'menu')
+  //   parents.forEach(parent => {
+  //     const childrens = this.apiList(routes, apis, parent.id);
+  //     if (childrens.length > 0) {
+  //       parent['index'] = parent['id'],
+  //         parent['id'] = parent['id'] + 1000,
+  //         parent['describe'] = parent['title'],
+  //         parent['nameTitle'] = parent['title']
+  //       childrens.forEach(children => {
+  //         const apiChildren = this._getMenuType(apis, children.id, 'apiList')
+  //         children['index'] = children['id'],
+  //           children['id'] = children['id'] + 1000,
+  //           children['describe'] = children['title'];
+  //         apiChildren.filter(apiItem => {
+  //           apiItem.selectArr = []
+  //           apiItem['title'] = apiItem['describe']
+  //           apiItem.selectArr.push(parent['index'])
+  //           apiItem.selectArr.push(children['index'])
+  //         })
+  //         if (apiChildren.length > 0) children['children'] = this._setIcon(apiChildren)
+  //       })
+  //       parent['children'] = this._setIcon(childrens)
+  //     }
+  //   })
+  //   return parents
+  // }
   /**
   * 后台菜单 私有方法
   * @param { Array } items 菜单列表

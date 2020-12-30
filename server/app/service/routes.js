@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 10:26:35
+ * @LastEditTime: 2020-12-30 15:26:10
  */
 'use strict';
 
@@ -39,6 +39,7 @@ class RoutesService extends Service {
   }
   /**
    * 获取列表
+   * @param { String } type 类型
    */
   async list (type) {
     const routes = await this.ctx.model.MzcRoutes.findAll({
@@ -50,6 +51,56 @@ class RoutesService extends Service {
     return type !== 'apiGetRoutes'
       ? { data: GetTree.menuList(routes, 'menu') }
       : routes
+  }
+  /**
+   * 增加
+   * @param { Number } pid 父id
+   * @param { String } path 路径
+   * @param { String } name name名
+   * @param { String } component 对应前端路由
+   * @param { String } redirect 重定向
+   * @param { String } title 标题
+   * @param { String } icon icon图标
+   * @param { Boolean } noCache 是否缓存
+   * @param { Boolean } hidden 是否隐藏
+   * @param { Boolean } breadcrumb 是否隐藏面包屑
+   * @param { Boolean } status 状态
+   * @param { Number } sort 排序
+   */
+  async add ({ pid = 0, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort }) {
+    await this.ctx.model.MzcRoutes.create({
+      pid, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort
+    });
+  }
+  /**
+   * 编辑
+   * @param { Number } id id
+   * @param { Number } pid 父id
+   * @param { String } path 路径
+   * @param { String } name name名
+   * @param { String } component 对应前端路由
+   * @param { String } redirect 重定向
+   * @param { String } title 标题
+   * @param { String } icon icon图标
+   * @param { Boolean } noCache 是否缓存
+   * @param { Boolean } hidden 是否隐藏
+   * @param { Boolean } breadcrumb 是否隐藏面包屑
+   * @param { Boolean } status 状态
+   * @param { Number } sort 排序
+   */
+  async edit ({ id, pid = 0, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort }) {
+    const routes = await this.ctx.model.MzcRoutes.update({
+      pid, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort
+    }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
+
+    if (!routes[0]) return { httpStatus: HttpStatus.INVALID_REQUEST, msg: '没有找到相关信息' };
+
+    return { httpStatus: HttpStatus.OK }
   }
 }
 

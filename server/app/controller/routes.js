@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 10:06:38
+ * @LastEditTime: 2020-12-30 15:08:35
  */
 
 'use strict';
@@ -28,6 +28,22 @@ class RoutesController extends Controller {
    */
   async list () {
     const routes = await this.ctx.service.routes.list();
+
+    await this.ctx.helper.checkData(routes);
+  }
+  /**
+   * 新增
+   */
+  async add () {
+    const routes = await this.ctx.service.routes.add();
+
+    await this.ctx.helper.checkData(routes);
+  }
+  /**
+   * 编辑
+   */
+  async edit () {
+    const routes = await this.ctx.service.routes.edit();
 
     await this.ctx.helper.checkData(routes);
   }

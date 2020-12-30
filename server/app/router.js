@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-29 16:08:13
+ * @LastEditTime: 2020-12-30 15:16:02
  */
 'use strict';
 
@@ -139,6 +139,8 @@ module.exports = app => {
   // routes
   router.get('/api/routes/index', jwt, controller.routes.index)
   router.get('/api/routes/list', jwt, controller.routes.list)
+  router.post('/api/routes/add', jwt, controller.routes.add)
+  router.post('/api/routes/edit', jwt, controller.routes.edit)
 
   // api
   router.get('/api/api/index', jwt, controller.api.index)
