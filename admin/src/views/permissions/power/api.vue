@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 09:32:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-29 18:47:32
+ * @LastEditTime: 2020-12-29 19:11:55
 -->
 <template>
   <div class="app-container">
@@ -104,6 +104,9 @@ export default {
     this.getList()
   },
   methods: {
+    /**
+     * 点击展开
+     */
     treeTable (row, column, event) {
       const { treeTable } = this.$refs
       treeTable.toggleRowExpansion(row)

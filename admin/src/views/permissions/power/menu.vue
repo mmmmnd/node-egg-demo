@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 09:32:38
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-28 09:33:06
+ * @LastEditTime: 2020-12-30 09:27:26
 -->
 <template>
   <div class="app-container">
@@ -20,114 +20,139 @@
     </div>
 
     <el-table :data="list"
-              style="width: 100%"
-              @row-click="clickRowHandle"
-              ref="table">
-      <el-table-column type="expand">
-        <el-form label-position=""
-                 inline
-                 class="demo-table-expand">
-          <el-form-item label="接口权限">
-            <el-tree :data="apiList"
-                     ref="apiTree"
-                     show-checkbox
-                     accordion
-                     node-key="id"
-                     :props="apiDisabledProps">
-            </el-tree>
-          </el-form-item>
-          <el-form-item label="菜单权限">
-            <el-tree :data="routesList"
-                     ref="routesTree"
-                     show-checkbox
-                     accordion
-                     node-key="id"
-                     :props="routesDisabledProps">
-            </el-tree>
-          </el-form-item>
-        </el-form>
-      </el-table-column>
-      <el-table-column label="id"
-                       prop="id"
-                       align="center">
-      </el-table-column>
-      <el-table-column label="角色"
-                       prop="roles_name"
-                       align="center">
-      </el-table-column>
-      <el-table-column label="账号"
-                       prop="nickname"
-                       align="center">
-      </el-table-column>
-      <el-table-column label="用户名"
-                       prop="user_name"
-                       align="center">
-      </el-table-column>
-      <el-table-column label="头像"
-                       prop="user_name"
-                       align="center">
+              style="width: 100%;margin-bottom: 20px;"
+              row-key="id"
+              border
+              :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
+              @row-click="treeTable"
+              default-expand-all
+              ref="treeTable">
+      <el-table-column prop="nameTitle"
+                       label="分类"
+                       align="left"
+                       fixed="left"
+                       width="200px">
         <template slot-scope="{row}">
-          <el-avatar shape="square"
-                     :size="50"
-                     fit="cover"
-                     v-if="row.avatar_image"
-                     :src="row.avatar_image"></el-avatar>
+          <el-tag v-if="row.pid === 0">{{ row.title }}</el-tag>
+          <span v-else
+                v-html="row.nameTitle"></span>
         </template>
       </el-table-column>
-      <el-table-column label="电话"
-                       prop="phone"
+      <el-table-column prop="id"
+                       label="Id"
                        align="center">
       </el-table-column>
-
-      <el-table-column label="邮箱"
-                       prop="email"
+      <el-table-column prop="pid"
+                       label="Pid"
                        align="center">
       </el-table-column>
-
-      <el-table-column label="登录次数"
-                       prop="login_count"
-                       align="center">
-      </el-table-column>
-
-      <el-table-column label="上一次登录ip"
-                       prop="last_login_ip"
-                       align="center">
-      </el-table-column>
-
-      <el-table-column label="上一次登录时间"
-                       prop="last_login_time"
+      <el-table-column prop="path"
+                       label="Path"
                        align="center"
                        width="150px">
+      </el-table-column>
+      <el-table-column prop="name"
+                       label="Name"
+                       align="center"
+                       width="150px">
+      </el-table-column>
+      <el-table-column prop="component"
+                       label="Component"
+                       align="center"
+                       width="200px">
+      </el-table-column>
+      <el-table-column prop="redirect"
+                       label="Redirect"
+                       align="center"
+                       width="200px">
+      </el-table-column>
+      <el-table-column prop="title"
+                       label="Title"
+                       align="center">
+      </el-table-column>
+      <el-table-column prop="icon"
+                       label="Icon"
+                       align="center">
         <template slot-scope="{row}">
-          <span>{{ row.last_login_time | formatTime('{y}-{m}-{d} {h}:{i}')  }}</span>
+          <i v-if="row.icon.includes('el-icon')"
+             :class="row.icon" />
+          <svg-icon v-else
+                    :icon-class="row.icon" />
         </template>
       </el-table-column>
-
-      <el-table-column label="状态"
-                       prop="status"
+      <el-table-column prop="affix"
+                       label="Affix"
+                       align="center">
+        <template slot-scope="{row}">
+          <el-switch v-model="row.affix"
+                     active-color="#13ce66"
+                     inactive-color="#ff4949"
+                     disabled>
+          </el-switch>
+        </template>
+      </el-table-column>
+      <el-table-column prop="noCache"
+                       label="NoCache"
+                       align="center">
+        <template slot-scope="{row}">
+          <el-switch v-model="row.noCache"
+                     active-color="#13ce66"
+                     inactive-color="#ff4949"
+                     disabled>
+          </el-switch>
+        </template>
+      </el-table-column>
+      <el-table-column prop="hidden"
+                       label="Hidden"
+                       align="center">
+        <template slot-scope="{row}">
+          <el-switch v-model="row.hidden"
+                     active-color="#13ce66"
+                     inactive-color="#ff4949"
+                     disabled>
+          </el-switch>
+        </template>
+      </el-table-column>
+      <el-table-column prop="breadcrumb"
+                       label="Breadcrumb"
+                       align="center">
+        <template slot-scope="{row}">
+          <el-switch v-model="row.breadcrumb"
+                     active-color="#13ce66"
+                     inactive-color="#ff4949"
+                     disabled>
+          </el-switch>
+        </template>
+      </el-table-column>
+      <el-table-column prop="status"
+                       label="Status"
                        align="center">
         <template slot-scope="{row}">
           <el-switch v-model="row.status"
                      active-color="#13ce66"
                      inactive-color="#ff4949"
-                     @change="statusSwitch(row.status,row.id)"
-                     onclick="(function(e){e.stopPropagation()}(event))">
+                     disabled>
           </el-switch>
         </template>
       </el-table-column>
+      <el-table-column prop="sort"
+                       label="Sort"
+                       align="center">
+      </el-table-column>
       <el-table-column align="center"
                        label="操作"
-                       width="190px">
+                       width="190px"
+                       fixed="right">
         <template slot-scope="{row}">
           <el-button type="primary"
                      size="mini"
                      icon="el-icon-edit"
+                     v-if="row.id <=1000"
                      @click.stop.prevent="handleUpdate(row)">
             编辑
           </el-button>
         </template>
       </el-table-column>
-
     </el-table>
 
     <pagination v-show="total>0"
@@ -136,27 +161,25 @@
                 :limit.sync="listQuery.limit"
                 @pagination="getList" />
 
-    <adminsEdit ref="newForm"
-                :visible.sync="showDialog"
-                :temp="temp"
-                :apiList="apiList"
-                :routesList="routesList"
-                :dialogStatus="dialogStatus"
-                :select="select"
-                @updateData="updateData"
-                @createData="createData" />
+    <menuEdit ref="newForm"
+              :visible.sync="showDialog"
+              :temp="temp"
+              :dialogStatus="dialogStatus"
+              :select="select"
+              @updateData="updateData"
+              @createData="createData" />
 
   </div>
 
 </template>
 
 <script>
-import { adminList, adminEdit, adminAdd, adminUpdate, apiIndex, routesList, rolesList } from '@/api/permissions'
+import { routesList } from '@/api/permissions'
 
 import Pagination from '@/components/Pagination'
-import adminsEdit from '../component/adminEdit'
+import menuEdit from '../component/menuEdit'
 export default {
-  components: { Pagination, adminsEdit },
+  components: { Pagination, menuEdit },
   data () {
     return {
       list: [],
@@ -169,19 +192,7 @@ export default {
       showDialog: false,
       temp: {},
       dialogStatus: '',
-      apiList: [], //接口
-      routesList: [], //菜单
       select: [], //下拉
-      apiDisabledProps: {
-        children: 'children',
-        label: 'describe',
-        disabled: 'status'
-      },
-      routesDisabledProps: {
-        children: 'children',
-        label: 'title',
-        disabled: 'status'
-      }
     }
   }
   ,
@@ -192,53 +203,20 @@ export default {
     /**
      * 点击展开
      */
-    clickRowHandle (row, column, event) {
-      const { table } = this.$refs
-      this.list.map(item => row.id != item.id && table.toggleRowExpansion(item, false))
-      table.toggleRowExpansion(row)
-      this.$nextTick(() => {
-        const { apiTree, routesTree } = this.$refs
-        if (apiTree && routesTree) {
-          if (!row.api_id) row.api_id = '[]';
-          if (!row.menu_id) row.menu_id = '[]'
-
-          const api_id = JSON.parse(row.api_id)
-          const menu_id = JSON.parse(row.menu_id)
-          this.$refs.apiTree.setCheckedKeys(api_id)
-          this.$refs.routesTree.setCheckedKeys(menu_id)
-        }
-      });
+    treeTable (row, column, event) {
+      const { treeTable } = this.$refs
+      treeTable.toggleRowExpansion(row)
     },
     /**
      * 获取列表
      */
     getList (id) {
-      var _response
       this.listLoading = true
       this.listQuery.id = typeof id === 'number' ? id : this.temp.id;
-      adminList(this.listQuery)
+      routesList(this.listQuery)
         .then(response => {
-          _response = response;
-
-          return apiIndex()
-        })
-        .then(response => {
-          this.apiList = response.data;
-          return routesList()
-        })
-        .then(response => {
-          this.routesList = response.data;
-          return rolesList()
-        })
-        .then(response => {
-          this.list = _response.data.data;
-          this.total = _response.data.meta.total
-          this.select = response.data
-          this.list.filter(listItem => {
-            this.select.filter(selectItem => {
-              if (listItem.roles_id === selectItem.id) listItem.roles_name = selectItem.roles_name
-            })
-          })
+          this.list = response.data;
+          this.select = response.data;
         })
     },
     /**
@@ -262,16 +240,6 @@ export default {
      */
     handleUpdate (row) {
       this.temp = Object.assign({}, row) // copy obj
-      this.$nextTick(() => {
-
-        if (!this.temp.api_id) this.temp.api_id = '[]';
-        if (!this.temp.menu_id) this.temp.menu_id = '[]'
-
-        const api_id = JSON.parse(this.temp.api_id)
-        const menu_id = JSON.parse(this.temp.menu_id)
-        this.$refs.newForm.$refs.apiTree.setCheckedKeys(api_id)
-        this.$refs.newForm.$refs.routesTree.setCheckedKeys(menu_id)
-      })
       this.dialogStatus = 'update'
       this.showDialog = true;
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
@@ -284,12 +252,9 @@ export default {
         status: true,
         roles_name: '',
         describe: '',
-        sort: 0
+        sort: 0,
+        selectArr: []
       };
-      this.$nextTick(() => {
-        this.$refs.newForm.$refs.apiTree.setCheckedKeys([])
-        this.$refs.newForm.$refs.routesTree.setCheckedKeys([])
-      })
       this.dialogStatus = 'create'
       this.showDialog = true
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
@@ -333,5 +298,8 @@ export default {
 }
 .el-table__row:hover {
   cursor: pointer;
+}
+path {
+  fill: inherit !important;
 }
 </style>
