@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-30 18:11:04
+ * @LastEditTime: 2021-01-04 21:14:00
  */
 'use strict';
 
@@ -18,7 +18,7 @@ class GetTree {
    * @param { Number } id 父id
    */
   static menuList (items, type, id = 0) {
-    items = JSON.parse(JSON.stringify(items));
+    items = this.isObject(items)
 
     const parents = this._getMenuType(items, id, type)
     parents.filter(parent => {
@@ -35,8 +35,7 @@ class GetTree {
    * @param { Array } about about分类
    */
   static aboutList (items, about) {
-    items = JSON.parse(JSON.stringify(items));
-    about = JSON.parse(JSON.stringify(about));
+    items = this.isObject(items), about = this.isObject(about);
 
     items.forEach((item, index) => {
       const children = this._getMenuType(about, item.id, 'about');
@@ -46,70 +45,42 @@ class GetTree {
 
     return items
   }
+  /**
+   * 接口菜单
+   * @param { Array } routes 菜单列表
+   * @param { Array } apis 接口列表
+   * @param { String } type 类型
+   * @param { Array } obj 定义父类
+   */
+  static apiList (routes, apis, type, obj = { index: 0 }) {
+    routes = this.isObject(routes), apis = this.isObject(apis);
 
-  static apiList (routes, apis, id = 0) {
-    apis = JSON.parse(JSON.stringify(apis));
-
-    const routess = this.menuList(routes, 'apiList')
-
-    const parents = this._getMenuType(routess, id, 'menu')
-    parents.forEach(parent => {
-      const childrens = this.apiList(routess, apis, parent.id);
-      parent.index = parent.id, parent.id = parent.id + 1000
-      if (childrens.length > 0) parent['children'] = childrens
+    const parents = this._getMenuType(routes, obj, type)
+    parents.filter(parent => {
+      const children = this.apiList(routes, apis, type, parent)
+      if (children.length > 0) parent['children'] = this._setIcon(children)
+      else if (children.length == 0) {
+        const apiChildren = this._getMenuType(apis, parent, type)
+        if (apiChildren.length > 0) parent['children'] = this._setIcon(apiChildren)
+      }
     })
 
     return parents
   }
   /**
-    * 接口列表
-    * @param { Array } routes 菜单
-    * @param { Array } apis 接口列表
-    */
-  //  static apiList (routes, apis, id = 0) {
-  //   routes = JSON.parse(JSON.stringify(routes));
-  //   apis = JSON.parse(JSON.stringify(apis));
-
-  //   const parents = this._getMenuType(routes, id, 'menu')
-  //   parents.forEach(parent => {
-  //     const childrens = this.apiList(routes, apis, parent.id);
-  //     if (childrens.length > 0) {
-  //       parent['index'] = parent['id'],
-  //         parent['id'] = parent['id'] + 1000,
-  //         parent['describe'] = parent['title'],
-  //         parent['nameTitle'] = parent['title']
-  //       childrens.forEach(children => {
-  //         const apiChildren = this._getMenuType(apis, children.id, 'apiList')
-  //         children['index'] = children['id'],
-  //           children['id'] = children['id'] + 1000,
-  //           children['describe'] = children['title'];
-  //         apiChildren.filter(apiItem => {
-  //           apiItem.selectArr = []
-  //           apiItem['title'] = apiItem['describe']
-  //           apiItem.selectArr.push(parent['index'])
-  //           apiItem.selectArr.push(children['index'])
-  //         })
-  //         if (apiChildren.length > 0) children['children'] = this._setIcon(apiChildren)
-  //       })
-  //       parent['children'] = this._setIcon(childrens)
-  //     }
-  //   })
-  //   return parents
-  // }
-  /**
   * 后台菜单 私有方法
   * @param { Array } items 菜单列表
   * @param { String } type 类型
-  * @param { Number } id 父id
+  * @param { Number || Object } value 父id || 父的item值
   * @param { Array } arrs 返回数组
   */
-  static _getMenuType (items, id, type, arrs = []) {
+  static _getMenuType (items, value, type, arrs = []) {
     switch (type) {
       /**
        * 前台菜单
        */
       case 'router':
-        items.filter(item => item.pid === id && arrs.push({
+        items.filter(item => item.pid === value && arrs.push({
           id: item.id,
           pid: item.pid,
           path: item.path,
@@ -128,28 +99,30 @@ class GetTree {
        * 页面菜单
        */
       case 'menu':
-        items.filter(item => item.pid === id && arrs.push(item));
+        items.filter(item => item.pid === value && arrs.push(item));
 
         return arrs
       /**
        * about下拉分类
        */
       case 'about':
-        items.forEach(item => item.dropId === id && item.id !== 1 && arrs.push(item));
-
-        return arrs
-      /**
-       * 接口菜单
-       */
-      case 'api':
-        items.forEach(item => item.pid === id && arrs.push(item));
+        items.forEach(item => item.dropId === value && item.value !== 1 && arrs.push(item));
 
         return arrs
       /**
        * 接口菜单
        */
       case 'apiList':
-        items.forEach(item => item.pid === id && arrs.push(item));
+        items.forEach(item => {
+          if (item.pid === value.index) {
+            if (value.index !== 0) item.selectArr = !value.selectArr ? [value.index] : [...value.selectArr, value.index];
+
+            item.index = item.id;
+            item.id = item.id + 1000;
+            if (item.describe) { item.title = item.describe; item.id = item.id - 1000; };
+            arrs.push(item)
+          }
+        });
 
         return arrs
     }
@@ -165,6 +138,13 @@ class GetTree {
     item.nameTitle = iconLast + item.title
 
     return items;
+  }
+  /**
+   * 校验对象
+   * @param {Object} Obj 
+   */
+  static isObject (Obj) {
+    return Obj instanceof Object ? JSON.parse(JSON.stringify(Obj)) : Obj
   }
 }
 
