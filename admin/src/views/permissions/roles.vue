@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 10:29:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 17:24:18
+ * @LastEditTime: 2021-01-04 21:11:27
 -->
 <template>
   <div class="app-container">
@@ -129,7 +129,7 @@ export default {
       routesList: [], //菜单
       apiDisabledProps: {
         children: 'children',
-        label: 'describe',
+        label: 'title',
         disabled: 'status'
       },
       routesDisabledProps: {
@@ -159,6 +159,7 @@ export default {
 
           const api_id = JSON.parse(row.api_id)
           const menu_id = JSON.parse(row.menu_id)
+          console.log(api_id)
           this.$refs.apiTree.setCheckedKeys(api_id)
           this.$refs.routesTree.setCheckedKeys(menu_id)
         }
@@ -227,7 +228,7 @@ export default {
       this.temp = {
         status: true,
         roles_name: '',
-        describe: '',
+        title: '',
         sort: 0
       };
       this.$nextTick(() => {

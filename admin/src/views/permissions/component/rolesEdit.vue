@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-23 11:08:44
+ * @LastEditTime: 2021-01-04 21:12:23
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -123,7 +123,7 @@ export default {
       },
       apiListProps: {
         children: 'children',
-        label: 'describe'
+        label: 'title'
       },
       routesListProps: {
         children: 'children',

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 09:32:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-29 19:11:55
+ * @LastEditTime: 2021-01-04 21:19:21
 -->
 <template>
   <div class="app-container">
@@ -31,7 +31,7 @@
                        label="分类"
                        align="left">
         <template slot-scope="{row}">
-          <el-tag v-if="row.pid === 0">{{ row.nameTitle }}</el-tag>
+          <el-tag v-if="row.pid === 0">{{ row.title }}</el-tag>
           <span v-else
                 v-html="row.nameTitle"></span>
         </template>

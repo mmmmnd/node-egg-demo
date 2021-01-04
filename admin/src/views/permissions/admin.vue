@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-23 17:42:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-28 10:14:06
+ * @LastEditTime: 2021-01-04 21:17:19
 -->
 <template>
   <div class="app-container">
@@ -174,7 +174,7 @@ export default {
       select: [], //下拉
       apiDisabledProps: {
         children: 'children',
-        label: 'describe',
+        label: 'title',
         disabled: 'status'
       },
       routesDisabledProps: {
@@ -204,6 +204,8 @@ export default {
 
           const api_id = JSON.parse(row.api_id)
           const menu_id = JSON.parse(row.menu_id)
+          console.log(api_id)
+          console.log(menu_id)
           this.$refs.apiTree.setCheckedKeys(api_id)
           this.$refs.routesTree.setCheckedKeys(menu_id)
         }
