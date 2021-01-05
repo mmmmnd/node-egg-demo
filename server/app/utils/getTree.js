@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-04 21:14:00
+ * @LastEditTime: 2021-01-05 19:59:10
  */
 'use strict';
 
@@ -59,7 +59,7 @@ class GetTree {
     parents.filter(parent => {
       const children = this.apiList(routes, apis, type, parent)
       if (children.length > 0) parent['children'] = this._setIcon(children)
-      else if (children.length == 0) {
+      else if (children.length == 0 && apis.length > 0) {
         const apiChildren = this._getMenuType(apis, parent, type)
         if (apiChildren.length > 0) parent['children'] = this._setIcon(apiChildren)
       }

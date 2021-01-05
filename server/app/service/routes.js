@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-30 15:26:10
+ * @LastEditTime: 2021-01-05 20:16:36
  */
 'use strict';
 
@@ -49,7 +49,7 @@ class RoutesService extends Service {
     });
 
     return type !== 'apiGetRoutes'
-      ? { data: GetTree.menuList(routes, 'menu') }
+      ? { data: GetTree.apiList(routes, [], 'apiList') }
       : routes
   }
   /**
@@ -68,13 +68,18 @@ class RoutesService extends Service {
    * @param { Number } sort 排序
    */
   async add ({ pid = 0, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort }) {
+    return {
+      data: {
+        pid, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort
+      }
+    }
     await this.ctx.model.MzcRoutes.create({
       pid, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort
     });
   }
   /**
    * 编辑
-   * @param { Number } id id
+   * @param { Number } index id
    * @param { Number } pid 父id
    * @param { String } path 路径
    * @param { String } name name名
@@ -88,12 +93,12 @@ class RoutesService extends Service {
    * @param { Boolean } status 状态
    * @param { Number } sort 排序
    */
-  async edit ({ id, pid = 0, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort }) {
+  async edit ({ index, pid = 0, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort }) {
     const routes = await this.ctx.model.MzcRoutes.update({
       pid, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort
     }, {
       where: {
-        id,
+        id: index,
         deleted_at: null
       },
     })

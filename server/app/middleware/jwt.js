@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-01 09:47:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-23 14:52:55
+ * @LastEditTime: 2021-01-05 20:57:08
  */
 'use strict'
 const HttpStatus = require('../utils/httpStatus');
@@ -27,7 +27,7 @@ module.exports = (options) => {
           await next();
         } else {
           await ctx.service.exception.add(pathName, userInfo, headers)
-          await ctx.helper.checkData({ msg: '无权操作 非法请求！相关信息已被记录，请注意行为（别以为我不知道你想干嘛）！！！如有疑惑请联系开发者 -> handsome.mo@foxmail.com', errorStatus: HttpStatus.UNAUTHORIZED })
+          await ctx.helper.checkData({ msg: '无权操作 非法请求！相关信息已被记录。如有疑惑请联系系统管理员', errorStatus: HttpStatus.UNAUTHORIZED })
         }
       } else if (redisToken !== token) {
         global.userInfo = '';
