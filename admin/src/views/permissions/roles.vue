@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 10:29:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-04 21:11:27
+ * @LastEditTime: 2021-01-05 20:35:22
 -->
 <template>
   <div class="app-container">
@@ -41,7 +41,7 @@
                      ref="routesTree"
                      show-checkbox
                      accordion
-                     node-key="id"
+                     node-key="index"
                      :props="routesDisabledProps">
             </el-tree>
           </el-form-item>
@@ -159,7 +159,6 @@ export default {
 
           const api_id = JSON.parse(row.api_id)
           const menu_id = JSON.parse(row.menu_id)
-          console.log(api_id)
           this.$refs.apiTree.setCheckedKeys(api_id)
           this.$refs.routesTree.setCheckedKeys(menu_id)
         }

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-04 21:15:03
+ * @LastEditTime: 2021-01-05 20:31:00
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -122,7 +122,7 @@
                        ref="routesTree"
                        show-checkbox
                        accordion
-                       node-key="id"
+                       node-key="index"
                        :props="routesListProps">
               </el-tree>
             </div>

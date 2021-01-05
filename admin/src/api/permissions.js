@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 11:01:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-29 16:19:20
+ * @LastEditTime: 2021-01-05 20:09:28
  */
 import request from '@/utils/request'
 
@@ -106,6 +106,22 @@ export function apiAdd (data) {
 export function apiEdit (data) {
   return request({
     url: '/api/edit',
+    method: 'post',
+    data
+  })
+}
+
+export function routesAdd (data) {
+  return request({
+    url: '/routes/add',
+    method: 'post',
+    data
+  })
+}
+
+export function routesEdit (data) {
+  return request({
+    url: '/routes/edit',
     method: 'post',
     data
   })

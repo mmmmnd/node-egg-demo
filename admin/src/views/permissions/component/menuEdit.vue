@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-30 08:36:33
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-30 11:58:05
+ * @LastEditTime: 2021-01-05 20:13:45
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -177,7 +177,7 @@ export default {
         create: '增加'
       },
       props: {
-        value: 'id',
+        value: 'index',
         label: 'title',
         checkStrictly: true
       },
@@ -231,10 +231,9 @@ export default {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
           const data = this.hierarchy(tempData)
-          console.log(data)
           this.$emit('updateData', data, res => {
             if (res.code == 0) {
-              this.$router.go(0);
+              // this.$router.go(0);
               this.$notify({
                 title: '成功',
                 message: '更新成功',
@@ -261,11 +260,9 @@ export default {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
           tempData.pid = tempData.selectArr[tempData.selectArr.length - 1]
-          console.log(tempData)
-          return false
           this.$emit('createData', tempData, res => {
             if (res.code == 0) {
-              this.$router.go(0);
+              // this.$router.go(0);
               this.$notify({
                 title: '成功',
                 message: '更新成功',

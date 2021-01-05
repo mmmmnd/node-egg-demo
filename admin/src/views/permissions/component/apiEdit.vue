@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 16:14:39
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-29 18:52:00
+ * @LastEditTime: 2021-01-05 20:03:59
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -98,7 +98,7 @@ export default {
         create: '增加'
       },
       props: {
-        value: 'id',
+        value: 'index',
         label: 'title'
       },
       rules: {

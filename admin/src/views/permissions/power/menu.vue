@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 09:32:38
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-30 09:27:26
+ * @LastEditTime: 2021-01-05 20:10:23
 -->
 <template>
   <div class="app-container">
@@ -147,7 +147,6 @@
           <el-button type="primary"
                      size="mini"
                      icon="el-icon-edit"
-                     v-if="row.id <=1000"
                      @click.stop.prevent="handleUpdate(row)">
             编辑
           </el-button>
@@ -174,7 +173,7 @@
 </template>
 
 <script>
-import { routesList } from '@/api/permissions'
+import { routesList, routesAdd, routesEdit } from '@/api/permissions'
 
 import Pagination from '@/components/Pagination'
 import menuEdit from '../component/menuEdit'
@@ -220,22 +219,6 @@ export default {
         })
     },
     /**
-     * 切换状态
-     */
-    statusSwitch (getSwitch, id) {
-      const data = { id, key: 'status', value: getSwitch };
-      this.listLoading = true
-      adminUpdate(data)
-        .then(response => {
-          this.listLoading = false
-          this.$notify({
-            title: '成功',
-            message: response.msg,
-            type: 'success'
-          });
-        })
-    },
-    /**
      * 编辑
      */
     handleUpdate (row) {
@@ -263,13 +246,13 @@ export default {
      * 父页面执行 修改
      */
     updateData (Obj, cab) {
-      adminEdit(Obj).then(res => cab(res))
+      routesEdit(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 增加
      */
     createData (Obj, cab) {
-      adminAdd(Obj).then(res => cab(res))
+      routesAdd(Obj).then(res => cab(res))
     },
     /**
      * 弹窗提示
