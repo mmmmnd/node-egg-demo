@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 09:32:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-05 20:04:24
+ * @LastEditTime: 2021-01-07 17:08:47
 -->
 <template>
   <div class="app-container">
@@ -43,6 +43,11 @@
       <el-table-column prop="code"
                        label="识别码"
                        align="center">
+        <template slot-scope="{row}">
+          <template v-for="item in apiCode">
+            {{item.id === row.code ?item.describe :'' }}
+          </template>
+        </template>
       </el-table-column>
       <el-table-column align="center"
                        label="操作"
@@ -70,6 +75,7 @@
               :temp="temp"
               :dialogStatus="dialogStatus"
               :select="select"
+              :apiCode="apiCode"
               @updateData="updateData"
               @createData="createData" />
 
@@ -78,7 +84,7 @@
 </template>
 
 <script>
-import { apiIndex, routesList, apiAdd, apiEdit } from '@/api/permissions'
+import { apiIndex, routesList, apiAdd, apiEdit, apiCodeIndex } from '@/api/permissions'
 
 import Pagination from '@/components/Pagination'
 import apisEdit from '../component/apiEdit'
@@ -97,6 +103,7 @@ export default {
       temp: {},
       dialogStatus: '',
       select: [], //下拉
+      apiCode: [] //识别码分类
     }
   }
   ,
@@ -115,15 +122,21 @@ export default {
      * 获取列表
      */
     getList (id) {
+      var _response;
       this.listLoading = true
       this.listQuery.id = typeof id === 'number' ? id : this.temp.id;
       apiIndex(this.listQuery)
         .then(response => {
-          this.list = response.data;
+          _response = response;
           return routesList()
         })
         .then(response => {
           this.select = response.data;
+          return apiCodeIndex()
+        })
+        .then(response => {
+          this.list = _response.data;
+          this.apiCode = response.data;
         })
     },
     /**

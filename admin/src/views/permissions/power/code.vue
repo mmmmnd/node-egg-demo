@@ -3,9 +3,9 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2021-01-06 17:15:11
+ * @Date: 2020-12-23 17:42:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-06 17:15:21
+ * @LastEditTime: 2021-01-07 17:34:16
 -->
 <template>
   <div class="app-container">
@@ -20,56 +20,37 @@
     </div>
 
     <el-table :data="list"
-              style="width: 100%;margin-bottom: 20px;"
               row-key="id"
               border
-              :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
-              @row-click="treeTable"
               default-expand-all
               ref="treeTable">
-      <el-table-column prop="nameTitle"
-                       label="分类"
-                       align="left">
-        <template slot-scope="{row}">
-          <el-tag v-if="row.pid === 0">{{ row.title }}</el-tag>
-          <span v-else
-                v-html="row.nameTitle"></span>
-        </template>
-      </el-table-column>
-      <el-table-column prop="api"
-                       label="Api"
+      <el-table-column label="id"
+                       prop="id"
                        align="center">
       </el-table-column>
-      <el-table-column prop="code"
-                       label="识别码"
+      <el-table-column label="描述"
+                       prop="describe"
                        align="center">
       </el-table-column>
+
       <el-table-column align="center"
-                       label="操作"
-                       width="190px">
+                       label="操作">
         <template slot-scope="{row}">
           <el-button type="primary"
                      size="mini"
                      icon="el-icon-edit"
-                     v-if="row.id <=1000"
                      @click.stop.prevent="handleUpdate(row)">
             编辑
           </el-button>
         </template>
       </el-table-column>
+
     </el-table>
 
-    <pagination v-show="total>0"
-                :total="total"
-                :page.sync="listQuery.page"
-                :limit.sync="listQuery.limit"
-                @pagination="getList" />
-
-    <apisEdit ref="newForm"
+    <codeEdit ref="newForm"
               :visible.sync="showDialog"
               :temp="temp"
               :dialogStatus="dialogStatus"
-              :select="select"
               @updateData="updateData"
               @createData="createData" />
 
@@ -78,12 +59,11 @@
 </template>
 
 <script>
-import { apiIndex, routesList, apiAdd, apiEdit } from '@/api/permissions'
+import { apiCodeIndex, apiCodeEdit, apiCodeAdd } from '@/api/permissions'
 
-import Pagination from '@/components/Pagination'
-import apisEdit from '../component/apiEdit'
+import codeEdit from '../component/codeEdit'
 export default {
-  components: { Pagination, apisEdit },
+  components: { codeEdit },
   data () {
     return {
       list: [],
@@ -96,7 +76,6 @@ export default {
       showDialog: false,
       temp: {},
       dialogStatus: '',
-      select: [], //下拉
     }
   }
   ,
@@ -105,25 +84,14 @@ export default {
   },
   methods: {
     /**
-     * 点击展开
-     */
-    treeTable (row, column, event) {
-      const { treeTable } = this.$refs
-      treeTable.toggleRowExpansion(row)
-    },
-    /**
      * 获取列表
      */
     getList (id) {
       this.listLoading = true
       this.listQuery.id = typeof id === 'number' ? id : this.temp.id;
-      apiIndex(this.listQuery)
+      apiCodeIndex(this.listQuery)
         .then(response => {
           this.list = response.data;
-          return routesList()
-        })
-        .then(response => {
-          this.select = response.data;
         })
     },
     /**
@@ -140,11 +108,7 @@ export default {
      */
     handleCreate () {
       this.temp = {
-        status: true,
-        roles_name: '',
         describe: '',
-        sort: 0,
-        selectArr: []
       };
       this.dialogStatus = 'create'
       this.showDialog = true
@@ -154,13 +118,13 @@ export default {
      * 父页面执行 修改
      */
     updateData (Obj, cab) {
-      apiEdit(Obj).then(res => cab(res))
+      apiCodeEdit(Obj).then(res => cab(res))
     },
     /**
      * 父页面执行 增加
      */
     createData (Obj, cab) {
-      apiAdd(Obj).then(res => cab(res))
+      apiCodeAdd(Obj).then(res => cab(res))
     },
     /**
      * 弹窗提示

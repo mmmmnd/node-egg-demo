@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 16:14:39
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-05 20:03:59
+ * @LastEditTime: 2021-01-07 17:10:27
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -27,7 +27,6 @@
             <span v-if="!node.isLeaf"> ({{ data.children.length }}) </span>
           </template>
         </el-cascader>
-
       </el-form-item>
 
       <el-form-item label="描述"
@@ -45,11 +44,17 @@
                   :disabled="dialogStatus === 'update'?true:false"></el-input>
       </el-form-item>
 
-      <el-form-item label="识别码"
+      <el-form-item label="识别码:"
                     class="postInfo-container-item"
                     prop="code">
-        <el-input v-model="temp.code"
-                  placeholder="请输入识别码"></el-input>
+        <el-select v-model="temp.code"
+                   placeholder="请选择">
+          <el-option v-for="item in apiCode"
+                     :key="item.id"
+                     :label="item.describe"
+                     :value="item.id">
+          </el-option>
+        </el-select>
       </el-form-item>
 
     </el-form>
@@ -85,6 +90,10 @@ export default {
     select: {
       type: Array,
       default: []
+    },
+    apiCode: {
+      type: Array,
+      default: []
     }
   },
   data () {
@@ -105,7 +114,7 @@ export default {
         selectArr: [{ type: 'array', required: true, message: '请选择所属分类', trigger: 'change' }],
         describe: [{ type: 'string', required: true, message: '请输入描述', trigger: 'blur' }],
         api: [{ type: 'string', required: true, message: '请输入账号', trigger: 'blur' }],
-        code: [{ type: 'string', required: true, message: '请输入密码', trigger: 'blur' }],
+        code: [{ required: true, message: '请选择识别码分类', trigger: 'change' }],
       },
     }
   },
