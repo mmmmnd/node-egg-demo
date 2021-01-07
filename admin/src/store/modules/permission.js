@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-28 10:20:14
+ * @LastEditTime: 2021-01-06 17:15:30
  */
 import { constantRoutes } from '@/router'
 import { routesIndex } from '@/api/routes'
@@ -59,6 +59,7 @@ export const componentsMap = {
   permissionsPower: () => import('@/views/permissions/power'),
   permissionsPowerApi: () => import('@/views/permissions/power/api'),
   permissionsPowerMenu: () => import('@/views/permissions/power/menu'),
+  permissionsPowerCode: () => import('@/views/permissions/power/code'),
 }
 
 const state = {

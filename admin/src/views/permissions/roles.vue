@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-16 10:29:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-05 20:35:22
+ * @LastEditTime: 2021-01-07 11:08:02
 -->
 <template>
   <div class="app-container">
@@ -208,13 +208,19 @@ export default {
       this.temp = Object.assign({}, row) // copy obj
       this.$nextTick(() => {
 
-        if (!this.temp.api_id) this.temp.api_id = '[]';
+        if (!this.temp.api_id) this.temp.api_id = '[]'
         if (!this.temp.menu_id) this.temp.menu_id = '[]'
 
         const api_id = JSON.parse(this.temp.api_id)
         const menu_id = JSON.parse(this.temp.menu_id)
+
         this.$refs.newForm.$refs.apiTree.setCheckedKeys(api_id)
-        this.$refs.newForm.$refs.routesTree.setCheckedKeys(menu_id)
+        this.$refs.newForm.$refs.routesTree.setCheckedKeys([])
+
+        menu_id.forEach((i, n) => {
+          const node = this.$refs.newForm.$refs.routesTree.getNode(i)
+          node.isLeaf && this.$refs.newForm.$refs.routesTree.setChecked(node, true)
+        })
       })
       this.dialogStatus = 'update'
       this.showDialog = true;

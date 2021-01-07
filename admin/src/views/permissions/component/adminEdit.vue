@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-05 20:31:00
+ * @LastEditTime: 2021-01-07 11:08:21
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -242,7 +242,7 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           this.temp.api_id = JSON.stringify(this.$refs.apiTree.getCheckedKeys().filter(item => item < 1000))
-          this.temp.menu_id = JSON.stringify(this.$refs.routesTree.getCheckedKeys())
+          this.temp.menu_id = JSON.stringify(this.$refs.routesTree.getCheckedKeys().concat(this.$refs.routesTree.getHalfCheckedKeys()))
           let tempData = Object.assign({}, this.temp)
           this.$emit('updateData', tempData, res => {
             if (res.code == 0) {
@@ -265,7 +265,7 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           this.temp.api_id = JSON.stringify(this.$refs.apiTree.getCheckedKeys().filter(item => item < 1000))
-          this.temp.menu_id = JSON.stringify(this.$refs.routesTree.getCheckedKeys())
+          this.temp.menu_id = JSON.stringify(this.$refs.routesTree.getCheckedKeys().concat(this.$refs.routesTree.getHalfCheckedKeys()))
           const tempData = Object.assign({}, this.temp)
           this.$emit('createData', tempData, res => {
             if (res.code == 0) {
