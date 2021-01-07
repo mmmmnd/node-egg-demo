@@ -3,9 +3,9 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2020-12-11 11:18:13
+ * @Date: 2021-01-06 10:09:02
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-07 17:54:45
+ * @LastEditTime: 2021-01-06 15:15:16
  */
 'use strict';
 
@@ -14,7 +14,7 @@ const moment = require('moment');
 module.exports = app => {
   const { INTEGER, STRING, BOOLEAN, DATE, TINYINT } = app.Sequelize;
 
-  const MzcApi = app.model.define('mzc-api', {
+  const mzcApiCode = app.model.define('mzc-api-code', {
     id: {
       allowNull: !1, // 是否为空
       autoIncrement: !0, // 自增
@@ -22,28 +22,10 @@ module.exports = app => {
       type: INTEGER(8).UNSIGNED, // 类型
       comment: 'ID', // 备注
     },
-    pid: {
-      allowNull: !1, // 是否为空
-      type: INTEGER(8).UNSIGNED, // 类型
-      comment: '菜单id', // 备注
-      defaultValue: '0', // 默认值
-    },
-    api: {
-      allowNull: !1, // 是否为空    
-      type: STRING(60), // 类型
-      comment: '路由地址', // 备注
-      defaultValue: '', // 默认值
-    },
     describe: {
       allowNull: !1, // 是否为空    
       type: STRING(60), // 类型
       comment: '描述', // 备注
-      defaultValue: '', // 默认值
-    },
-    code: {
-      allowNull: !1, // 是否为空    
-      type: INTEGER(8), // 类型
-      comment: '识别码', // 备注
       defaultValue: '', // 默认值
     },
     status: {
@@ -84,8 +66,8 @@ module.exports = app => {
     },
   },
     {
-      tableName: 'mzc-api',
+      tableName: 'mzc-api-code',
     });
 
-  return MzcApi;
+  return mzcApiCode;
 };

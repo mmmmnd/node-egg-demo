@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-05 20:16:36
+ * @LastEditTime: 2021-01-06 16:26:55
  */
 'use strict';
 
@@ -68,14 +68,11 @@ class RoutesService extends Service {
    * @param { Number } sort 排序
    */
   async add ({ pid = 0, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort }) {
-    return {
-      data: {
-        pid, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort
-      }
-    }
     await this.ctx.model.MzcRoutes.create({
       pid, path, name, component, redirect, title, icon, affix, noCache, hidden, breadcrumb, status, sort
     });
+
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 编辑
