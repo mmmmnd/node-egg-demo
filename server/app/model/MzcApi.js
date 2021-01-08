@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-11 11:18:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-07 17:54:45
+ * @LastEditTime: 2021-01-08 19:09:18
  */
 'use strict';
 
@@ -42,7 +42,7 @@ module.exports = app => {
     },
     code: {
       allowNull: !1, // 是否为空    
-      type: INTEGER(8), // 类型
+      type: STRING(20),  // 类型
       comment: '识别码', // 备注
       defaultValue: '', // 默认值
     },

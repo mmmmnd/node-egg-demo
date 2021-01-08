@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-05 19:59:10
+ * @LastEditTime: 2021-01-08 21:04:26
  */
 'use strict';
 
@@ -28,7 +28,28 @@ class GetTree {
 
     return parents
   }
+  /**
+   * 菜单列表显示用户接口权限
+   * @param { Array } items 数组对象
+   * @param { Array } api //接口数组
+   * @param { String } type 类型
+   * @param { Array } about about分类
+   * @param { Number } id 父id
+   */
+  static menuAndApiList (items, api, type, id = 0) {
+    items = this.isObject(items)
 
+    const parents = this._getMenuType(items, id, type)
+    parents.filter(parent => {
+      const children = this.menuAndApiList(items, api, type, parent.id)
+      if (children.length > 0) {
+        this._getMenuType(children, api, 'api')
+        parent['children'] = type == 'menu' ? this._setIcon(children) : children
+      }
+    });
+
+    return parents
+  }
   /**
    * 关于我们
    * @param { Array } items 数组对象
@@ -125,7 +146,22 @@ class GetTree {
         });
 
         return arrs
+      /**
+       * 菜单显示接口权限
+       */
+      case 'api':
+        items.filter(items => {
+          value.filter(valueItem => {
+            if (items.id == valueItem.pid) {
+              if (!items['meta'].btns) items['meta'].btns = [];
+              items['meta'].btns.push(valueItem.code)
+            }
+          })
+        })
+
+        return items
     }
+
   }
   /**
    * 追加树状符合

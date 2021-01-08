@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-06 10:09:02
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-06 15:15:16
+ * @LastEditTime: 2021-01-08 19:06:42
  */
 'use strict';
 
@@ -26,6 +26,12 @@ module.exports = app => {
       allowNull: !1, // 是否为空    
       type: STRING(60), // 类型
       comment: '描述', // 备注
+      defaultValue: '', // 默认值
+    },
+    code: {
+      allowNull: !1, // 是否为空    
+      type: STRING(20), // 类型
+      comment: '识别码', // 备注
       defaultValue: '', // 默认值
     },
     status: {

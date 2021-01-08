@@ -5,10 +5,11 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-06 16:26:55
+ * @LastEditTime: 2021-01-08 18:35:51
  */
 'use strict';
 
+const await = require('await-stream-ready/lib/await');
 const { Op } = require('sequelize');
 const Service = require('egg').Service;
 const GetTree = require('../utils/getTree');
@@ -23,19 +24,24 @@ class RoutesService extends Service {
    */
   async index (roles, rolesMenu) {
     if (!roles.menu_id) roles.menu_id = '[]'
+    if (!roles.api_id) rolesMenu.api_id = '[]'
+    if (!rolesMenu.api_id) rolesMenu.api_id = '[]'
     if (!rolesMenu.menu_id) rolesMenu.menu_id = '[]'
-    const userRoles = [...JSON.parse(roles.menu_id), ...JSON.parse(rolesMenu.menu_id)]
+
+    const userRolesApi = [...JSON.parse(roles.api_id), ...JSON.parse(rolesMenu.api_id)]
+    const userRolesMenu = [...JSON.parse(roles.menu_id), ...JSON.parse(rolesMenu.menu_id)]
     /**
-    * 群组和个人菜单合集
-    */
-    const rolesRoutes = await this.ctx.model.MzcRoutes.findAll({
+     * 群组和个人权限合集
+     */
+    const api = await this.ctx.service.api.getRolesAndUserApi(userRolesApi); // 个人接口权限
+    const menu = await this.ctx.model.MzcRoutes.findAll({
       where: {
-        id: [...new Set(userRoles)], //去重
+        id: [...new Set(userRolesMenu)], //去重
       },
       attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
     });
 
-    return { data: GetTree.menuList(rolesRoutes, 'router') };
+    return { data: GetTree.menuAndApiList(menu, api, 'router') };
   }
   /**
    * 获取列表

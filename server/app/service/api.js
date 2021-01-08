@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-15 10:50:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-29 16:17:49
+ * @LastEditTime: 2021-01-08 17:23:27
  */
 'use strict';
 /**
@@ -34,13 +34,14 @@ class ApiService extends Service {
     const whiteList = [
       '/api/admin/logout',
       '/api/admin/current',
-      '/api/routes/index'
+      '/api/routes/index',
+      '/api/api/getUserApi'
     ]; // 白名单
     if (whiteList.includes(urlPathName)) return true
 
     const apiId = await this.detail(urlPathName); // 查找接口id
-    const roles = await this.ctx.service.roles.detail(userInfo.userRolesId); // 群组接口权限
     const adminApi = await this.ctx.service.admin.current(); // 个人接口权限
+    const roles = await this.ctx.service.roles.detail(userInfo.userRolesId); // 群组接口权限
 
     if (!roles.api_id) roles.api_id = '[]'
     if (!adminApi.data.api_id) adminApi.data.api_id = '[]'
@@ -112,6 +113,18 @@ class ApiService extends Service {
     if (!Api[0]) return { httpStatus: HttpStatus.INVALID_REQUEST, msg: '没有找到相关信息' };
 
     return { httpStatus: HttpStatus.OK }
+  }
+  /**
+   * 查找群组和个人接口权限
+   * @param { Array } userRolesApi 群组和个人数组
+   */
+  async getRolesAndUserApi (userRolesApi) {
+    return await this.ctx.model.MzcApi.findAll({
+      where: {
+        id: [...new Set(userRolesApi)], //去重
+      },
+      attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
+    })
   }
 }
 
