@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 09:32:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-07 17:08:47
+ * @LastEditTime: 2021-01-08 21:00:35
 -->
 <template>
   <div class="app-container">
@@ -43,11 +43,6 @@
       <el-table-column prop="code"
                        label="识别码"
                        align="center">
-        <template slot-scope="{row}">
-          <template v-for="item in apiCode">
-            {{item.id === row.code ?item.describe :'' }}
-          </template>
-        </template>
       </el-table-column>
       <el-table-column align="center"
                        label="操作"

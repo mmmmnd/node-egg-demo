@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 16:14:39
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-07 17:10:27
+ * @LastEditTime: 2021-01-08 19:11:16
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -51,8 +51,8 @@
                    placeholder="请选择">
           <el-option v-for="item in apiCode"
                      :key="item.id"
-                     :label="item.describe"
-                     :value="item.id">
+                     :label="item.code"
+                     :value="item.code">
           </el-option>
         </el-select>
       </el-form-item>

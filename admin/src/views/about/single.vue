@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-29 08:47:40
+ * @LastEditTime: 2021-01-08 21:11:44
 -->
 <template>
   <div class="app-container">
@@ -64,6 +64,7 @@
           <el-switch v-model="row.status"
                      active-color="#13ce66"
                      inactive-color="#ff4949"
+                     v-has="{class:'update'}"
                      @change="statusSwitch(row.status,row.id)">
           </el-switch>
         </template>
@@ -85,7 +86,8 @@
           <el-button type="primary"
                      size="mini"
                      icon="el-icon-edit"
-                     @click="handleUpdate(row)">
+                     @click="handleUpdate(row)"
+                     v-has="{class:'edit'}">
             编辑
           </el-button>
           <el-button type="info"
@@ -211,6 +213,15 @@ export default {
   },
   created () {
     this.getList()
+  },
+  mounted () {
+    const btns = []
+    if (this.$route.meta.btns && this.$route.meta.btns.length > 0) {
+      this.$route.meta.btns.forEach(item => {
+        btns.push(item)
+      })
+    }
+    sessionStorage.setItem('btns', JSON.stringify(btns))
   },
   methods: {
     /**

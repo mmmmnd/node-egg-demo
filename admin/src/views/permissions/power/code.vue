@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-23 17:42:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-07 17:34:16
+ * @LastEditTime: 2021-01-08 19:04:59
 -->
 <template>
   <div class="app-container">
@@ -28,8 +28,14 @@
                        prop="id"
                        align="center">
       </el-table-column>
+
       <el-table-column label="描述"
                        prop="describe"
+                       align="center">
+      </el-table-column>
+
+      <el-table-column label="识别码"
+                       prop="code"
                        align="center">
       </el-table-column>
 

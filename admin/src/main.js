@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-23 15:30:41
+ * @LastEditTime: 2021-01-08 11:44:54
  */
 import Vue from 'vue'
 
@@ -14,6 +14,7 @@ import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import locale from 'element-ui/lib/locale/lang/en' // lang i18n
+import has from './utils/btnsPermission';
 
 import '@/styles/index.scss' // global css
 
@@ -43,6 +44,7 @@ import * as filters from './filters' // global filters
 // Vue.use(ElementUI, { locale })
 // 如果想要中文版 element-ui，按如下方式声明
 Vue.use(ElementUI)
+Vue.use(has)
 
 // register global utility filters
 Object.keys(filters).forEach(key => {
