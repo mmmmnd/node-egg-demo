@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-18 15:29:49
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-18 16:00:42
+ * @LastEditTime: 2021-01-12 15:42:27
  */
 import request from '@/utils/request'
 
@@ -25,3 +25,10 @@ export function settingsEdit (data) {
   })
 }
 
+export function exceptionIndex (params) {
+  return request({
+    url: '/exception/index',
+    method: 'get',
+    params
+  })
+}
