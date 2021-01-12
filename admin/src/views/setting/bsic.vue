@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-18 15:10:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-19 11:22:51
+ * @LastEditTime: 2021-01-12 09:33:47
 -->
 <template>
   <div class="app-container">
@@ -94,15 +94,24 @@
                          accept=".mp4"
                          :show-file-list="false"
                          :on-success="handleSuccess">
-                <el-button size="small"
-                           type="primary">点击上传</el-button>
+                <m-btn size="small"
+                       type="primary"
+                       label="点击上传"
+                       perms='edit'
+                       btnType="btn"
+                       class="filter-item"
+                       style="margin-left: 10px;" />
               </el-upload>
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary"
-                         @click="onSubmit">立即创建</el-button>
-              <el-button>取消</el-button>
+              <m-btn type="primary"
+                     label="修改"
+                     perms='edit'
+                     btnType="btn"
+                     class="filter-item"
+                     style="margin-left: 10px;"
+                     @click="onSubmit" />
             </el-form-item>
           </el-form>
         </el-col>

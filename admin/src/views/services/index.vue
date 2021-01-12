@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-10-29 09:05:41
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-05 16:07:07
+ * @LastEditTime: 2021-01-11 20:46:30
 -->
 <template>
   <div class="app-container">
@@ -63,11 +63,10 @@
                        align="center"
                        label="状态">
         <template slot-scope="{row}">
-          <el-switch v-model="row.status"
-                     active-color="#13ce66"
-                     inactive-color="#ff4949"
-                     @change="statusSwitch(row.status,row.id)">
-          </el-switch>
+          <m-btn :label="row.status"
+                 perms='update'
+                 btnType='switch'
+                 @click="statusSwitch(row)" />
         </template>
       </el-table-column>
 
@@ -84,12 +83,13 @@
                        width="200px"
                        fixed="right">
         <template slot-scope="{row}">
-          <el-button type="primary"
-                     size="mini"
-                     icon="el-icon-edit"
-                     @click="handleUpdate(row)">
-            编辑
-          </el-button>
+          <m-btn size="mini"
+                 type="primary"
+                 icon="el-icon-edit"
+                 label="编辑"
+                 perms='edit'
+                 btnType="btn"
+                 @click="handleUpdate(row)" />
           <el-button type="info"
                      size="mini"
                      icon="el-icon-view"
@@ -161,8 +161,10 @@ export default {
     /**
      * 切换状态
      */
-    statusSwitch (getSwitch, id) {
-      const data = { id, key: 'status', value: getSwitch };
+    statusSwitch (row) {
+      row.status = !row.status
+
+      const data = { id: row.id, key: 'status', value: row.status };
       this.listLoading = true
       servicesUpdate(data)
         .then(response => {

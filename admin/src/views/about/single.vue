@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-08 21:11:44
+ * @LastEditTime: 2021-01-11 20:30:40
 -->
 <template>
   <div class="app-container">
@@ -61,12 +61,10 @@
                        align="center"
                        label="状态">
         <template slot-scope="{row}">
-          <el-switch v-model="row.status"
-                     active-color="#13ce66"
-                     inactive-color="#ff4949"
-                     v-has="{class:'update'}"
-                     @change="statusSwitch(row.status,row.id)">
-          </el-switch>
+          <m-btn :label="row.status"
+                 perms='update'
+                 btnType='switch'
+                 @click="statusSwitch(row)" />
         </template>
       </el-table-column>
 
@@ -80,16 +78,16 @@
 
       <el-table-column align="center"
                        label="操作"
-                       width="200px"
+                       width="230px"
                        fixed="right">
         <template slot-scope="{row}">
-          <el-button type="primary"
-                     size="mini"
-                     icon="el-icon-edit"
-                     @click="handleUpdate(row)"
-                     v-has="{class:'edit'}">
-            编辑
-          </el-button>
+          <m-btn size="mini"
+                 type="primary"
+                 icon="el-icon-edit"
+                 label="编辑"
+                 perms='edit'
+                 btnType="btn"
+                 @click="handleUpdate(row)" />
           <el-button type="info"
                      size="mini"
                      icon="el-icon-view"
@@ -214,15 +212,6 @@ export default {
   created () {
     this.getList()
   },
-  mounted () {
-    const btns = []
-    if (this.$route.meta.btns && this.$route.meta.btns.length > 0) {
-      this.$route.meta.btns.forEach(item => {
-        btns.push(item)
-      })
-    }
-    sessionStorage.setItem('btns', JSON.stringify(btns))
-  },
   methods: {
     /**
      * 获取列表
@@ -240,8 +229,10 @@ export default {
     /**
      * 切换状态
      */
-    statusSwitch (getSwitch, id) {
-      const data = { id, key: 'status', value: getSwitch };
+    statusSwitch (row) {
+      row.status = !row.status
+
+      const data = { id: row.id, key: 'status', value: row.status };
       this.listLoading = true
       aboutSingleUpdate(data)
         .then(response => {

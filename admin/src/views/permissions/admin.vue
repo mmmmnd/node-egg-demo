@@ -5,18 +5,19 @@
  * @version: 1.0.0
  * @Date: 2020-12-23 17:42:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-07 17:51:44
+ * @LastEditTime: 2021-01-12 09:51:04
 -->
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-button class="filter-item"
-                 style="margin-left: 10px;"
-                 type="primary"
-                 icon="el-icon-plus"
-                 @click="handleCreate">
-        增加
-      </el-button>
+      <m-btn type="primary"
+             label="增加"
+             perms='add'
+             btnType="btn"
+             icon="el-icon-plus"
+             class="filter-item"
+             style="margin-left: 10px;"
+             @click="handleCreate" />
     </div>
 
     <el-table :data="list"
@@ -107,24 +108,25 @@
                        prop="status"
                        align="center">
         <template slot-scope="{row}">
-          <el-switch v-model="row.status"
-                     active-color="#13ce66"
-                     inactive-color="#ff4949"
-                     @change="statusSwitch(row.status,row.id)"
-                     onclick="(function(e){e.stopPropagation()}(event))">
-          </el-switch>
+          <m-btn :label="row.status"
+                 perms='update'
+                 btnType='switch'
+                 @click="statusSwitch(row)"
+                 onclick="(function(e){e.stopPropagation()}(event))" />
         </template>
       </el-table-column>
       <el-table-column align="center"
                        label="操作"
                        width="190px">
         <template slot-scope="{row}">
-          <el-button type="primary"
-                     size="mini"
-                     icon="el-icon-edit"
-                     @click.stop.prevent="handleUpdate(row)">
-            编辑
-          </el-button>
+          <m-btn size="mini"
+                 type="primary"
+                 icon="el-icon-edit"
+                 label="编辑"
+                 perms='edit'
+                 btnType="btn"
+                 @click="handleUpdate(row)"
+                 onclick="(function(e){e.stopPropagation()}(event))" />
         </template>
       </el-table-column>
 
@@ -243,8 +245,10 @@ export default {
     /**
      * 切换状态
      */
-    statusSwitch (getSwitch, id) {
-      const data = { id, key: 'status', value: getSwitch };
+    statusSwitch (row) {
+      row.status = !row.status
+
+      const data = { id: row.id, key: 'status', value: row.status };
       this.listLoading = true
       adminUpdate(data)
         .then(response => {

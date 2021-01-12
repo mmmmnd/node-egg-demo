@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-30 08:36:33
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-05 20:13:45
+ * @LastEditTime: 2021-01-12 11:08:03
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -233,7 +233,7 @@ export default {
           const data = this.hierarchy(tempData)
           this.$emit('updateData', data, res => {
             if (res.code == 0) {
-              // this.$router.go(0);
+              this.$router.go(0);
               this.$notify({
                 title: '成功',
                 message: '更新成功',
@@ -262,7 +262,7 @@ export default {
           tempData.pid = tempData.selectArr[tempData.selectArr.length - 1]
           this.$emit('createData', tempData, res => {
             if (res.code == 0) {
-              // this.$router.go(0);
+              this.$router.go(0);
               this.$notify({
                 title: '成功',
                 message: '更新成功',

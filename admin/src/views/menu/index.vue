@@ -66,11 +66,10 @@
                        align="center"
                        label="状态">
         <template slot-scope="{row}">
-          <el-switch v-model="row.status"
-                     active-color="#13ce66"
-                     inactive-color="#ff4949"
-                     @change="statusSwitch(row.status,row.id)">
-          </el-switch>
+          <m-btn :label="row.status"
+                 perms='update'
+                 btnType='switch'
+                 @click="statusSwitch(row)" />
         </template>
       </el-table-column>
 
@@ -111,14 +110,14 @@
                      @click="cancelEdit(row)">
             取消
           </el-button>
-          <el-button v-else
-                     type="primary"
-                     size="small"
-                     icon="el-icon-edit"
-                     @click="row.edit=!row.edit">
-            编辑
-          </el-button>
-
+          <m-btn v-else
+                 size="mini"
+                 type="primary"
+                 icon="el-icon-edit"
+                 label="编辑"
+                 perms='edit'
+                 btnType="btn"
+                 @click="row.edit=!row.edit" />
         </template>
 
       </el-table-column>
@@ -170,9 +169,12 @@ export default {
     /**
      * 切换状态
      */
-    statusSwitch (getSwitch, id) {
+
+    statusSwitch (row) {
+      row.status = !row.status
+
+      const data = { id: row.id, key: 'status', value: row.status };
       this.listLoading = true
-      const data = { id, key: 'status', value: getSwitch };
       menuUpdate(data)
         .then(response => {
           this.listLoading = false

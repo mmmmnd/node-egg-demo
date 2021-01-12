@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-16 17:20:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-18 09:06:37
+ * @LastEditTime: 2021-01-11 21:01:16
 -->
 <template>
   <div class="app-container">
@@ -26,13 +26,14 @@
           </el-select>
         </el-form-item>
       </el-form>
-      <el-button class="filter-item"
-                 style="margin-left: 10px;"
-                 type="primary"
-                 icon="el-icon-plus"
-                 @click="handleCreate">
-        增加
-      </el-button>
+      <m-btn type="primary"
+             label="增加"
+             perms='add'
+             btnType="btn"
+             icon="el-icon-plus"
+             class="filter-item"
+             style="margin-left: 10px;"
+             @click="handleCreate" />
     </div>
 
     <el-table :data="list"
@@ -94,12 +95,11 @@
                        prop="status"
                        align="center">
         <template slot-scope="{row}">
-          <el-switch v-model="row.status"
-                     active-color="#13ce66"
-                     inactive-color="#ff4949"
-                     @change="statusSwitch(row.status,row.id)"
-                     onclick="(function(e){e.stopPropagation()}(event))">
-          </el-switch>
+          <m-btn :label="row.status"
+                 perms='update'
+                 btnType='switch'
+                 @click="statusSwitch(row)"
+                 onclick="(function(e){e.stopPropagation()}(event))" />
         </template>
       </el-table-column>
       <el-table-column label="发布时间"
@@ -118,18 +118,20 @@
                        label="操作"
                        width="190px">
         <template slot-scope="{row}">
-          <el-button type="primary"
-                     size="mini"
-                     icon="el-icon-edit"
-                     @click.stop.prevent="handleUpdate(row)">
-            编辑
-          </el-button>
-          <el-button type="danger"
-                     size="small"
-                     icon="el-icon-delete"
-                     @click.stop.prevent="handleDel(row)">
-            删除
-          </el-button>
+          <m-btn size="mini"
+                 type="primary"
+                 icon="el-icon-edit"
+                 label="编辑"
+                 perms='edit'
+                 btnType="btn"
+                 @click.stop.prevent="handleUpdate(row)" />
+          <m-btn size="mini"
+                 type="danger"
+                 icon="el-icon-delete"
+                 label="删除"
+                 perms='destroy'
+                 btnType="btn"
+                 @click.stop.prevent="handleDel(row)" />
         </template>
       </el-table-column>
 
@@ -216,8 +218,10 @@ export default {
     /**
      * 切换状态
      */
-    statusSwitch (getSwitch, id) {
-      const data = { id, key: 'status', value: getSwitch };
+    statusSwitch (row) {
+      row.status = !row.status
+
+      const data = { id: row.id, key: 'status', value: row.status };
       this.listLoading = true
       recruitUpdate(data)
         .then(response => {

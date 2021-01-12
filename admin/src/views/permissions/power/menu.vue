@@ -5,18 +5,19 @@
  * @version: 1.0.0
  * @Date: 2020-12-28 09:32:38
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-05 20:10:23
+ * @LastEditTime: 2021-01-12 09:54:13
 -->
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-button class="filter-item"
-                 style="margin-left: 10px;"
-                 type="primary"
-                 icon="el-icon-plus"
-                 @click="handleCreate">
-        增加
-      </el-button>
+      <m-btn type="primary"
+             label="增加"
+             perms='add'
+             btnType="btn"
+             icon="el-icon-plus"
+             class="filter-item"
+             style="margin-left: 10px;"
+             @click="handleCreate" />
     </div>
 
     <el-table :data="list"
@@ -144,12 +145,13 @@
                        width="190px"
                        fixed="right">
         <template slot-scope="{row}">
-          <el-button type="primary"
-                     size="mini"
-                     icon="el-icon-edit"
-                     @click.stop.prevent="handleUpdate(row)">
-            编辑
-          </el-button>
+          <m-btn size="mini"
+                 type="primary"
+                 icon="el-icon-edit"
+                 label="编辑"
+                 perms='edit'
+                 btnType="btn"
+                 @click="handleUpdate(row)" />
         </template>
       </el-table-column>
     </el-table>
