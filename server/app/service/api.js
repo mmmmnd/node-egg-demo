@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-15 10:50:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-08 17:23:27
+ * @LastEditTime: 2021-01-12 10:37:58
  */
 'use strict';
 /**
@@ -20,7 +20,7 @@ class ApiService extends Service {
    * @param { String } urlPathName 接口名
    */
   async detail (urlPathName) {
-    const api = await this.ctx.model.MzcApi.findOne({
+    const api = await this.ctx.model.MzcApi.findAll({
       where: { api: urlPathName }
     })
     return api ? api : false
@@ -49,7 +49,11 @@ class ApiService extends Service {
     roles.api_id = JSON.parse(roles.api_id)
     adminApi.data.api_id = JSON.parse(adminApi.data.api_id)
 
-    return roles.api_id.includes(apiId.id) || adminApi.data.api_id.includes(apiId.id)
+    for (var item of apiId) {
+      if (roles.api_id.includes(item.id) || adminApi.data.api_id.includes(item.id)) {
+        return true
+      }
+    }
   }
   /**
    * 获取接口列表
