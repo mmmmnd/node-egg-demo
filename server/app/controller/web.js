@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-18 11:48:15
+ * @LastEditTime: 2021-01-12 11:39:51
  */
 'use strict';
 const moment = require('moment');
@@ -35,7 +35,7 @@ class WebController extends Controller {
     const { pid, cid } = ctx.params;
 
     const err = await error(pid, cid, this);
-    if (err) return render(ctx); 24
+    if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
     const settingsList = await service.settings.list(); // 基本设置
