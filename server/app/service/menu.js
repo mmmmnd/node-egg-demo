@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-17 17:34:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-07 15:43:03
+ * @LastEditTime: 2021-01-15 15:47:11
  */
 'use strict';
 
@@ -51,14 +51,16 @@ class MenuService extends Service {
   /**
    * 编辑
    * @param { String } title 标题
+   * @param { String } url 模板地址
    * @param { Boolean } status 状态
    * @param { Number } sort 排序
    * @param { Number } id id
+   * @param { Number } pid 父id
    */
-  async edit ({ title, status, sort, id }) {
+  async edit ({ url, title, status, sort, id, pid }) {
     try {
       await this.ctx.model.MzcMenu.update({
-        title, status, sort
+        pid, title, url, status, sort
       }, {
         where: {
           id,
@@ -109,6 +111,19 @@ class MenuService extends Service {
         deleted_at: null
       }
     })
+  }
+  /**
+   * 增加
+   * @param { Number } pid 父id
+   * @param { String } title 标题
+   * @param { String } url 模板地址
+   * @param { Boolean } status 状态
+   * @param { Number } sort 排序
+   */
+  async add ({ pid, title, url, status, sort }) {
+    await this.ctx.model.MzcMenu.create({
+      pid, title, url, status, sort
+    });
   }
 }
 

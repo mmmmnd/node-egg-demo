@@ -4,8 +4,8 @@
  * @Descripttion: 描述
  * @version: 1.0.0
  * @Date: 2020-09-16 15:44:23
- * @LastEditors: Please set LastEditors
- * @LastEditTime: 2020-11-28 20:48:06
+ * @LastEditors: 莫卓才
+ * @LastEditTime: 2021-01-12 20:48:35
  */
 'use strict';
 const Controller = require('egg').Controller;
@@ -34,6 +34,15 @@ class MenuController extends Controller {
     const params = this.ctx.request.body;
 
     const menu = await this.ctx.service.menu.edit(params)
+    await this.ctx.helper.checkData(menu);
+  }
+  /**
+   * 增加
+   */
+  async add () {
+    const params = this.ctx.request.body;
+
+    const menu = await this.ctx.service.menu.add(params)
     await this.ctx.helper.checkData(menu);
   }
 }

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-12 15:15:33
+ * @LastEditTime: 2021-01-12 20:49:01
  */
 'use strict';
 
@@ -52,6 +52,7 @@ module.exports = app => {
   router.get('/api/menu/index', jwt, controller.menu.index);
   router.put('/api/menu/update', jwt, controller.menu.update);
   router.post('/api/menu/edit', jwt, controller.menu.edit);
+  router.post('/api/menu/add', jwt, controller.menu.add);
 
   // aboutSingle
   router.get('/api/aboutSingle/index', jwt, controller.aboutSingle.index)
