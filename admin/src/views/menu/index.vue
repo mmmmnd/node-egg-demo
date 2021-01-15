@@ -1,5 +1,15 @@
 <template>
   <div class="app-container">
+    <div class="filter-container">
+      <m-btn type="primary"
+             label="增加"
+             perms='add'
+             btnType="btn"
+             icon="el-icon-plus"
+             class="filter-item"
+             style="margin-left: 10px;"
+             @click="handleCreate" />
+    </div>
     <el-table v-loading="listLoading"
               :data="list"
               border
@@ -12,7 +22,7 @@
       <el-table-column prop="id"
                        align="center"
                        label="ID"
-                       width="80px">
+                       width="100px">
         <template slot-scope="{row}">
           <span>{{ row.id }}</span>
         </template>
@@ -33,24 +43,9 @@
                        align="left"
                        label="分类标题">
         <template slot-scope="{row}">
-          <template v-if="row.edit">
-            <el-input v-if="row.originalEdit"
-                      v-model="row.title"
-                      class="edit-input"
-                      size="small" />
-
-            <el-input v-else
-                      v-model="row.title"
-                      class="edit-input"
-                      size="small" />
-          </template>
-
-          <template v-else>
-            <span v-if="row.originalEdit"
-                  v-html="row.nameTitle"></span>
-            <el-tag v-else>{{ row.title }}</el-tag>
-          </template>
-
+          <el-tag v-if="row.children">{{ row.title }}</el-tag>
+          <span v-else
+                v-html="row.nameTitle"></span>
         </template>
       </el-table-column>
 
@@ -69,7 +64,8 @@
           <m-btn :label="row.status"
                  perms='update'
                  btnType='switch'
-                 @click="statusSwitch(row)" />
+                 @click="statusSwitch(row)"
+                 v-if="row.pid !=0" />
         </template>
       </el-table-column>
 
@@ -77,63 +73,64 @@
                        align="center"
                        label="前台显示排序"
                        sortable>
-
         <template slot-scope="{row}">
-          <template v-if="row.edit">
-            <el-input-number v-model="row.sort"
-                             controls-position="right"
-                             :min="0"
-                             ref="inputNumber"
-                             size="small"></el-input-number>
-          </template>
-          <span v-else>{{ row.sort }}</span>
+          <span>{{ row.sort }}</span>
         </template>
-
       </el-table-column>
 
       <el-table-column align="center"
                        label="操作"
-                       width="200px">
+                       width="300px"
+                       fixed="right">
         <template slot-scope="{row}">
-
-          <el-button v-if="row.edit"
-                     type="success"
-                     size="small"
-                     icon="el-icon-check"
-                     @click="confirmEdit(row)">
-            修改
-          </el-button>
-          <el-button v-if="row.edit"
-                     type="warning"
-                     size="small"
-                     icon="el-icon-close"
-                     @click="cancelEdit(row)">
-            取消
-          </el-button>
-          <m-btn v-else
-                 size="mini"
+          <m-btn size="mini"
                  type="primary"
                  icon="el-icon-edit"
                  label="编辑"
                  perms='edit'
                  btnType="btn"
-                 @click="row.edit=!row.edit" />
+                 @click="handleUpdate(row)" />
+          <m-btn size="mini"
+                 type="danger"
+                 icon="el-icon-delete"
+                 label="删除"
+                 perms='destroy'
+                 btnType="btn"
+                 @click="handleDel(row)" />
         </template>
-
       </el-table-column>
 
     </el-table>
+
+    <edit ref="newForm"
+          :visible.sync="showDialog"
+          :temp="temp"
+          :dialogStatus="dialogStatus"
+          :select="select"
+          @updateData="updateData"
+          @createData="createData" />
 
   </div>
 </template>
 
 <script>
-import { menuList, menuUpdate, menuEdit } from '@/api/menu'
+import { menuList, menuUpdate, menuEdit, menuAdd } from '@/api/menu'
+import edit from './component/edit'
 export default {
+  components: { edit },
   data () {
     return {
       list: [],
+      total: 0,
       listLoading: true,
+      listQuery: {
+        page: 1,
+        limit: 20
+      },
+      showDialog: false,
+      temp: {},
+      dialogStatus: '',
+      select: [], //下拉
     }
   },
   created () {
@@ -146,30 +143,13 @@ export default {
     async getList () {
       this.listLoading = true
       const { data } = await menuList(this.listQuery);
-      this.list = data.map(v => {
-
-        if (v.children) {
-          v.children.map(item => {
-            this.$set(item, 'edit', false)
-            item.originalSort = item.sort;
-            item.originalNameTitle = item.nameTitle;
-            item.originalTitle = item.title;
-            item.originalEdit = item.title;
-            return item
-          })
-        }
-
-        this.$set(v, 'edit', false)
-        v.originalSort = v.sort
-        v.originalTitle = v.title
-        return v
-      })
+      this.list = data;
+      this.select = data;
       this.listLoading = false
     },
     /**
      * 切换状态
      */
-
     statusSwitch (row) {
       row.status = !row.status
 
@@ -186,57 +166,39 @@ export default {
         })
     },
     /**
-     * 修改
+     * 编辑
      */
-    confirmEdit (row) {
-      row.edit = false;
-      const [isTITLE, isSORT, isEDIT] = [row.title !== row.originalTitle, row.originalSort !== row.sort, row.originalEdit];
-      /**
-       * 带树状title
-       */
-      if (isTITLE && isEDIT) {
-        if (row.title == '') {
-          row.title = row.originalTitle;
-          row.nameTitle = row.originalNameTitle
-          row.sort = row.originalSort;
-          return this.alertView('不允许为空！', 'error');
-        }
-        var i = row.nameTitle.indexOf(row.originalTitle),
-          v = row.nameTitle.substring(i),
-          item = row.nameTitle.replace(v, row.title);
-        row.originalNameTitle = row.nameTitle = item;
-        row.originalTitle = row.title;
-        this.alertView('已被编辑', 'success');
-        /**
-         * 不带树状title
-         */
-      } else if (isTITLE) {
-        if (row.title == '') {
-          row.title = row.originalTitle;
-          row.sort = row.originalSort;
-          return this.alertView('不允许为空！', 'error');
-        }
-        row.originalTitle = row.title;
-        this.alertView('已被编辑', 'success');
-      } else if (isSORT) {
-        row.originalTitle = row.title;
-        row.originalNameTitle = row.nameTitle;
-        row.originalSort = row.sort;
-        this.alertView('已被编辑', 'success');
-      } else return this.alertView('该选项没有进行任何修改', 'warning');
-      /**
-       * 修改http请求
-       */
-      menuEdit(row);
+    handleUpdate (row) {
+      this.temp = Object.assign({}, row) // copy obj
+      this.dialogStatus = 'update'
+      this.showDialog = true;
+      this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
     },
     /**
-     * 取消
+     * 增加
      */
-    cancelEdit (row) {
-      row.edit = false
-      row.title = row.originalTitle;
-      row.sort = row.originalSort
-      return this.alertView('已恢复为原始值', 'warning')
+    handleCreate () {
+      this.temp = {
+        title: '',
+        url: '',
+        sort: 0,
+        status: true
+      }
+      this.dialogStatus = 'create'
+      this.showDialog = true
+      this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
+    },
+    /**
+     * 父页面执行 修改
+     */
+    updateData (Obj, cab) {
+      menuEdit(Obj).then(res => cab(res))
+    },
+    /**
+     * 父页面执行 增加
+     */
+    createData (Obj, cab) {
+      menuAdd(Obj).then(res => cab(res))
     },
     /**
      * 弹窗提示
