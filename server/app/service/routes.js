@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-28 20:59:29
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-08 18:35:51
+ * @LastEditTime: 2021-01-18 19:51:00
  */
 'use strict';
 
@@ -37,6 +37,8 @@ class RoutesService extends Service {
     const menu = await this.ctx.model.MzcRoutes.findAll({
       where: {
         id: [...new Set(userRolesMenu)], //去重
+        status: true,
+        deleted_at: null
       },
       attributes: { exclude: ['created_at', 'updated_at', 'deleted_at'] },
     });

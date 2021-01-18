@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-12 11:04:15
+ * @LastEditTime: 2021-01-18 18:25:24
  */
 'use strict';
 
@@ -39,7 +39,7 @@ module.exports = app => {
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
       comment: '公司关键词', // 备注
     },
-    companyDescription: {
+    description: {
       allowNull: !1, // 是否为空
       type: STRING, // 类型
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
@@ -68,7 +68,7 @@ module.exports = app => {
       type: DATE, // 类型
       comment: '创建时间', // 备注
       get () {
-        return moment(this.getDataValue('created_at')).format('YYYY-MM-DD');
+        return moment(this.getDataValue('created_at')).valueOf();
       }
     },
     updated_at: {

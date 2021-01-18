@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:35:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-29 10:15:00
+ * @LastEditTime: 2021-01-18 18:16:31
  */
 'use strict';
 
@@ -16,35 +16,20 @@ const HttpStatus = require('../utils/httpStatus');
  */
 class AboutSingleService extends Service {
   /**
-  * 获取列表
-  * @param { String } limit 最大限制
-  * @param { String } page 分页
-  */
-  async index ({ limit = 20, page = 1 }) {
-    const maxPage = Number(limit);
-    try {
-      const aboutSingle = await this.ctx.model.MzcAboutSingle.findAndCountAll({
-        where: {
-          deleted_at: null
-        },
-        offset: (page - 1) * maxPage,
-        limit: maxPage,
-      })
-
-      if (aboutSingle.rows.length == 0) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
-
-      return {
-        data: aboutSingle.rows,
-        meta: {
-          current_page: parseInt(page),
-          per_page: maxPage,
-          total: aboutSingle.count,
-          total_pages: Math.ceil(aboutSingle.count / maxPage),
-        }
+   * 获取详情列表
+   * @param { String } cid 父id
+   */
+  async index ({ cid }) {
+    const aboutSingle = await this.ctx.model.MzcAboutSingle.findOne({
+      where: {
+        category_id: cid,
+        deleted_at: null
       }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    });
+
+    if (!aboutSingle) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
+
+    return { data: aboutSingle }
   }
   /**
    * 详情
@@ -67,37 +52,18 @@ class AboutSingleService extends Service {
     }
   }
   /**
-  * 修改
-  * @param { String } id 当前id
-  * @param { String } key 字段名
-  * @param { String } value 字段值
-  */
-  async update ({ id, key, value }) {
-    try {
-      await this.ctx.model.MzcAboutSingle.update({ [key]: value }, {
-        where: {
-          id,
-          deleted_at: null
-        },
-      })
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
-  }
-  /**
    * 编辑
    * @param { String } title 标题
    * @param { String } keywords 关键词
-   * @param { String } companyDescription 描述
+   * @param { String } description 描述
    * @param { Text } content 内容
    * @param { Boolean } status 状态
    * @param { Number } id id
    */
-  async edit ({ title, keywords, companyDescription, content, status, id }) {
+  async edit ({ title, keywords, description, content, status, id }) {
     try {
       await this.ctx.model.MzcAboutSingle.update({
-        title, keywords, companyDescription, content, status
+        title, keywords, description, content, status
       }, {
         where: {
           id,

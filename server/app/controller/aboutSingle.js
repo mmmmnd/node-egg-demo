@@ -5,29 +5,19 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 14:45:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-29 10:21:14
+ * @LastEditTime: 2021-01-18 18:16:41
  */
 'use strict';
 const Controller = require('egg').Controller;
 
 class AboutSingleController extends Controller {
   /**
-   * 获取列表
+   * 修改
    */
   async index () {
     const params = this.ctx.query;
 
     const aboutSingle = await this.ctx.service.aboutSingle.index(params);
-    const aboutSingleMenu = await this.ctx.service.menu.details(3, 2);
-    await this.ctx.helper.checkData({ data: { aboutSingle, aboutSingleMenu } });
-  }
-  /**
-   * 修改
-   */
-  async update () {
-    const params = this.ctx.request.body;
-
-    const aboutSingle = await this.ctx.service.aboutSingle.update(params);
     await this.ctx.helper.checkData(aboutSingle);
   }
   /**

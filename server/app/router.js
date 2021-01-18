@@ -56,7 +56,6 @@ module.exports = app => {
 
   // aboutSingle
   router.get('/api/aboutSingle/index', jwt, controller.aboutSingle.index)
-  router.put('/api/aboutSingle/update', jwt, controller.aboutSingle.update)
   router.get('/api/aboutSingle/detail', jwt, controller.aboutSingle.detail)
   router.post('/api/aboutSingle/edit', jwt, controller.aboutSingle.edit)
 
