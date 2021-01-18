@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-12 15:43:17
+ * @LastEditTime: 2021-01-18 19:56:40
  */
 import { constantRoutes } from '@/router'
 import { routesIndex } from '@/api/routes'
@@ -40,9 +40,10 @@ export const componentsMap = {
   login: () => import('@/views/login/index'),
   404: () => import('@/views/404'),
   dashboard: () => import('@/views/dashboard/index'),
-  aboutSingle: () => import('@/views/about/single'),
   aboutList: () => import('@/views/about/list'),
   aboutClassify: () => import('@/views/about/classify'),
+  aboutDescribe: () => import('@/views/about/describe'),
+  aboutSkeleton: () => import('@/views/about/skeleton'),
   servicesIndex: () => import('@/views/services/index'),
   companyIndex: () => import('@/views/company/index'),
   cultureIndex: () => import('@/views/culture/index'),

@@ -90,13 +90,6 @@
                  perms='edit'
                  btnType="btn"
                  @click="handleUpdate(row)" />
-          <m-btn size="mini"
-                 type="danger"
-                 icon="el-icon-delete"
-                 label="删除"
-                 perms='destroy'
-                 btnType="btn"
-                 @click="handleDel(row)" />
         </template>
       </el-table-column>
 
