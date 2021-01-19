@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-25 15:11:32
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-12 18:58:04
+ * @LastEditTime: 2021-01-19 11:24:03
  */
 /** */
 'use strict';
@@ -30,7 +30,7 @@ module.exports = appInfo => {
     password: '123456',
     database: 'local-egg-demo',
     timezone: '+08:00',
-    logging: true,//输出日志信息
+    logging: false,//输出日志信息
     define: {  // model的全局配置
       timestamps: true,   // 添加create,update,delete时间戳
       paranoid: true,   // 添加软删除

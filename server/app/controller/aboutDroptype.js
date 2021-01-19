@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-29 11:17:48
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-23 15:34:10
+ * @LastEditTime: 2021-01-19 20:37:47
  */
 'use strict';
 
@@ -63,8 +63,8 @@ class AboutDroptypeController extends Controller {
    * 列表
    */
   async list () {
-    const params = this.ctx.request.body;
-    const aboutDroptype = await this.ctx.service.aboutDroptype.list();
+    const params = this.ctx.query;
+    const aboutDroptype = await this.ctx.service.aboutDroptype.list(params);
 
     await this.ctx.helper.checkData(aboutDroptype);
   }

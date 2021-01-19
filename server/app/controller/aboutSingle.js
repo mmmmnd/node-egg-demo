@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 14:45:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-18 18:16:41
+ * @LastEditTime: 2021-01-19 09:23:16
  */
 'use strict';
 const Controller = require('egg').Controller;
@@ -18,15 +18,6 @@ class AboutSingleController extends Controller {
     const params = this.ctx.query;
 
     const aboutSingle = await this.ctx.service.aboutSingle.index(params);
-    await this.ctx.helper.checkData(aboutSingle);
-  }
-  /**
-   * 详情
-   */
-  async detail () {
-    const params = this.ctx.query;
-
-    const aboutSingle = await this.ctx.service.aboutSingle.detail(params.cid, true);
     await this.ctx.helper.checkData(aboutSingle);
   }
   /**

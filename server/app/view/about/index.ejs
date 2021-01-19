@@ -5,12 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 14:44:36
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-28 15:52:47
+ * @LastEditTime: 2021-01-19 11:39:24
 -->
 <%- include('/commom/header',{
-  title:aboutSingleDetail?aboutSingleDetail.title:aboutDroptypeList[0].info[0].title,
-  Keywords:aboutSingleDetail?aboutSingleDetail.keywords:aboutDroptypeList[0].info[0].keywords,
-  companyDescription:aboutSingleDetail?aboutSingleDetail.companyDescription:aboutDroptypeList[0].info[0].companyDescription,
+  title:aboutSingleDetail?aboutSingleDetail.title:'海南昆仑体育文化股份有限公司',
+  Keywords:aboutSingleDetail?aboutSingleDetail.keywords:'海南昆仑体育文化股份有限公司',
+  description:aboutSingleDetail?aboutSingleDetail.description:'海南昆仑体育文化股份有限公司',
 }) %>
 <style>
   .dropdown-menu>.active>a,
@@ -32,27 +32,27 @@
       </div>
       <% }else{ %>
       <%# 下拉菜单 %>
-      <% if(aboutDroptypeList[0].dropId != 6){ %>
+      <% if(aboutDroptypeList[0].product_id != 6){ %>
       <div role="presentation" class="dropdown">
         <a href="#1" id="myTabDrop1" class="dropdown-toggle" data-toggle="dropdown">
-          <%= aboutDroptypeList[0].dropContent %>
+          <%= aboutDroptypeList[0].title %>
           <b class="caret"></b>
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="myTabDrop1">
           <% Object.values(aboutDroptypeList).forEach(item =>{ %>
-          <li><a href="#<%= item.id %>" tabindex="-1" data-toggle="tab"><%= item.dropContent %></a></li>
+          <li><a href="#<%= item.id %>" tabindex="-1" data-toggle="tab"><%= item.title %></a></li>
           <% }) %>
         </ul>
       </div>
       <% } %>
       <%# 管理团队 %>
-      <% if(aboutDroptypeList[0].dropId == 4){ %>
+      <% if(aboutDroptypeList[0].product_id == 4){ %>
       <div class="about2-list tab-content">
         <% Object.values(aboutDroptypeList).forEach(val =>{ %>
         <ul class="tab-pane fade <%= aboutDroptypeList[0] == val ?'in active':'' %> " id="<%= val.id %>">
           <% val.info.forEach(item =>{ %>
           <li>
-            <img src="" alt="" class="about2-img" data-src="<%= item.avatarImage %>">
+            <img src="" alt="" class="about2-img" data-src="<%= item.avatar_image %>">
             <div class="about2-right">
               <h3><%= item.aboutTitle %></h3>
               <%- item.content %>
@@ -72,7 +72,7 @@
           <li class="honor-list">
             <i></i>
             <div class="honor-right">
-              <img src="" alt="" class="honor-img" data-src="<%= item.avatarImage %>">
+              <img src="" alt="" class="honor-img" data-src="<%= item.avatar_image %>">
               <div class="honor-txt">
                 <p class="honor-data"><%= moment(item.created_at).format('YYYY-MM-DD') %></p>
                 <h5><%= item.aboutTitle %></h5>

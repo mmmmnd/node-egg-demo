@@ -21,7 +21,7 @@ module.exports = app => {
       type: INTEGER(8).UNSIGNED, // 类型
       comment: 'ID', // 备注
     },
-    dropId: {
+    product_id: {
       allowNull: !1, // 是否为空
       type: INTEGER(2), // 类型
       defaultValue: '0', // 默认值

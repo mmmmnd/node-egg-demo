@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:35:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-18 18:16:31
+ * @LastEditTime: 2021-01-19 15:56:08
  */
 'use strict';
 
@@ -34,22 +34,19 @@ class AboutSingleService extends Service {
   /**
    * 详情
    * @param { String } cid 父id
-   * @param { Boolean } edit 后台获取筛选
    */
-  async detail (cid, edit) {
-    const filter = edit
-      ? { category_id: cid, deleted_at: null }
-      : { category_id: cid, status: true, deleted_at: null };
-
+  async detail (cid) {
     const aboutSingle = await this.ctx.model.MzcAboutSingle.findOne({
-      where: filter
+      where: {
+        category_id: cid,
+        status: true,
+        deleted_at: null
+      }
     });
 
-    if (edit) {
-      return { data: aboutSingle }
-    } else {
-      return aboutSingle
-    }
+    if (!aboutSingle) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
+
+    return aboutSingle
   }
   /**
    * 编辑
@@ -61,19 +58,15 @@ class AboutSingleService extends Service {
    * @param { Number } id id
    */
   async edit ({ title, keywords, description, content, status, id }) {
-    try {
-      await this.ctx.model.MzcAboutSingle.update({
-        title, keywords, description, content, status
-      }, {
-        where: {
-          id,
-          deleted_at: null
-        },
-      })
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    await this.ctx.model.MzcAboutSingle.update({
+      title, keywords, description, content, status
+    }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
+    return { httpStatus: HttpStatus.OK }
   }
 }
 

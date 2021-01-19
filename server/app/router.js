@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-12 20:49:01
+ * @LastEditTime: 2021-01-19 09:23:32
  */
 'use strict';
 
@@ -56,7 +56,7 @@ module.exports = app => {
 
   // aboutSingle
   router.get('/api/aboutSingle/index', jwt, controller.aboutSingle.index)
-  router.get('/api/aboutSingle/detail', jwt, controller.aboutSingle.detail)
+  // router.get('/api/aboutSingle/detail', jwt, controller.aboutSingle.detail)
   router.post('/api/aboutSingle/edit', jwt, controller.aboutSingle.edit)
 
   // about

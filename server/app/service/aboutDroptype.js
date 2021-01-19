@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:12:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 10:38:03
+ * @LastEditTime: 2021-01-19 20:36:27
  */
 'use strict';
 
@@ -22,9 +22,8 @@ class AboutDroptypeService extends Service {
    * @param { Number } limit 最大限制
    */
   async index (cid, limit = 9999) {
-
     const filter = cid
-      ? { dropId: cid, status: true, deleted_at: null }
+      ? { product_id: cid, status: true, deleted_at: null }
       : { deleted_at: null };
 
     const include = cid ? [{
@@ -57,7 +56,7 @@ class AboutDroptypeService extends Service {
   async detail (cid = 2) {
     return await this.ctx.model.MzcAboutDroptype.findOne({
       where: {
-        dropId: cid,
+        product_id: cid,
         deleted_at: null,
       },
       include: [{
@@ -74,20 +73,16 @@ class AboutDroptypeService extends Service {
    * @param { String } value 字段值
    */
   async update ({ id, key, value }) {
-    try {
-      let aboutDroptype = await this.ctx.model.MzcAboutDroptype.update({ [key]: value }, {
-        where: {
-          id,
-          deleted_at: null
-        },
-      })
+    let aboutDroptype = await this.ctx.model.MzcAboutDroptype.update({ [key]: value }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
 
-      if (!aboutDroptype[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
+    if (!aboutDroptype[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
 
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 编辑
@@ -96,40 +91,34 @@ class AboutDroptypeService extends Service {
    * @param { Number } sort 排序
    * @param { Number } id id
    */
-  async edit ({ dropId, dropContent, status, sort, id }) {
-    try {
-      await this.ctx.model.MzcAboutDroptype.update({
-        dropId, dropContent, status, sort
-      }, {
-        where: {
-          id,
-          deleted_at: null
-        },
-      })
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+  async edit ({ product_id, dropContent, status, sort, id }) {
+    await this.ctx.model.MzcAboutDroptype.update({
+      product_id, dropContent, status, sort
+    }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
+
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 增加
-   * @param { Number } dropId 下拉id
+   * @param { Number } product_id 下拉id
    * @param { String } dropContent 标题
    * @param { Boolean } status 状态
    * @param { Number } sort 排序
    */
-  async add ({ dropId, dropContent, status, sort }) {
-    try {
-      await this.ctx.model.MzcAboutDroptype.create({
-        dropId,
-        dropContent,
-        status,
-        sort,
-      });
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+  async add ({ product_id, dropContent, status, sort }) {
+    await this.ctx.model.MzcAboutDroptype.create({
+      product_id,
+      dropContent,
+      status,
+      sort,
+    });
+
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 删除
@@ -148,9 +137,10 @@ class AboutDroptypeService extends Service {
    * 列表
    * @param { Number } id 不显示全部
    */
-  async list (id = 1) {
+  async list ({ product_id, id = 1 }) {
     const aboutDroptype = await this.ctx.model.MzcAboutDroptype.findAll({
       where: {
+        product_id,
         id: { [Op.gt]: id },
         deleted_at: null
       },
