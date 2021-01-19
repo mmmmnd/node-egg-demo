@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-11 20:39:01
+ * @LastEditTime: 2021-01-19 19:50:40
 -->
 <template>
   <div class="app-container">
@@ -192,120 +192,12 @@
                 :limit.sync="listQuery.limit"
                 @pagination="getList" />
 
-    <el-dialog :title="textMap[dialogStatus]"
-               :visible.sync="dialogFormVisible">
-      <el-form ref="dataForm"
-               :rules="rules"
-               :model="temp"
-               label-position="right"
-               label-width="100px">
-        <el-row>
-          <el-col :span="12">
-            <el-form-item label="所属分类"
-                          prop="category_id">
-              <el-select v-model="temp.category_id"
-                         class="filter-item"
-                         placeholder="请选择所属分类"
-                         style="width: 100%;">
-                <el-option v-for="item in aboutDroptypeList"
-                           :key="item.id"
-                           :label="item.dropContent"
-                           :value="item.id" />
-              </el-select>
-            </el-form-item>
-            <el-form-item label="网站标题"
-                          prop="title">
-              <el-input v-model="temp.title"
-                        type="textarea"
-                        placeholder="请输入网站标题" />
-            </el-form-item>
-
-            <el-form-item label="网站描述"
-                          prop="companyDescription">
-              <el-input v-model="temp.companyDescription"
-                        type="textarea"
-                        placeholder="请输入网站描述" />
-            </el-form-item>
-
-            <el-form-item label="状态"
-                          prop="status">
-              <el-switch v-model="temp.status"
-                         active-color="#13ce66"
-                         inactive-color="#ff4949">
-              </el-switch>
-            </el-form-item>
-
-            <el-form-item label="排序"
-                          prop="sort">
-              <el-input-number v-model="temp.sort"
-                               controls-position="right"
-                               :min="0"
-                               ref="inputNumber"
-                               size="small"></el-input-number>
-            </el-form-item>
-
-          </el-col>
-          <el-col :span="12">
-            <el-form-item label="列表标题"
-                          prop="aboutTitle">
-              <el-input v-model="temp.aboutTitle"
-                        placeholder="请输入列表标题" />
-            </el-form-item>
-
-            <el-form-item label="网站关键词"
-                          prop="keywords">
-              <el-input v-model="temp.keywords"
-                        type="textarea"
-                        placeholder="请输入网站关键词" />
-            </el-form-item>
-
-            <el-form-item label="图片">
-
-              <el-upload v-if="progress"
-                         class="avatar-uploader"
-                         :headers="{token}"
-                         :action="uploadUrl"
-                         :show-file-list="false"
-                         :on-progress="setAvatarProgress"
-                         :on-success="handleAvatarSuccess">
-                <img v-if="temp.avatarImage"
-                     :src="temp.avatarImage"
-                     class="avatar">
-                <i v-else
-                   class="el-icon-plus avatar-uploader-icon"></i>
-              </el-upload>
-
-              <el-progress v-else
-                           type="circle"
-                           :percentage="percentage"></el-progress>
-            </el-form-item>
-
-          </el-col>
-        </el-row>
-        <el-form-item prop="content"
-                      label="列表内容">
-          <Tinymce ref="editor"
-                   v-model="temp.content"
-                   :height="400" />
-        </el-form-item>
-
-      </el-form>
-      <div slot="footer"
-           class="dialog-footer">
-
-        <el-button @click="dialogFormVisible = false">取消</el-button>
-        <el-button type="primary"
-                   @click="dialogStatus==='create'?createData():updateData()">确定</el-button>
-
-      </div>
-    </el-dialog>
-
   </div>
 </template>
 
 <script>
 import { aboutIndex, aboutDroptypeList, aboutUpdate, aboutAdd, aboutDestroy, aboutEdit, aboutFilters } from '@/api/about'
-import Pagination from '@/components/Pagination' // Secondary package based on el-pagination
+import Pagination from '@/components/Pagination'
 import Tinymce from '@/components/Tinymce'
 export default {
   components: { Pagination, Tinymce },
@@ -324,7 +216,7 @@ export default {
       percentage: 0,
       temp: {
         category_id: undefined,
-        dropId: '',
+        product_id: '',
         title: '',
         keywords: '',
         companyDescription: '',
@@ -413,7 +305,7 @@ export default {
      * 预览
      */
     getView (row) {
-      window.open(process.env.VUE_APP_BASE_SERVER + "/about/pid/1/cid/" + row.dropId, "blank");
+      window.open(process.env.VUE_APP_BASE_SERVER + "/about/pid/1/cid/" + row.product_id, "blank");
     },
     /**
      * 删除
@@ -448,7 +340,7 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           var v = this.aboutDroptypeList.find(item => item.id == this.temp.category_id);
-          this.temp.dropId = v.dropId;
+          this.temp.product_id = v.product_id;
           aboutAdd(this.temp).then(() => {
             this.dialogFormVisible = false;
             this.$notify({
@@ -470,7 +362,7 @@ export default {
         if (valid) {
           let tempData = Object.assign({}, this.temp)
           var v = this.aboutDroptypeList.find(item => item.id == tempData.category_id);
-          tempData.dropId = v.dropId;
+          tempData.product_id = v.product_id;
           aboutEdit(tempData).then(() => {
             this.dialogFormVisible = false;
             this.$router.go(0);
@@ -490,7 +382,7 @@ export default {
     resetTemp () {
       this.temp = {
         category_id: undefined,
-        dropId: '',
+        product_id: '',
         title: '',
         keywords: '',
         companyDescription: '',
@@ -533,35 +425,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-.avatar-uploader .el-upload:hover {
-  border-color: #409eff;
-}
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 178px;
-  height: 178px;
-  line-height: 178px;
-  text-align: center;
-}
-.avatar {
-  width: 178px;
-  height: 178px;
-  display: block;
-}
-.el-avatar img {
-  width: 100% !important;
-}
-.el-textarea .el-textarea__inner {
-  width: 100% !important;
-}
-</style>

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-11 20:42:11
+ * @LastEditTime: 2021-01-19 11:41:10
 -->
 <template>
   <div class="app-container">
@@ -52,7 +52,7 @@
                        align="center"
                        label="状态">
         <template slot-scope="{row}">
-          <m-btn v-if="row.dropId"
+          <m-btn v-if="row.product_id"
                  :label="row.status"
                  perms='update'
                  btnType='switch'
@@ -118,8 +118,8 @@
                style="width: 400px; margin-left:50px;">
 
         <el-form-item label="上级分类"
-                      prop="dropId">
-          <el-select v-model="temp.dropId"
+                      prop="product_id">
+          <el-select v-model="temp.product_id"
                      class="filter-item"
                      placeholder="请选择上级分类">
             <el-option v-for="item in list"
@@ -180,7 +180,7 @@ export default {
         limit: 10
       },
       temp: {
-        dropId: '',
+        product_id: '',
         dropContent: '',
         sort: 0,
         status: true
@@ -191,7 +191,7 @@ export default {
         create: '增加'
       },
       rules: {
-        dropId: [{ required: true, message: '请选择上级分类', trigger: 'blur' }],
+        product_id: [{ required: true, message: '请选择上级分类', trigger: 'blur' }],
         dropContent: [{ type: 'string', required: true, message: '请输入分类标题', trigger: 'blur' }],
         status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
         sort: [{ type: 'integer', required: true, message: '请选择排序', trigger: 'blur' }]
@@ -325,7 +325,7 @@ export default {
      */
     resetTemp () {
       this.temp = {
-        dropId: '',
+        product_id: '',
         dropContent: '',
         sort: 0,
         status: true
