@@ -145,7 +145,7 @@
                 :total="total"
                 :page.sync="listQuery.page"
                 :limit.sync="listQuery.limit"
-                @change="getList" />
+                @pagination="getList" />
 
     <vEdit ref="newForm"
            :visible.sync="showDialog"
@@ -176,16 +176,14 @@ export default {
     total: {
       type: Number,
       default: 0
+    },
+    listQuery: {
+      type: Object,
+      default: {}
     }
   },
   data () {
     return {
-      listLoading: true,
-      listQuery: {
-        page: 1,
-        limit: 20
-      },
-      category: [],
       showDialog: false,
       temp: {},
       dialogStatus: '',
@@ -199,9 +197,8 @@ export default {
       })
       table.toggleRowExpansion(row)
     },
-    getList (id) {
-      console.log(id)
-      // this.$emit('createData', Obj, res => cab(res))
+    getList (params) {
+      this.$emit('getList', params)
     },
     /**
      * 编辑
@@ -251,9 +248,7 @@ export default {
       row.status = !row.status
 
       const data = { id: row.id, key: 'status', value: row.status };
-      this.listLoading = true
       this.$emit('updateItem', data, res => {
-        this.listLoading = false
         this.alertView('更新成功!', 'success')
       })
     },

@@ -13,10 +13,12 @@
       <vList :select="select"
              :list="list"
              :total="total"
+             :listQuery="listQuery"
              @destroyData="destroyData"
              @updateData="updateData"
              @createData="createData"
-             @updateItem="updateItem" />
+             @updateItem="updateItem"
+             @getList="getList" />
     </div>
   </div>
 
@@ -56,9 +58,14 @@ export default {
     /**
      * 获取列表
      */
-    getList (id) {
+    getList (params) {
       this.listLoading = true
-      // this.listQuery.type = typeof id === 'number' ? id : this.temp.categoryId;
+      if (typeof params === 'number') {
+        this.listQuery.category_id = params
+      } else if (typeof params === 'object') {
+        params.product_id = 4;
+        this.listQuery = params
+      }
       aboutIndex(this.listQuery)
         .then(response => {
           this.list = response.data.data;
