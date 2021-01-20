@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-19 11:47:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-19 20:36:51
+ * @LastEditTime: 2021-01-20 17:42:57
 -->
 <template>
   <div class="app-container">
@@ -56,15 +56,16 @@ export default {
     /**
      * 获取列表
      */
-    getList () {
+    getList (id) {
       this.listLoading = true
+      // this.listQuery.type = typeof id === 'number' ? id : this.temp.categoryId;
       aboutIndex(this.listQuery)
         .then(response => {
           this.list = response.data.data;
           this.total = response.data.meta.total;
           this.listLoading = false;
         })
-      aboutDroptypeList(this.listQuery.product_id)
+      aboutDroptypeList(this.listQuery)
         .then(res => {
           this.select = res.data;
         })

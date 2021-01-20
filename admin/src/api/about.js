@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:59:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 16:03:56
+ * @LastEditTime: 2021-01-20 17:04:02
  */
 import request from '@/utils/request'
 
@@ -81,10 +81,11 @@ export function aboutDroptypeDestroy (data) {
   })
 }
 
-export function aboutDroptypeList () {
+export function aboutDroptypeList (params) {
   return request({
     url: '/aboutDroptype/list',
     method: 'get',
+    params
   })
 }
 

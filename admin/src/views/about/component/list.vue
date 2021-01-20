@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-19 11:54:25
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-19 20:33:53
+ * @LastEditTime: 2021-01-20 17:46:06
 -->
 <template>
   <div class="app-container">
@@ -17,7 +17,8 @@
           <el-select v-model="temp.categoryId"
                      class="filter-item"
                      placeholder="请选择所属分类"
-                     clearable>
+                     clearable
+                     @change="getList">
             <el-option v-for="item in select"
                        :key="item.id"
                        :label="item.title"
@@ -57,6 +58,11 @@
       <el-table-column label="分类"
                        prop="category_id"
                        align="center">
+        <template slot-scope="{row}">
+          <template v-for="item in select">
+            {{row.category_id == item.id?item.title:''}}
+          </template>
+        </template>
       </el-table-column>
       <el-table-column label="标题"
                        prop="title"
@@ -138,7 +144,8 @@
     <pagination v-show="total>0"
                 :total="total"
                 :page.sync="listQuery.page"
-                :limit.sync="listQuery.limit" />
+                :limit.sync="listQuery.limit"
+                @change="getList" />
 
     <vEdit ref="newForm"
            :visible.sync="showDialog"
@@ -191,6 +198,10 @@ export default {
         row.id != item.id && table.toggleRowExpansion(item, false)
       })
       table.toggleRowExpansion(row)
+    },
+    getList (id) {
+      console.log(id)
+      // this.$emit('createData', Obj, res => cab(res))
     },
     /**
      * 编辑
