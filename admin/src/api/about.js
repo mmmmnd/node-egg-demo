@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:59:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-20 17:04:02
+ * @LastEditTime: 2021-01-21 16:54:34
  */
 import request from '@/utils/request'
 
@@ -129,10 +129,10 @@ export function aboutEdit (data) {
   })
 }
 
-export function aboutFilters (params) {
+export function aboutMove (data) {
   return request({
-    url: '/about/filters',
-    method: 'get',
-    params
+    url: '/about/move',
+    method: 'post',
+    data
   })
 }

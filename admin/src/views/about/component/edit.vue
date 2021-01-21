@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-19 20:28:24
+ * @LastEditTime: 2021-01-21 11:41:51
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -17,31 +17,51 @@
              :model="temp"
              label-position="right"
              label-width="100px">
+      <el-row>
+        <el-col :span="12">
+          <el-form-item label="所属分类"
+                        prop="category_id">
+            <el-select v-model="temp.category_id"
+                       class="filter-item"
+                       placeholder="请选择所属分类"
+                       clearable>
+              <el-option v-for="item in select"
+                         :key="item.id"
+                         :label="item.title"
+                         :value="item.id" />
+            </el-select>
+          </el-form-item>
+          <el-form-item label="标题"
+                        prop="title"
+                        style="width:300px">
+            <el-input v-model="temp.title"
+                      placeholder="请输入标题" />
+          </el-form-item>
+          <el-form-item label="排序"
+                        prop="sort"
+                        style="width:300px">
+            <el-input-number v-model="temp.sort"
+                             controls-position="right"
+                             :min="0"
+                             ref="inputNumber"
+                             size="small"></el-input-number>
+          </el-form-item>
+          <el-form-item label="状态"
+                        prop="status">
+            <el-switch v-model="temp.status"
+                       active-color="#13ce66"
+                       inactive-color="#ff4949">
+            </el-switch>
+          </el-form-item>
+        </el-col>
+        <el-col :span="12">
+          <el-form-item label="图片"
+                        prop="avatar_image">
+            <vUpload :avatar_image.sync="temp.avatar_image" />
+          </el-form-item>
 
-      <el-form-item label="标题"
-                    prop="title"
-                    style="width:400px">
-        <el-input v-model="temp.title"
-                  placeholder="请输入标题" />
-      </el-form-item>
-      <el-form-item label="图片">
-        <vUpload :avatar_image.sync="temp.avatar_image" />
-      </el-form-item>
-      <el-form-item label="排序"
-                    prop="sort">
-        <el-input-number v-model="temp.sort"
-                         controls-position="right"
-                         :min="0"
-                         ref="inputNumber"
-                         size="small"></el-input-number>
-      </el-form-item>
-      <el-form-item label="状态"
-                    prop="status">
-        <el-switch v-model="temp.status"
-                   active-color="#13ce66"
-                   inactive-color="#ff4949">
-        </el-switch>
-      </el-form-item>
+        </el-col>
+      </el-row>
       <el-form-item prop="content"
                     label="列表内容">
         <Tinymce ref="editor"
@@ -66,6 +86,11 @@ import vUpload from '@/views/public/upload'
 export default {
   components: { Tinymce, vUpload },
   props: {
+    // 下拉
+    select: {
+      type: Array,
+      default: []
+    },
     // 弹窗
     visible: {
       type: Boolean,
@@ -80,6 +105,11 @@ export default {
     dialogStatus: {
       type: String,
       default: 'update'
+    },
+    // 校验类型
+    rules: {
+      type: Object,
+      default: {}
     }
   },
   data () {
@@ -89,14 +119,6 @@ export default {
         create: '增加'
       },
       avatar_image: '', //图片
-      rules: {
-        category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
-        title: [{ type: 'string', required: true, message: '请输入网站标题', trigger: 'blur' }],
-        keywords: [{ type: 'string', required: true, message: '请输入网站关键词', trigger: 'blur' }],
-        companyDescription: [{ type: 'string', required: true, message: '请输入网站描述', trigger: 'blur' }],
-        status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
-        content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
-      },
     }
   },
   computed: {
@@ -138,8 +160,6 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
-          console.log(tempData)
-          return false
           this.$emit('createData', tempData, res => {
             if (res.code == 0) {
               this.$router.go(0);

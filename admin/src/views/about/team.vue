@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-19 11:47:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-20 17:42:57
+ * @LastEditTime: 2021-01-21 17:02:28
 -->
 <template>
   <div class="app-container">
@@ -13,18 +13,21 @@
       <vList :select="select"
              :list="list"
              :total="total"
+             :rules="rules"
              :listQuery="listQuery"
+             :selectType="selectType"
              @destroyData="destroyData"
              @updateData="updateData"
              @createData="createData"
              @updateItem="updateItem"
+             @moveData="moveData"
              @getList="getList" />
     </div>
   </div>
 
 </template>
 <script>
-import { aboutIndex, aboutDroptypeList, aboutUpdate, aboutAdd, aboutDestroy, aboutEdit, aboutFilters } from '@/api/about'
+import { aboutIndex, aboutDroptypeList, aboutUpdate, aboutAdd, aboutDestroy, aboutEdit, aboutMove } from '@/api/about'
 import vList from './component/list'
 export default {
   components: { vList },
@@ -32,23 +35,20 @@ export default {
     return {
       list: [],
       total: 0,
-      listLoading: true,
       listQuery: {
         page: 1,
         limit: 10,
-        product_id: 4
+        product_id: 4 //菜单id
       },
       select: [], //下拉
+      selectType: [], //剪切类型
       rules: {
         category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
-        aboutTitle: [{ type: 'string', required: true, message: '请输入列表标题', trigger: 'blur' }],
-        title: [{ type: 'string', required: true, message: '请输入网站标题', trigger: 'blur' }],
-        keywords: [{ type: 'string', required: true, message: '请输入网站关键词', trigger: 'blur' }],
-        companyDescription: [{ type: 'string', required: true, message: '请输入网站描述', trigger: 'blur' }],
+        title: [{ type: 'string', required: true, message: '请输入标题', trigger: 'blur' }],
+        avatar_image: [{ required: true, message: '请上传图片', }],
         status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
-        sort: [{ type: 'integer', required: true, message: '请选择排序', trigger: 'blur' }],
         content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
-      },
+      }
     }
   },
   created () {
@@ -59,22 +59,26 @@ export default {
      * 获取列表
      */
     getList (params) {
-      this.listLoading = true
       if (typeof params === 'number') {
         this.listQuery.category_id = params
       } else if (typeof params === 'object') {
-        params.product_id = 4;
+        params.product_id = this.listQuery.product_id;
         this.listQuery = params
+      } else {
+        this.listQuery.category_id = ''
       }
       aboutIndex(this.listQuery)
         .then(response => {
           this.list = response.data.data;
           this.total = response.data.meta.total;
-          this.listLoading = false;
         })
       aboutDroptypeList(this.listQuery)
         .then(res => {
           this.select = res.data;
+        })
+      aboutDroptypeList()
+        .then(res => {
+          this.selectType = res.data
         })
     },
     /**
@@ -102,10 +106,10 @@ export default {
       aboutUpdate(Obj).then(res => cab(res))
     },
     /**
-     * 预览
+     * 父页面执行 移动
      */
-    getView (row) {
-      window.open(process.env.VUE_APP_BASE_SERVER + "/about/pid/1/cid/" + row.product_id, "blank");
+    moveData (Obj, cab) {
+      aboutMove(Obj).then(res => cab(res))
     }
   }
 }

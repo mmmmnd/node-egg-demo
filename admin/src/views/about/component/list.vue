@@ -5,27 +5,11 @@
  * @version: 1.0.0
  * @Date: 2021-01-19 11:54:25
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-20 17:46:06
+ * @LastEditTime: 2021-01-21 17:02:07
 -->
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-form label-position="left"
-               style="display: inline-block;">
-        <el-form-item label="选择分类"
-                      style="width: 300px;">
-          <el-select v-model="temp.categoryId"
-                     class="filter-item"
-                     placeholder="请选择所属分类"
-                     clearable
-                     @change="getList">
-            <el-option v-for="item in select"
-                       :key="item.id"
-                       :label="item.title"
-                       :value="item.id" />
-          </el-select>
-        </el-form-item>
-      </el-form>
       <m-btn type="primary"
              label="增加"
              perms='add'
@@ -34,6 +18,60 @@
              class="filter-item"
              style="margin-left: 10px;"
              @click="handleCreate" />
+
+      <el-button type="primary"
+                 v-show="canTools"
+                 @click="toggleSelection()"
+                 icon="el-icon-s-tools"
+                 style="vertical-align: middle;margin-bottom: 10px;">
+        批量操作</el-button>
+
+      <span v-show="!canTools">
+        <el-button type="warning"
+                   v-show="canMove"
+                   icon="el-icon-scissors"
+                   style="vertical-align: middle;margin-bottom: 10px;"
+                   @click="toggleMove()">
+          移动</el-button>
+
+        <el-select v-model="selectTypeId"
+                   v-show="!canMove"
+                   class="filter-item"
+                   placeholder="请选择要移动的分类"
+                   clearable
+                   @change="setMove"
+                   style="margin-left: 10px;">
+          <el-option v-for="item in selectType"
+                     :key="item.id"
+                     :label="item.title"
+                     :value="item.id" />
+        </el-select>
+
+        <m-btn type="danger"
+               icon="el-icon-delete"
+               label="删除"
+               perms='destroy'
+               btnType="btn"
+               @click="toolsDel()" />
+
+        <el-button icon="el-icon-close"
+                   @click="showTools"
+                   style="vertical-align: middle;margin-bottom: 10px;">
+          取消</el-button>
+      </span>
+
+      <el-select v-model="category_Id"
+                 class="filter-item"
+                 placeholder="请选择过滤的分类"
+                 clearable
+                 @change="getList"
+                 style="margin-left: 10px;">
+        <el-option v-for="item in select"
+                   :key="item.id"
+                   :label="item.title"
+                   :value="item.id" />
+      </el-select>
+
     </div>
 
     <el-table :data="list"
@@ -51,6 +89,7 @@
           </el-form>
         </template>
       </el-table-column>
+      <el-table-column type="selection"></el-table-column>
       <el-table-column label="id"
                        prop="id"
                        align="center">
@@ -150,6 +189,8 @@
     <vEdit ref="newForm"
            :visible.sync="showDialog"
            :temp="temp"
+           :rules="rules"
+           :select="select"
            :dialogStatus="dialogStatus"
            @updateData="updateData"
            @createData="createData" />
@@ -169,27 +210,96 @@ export default {
       type: Array,
       default: []
     },
+    // table 数据
     list: {
       type: Array,
       default: []
     },
+    // 总页码
     total: {
       type: Number,
       default: 0
     },
+    // 分页
     listQuery: {
       type: Object,
       default: {}
+    },
+    // 校验类型
+    rules: {
+      type: Object,
+      default: {}
+    },
+    // 下拉切换
+    selectType: {
+      type: Array,
+      default: []
     }
   },
   data () {
     return {
-      showDialog: false,
-      temp: {},
-      dialogStatus: '',
+      showDialog: false, //弹窗
+      temp: {}, //编辑页数据
+      dialogStatus: '', //弹窗状态
+      canTools: true, //判断是否批量是否显示
+      canMove: true,
+      category_Id: '',
+      selectTypeId: ''
     }
   },
   methods: {
+    toggleSelection () {
+      const selection = this.$refs.table.selection;
+      if (selection.length == 0) return this.alertView('请勾选选择列表数据', 'warning')
+      this.canTools = false;
+    },
+    /**
+     * 批量移动
+     */
+    toggleMove () {
+      this.canMove = false;
+    },
+    setMove (params) {
+      const selection = this.$refs.table.selection;
+      const data = { ids: [] }
+      selection.map(item => data.ids.push(item.id));
+      this.selectType.find(item => {
+        if (item.id === params) data.product_id = item.product_id;
+      })
+
+      data.category_id = params;
+      this.$emit('moveData', params)
+    },
+    /**
+     * 批量取消
+     */
+    showTools () {
+      this.canTools = !this.canTools;
+      this.canMove = true;
+      this.selectTypeId = ''
+      this.$refs.table.clearSelection();
+    },
+    /**
+     * 批量删除
+     */
+    toolsDel () {
+      const selection = this.$refs.table.selection;
+      const data = [];
+      selection.map(item => data.push(item.id))
+      this.$confirm('此操作将删除该文件, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$emit('destroyData', data, res => {
+          this.alertView('删除成功!', 'success')
+          this.$router.go(0);
+        })
+      }).catch(() => {
+        this.alertView('已取消删除', 'info')
+      });
+
+    },
     clickRowHandle (row, column, event) {
       const table = this.$refs.table;
       this.list.map(item => {
@@ -197,6 +307,9 @@ export default {
       })
       table.toggleRowExpansion(row)
     },
+    /**
+     * 子页面执行 搜索
+     */
     getList (params) {
       this.$emit('getList', params)
     },
@@ -214,11 +327,13 @@ export default {
      */
     handleCreate () {
       this.temp = {
+        category_id: '',
         title: '',
         content: '',
         avatar_image: '',
         status: true,
-        sort: 0
+        sort: 0,
+        product_id: this.listQuery.product_id
       }
       this.dialogStatus = 'create'
       this.showDialog = true
@@ -233,9 +348,9 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.$emit('destroyData', row, res => {
+        this.$emit('destroyData', [row.id], res => {
           this.alertView('删除成功!', 'success')
-          this.$router.go(0);
+          // this.$router.go(0);
         })
       }).catch(() => {
         this.alertView('已取消删除', 'info')
