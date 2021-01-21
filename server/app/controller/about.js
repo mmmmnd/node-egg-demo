@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-10-23 11:10:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-10-28 14:58:46
+ * @LastEditTime: 2021-01-21 16:11:50
  */
 'use strict';
 
@@ -55,6 +55,15 @@ class AboutController extends Controller {
     const params = this.ctx.request.body;
 
     const about = await this.ctx.service.about.edit(params)
+    await this.ctx.helper.checkData(about);
+  }
+  /**
+   * 移动
+   */
+  async move () {
+    const params = this.ctx.request.body;
+
+    const about = await this.ctx.service.about.move(params)
     await this.ctx.helper.checkData(about);
   }
 }

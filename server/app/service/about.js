@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:13:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-19 20:41:33
+ * @LastEditTime: 2021-01-21 16:53:37
  */
 'use strict';
 
@@ -117,14 +117,12 @@ class AboutService extends Service {
   }
   /**
    * 删除
-   * @param { Number } id 
+   * @param { Array }  id数组
    */
-  async destroy ({ id }) {
-    const aboutDroptype = await this.ctx.model.MzcAbout.findByPk(id);
-
-    if (!aboutDroptype) return { httpStatus: HttpStatus.NOT_FOUND, msg: '没有找到相关信息' };
-
-    aboutDroptype.destroy();
+  async destroy (params) {
+    await this.ctx.model.MzcAbout.destroy({
+      where: { id: params }
+    })
 
     return { httpStatus: HttpStatus.OK }
   }
@@ -144,6 +142,19 @@ class AboutService extends Service {
       },
     })
     return { httpStatus: HttpStatus.OK }
+  }
+  /**
+   * 移动
+   */
+  async move (params) {
+
+    return { data: params }
+
+    const key = Object.keys(params)
+    const value = Object.values(params)
+    for (var i in key) data.push({ id: Number(i) + 1, name: key[i], value: value[i] })
+
+    await this.ctx.model.MzcSettings.bulkCreate(data, { updateOnDuplicate: ["id", "name", "value"] });
   }
 }
 

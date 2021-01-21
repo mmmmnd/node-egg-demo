@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:12:52
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-19 20:36:27
+ * @LastEditTime: 2021-01-21 15:44:29
  */
 'use strict';
 
@@ -138,12 +138,12 @@ class AboutDroptypeService extends Service {
    * @param { Number } id 不显示全部
    */
   async list ({ product_id, id = 1 }) {
+    const filter = product_id
+      ? { product_id, id: { [Op.gt]: id }, deleted_at: null }
+      : { id: { [Op.gt]: id }, deleted_at: null };
+
     const aboutDroptype = await this.ctx.model.MzcAboutDroptype.findAll({
-      where: {
-        product_id,
-        id: { [Op.gt]: id },
-        deleted_at: null
-      },
+      where: filter,
       order: [['sort', 'ASC']],
     });
 
