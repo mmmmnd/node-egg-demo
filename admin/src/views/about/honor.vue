@@ -3,9 +3,9 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2021-01-19 11:47:37
+ * @Date: 2021-01-25 16:11:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-25 11:13:41
+ * @LastEditTime: 2021-01-25 16:11:54
 -->
 <template>
   <div class="app-container">
@@ -38,7 +38,7 @@ export default {
       listQuery: {
         page: 1,
         limit: 10,
-        product_id: 4, //菜单id
+        product_id: 6, //菜单id
         category_id: ''
       },
       select: [], //下拉

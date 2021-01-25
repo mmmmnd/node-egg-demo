@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-19 11:54:25
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-21 17:02:07
+ * @LastEditTime: 2021-01-25 16:16:01
 -->
 <template>
   <div class="app-container">
@@ -16,23 +16,24 @@
              btnType="btn"
              icon="el-icon-plus"
              class="filter-item"
-             style="margin-left: 10px;"
+             style="margin-left: 10px;vertical-align: unset;"
              @click="handleCreate" />
 
       <el-button type="primary"
                  v-show="canTools"
                  @click="toggleSelection()"
                  icon="el-icon-s-tools"
-                 style="vertical-align: middle;margin-bottom: 10px;">
+                 style="vertical-align: middle">
         批量操作</el-button>
 
       <span v-show="!canTools">
-        <el-button type="warning"
-                   v-show="canMove"
-                   icon="el-icon-scissors"
-                   style="vertical-align: middle;margin-bottom: 10px;"
-                   @click="toggleMove()">
-          移动</el-button>
+        <m-btn type="warning"
+               v-show="canMove"
+               icon="el-icon-delete"
+               label="移动"
+               perms='move'
+               btnType="btn"
+               @click="toggleMove()" />
 
         <el-select v-model="selectTypeId"
                    v-show="!canMove"
@@ -40,7 +41,7 @@
                    placeholder="请选择要移动的分类"
                    clearable
                    @change="setMove"
-                   style="margin-left: 10px;">
+                   style="margin-right: 10px;vertical-align: unset;">
           <el-option v-for="item in selectType"
                      :key="item.id"
                      :label="item.title"
@@ -55,17 +56,17 @@
                @click="toolsDel()" />
 
         <el-button icon="el-icon-close"
-                   @click="showTools"
-                   style="vertical-align: middle;margin-bottom: 10px;">
+                   @click="showTools">
           取消</el-button>
       </span>
 
       <el-select v-model="category_Id"
+                 v-if="listQuery.product_id !==6"
                  class="filter-item"
                  placeholder="请选择过滤的分类"
                  clearable
                  @change="getList"
-                 style="margin-left: 10px;">
+                 style="margin-left: 10px;vertical-align: unset;">
         <el-option v-for="item in select"
                    :key="item.id"
                    :label="item.title"
@@ -96,7 +97,8 @@
       </el-table-column>
       <el-table-column label="分类"
                        prop="category_id"
-                       align="center">
+                       align="center"
+                       v-if="listQuery.product_id !==6">
         <template slot-scope="{row}">
           <template v-for="item in select">
             {{row.category_id == item.id?item.title:''}}
@@ -264,11 +266,13 @@ export default {
       const data = { ids: [] }
       selection.map(item => data.ids.push(item.id));
       this.selectType.find(item => {
-        if (item.id === params) data.product_id = item.product_id;
+        if (item.id === params) data.product_id = item.product_id; //父id
       })
-
-      data.category_id = params;
-      this.$emit('moveData', params)
+      data.category_id = params; //类别id
+      this.$emit('moveData', data, res => {
+        this.alertView('移动成功!', 'success')
+        this.$router.go(0);
+      })
     },
     /**
      * 批量取消

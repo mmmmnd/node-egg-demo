@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-07 11:26:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-07 11:34:13
+ * @LastEditTime: 2021-01-25 15:54:24
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -22,6 +22,13 @@
                     prop="describe">
         <el-input v-model="temp.describe"
                   placeholder="请输入描述"></el-input>
+      </el-form-item>
+
+      <el-form-item label="识别码"
+                    class="postInfo-container-item"
+                    prop="code">
+        <el-input v-model="temp.code"
+                  placeholder="请输入识别码"></el-input>
       </el-form-item>
 
     </el-form>
@@ -71,6 +78,7 @@ export default {
       },
       rules: {
         describe: [{ type: 'string', required: true, message: '请输入描述', trigger: 'blur' }],
+        code: [{ type: 'string', required: true, message: '请输入识别码', trigger: 'blur' }],
       },
     }
   },

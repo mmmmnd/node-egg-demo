@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-23 17:42:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-12 09:51:04
+ * @LastEditTime: 2021-01-25 17:29:22
 -->
 <template>
   <div class="app-container">
@@ -278,7 +278,7 @@ export default {
 
         menu_id.forEach((i, n) => {
           const node = this.$refs.newForm.$refs.routesTree.getNode(i)
-          node.isLeaf && this.$refs.newForm.$refs.routesTree.setChecked(node, true)
+          isLeaf && node.isLeaf && this.$refs.newForm.$refs.routesTree.setChecked(node, true)
         })
       })
       this.dialogStatus = 'update'
