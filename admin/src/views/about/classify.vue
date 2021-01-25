@@ -43,7 +43,7 @@
 
           <el-tag v-if="row.title && row.children">{{ row.title }}</el-tag>
           <span v-else
-                v-html="row.title"></span>
+                v-html="row.nameTitle"></span>
 
         </template>
       </el-table-column>

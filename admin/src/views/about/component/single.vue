@@ -49,6 +49,7 @@
                      class="filter-item"
                      style="margin-left: 10px;"
                      @click="onSubmit" />
+              <el-button @click="resetForm('form')">重置</el-button>
             </el-form-item>
           </el-form>
         </el-col>
@@ -57,7 +58,6 @@
   </div>
 </template>
 <script>
-import { aboutSingleList, aboutSingleEdit } from '@/api/about'
 import Tinymce from '@/components/Tinymce'
 export default {
   components: { Tinymce },
@@ -88,6 +88,14 @@ export default {
         })
 
       })
+    },
+    /**
+     * 重置
+     */
+    resetForm (formName) {
+      console.log(this.$refs[formName].resetFields())
+      console.log(1)
+      this.$refs[formName].resetFields();
     }
   }
 }
