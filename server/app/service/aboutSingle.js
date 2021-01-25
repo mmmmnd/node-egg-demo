@@ -44,7 +44,7 @@ class AboutSingleService extends Service {
       }
     });
 
-    if (!aboutSingle) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
+    // if (!aboutSingle) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
 
     return aboutSingle
   }

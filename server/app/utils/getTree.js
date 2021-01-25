@@ -127,7 +127,7 @@ class GetTree {
        * about下拉分类
        */
       case 'about':
-        items.forEach(item => item.dropId === value && item.value !== 1 && arrs.push(item));
+        items.forEach(item => item.product_id === value && item.value !== 1 && arrs.push(item));
 
         return arrs
       /**
