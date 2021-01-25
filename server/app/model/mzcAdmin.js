@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-28 09:24:46
+ * @LastEditTime: 2021-01-25 17:27:36
  */
 'use strict';
 
@@ -36,7 +36,7 @@ module.exports = app => {
 		},
 		api_id: {
 			allowNull: !1, // 是否为空    
-			type: STRING, // 类型
+			type: STRING(500), // 类型
 			comment: '接口id', // 备注
 			defaultValue: '', // 默认值
 		},

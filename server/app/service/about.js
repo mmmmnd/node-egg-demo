@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:13:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-21 16:53:37
+ * @LastEditTime: 2021-01-25 11:52:19
  */
 'use strict';
 
@@ -145,16 +145,22 @@ class AboutService extends Service {
   }
   /**
    * 移动
+   * @param { Number } category_id 类别id
+   * @param { Array } ids 移动的数组
+   * @param { Number } product_id 父id
    */
-  async move (params) {
+  async move ({ category_id, ids, product_id }) {
+    const about = await this.ctx.model.MzcAbout.findAll({
+      where: { id: ids }
+    });
 
-    return { data: params }
+    about.map(item => {
+      item.category_id = category_id
+      item.product_id = product_id
+      item.save();
+    })
 
-    const key = Object.keys(params)
-    const value = Object.values(params)
-    for (var i in key) data.push({ id: Number(i) + 1, name: key[i], value: value[i] })
-
-    await this.ctx.model.MzcSettings.bulkCreate(data, { updateOnDuplicate: ["id", "name", "value"] });
+    return { httpStatus: HttpStatus.OK }
   }
 }
 
