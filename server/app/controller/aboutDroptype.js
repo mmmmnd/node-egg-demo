@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-29 11:17:48
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-21 15:42:13
+ * @LastEditTime: 2021-01-26 18:26:59
  */
 'use strict';
 
@@ -18,7 +18,7 @@ class AboutDroptypeController extends Controller {
    */
   async index () {
     const aboutDroptype = await this.ctx.service.aboutDroptype.index(); // 下拉分类
-    const aboutSingleMenu = await this.ctx.service.menu.details(6, 4); // 父分类
+    const aboutSingleMenu = await this.ctx.service.menu.details(1); // 父分类
     const data = GetTree.aboutList(aboutSingleMenu, aboutDroptype, 'about');
 
     await this.ctx.helper.checkData({ data });

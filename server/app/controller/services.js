@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-10-23 11:10:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-05 15:57:08
+ * @LastEditTime: 2021-01-26 18:16:07
  */
 'use strict';
 
@@ -16,10 +16,9 @@ class ServicesController extends Controller {
    * 获取列表
    */
   async list () {
-
     const services = await this.ctx.service.services.list()
-    const aboutSingleMenu = await this.ctx.service.menu.details(12, 8);
-    await this.ctx.helper.checkData({ data: { services, aboutSingleMenu } });
+
+    await this.ctx.helper.checkData({ data: services });
   }
   /**
    * 修改
@@ -38,6 +37,14 @@ class ServicesController extends Controller {
 
     const services = await this.ctx.service.services.edit(params)
     await this.ctx.helper.checkData(services);
+  }
+  /**
+   * 详情
+   */
+  async detail () {
+    const aboutSingleMenu = await this.ctx.service.menu.details(7);
+
+    await this.ctx.helper.checkData({ data: aboutSingleMenu });
   }
 }
 

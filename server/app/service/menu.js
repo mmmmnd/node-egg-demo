@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-17 17:34:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-15 15:47:11
+ * @LastEditTime: 2021-01-26 18:26:51
  */
 'use strict';
 
@@ -101,15 +101,15 @@ class MenuService extends Service {
   }
   /**
    * 获取分类详情
-   * @param { Number } maxId 最大id
-   * @param { Number } minId 最小id
+   * @param { Number } pid 父id
    */
-  async details (maxId = 0, minId = 0) {
+  async details (pid) {
+    const filter = pid == 1
+      ? { id: { [Op.gte]: 4, [Op.lte]: 6 }, status: true, deleted_at: null }
+      : { pid, status: true, deleted_at: null };
+
     return await this.ctx.model.MzcMenu.findAll({
-      where: {
-        id: { [Op.gte]: minId, [Op.lte]: maxId },
-        deleted_at: null
-      }
+      where: filter
     })
   }
   /**
