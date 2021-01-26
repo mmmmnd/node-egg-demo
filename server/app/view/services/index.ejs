@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-22 09:20:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-25 08:33:22
+ * @LastEditTime: 2021-01-26 11:48:55
 -->
 
 <%- include('/commom/header',{
   title:servicesDetail?servicesDetail[0].title:"海南昆仑体育文化股份有限公司",
   Keywords:servicesDetail?servicesDetail[0].keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:servicesDetail?servicesDetail[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  description:servicesDetail?servicesDetail[0].description:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <% var id = 
@@ -32,7 +32,7 @@ ctx.params.cid == 8 ?
       <div class="ser-top">
         <div class="ser-top-txt">
           <h5><%= servicesDetail[0].title %></h5>
-          <p><%= servicesDetail[0].companyDescription %></p>
+          <p><%= servicesDetail[0].description %></p>
         </div>
         <img src="" alt="" class="ser-top-img" data-src="<%= servicesDetail[0].servicesImage %>">
       </div>

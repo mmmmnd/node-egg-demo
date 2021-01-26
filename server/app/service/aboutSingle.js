@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:35:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-19 15:56:08
+ * @LastEditTime: 2021-01-26 16:15:44
  */
 'use strict';
 
@@ -17,12 +17,12 @@ const HttpStatus = require('../utils/httpStatus');
 class AboutSingleService extends Service {
   /**
    * 获取详情列表
-   * @param { String } cid 父id
+   * @param { String } product_id 父id
    */
-  async index ({ cid }) {
+  async index ({ product_id }) {
     const aboutSingle = await this.ctx.model.MzcAboutSingle.findOne({
       where: {
-        category_id: cid,
+        product_id,
         deleted_at: null
       }
     });
@@ -33,12 +33,12 @@ class AboutSingleService extends Service {
   }
   /**
    * 详情
-   * @param { String } cid 父id
+   * @param { String } product_id 父id
    */
-  async detail (cid) {
+  async detail (product_id) {
     const aboutSingle = await this.ctx.model.MzcAboutSingle.findOne({
       where: {
-        category_id: cid,
+        product_id: product_id,
         status: true,
         deleted_at: null
       }

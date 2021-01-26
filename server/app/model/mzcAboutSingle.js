@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-18 18:25:24
+ * @LastEditTime: 2021-01-26 16:12:51
  */
 'use strict';
 
@@ -21,7 +21,7 @@ module.exports = app => {
       type: INTEGER(8).UNSIGNED, // 类型
       comment: 'ID', // 备注
     },
-    category_id: {
+    product_id: {
       allowNull: !1, // 是否为空
       type: INTEGER, // 类型
       defaultValue: '0', // 默认值

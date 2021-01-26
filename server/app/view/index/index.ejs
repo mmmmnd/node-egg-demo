@@ -10,7 +10,7 @@
 <%- include('/commom/header',{
   title:settingsList?settingsList.title:"海南昆仑体育文化股份有限公司",
   Keywords:settingsList?settingsList.keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:settingsList?settingsList.companyDescription:"海南昆仑体育文化股份有限公司",
+  description:settingsList?settingsList.description:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <%- include('/commom/indexBanner') %>
@@ -25,7 +25,7 @@
           <h5>关于我们</h5>
         </div>
         <h3 class="row-h3">大海之南•昆仑为巅</h3>
-        <p class="row-p"><%= aboutSingleDetail.companyDescription %></p>
+        <p class="row-p"><%= aboutSingleDetail.description %></p>
         <a href="/about/pid/1/cid/2" class="row-btn">查看详情</a>
       </div>
       <div class="col-lg-6 row1-right">
@@ -62,7 +62,7 @@
           <div class="swiper-slide">
             <div class="row2-txt">
               <h5><%= menuList[1].children[index].title %></h5>
-              <p><%= item.companyDescription %></p>
+              <p><%= item.description %></p>
               <a href="/services/pid/7/cid/<%= item.category_id %>" class="row2-btn">
                 <img src="" alt="" data-src="/public/images/more_icon.png">
               </a>
@@ -96,7 +96,7 @@
               </div>
               <div class="row3-txt">
                 <h5><%= item.cultureTitle %></h5>
-                <p><%= item.companyDescription %></p>
+                <p><%= item.description %></p>
                 <div class="row3-data">
                   <p><%= moment(item.created_at).format('YYYY-MM-DD') %></p>
                   <img src="" alt="" data-src="/public/images/news_icon.png">
