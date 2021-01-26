@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-18 15:10:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-18 19:42:51
+ * @LastEditTime: 2021-01-26 16:19:36
 -->
 <template>
   <div class="app-container">
@@ -26,7 +26,7 @@ export default {
   data () {
     return {
       listQuery: {
-        cid: 2
+        product_id: 2
       },
       form: {
         id: '',

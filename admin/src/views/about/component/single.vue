@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-18 18:37:39
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-18 19:44:25
+ * @LastEditTime: 2021-01-26 16:14:29
 -->
 <template>
   <div class="app-container">
@@ -43,13 +43,19 @@
 
             <el-form-item>
               <m-btn type="primary"
+                     icon="el-icon-edit"
                      label="修改"
                      perms='edit'
                      btnType="btn"
                      class="filter-item"
-                     style="margin-left: 10px;"
+                     style="margin-left: 10px;vertical-align: unset;"
                      @click="onSubmit" />
-              <el-button @click="resetForm('form')">重置</el-button>
+              <el-button type="info"
+                         icon="el-icon-view"
+                         style="margin-right:10px"
+                         @click="getView(row)">
+                预览
+              </el-button>
             </el-form-item>
           </el-form>
         </el-col>
@@ -86,17 +92,14 @@ export default {
           message: res.msg,
           type: 'success'
         })
-
       })
     },
     /**
-     * 重置
+     * 预览
      */
-    resetForm (formName) {
-      console.log(this.$refs[formName].resetFields())
-      console.log(1)
-      this.$refs[formName].resetFields();
-    }
+    getView (row) {
+      window.open(process.env.VUE_APP_BASE_SERVER + "/about/pid/1/cid/" + this.listQuery.product_id, "blank");
+    },
   }
 }
 </script>
