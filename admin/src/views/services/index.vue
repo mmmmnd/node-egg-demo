@@ -5,21 +5,30 @@
  * @version: 1.0.0
  * @Date: 2020-10-29 09:05:41
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-11 20:46:30
+ * @LastEditTime: 2021-01-26 18:00:51
 -->
 <template>
   <div class="app-container">
-    <el-table v-loading="listLoading"
-              :data="list"
-              border
-              fit
-              highlight-current-row
+    <el-table :data="list"
               style="width: 100%"
-              ref="tableDataRef">
+              @row-click="clickRowHandle"
+              ref="table">
+      <el-table-column type="expand">
+        <template slot-scope="props">
+          <el-form label-position="left"
+                   inline
+                   class="demo-table-expand">
+            <el-form-item label="内容">
+              <div v-html="props.row.content"></div>
+            </el-form-item>
+          </el-form>
+        </template>
+      </el-table-column>
+
       <el-table-column prop="index"
                        type="index"
                        align="center"
-                       label="序号"
+                       label="Id"
                        width="80px"
                        sortable>
       </el-table-column>
@@ -28,7 +37,10 @@
                        label="分类"
                        width="120px">
         <template slot-scope="{row}">
-          <el-tag>{{ category[row.id-1].title }}</el-tag>
+          <template v-for="(item,index) in category">
+            <el-tag v-if="row.category_id === item.id"
+                    :key="index">{{item.title }}</el-tag>
+          </template>
         </template>
       </el-table-column>
 
@@ -50,18 +62,19 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="companyDescription"
+      <el-table-column prop="description"
                        align="center"
                        label="网站描述"
                        show-overflow-tooltip>
         <template slot-scope="{row}">
-          <span class="text-hidden">{{ row.companyDescription }}</span>
+          <span class="text-hidden">{{ row.description }}</span>
         </template>
       </el-table-column>
 
       <el-table-column prop="status"
                        align="center"
-                       label="状态">
+                       label="状态"
+                       width="50">
         <template slot-scope="{row}">
           <m-btn :label="row.status"
                  perms='update'
@@ -70,9 +83,9 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="companyDescription"
-                       align="center"
-                       label="最后修改时间">
+      <el-table-column align="center"
+                       label="最后修改时间"
+                       width="200">
         <template slot-scope="{row}">
           <span>{{ row.updated_at | formatTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
@@ -100,7 +113,6 @@
       </el-table-column>
 
     </el-table>
-
     <vEdit ref="newForm"
            :visible.sync="showDialog"
            :temp="temp"
@@ -113,7 +125,7 @@
 </template>
 
 <script>
-import { servicesList, servicesUpdate, servicesEdit } from '@/api/services'
+import { servicesList, servicesUpdate, servicesEdit, servicesDetail } from '@/api/services'
 import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
 
 import vEdit from './component/edit'
@@ -146,17 +158,29 @@ export default {
       this.listLoading = true
       servicesList()
         .then(response => {
-          this.list = response.data.services
-          this.category = response.data.aboutSingleMenu
+          this.list = response.data
           return advertDetail(data)
         }).then(response => {
-          var data = response.data.filter(item => item.parentId == this.category[0].pid);
-          this.list.filter(listItem => {
-            var advert = data.filter(item => listItem.id == item.serId)
-            return listItem.advert = advert
-          })
+          console.log(response)
+
+          // var data = response.data.filter(item => item.parentId == this.category[0].pid);
+          // this.list.filter(listItem => {
+          //   var advert = data.filter(item => listItem.id == item.serId)
+          //   return listItem.advert = advert
+          // })
+          return servicesDetail()
+        })
+        .then(response => {
+          this.category = response.data
           this.listLoading = false
         })
+    },
+    clickRowHandle (row, column, event) {
+      const table = this.$refs.table;
+      this.list.map(item => {
+        row.id != item.id && table.toggleRowExpansion(item, false)
+      })
+      table.toggleRowExpansion(row)
     },
     /**
      * 切换状态
