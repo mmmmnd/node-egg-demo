@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-18 15:10:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-26 16:19:36
+ * @LastEditTime: 2021-01-27 19:31:15
 -->
 <template>
   <div class="app-container">
@@ -19,10 +19,9 @@
 </template>
 <script>
 import { aboutSingleList, aboutSingleEdit } from '@/api/about'
-import Tinymce from '@/components/Tinymce'
 import vSingle from './component/single'
 export default {
-  components: { Tinymce, vSingle },
+  components: { vSingle },
   data () {
     return {
       listQuery: {

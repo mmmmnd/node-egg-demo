@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-10-29 09:05:41
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-26 18:00:51
+ * @LastEditTime: 2021-01-27 19:35:42
 -->
 <template>
   <div class="app-container">
@@ -18,9 +18,32 @@
           <el-form label-position="left"
                    inline
                    class="demo-table-expand">
-            <el-form-item label="内容">
-              <div v-html="props.row.content"></div>
-            </el-form-item>
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="图片">
+                  <el-image style="width: 380px; height: 300px"
+                            :src="props.row.image"
+                            fit="fill"></el-image>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="轮博图片">
+                  <el-carousel indicator-position="outside"
+                               :autoplay="false"
+                               style="width:380px;">
+                    <el-carousel-item v-for="item in props.row.advert"
+                                      :key="item.file_path">
+                      <el-image :src="item.file_path"
+                                fit="fill"
+                                style="height:100%"></el-image>
+                    </el-carousel-item>
+                  </el-carousel>
+                </el-form-item>
+              </el-col>
+              <el-form-item label="内容">
+                <div v-html="props.row.content"></div>
+              </el-form-item>
+            </el-row>
           </el-form>
         </template>
       </el-table-column>
@@ -140,10 +163,10 @@ export default {
         page: 1,
         limit: 20
       },
-      category: [],
-      showDialog: false,
+      category: [], //分类
+      showDialog: false, //弹窗
       temp: {},
-      dialogStatus: ''
+      dialogStatus: '' //弹窗标题
     }
   },
   created () {
@@ -161,13 +184,10 @@ export default {
           this.list = response.data
           return advertDetail(data)
         }).then(response => {
-          console.log(response)
-
-          // var data = response.data.filter(item => item.parentId == this.category[0].pid);
-          // this.list.filter(listItem => {
-          //   var advert = data.filter(item => listItem.id == item.serId)
-          //   return listItem.advert = advert
-          // })
+          this.list.filter(listItem => {
+            const advert = response.data.filter(item => listItem.id == item.ser_id)
+            return listItem.advert = advert
+          })
           return servicesDetail()
         })
         .then(response => {
@@ -204,7 +224,7 @@ export default {
      * 编辑
      */
     handleUpdate (row) {
-      this.temp = Object.assign({}, row) // copy obj
+      this.temp = Object.assign({}, row)
       this.dialogStatus = 'update'
       this.showDialog = true;
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
@@ -227,10 +247,10 @@ export default {
     uploadOnSuccess (Obj, cab) {
       const data = {
         title: '新增图片',
-        filepath: Obj.e.data.url,
+        file_path: Obj.e.data.url,
         place: 3,
-        parentId: this.category[0].pid,
-        serId: Obj.temp.id
+        parent_id: this.category[0].pid,
+        ser_id: Obj.temp.id
       }
       advertAdd(data).then(res => cab(res))
     },
