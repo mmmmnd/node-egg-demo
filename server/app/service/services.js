@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:24:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-26 17:40:38
+ * @LastEditTime: 2021-01-27 17:08:03
  */
 'use strict';
 /**
@@ -55,11 +55,11 @@ class ServicesService extends Service {
    * @param { Object } params 参数
    */
   async edit (params) {
-    const { id, category_id, title, keywords, companyDescription, servicesImage, content, status } = params;
+    const { id, category_id, title, keywords, description, image, content, status } = params;
 
     try {
       await this.ctx.model.MzcServices.update({
-        category_id, title, keywords, companyDescription, servicesImage, content, status
+        category_id, title, keywords, description, image, content, status
       }, {
         where: {
           id,

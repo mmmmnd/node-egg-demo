@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:11:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-19 14:45:29
+ * @LastEditTime: 2021-01-27 17:08:25
  */
 'use strict';
 
@@ -47,24 +47,10 @@ class AdvertService extends Service {
   * @param { Object } params 参数
   */
   async add (params) {
-    const {
-      title,
-      url = '',
-      filepath = '',
-      place = '',
-      parentId = '',
-      serId = '',
-      remark = ''
-    } = params;
+    const { title, url = '', file_path = '', place = '', parent_id = '', ser_id = '', remark = '' } = params;
 
     await this.ctx.model.MzcAdvert.create({
-      title,
-      url,
-      filepath,
-      place,
-      parentId,
-      serId,
-      remark
+      title, url, file_path, place, parent_id, ser_id, remark
     });
 
     return { httpStatus: HttpStatus.OK }
@@ -74,29 +60,10 @@ class AdvertService extends Service {
   * @param { Object } params 参数
   */
   async edit (params) {
-    const {
-      id,
-      title,
-      url,
-      filepath,
-      place,
-      parentId,
-      serId,
-      remark,
-      status,
-      sort
-    } = params;
+    const { id, title, url, file_path, place, parent_id, ser_id, remark, status, sort } = params;
 
     await this.ctx.model.MzcAdvert.update({
-      title,
-      url,
-      filepath,
-      place,
-      parentId,
-      serId,
-      remark,
-      status,
-      sort
+      title, url, file_path, place, parent_id, ser_id, remark, status, sort
     }, {
       where: {
         id,

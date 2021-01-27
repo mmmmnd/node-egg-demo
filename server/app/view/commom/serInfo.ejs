@@ -12,10 +12,10 @@
     <% servicesList.forEach((item,index) => { %>
       <div class="swiper-slide">
         <a href="/services/pid/7/cid/<%= item.category_id %>">
-          <img src="" alt="" class="ser-info-img" data-src="<%= item.servicesImage %>">
+          <img src="" alt="" class="ser-info-img" data-src="<%= item.image %>">
           <div class="ser-info-txt">
             <h5><%= menuList[1].children[index].title %></h5>
-            <p><%= item.companyDescription %></p>
+            <p><%= item.description %></p>
           </div>
         </a>
       </div>

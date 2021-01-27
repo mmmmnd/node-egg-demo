@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-23 18:55:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-26 17:40:53
+ * @LastEditTime: 2021-01-27 16:38:51
  */
 'use strict';
 
@@ -45,7 +45,7 @@ module.exports = app => {
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
       comment: '公司描述', // 备注
     },
-    servicesImage: {
+    image: {
       allowNull: !1, // 是否为空
       type: STRING, // 类型
       defaultValue: '', // 默认值

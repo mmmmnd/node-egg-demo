@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-22 09:20:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-26 11:48:55
+ * @LastEditTime: 2021-01-27 16:38:36
 -->
 
 <%- include('/commom/header',{
@@ -34,7 +34,7 @@ ctx.params.cid == 8 ?
           <h5><%= servicesDetail[0].title %></h5>
           <p><%= servicesDetail[0].description %></p>
         </div>
-        <img src="" alt="" class="ser-top-img" data-src="<%= servicesDetail[0].servicesImage %>">
+        <img src="" alt="" class="ser-top-img" data-src="<%= servicesDetail[0].image %>">
       </div>
       <%- include('/commom/serInfoPhoto',{ id }) %>
       <div class="ser-info-text">
@@ -48,12 +48,12 @@ ctx.params.cid == 8 ?
 <%- include('/commom/footer') %>
 <script>
   var swiper = new Swiper('.ser-info-photo', {
-    slidesPerView: 'auto',
-    spaceBetween: 30,
-    freeMode: true,
+    speed: 500,
+    loop: true,
+    observer: true,//修改swiper自己或子元素时，自动初始化swiper
+    observeParents: true,//修改swiper的父元素时，自动初始化swiper
     pagination: {
-      el: '.photo-pagination',
-      clickable: true,
+      el: '.swiper-pagination',
     },
   });
 </script>

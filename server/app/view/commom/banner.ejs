@@ -8,7 +8,7 @@
  * @LastEditTime: 2020-07-22 20:19:00
 --> 
 <% advertList.forEach((item,index)=>{ %>
-  <% if(item.place === 2 && item.parentId == ctx.params.pid){ %>
-    <div class="banner-info" style="background: url('<%= item.filepath %>') no-repeat center;" data-paroller-factor="0.5"></div>
+  <% if(item.place === 2 && item.parent_id == ctx.params.pid){ %>
+    <div class="banner-info" style="background: url('<%= item.file_path %>') no-repeat center;" data-paroller-factor="0.5"></div>
   <% } %>
 <% }) %>

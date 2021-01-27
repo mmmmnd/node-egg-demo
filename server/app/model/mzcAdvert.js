@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 19:53:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-18 11:52:19
+ * @LastEditTime: 2021-01-27 16:58:38
  */
 'use strict';
 
@@ -27,7 +27,7 @@ module.exports = app => {
       defaultValue: '', // 默认值
       comment: '标题', // 备注
     },
-    filepath: {
+    file_path: {
       allowNull: !1, // 是否为空
       type: STRING(150), // 类型
       defaultValue: '', // 默认值
@@ -39,13 +39,13 @@ module.exports = app => {
       defaultValue: '0', // 默认值
       comment: '文件类型 0->首页轮播 1->页面轮播广告 2->页面banner 3->公司轮播介绍', // 备注
     },
-    parentId: {
+    parent_id: {
       allowNull: !1, // 是否为空
       type: BOOLEAN, // 类型
       defaultValue: '0', // 默认值
       comment: '菜单id', // 备注
     },
-    serId: {
+    ser_id: {
       allowNull: !1, // 是否为空
       type: BOOLEAN, // 类型
       defaultValue: '0', // 默认值

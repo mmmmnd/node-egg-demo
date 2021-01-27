@@ -11,10 +11,10 @@
 <div class="ser-info-photo">
   <div class="swiper-wrapper">
     <% advertList.forEach(item =>{ %>
-      <% if(item.place === 3 && item.parentId == ctx.params.pid && item.serId == id){ %>
+      <% if(item.place === 3 && item.parent_id == ctx.params.pid && item.ser_id == id){ %>
         <% isSwiper = 1; %>
         <div class="swiper-slide">
-          <img src="" alt="" class="swiper-photo" data-src="<%= item.filepath %>">
+          <img src="" alt="" class="swiper-photo" data-src="<%= item.file_path %>">
           <h5><%= item.title %></h5>
         </div>
       <% } %>
