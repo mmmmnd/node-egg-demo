@@ -76,10 +76,10 @@ module.exports = app => {
   router.delete('/api/aboutDroptype/destroy', jwt, controller.aboutDroptype.destroy);
 
   // services
-  router.get('/api/services/list', jwt, controller.services.list)
-  router.put('/api/services/update', jwt, controller.services.update)
-  router.post('/api/services/edit', jwt, controller.services.edit)
   router.get('/api/services/detail', jwt, controller.services.detail)
+  // router.put('/api/services/update', jwt, controller.services.update)
+  router.post('/api/services/edit', jwt, controller.services.edit)
+  // router.get('/api/services/detail', jwt, controller.services.detail)
 
   // company
   router.get('/api/company/index', jwt, controller.company.index)

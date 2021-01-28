@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-07-22 09:20:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-27 16:38:36
+ * @LastEditTime: 2021-01-28 09:15:59
 -->
 
 <%- include('/commom/header',{
-  title:servicesDetail?servicesDetail[0].title:"海南昆仑体育文化股份有限公司",
-  Keywords:servicesDetail?servicesDetail[0].keywords:"海南昆仑体育文化股份有限公司",
-  description:servicesDetail?servicesDetail[0].description:"海南昆仑体育文化股份有限公司",
+  title:servicesDetail?servicesDetail.title:"海南昆仑体育文化股份有限公司",
+  Keywords:servicesDetail?servicesDetail.keywords:"海南昆仑体育文化股份有限公司",
+  description:servicesDetail?servicesDetail.description:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <% var id = 
@@ -31,14 +31,14 @@ ctx.params.cid == 8 ?
     <div class="content-right">
       <div class="ser-top">
         <div class="ser-top-txt">
-          <h5><%= servicesDetail[0].title %></h5>
-          <p><%= servicesDetail[0].description %></p>
+          <h5><%= servicesDetail.title %></h5>
+          <p><%= servicesDetail.description %></p>
         </div>
-        <img src="" alt="" class="ser-top-img" data-src="<%= servicesDetail[0].image %>">
+        <img src="" alt="" class="ser-top-img" data-src="<%= servicesDetail.image %>">
       </div>
       <%- include('/commom/serInfoPhoto',{ id }) %>
       <div class="ser-info-text">
-        <%- servicesDetail[0].content %>
+        <%- servicesDetail.content %>
       </div>
     </div>
   </div>
