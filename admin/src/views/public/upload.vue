@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-19 16:50:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-19 20:09:33
+ * @LastEditTime: 2021-01-28 17:22:00
 -->
 <template>
   <el-upload v-if="progress"
@@ -15,9 +15,10 @@
              :show-file-list="false"
              :on-progress="setAvatarProgress"
              :on-success="handleAvatarSuccess">
-    <img v-if="avatar_image"
-         :src="avatar_image"
-         class="avatar">
+    <el-image v-if="avatar_image"
+              :src="avatar_image"
+              fit="cover"
+              lazy></el-image>
     <i v-else
        class="el-icon-plus avatar-uploader-icon"></i>
   </el-upload>

@@ -5,15 +5,16 @@
  * @version: 1.0.0
  * @Date: 2021-01-27 19:18:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-27 19:33:35
+ * @LastEditTime: 2021-01-28 18:41:42
 -->
 <template>
-  <div>
+  <div class="img-list">
     <div class="img-li-box"
          v-for="(item,key) in advert"
          :key="key">
-      <img class="img-li-b--url"
-           :src="item.file_path">
+      <el-image class="img-li-b--url"
+                :src="item.file_path"
+                lazy></el-image>
       <div class="img-li-b--bottom">
         <div class="img-li-b--name">{{ item.title }}</div>
         <el-button type="text"
@@ -62,15 +63,21 @@
 <script>
 export default {
   props: {
-    advert: {
+    advert: { //轮播数组
       type: Array,
-      default: {}
-    }
+      default: []
+    },
+    progress: { //上传进度
+      type: Number,
+      default: 0
+    },
+    pass: { //是否上传成功
+      type: Boolean,
+      default: false
+    },
   },
   data () {
     return {
-      progress: 0, //上传进度
-      pass: null, //是否上传成功
       isEnlargeImage: false, //放大图片
       enlargeImage: '', //放大图片地址
     }
@@ -91,10 +98,11 @@ export default {
           this.$emit('updateItem', Obj, res => {
             if (res.code == 0) {
               this.$set(this.temp.advert[i], 'title', value)
-              this.alertView('操作成功', 'success')
+              this.$message.success('操作成功')
             }
           })
         })
+        .catch(() => this.$message.info('已取消修改'));
     },
     /**
      * 排序
@@ -108,7 +116,6 @@ export default {
      */
     handleFileRemove (file, i) {
       if (!file.file_path) return false;
-      let that = this;
       this.$confirm('是否删除此文件？', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -117,12 +124,15 @@ export default {
         .then(() => {
           this.$emit('handleFileRemove', file, res => {
             if (res.code == 0) {
-              that.temp.advert.splice(i, 1)
-              this.alertView('删除成功', 'success')
+              console.log(this.advert)
+              this.advert.splice(i, 1)
+              console.log(this.advert)
+              this.$emit('update:advert', this.advert)
+              this.$message.success('删除成功')
             }
           })
         })
-        .catch(() => this.alertView('已取消删除', 'info'));
+        .catch(() => this.$message.info('已取消删除'));
     },
     /**
      * 放大图片
@@ -138,8 +148,9 @@ export default {
 </script>
 <style lang="scss" scoped>
 .img-list {
-  overflow: hidden;
   width: 100%;
+  overflow: auto;
+  white-space: nowrap;
 
   // 文件列表
   .img-li-box {
