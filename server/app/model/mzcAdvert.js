@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 19:53:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-27 16:58:38
+ * @LastEditTime: 2021-01-29 17:21:00
  */
 'use strict';
 
@@ -54,7 +54,7 @@ module.exports = app => {
     status: {
       allowNull: !1, // 是否为空
       type: BOOLEAN, // 类型
-      defaultValue: '0', // 默认值
+      defaultValue: '1', // 默认值
       comment: '状态', // 备注
     },
     sort: {
