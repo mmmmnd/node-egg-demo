@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-28 08:50:33
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-28 18:40:08
+ * @LastEditTime: 2021-01-29 17:27:44
 -->
 <template>
   <div class="app-container">
@@ -81,18 +81,11 @@
             </el-form-item>
 
             <el-form-item label="轮播图片:">
-              <VbatchUpload :advert.sync="form.advert"
+              <VbatchUpload :advert="form.advert"
+                            @updateItem="updateItem"
+                            @uploadOnSuccess="uploadOnSuccess"
                             @handleFileRemove="handleFileRemove" />
             </el-form-item>
-
-            <el-upload class="upload-demo"
-                       :headers="{token}"
-                       :action="uploadUrl"
-                       :on-success="uploadOnSuccess"
-                       :on-progress="uploadOnProgress"
-                       style="margin-left: 14%;">
-              <el-button type="primary">上传轮播图</el-button>
-            </el-upload>
           </el-col>
         </el-row>
       </el-form>
@@ -117,9 +110,6 @@ export default {
   },
   data () {
     return {
-      progress: false, // 上传进度条
-      uploadUrl: process.env.VUE_APP_BASE_API + '/upload/create',
-      token: this.$store.getters.token,
     }
   },
   methods: {
@@ -130,40 +120,22 @@ export default {
       this.$emit('updateItem', this.form, res => this.$message.success(res.msg))
     },
     /**
-     * 轮播上传
+     * 父页面执行 上传轮播图
      */
-    uploadOnProgress (e, file) {
-      const REG = /\.(png|jpg|gif|jpeg|webp)$/;
-
-      if (!REG.test(file.name)) {
-        this.$message.warning('文件格式不支持！')
-        return false;
-      }
-
-      this.progress = Math.floor(e.percent)
+    uploadOnSuccess (Obj, cab) {
+      this.$emit('uploadOnSuccess', Obj, res => cab(res))
     },
     /**
-     * 轮播成功
+     * 父页面执行 轮播图删除
      */
-    uploadOnSuccess (e, file) {
-      this.pass = true;
-      var Obj = { e, form: this.form }
-      this.$emit('uploadOnSuccess', Obj, res => {
-        if (res.code == 0) {
-          this.$message.success('上传成功')
-          this.form.advert.push({
-            file_path: e.data.url,
-            title: '新增图片'
-          })
-          console.log(this.form)
-        }
-      })
-    },
-    /**
-    * 父页面执行 轮播图删除
-    */
     handleFileRemove (Obj, cab) {
       this.$emit('handleFileRemove', Obj, res => cab(res))
+    },
+    /**
+     * 父页面执行 轮播修改
+     */
+    updateItem (Obj, cab) {
+      this.$emit('updateItem', Obj, res => cab(res))
     },
     /**
      * 预览

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-28 08:49:12
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-28 18:16:37
+ * @LastEditTime: 2021-01-29 17:30:38
 -->
 <template>
   <div class="app-container">
@@ -13,6 +13,7 @@
       <vSingle :listQuery="listQuery"
                :form="form"
                @updateItem="updateItem"
+               @uploadOnSuccess="uploadOnSuccess"
                @handleFileRemove="handleFileRemove" />
     </div>
   </div>
@@ -67,19 +68,21 @@ export default {
     /**
      * 父页面执行 修改
      */
-    updateItem (Obj, cab) {
-      servicesEdit(Obj).then(res => cab(res))
-    },
+    // updateItem (Obj, cab) {
+    //   servicesEdit(Obj).then(res => cab(res))
+    // },
     /**
      * 父页面执行 轮播图上传成功
      */
     uploadOnSuccess (Obj, cab) {
       const data = {
         title: '新增图片',
-        file_path: Obj.e.data.url,
+        file_path: Obj.url,
         place: 3,
         parent_id: 7,
-        ser_id: Obj.form.id
+        status: 1,
+        sort: 0,
+        ser_id: this.form.id
       }
       advertAdd(data).then(res => cab(res))
     },
@@ -90,11 +93,11 @@ export default {
       advertDestroy(Obj).then(res => cab(res))
     },
     /**
-     * 父页面执行 修改
+     * 父页面执行 轮播修改
      */
-    // updateItem (Obj, cab) {
-    //   advertUpdate(Obj).then(res => cab(res))
-    // }
+    updateItem (Obj, cab) {
+      advertUpdate(Obj).then(res => cab(res))
+    }
   }
 }
 </script>
