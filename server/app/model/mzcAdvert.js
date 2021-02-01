@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 19:53:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-29 17:21:00
+ * @LastEditTime: 2021-02-01 16:16:35
  */
 'use strict';
 
@@ -62,6 +62,18 @@ module.exports = app => {
       type: INTEGER(6), // 类型
       defaultValue: '0', // 默认值
       comment: '排序', // 备注
+    },
+    created_user_id: {
+      allowNull: !1, // 是否为空
+      type: INTEGER(8), // 类型
+      comment: '用户创建id', // 备注
+      defaultValue: '0', // 默认值
+    },
+    updated_user_id: {
+      allowNull: !1, // 是否为空
+      type: INTEGER(8), // 类型
+      comment: '用户修改id', // 备注
+      defaultValue: '0', // 默认值
     },
     created_at: {
       allowNull: !0, // 是否为空

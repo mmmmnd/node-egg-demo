@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:11:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-29 17:22:13
+ * @LastEditTime: 2021-02-01 16:26:16
  */
 'use strict';
 
@@ -13,7 +13,6 @@ const Service = require('egg').Service;
 const HttpStatus = require('../utils/httpStatus');
 
 class AdvertService extends Service {
-
   /**
    * 轮播图列表
    */
@@ -27,12 +26,11 @@ class AdvertService extends Service {
     });
   }
   /**
- * 详情
- * @param { String } key 字段名
- * @param { String } value 字段值
- */
+   * 详情
+   * @param { String } key 字段名
+   * @param { String } value 字段值
+   */
   async detail ({ key, value }) {
-
     const advert = await this.ctx.model.MzcAdvert.findAll({
       where: {
         [key]: value,
@@ -43,27 +41,27 @@ class AdvertService extends Service {
     return { data: advert }
   }
   /**
-  * 增加
-  * @param { Object } params 参数
-  */
+   * 增加
+   * @param { Object } params 参数
+   */
   async add (params) {
-    const { title, url = '', file_path = '', place = '', parent_id = '', status, ser_id = '', remark = '' } = params;
+    const { title, url = '', file_path = '', place = '', parent_id = '', status, ser_id = '', remark = '', created_user_id = global.userInfo.userId } = params;
 
-    await this.ctx.model.MzcAdvert.create({
-      title, url, file_path, place, parent_id, status, ser_id, remark
+    const advert = await this.ctx.model.MzcAdvert.create({
+      title, url, file_path, place, parent_id, status, ser_id, remark, created_user_id
     });
 
-    return { httpStatus: HttpStatus.OK }
+    return { data: advert }
   }
   /**
-  * 编辑
-  * @param { Object } params 参数
-  */
+   * 编辑
+   * @param { Object } params 参数
+   */
   async edit (params) {
-    const { id, title, url, file_path, place, parent_id, ser_id, remark, status, sort } = params;
+    const { id, title, url, file_path, place, parent_id, ser_id, remark, status, sort, updated_user_id = global.userInfo.userId } = params;
 
     await this.ctx.model.MzcAdvert.update({
-      title, url, file_path, place, parent_id, ser_id, remark, status, sort
+      title, url, file_path, place, parent_id, ser_id, remark, status, sort, updated_user_id
     }, {
       where: {
         id,
@@ -93,20 +91,16 @@ class AdvertService extends Service {
    * @param { String } value 字段值
    */
   async update ({ id, key, value }) {
-    try {
-      let aboutDroptype = await this.ctx.model.MzcAdvert.update({ [key]: value }, {
-        where: {
-          id,
-          deleted_at: null
-        },
-      })
+    const aboutDroptype = await this.ctx.model.MzcAdvert.update({ [key]: value, updated_user_id: global.userInfo.userId }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
 
-      if (!aboutDroptype[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
+    if (!aboutDroptype) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
 
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    return { httpStatus: HttpStatus.OK }
   }
 }
 

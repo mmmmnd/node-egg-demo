@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-26 17:25:05
+ * @LastEditTime: 2021-02-01 17:48:44
  */
 'use strict';
 
@@ -77,9 +77,7 @@ module.exports = app => {
 
   // services
   router.get('/api/services/detail', jwt, controller.services.detail)
-  // router.put('/api/services/update', jwt, controller.services.update)
   router.post('/api/services/edit', jwt, controller.services.edit)
-  // router.get('/api/services/detail', jwt, controller.services.detail)
 
   // company
   router.get('/api/company/index', jwt, controller.company.index)
