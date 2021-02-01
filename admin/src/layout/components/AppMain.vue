@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-09-23 15:22:59
+ * @LastEditTime: 2021-02-01 16:46:25
 -->
 <template>
   <section class="app-main">
@@ -32,7 +32,7 @@ export default {
 
 <style lang="scss" scoped>
 .app-main {
-  min-height: calc(100vh - 50px);
+  // min-height: calc(100vh - 50px);
   width: 100%;
   position: relative;
   overflow: hidden;

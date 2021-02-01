@@ -5,12 +5,13 @@
  * @version: 1.0.0
  * @Date: 2021-01-27 19:18:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-29 17:30:23
+ * @LastEditTime: 2021-02-01 18:03:48
 -->
 <template>
   <div class="batch-upload-wrapper">
     <!-- 列表 -->
-    <div class="img-list">
+    <div v-if="advert.length>0"
+         class="img-list">
       <div class="img-li-box"
            v-for="(item,key) in items"
            :key="key">
@@ -69,7 +70,7 @@
         </el-carousel>
       </el-dialog>
     </div>
-
+    <el-divider v-else>暂无轮播图数据</el-divider>
     <!-- 批量上传按钮 -->
     <el-upload class="upload-demo"
                :headers="{token}"
@@ -115,7 +116,7 @@ export default {
         if (res.code == 0) {
           this.$message.success('上传成功')
           this.items.push({
-            id: Number(this.items[this.items.length - 1].id) + 1,
+            id: res.data.id,
             file_path: e.data.url,
             title: '新增图片',
             sort: 0

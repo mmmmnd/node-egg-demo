@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-28 08:49:48
+ * @LastEditTime: 2021-02-01 17:54:07
  */
 import { constantRoutes } from '@/router'
 import { routesIndex } from '@/api/routes'
@@ -46,8 +46,11 @@ export const componentsMap = {
   aboutTeam: () => import('@/views/about/team'),
   aboutEvent: () => import('@/views/about/event'),
   aboutHonor: () => import('@/views/about/honor'),
-  servicesIndex: () => import('@/views/services/index'),
+  servicesEvent: () => import('@/views/services/event'),
   servicesCulture: () => import('@/views/services/culture'),
+  servicesEducation: () => import('@/views/services/education'),
+  servicesTraining: () => import('@/views/services/training'),
+  servicesMeeting: () => import('@/views/services/meeting'),
   companyIndex: () => import('@/views/company/index'),
   cultureIndex: () => import('@/views/culture/index'),
   newsIndex: () => import('@/views/news/index'),

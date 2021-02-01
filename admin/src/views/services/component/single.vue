@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-28 08:50:33
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-29 17:27:44
+ * @LastEditTime: 2021-02-01 17:56:08
 -->
 <template>
   <div class="app-container">
@@ -26,7 +26,6 @@
 
             <el-form-item label="网站描述:">
               <el-input type="textarea"
-                        rows="4"
                         v-model="form.description"></el-input>
             </el-form-item>
 
@@ -114,12 +113,6 @@ export default {
   },
   methods: {
     /**
-     * 编辑
-     */
-    onSubmit () {
-      this.$emit('updateItem', this.form, res => this.$message.success(res.msg))
-    },
-    /**
      * 父页面执行 上传轮播图
      */
     uploadOnSuccess (Obj, cab) {
@@ -138,6 +131,12 @@ export default {
       this.$emit('updateItem', Obj, res => cab(res))
     },
     /**
+     * 编辑
+     */
+    onSubmit () {
+      this.$emit('onSubmit', this.form, res => this.$message.success(res.msg))
+    },
+    /**
      * 预览
      */
     getView (row) {
@@ -146,3 +145,31 @@ export default {
   }
 }
 </script>
+<style scoped>
+.el-form-item {
+  margin-bottom: 5px;
+}
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.avatar {
+  width: 400px;
+  height: 250px;
+  display: block;
+}
+</style>

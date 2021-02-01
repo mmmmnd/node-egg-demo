@@ -3,9 +3,9 @@
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
- * @Date: 2021-01-28 08:49:12
+ * @Date: 2021-02-01 17:51:33
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-01 17:53:36
+ * @LastEditTime: 2021-02-01 17:55:24
 -->
 <template>
   <div class="app-container">
@@ -29,7 +29,7 @@ export default {
   data () {
     return {
       listQuery: {
-        category_id: 9
+        category_id: 12
       },
       category: [], //分类
       form: {

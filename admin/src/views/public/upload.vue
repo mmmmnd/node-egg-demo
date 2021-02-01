@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-19 16:50:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-28 17:22:00
+ * @LastEditTime: 2021-02-01 16:34:52
 -->
 <template>
   <el-upload v-if="progress"
@@ -18,7 +18,8 @@
     <el-image v-if="avatar_image"
               :src="avatar_image"
               fit="cover"
-              lazy></el-image>
+              lazy
+              class="avatar"></el-image>
     <i v-else
        class="el-icon-plus avatar-uploader-icon"></i>
   </el-upload>
