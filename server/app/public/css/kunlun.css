@@ -1438,6 +1438,7 @@ body.modal-open{
     position: relative;
 }
 .content-right{
+    min-height: 400px;
     width: 100%;
     padding-left: 300px; 
     overflow: hidden;

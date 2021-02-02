@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-22 09:20:21
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-28 09:15:59
+ * @LastEditTime: 2021-02-02 10:18:26
 -->
 
 <%- include('/commom/header',{
@@ -28,19 +28,29 @@ ctx.params.cid == 8 ?
   <div class="content main-info">
 
     <%- include('/commom/column') %>
-    <div class="content-right">
-      <div class="ser-top">
-        <div class="ser-top-txt">
-          <h5><%= servicesDetail.title %></h5>
-          <p><%= servicesDetail.description %></p>
+      <% if(servicesDetail){ %>
+        <div class="content-right">
+          <div class="ser-top">
+            <div class="ser-top-txt">
+              <h5><%= servicesDetail.title %></h5>
+              <p><%= servicesDetail.description %></p>
+            </div>
+            <img src="" alt="" class="ser-top-img" data-src="<%= servicesDetail.image %>">
+          </div>
+          <%- include('/commom/serInfoPhoto',{ id }) %>
+          <div class="ser-info-text">
+            <%- servicesDetail.content %>
+          </div>
         </div>
-        <img src="" alt="" class="ser-top-img" data-src="<%= servicesDetail.image %>">
-      </div>
-      <%- include('/commom/serInfoPhoto',{ id }) %>
-      <div class="ser-info-text">
-        <%- servicesDetail.content %>
-      </div>
-    </div>
+      <% }else{ %>
+        <div class="content-right">
+          <div class="ser-top">
+            <div class="ser-top-txt">
+              <h1>暂无数据</h1>
+            </div>
+          </div>
+        </div>
+      <% } %>
   </div>
 </div>
 <%- include('/commom/serInfo') %>
