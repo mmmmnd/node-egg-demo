@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-28 08:50:33
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-02 09:42:02
+ * @LastEditTime: 2021-02-02 17:01:33
 -->
 <template>
   <div class="app-container">
@@ -16,7 +16,7 @@
         <el-row>
           <el-col :span="12">
             <el-form-item label="网站标题:">
-              <el-input v-model="form.title"></el-input>
+              <el-input v-model="form.site_title"></el-input>
             </el-form-item>
 
             <el-form-item label="网站关键词:">
