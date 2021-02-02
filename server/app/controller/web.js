@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-01 17:33:32
+ * @LastEditTime: 2021-02-02 16:51:04
  */
 'use strict';
 const moment = require('moment');
@@ -65,18 +65,23 @@ class WebController extends Controller {
   }
   async company () {
     const { ctx, service } = this;
-    const { pid, cid } = ctx.params;
+    var { pid, cid, id } = ctx.params;
 
     const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
+    if (!id) {
+      const companyId = await service.company.getMaxId(cid);
+      id = companyId.id;
+    }
     const menuList = await service.menu.list(); // 导航栏菜单
-    const companyDetail = await service.company.detail(cid); // services数据
+    const companyList = await service.company.list(cid); // company详情数据
+    const companyDetail = await service.company.detail(id, cid); // company详情数据
     const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingsList, companyDetail, advertList, servicesList }
+    const data = { menuList, settingsList, companyList, companyDetail, advertList, servicesList }
     await ctx.render('company/index.ejs', data);
   }
   async culture () {

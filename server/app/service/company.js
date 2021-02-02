@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:27:48
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-09 10:01:47
+ * @LastEditTime: 2021-02-02 15:36:08
  */
 'use strict';
 
@@ -48,18 +48,46 @@ class CompanyService extends Service {
       return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
     }
   }
-  /**
-   * 详情
-   * @param { Object } ctx 全局this
-   * @param { Number } cid 二级菜单id
-   */
-  async detail (cid) {
+  async list (cid) {
     return await this.ctx.model.MzcCompany.findAll({
       where: {
         category_id: cid,
+        status: true,
+        deleted_at: null
+      },
+      order: [['sort', 'DESC'], ['id', 'ASC']],
+    });
+  }
+  /**
+   * 详情
+   * @param { Number } cid 二级菜单id
+   * @param { Number } id 列表id
+   */
+  async detail (id, cid) {
+    return await this.ctx.model.MzcCompany.findOne({
+      where: {
+        id,
+        category_id: cid,
+        status: true,
         deleted_at: null
       },
     });
+  }
+  /**
+   * 查找当前二级菜单最大排序id
+   * @param { Number } cid  二级菜单id
+   */
+  async getMaxId (cid) {
+    const company = await this.ctx.model.MzcCompany.findOne({
+      where: {
+        category_id: cid,
+        status: true,
+        deleted_at: null
+      },
+      order: [['sort', 'DESC'], ['id', 'ASC']],
+    });
+
+    return company
   }
   /**
    * 修改
@@ -88,11 +116,11 @@ class CompanyService extends Service {
    * @param { Object } params 参数
    */
   async edit (params) {
-    const { id, category_id, title, keywords, companyDescription, companyTitle, content, image, address, website, email, phone, status, sort } = params;
+    const { id, category_id, site_title, keywords, description, title, content, image, address, website, email, phone, status, sort } = params;
 
     try {
       await this.ctx.model.MzcCompany.update({
-        category_id, title, keywords, companyDescription, companyTitle, content, image, address, website, email, phone, status, sort
+        category_id, site_title, keywords, description, title, content, image, address, website, email, phone, status, sort
       }, {
         where: {
           id,
@@ -122,11 +150,11 @@ class CompanyService extends Service {
    * @param { Object } params 参数
    */
   async add (params) {
-    const { category_id, title, keywords, companyDescription, companyTitle, content, image, address, website, email, phone, status, sort } = params;
+    const { category_id, site_title, keywords, description, title, content, image, address, website, email, phone, status, sort } = params;
 
     try {
       await this.ctx.model.MzcCompany.create({
-        category_id, title, keywords, companyDescription, companyTitle, content, image, address, website, email, phone, status, sort
+        category_id, site_title, keywords, description, title, content, image, address, website, email, phone, status, sort
       });
       return { httpStatus: HttpStatus.OK }
     } catch (error) {

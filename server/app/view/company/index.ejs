@@ -5,13 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-25 08:27:04
+ * @LastEditTime: 2021-02-02 16:47:08
 -->
-
 <%- include('/commom/header',{
-  title:companyDetail?companyDetail[0].title:"海南昆仑体育文化股份有限公司",
-  Keywords:companyDetail?companyDetail[0].keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:companyDetail?companyDetail[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  site_title:companyDetail?companyDetail.site_title:"海南昆仑体育文化股份有限公司",
+  Keywords:companyDetail?companyDetail.keywords:"海南昆仑体育文化股份有限公司",
+  description:companyDetail?companyDetail.description:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <%- include('/commom/banner') %>
@@ -22,39 +21,34 @@
     <%- include('/commom/column') %>
     <div class="content-right">
       <div class="nav-right">
-        <% companyDetail.forEach(item => { %>
-        <% if(item.category_id == ctx.params.cid){ %>
-        <a href="#<%= item.id %>" class="nav-btn <%= companyDetail[0] == item ?'active':''; %>"
-          data-toggle="tab"><%= item.companyTitle %></a>
-        <% } %>
+        <% companyList.forEach(item => { %>
+          <% if(item.category_id == ctx.params.cid){ %>
+            <a href=<%= `/company/pid/${ctx.params.pid}/cid/${ctx.params.cid}/id/${item.id}` %> class="nav-btn <%= companyDetail.id == item.id ?'active':''; %>"><%= item.title %></a>
+          <% } %>
         <% }) %>
       </div>
       <div class="tab-content">
-        <% companyDetail.forEach(item => { %>
-        <% if(item.category_id == ctx.params.cid){ %>
-        <div class="ser-top tab-pane fade <%= companyDetail[0] == item ?'in active':''; %>" id="<%= item.id %>">
+        <div class="ser-top">
           <div class="ser-top-txt">
-            <h5><%= item.companyTitle %></h5>
-            <%- item.content %>
+            <h5><%= companyDetail.title %></h5>
+            <%- companyDetail.content %>
           </div>
-          <img src="" alt="" class="ser-top-img" data-src="<%= item.image %>">
+          <img src="" alt="" class="ser-top-img" data-src="<%= companyDetail.image %>">
 
-          <%- include('/commom/serInfoPhoto',{id: item.id }) %>
+          <%- include('/commom/serInfoPhoto',{id: companyDetail.id }) %>
 
           <div class="ser-info-text">
             <h5>联系方式</h5>
             <div class="ser-info-cont">
               <div class="ser-text-right">
-                <p>公司地址：<%= item.address %></p>
-                <p>公司网址：<a href="<%= item.website %>" target="_blank"><%= item.website %></a></p>
-                <p>电子邮箱：<%= item.email %></p>
-                <p>联系电话：<a tel="<%= item.phone %>"><%= item.phone %></a></p>
+                <p>公司地址：<%= companyDetail.address %></p>
+                <p>公司网址：<a href="<%= companyDetail.website %>" target="_blank"><%= companyDetail.website %></a></p>
+                <p>电子邮箱：<%= companyDetail.email %></p>
+                <p>联系电话：<a tel="<%= companyDetail.phone %>"><%= companyDetail.phone %></a></p>
               </div>
             </div>
           </div>
         </div>
-        <% } %>
-        <% }) %>
       </div>
     </div>
   </div>

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-01 17:48:44
+ * @LastEditTime: 2021-02-02 11:24:45
  */
 'use strict';
 
@@ -22,6 +22,7 @@ module.exports = app => {
   router.get('/about/pid/:pid/cid/:cid', controller.web.about);
   router.get('/services/pid/:pid/cid/:cid', controller.web.services);
   router.get('/company/pid/:pid/cid/:cid', controller.web.company);
+  router.get('/company/pid/:pid/cid/:cid/id/:id', controller.web.company);
   router.get('/culture/pid/:pid/cid/:cid', controller.web.culture);
   router.get('/culture/pid/:pid/cid/:cid/page/:page', controller.web.culture);
   router.get('/culture_info/pid/:pid/cid/:cid/id/:id', controller.web.culture_info);

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 11:03:35
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-25 08:24:58
+ * @LastEditTime: 2021-02-02 15:43:25
 -->
 <!DOCTYPE html>
 <html>
@@ -15,8 +15,8 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-  <title><%= title %></title>
-  <meta name="Keywords" content="<%= title %>,<%= Keywords %>" />
+  <title><%= site_title %></title>
+  <meta name="Keywords" content="<%= site_title %>,<%= Keywords %>" />
   <meta name="description" content="<%= description %>" />
   <link href="/public/css/animate.css" rel="stylesheet">
   <link href="/public/css/swiper.min.css" rel="stylesheet">
@@ -37,8 +37,8 @@
       <div class="header-right">
         <!-- <a href="javascript:;" class="language"><img src="/public/images/header_icon.png" alt=""
             class="language_icon"></a> -->
-        <a href="javascript:;" class="menu" data-toggle="modal" data-target="#myModal"><img
-            src="" alt="" class="menu_icon" data-src="/public/images/icons-dark-menu.png"></a>
+        <a href="javascript:;" class="menu" data-toggle="modal" data-target="#myModal"><img src="" alt=""
+            class="menu_icon" data-src="/public/images/icons-dark-menu.png"></a>
       </div>
       <div class="modal fade menu-modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <a href="javascript:;" class="menu-close" data-dismiss="modal" aria-label="Close"></a>
@@ -132,7 +132,7 @@
             <% }) %>
           </ul>
         </div>
-        <p class="compy-txt"><%= title %></p>
+        <p class="compy-txt"><%= site_title %></p>
       </div>
     </div>
   </div>
