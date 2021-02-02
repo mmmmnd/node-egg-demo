@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-18 14:59:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-26 16:12:51
+ * @LastEditTime: 2021-02-02 17:00:21
  */
 'use strict';
 
@@ -27,7 +27,7 @@ module.exports = app => {
       defaultValue: '0', // 默认值
       comment: '菜单cid', // 备注
     },
-    title: {
+    site_title: {
       allowNull: !1, // 是否为空
       type: STRING(20), // 类型
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值

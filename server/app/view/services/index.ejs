@@ -9,7 +9,7 @@
 -->
 
 <%- include('/commom/header',{
-  title:servicesDetail?servicesDetail.title:"海南昆仑体育文化股份有限公司",
+  site_title:servicesDetail?servicesDetail.site_title:"海南昆仑体育文化股份有限公司",
   Keywords:servicesDetail?servicesDetail.keywords:"海南昆仑体育文化股份有限公司",
   description:servicesDetail?servicesDetail.description:"海南昆仑体育文化股份有限公司",
 }) %>
@@ -32,7 +32,7 @@ ctx.params.cid == 8 ?
         <div class="content-right">
           <div class="ser-top">
             <div class="ser-top-txt">
-              <h5><%= servicesDetail.title %></h5>
+              <h5><%= servicesDetail.site_title %></h5>
               <p><%= servicesDetail.description %></p>
             </div>
             <img src="" alt="" class="ser-top-img" data-src="<%= servicesDetail.image %>">

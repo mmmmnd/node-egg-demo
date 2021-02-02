@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:35:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-26 16:15:44
+ * @LastEditTime: 2021-02-02 16:59:09
  */
 'use strict';
 
@@ -50,16 +50,16 @@ class AboutSingleService extends Service {
   }
   /**
    * 编辑
-   * @param { String } title 标题
+   * @param { String } site_title 标题
    * @param { String } keywords 关键词
    * @param { String } description 描述
    * @param { Text } content 内容
    * @param { Boolean } status 状态
    * @param { Number } id id
    */
-  async edit ({ title, keywords, description, content, status, id }) {
+  async edit ({ site_title, keywords, description, content, status, id }) {
     await this.ctx.model.MzcAboutSingle.update({
-      title, keywords, description, content, status
+      site_title, keywords, description, content, status
     }, {
       where: {
         id,
