@@ -5,13 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-21 11:41:51
+ * @LastEditTime: 2021-02-02 10:36:36
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
              :visible.sync="dialogFormVisible"
              v-if="dialogFormVisible"
-             width="800px">
+             width="800px"
+             top="1vh">
     <el-form ref="dataForm"
              :rules="rules"
              :model="temp"
@@ -57,7 +58,7 @@
         <el-col :span="12">
           <el-form-item label="图片"
                         prop="avatar_image">
-            <vUpload :avatar_image.sync="temp.avatar_image" />
+            <mUpload :avatar_image.sync="temp.avatar_image" />
           </el-form-item>
 
         </el-col>
@@ -82,9 +83,9 @@
 </template>
 <script>
 import Tinymce from '@/components/Tinymce'
-import vUpload from '@/views/public/upload'
+import mUpload from '@/views/public/upload'
 export default {
-  components: { Tinymce, vUpload },
+  components: { Tinymce, mUpload },
   props: {
     // 下拉
     select: {
@@ -184,7 +185,10 @@ export default {
   }
 }
 </script>
-<style>
+<style scoped>
+.el-form-item {
+  margin-bottom: 5px;
+}
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;

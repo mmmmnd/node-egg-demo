@@ -26,14 +26,14 @@
           </el-select>
         </el-form-item>
       </el-form>
-      <m-btn type="primary"
-             label="增加"
-             perms='add'
-             btnType="btn"
-             icon="el-icon-plus"
-             class="filter-item"
-             style="margin-left: 10px;"
-             @click="handleCreate" />
+      <mBtn type="primary"
+            label="增加"
+            perms='add'
+            btnType="btn"
+            icon="el-icon-plus"
+            class="filter-item"
+            style="margin-left: 10px;"
+            @click="handleCreate" />
     </div>
 
     <el-table :data="list"
@@ -95,11 +95,11 @@
                        prop="status"
                        align="center">
         <template slot-scope="{row}">
-          <m-btn :label="row.status"
-                 perms='update'
-                 btnType='switch'
-                 @click="statusSwitch(row)"
-                 onclick="(function(e){e.stopPropagation()}(event))" />
+          <mBtn :label="row.status"
+                perms='update'
+                btnType='switch'
+                @click="statusSwitch(row)"
+                onclick="(function(e){e.stopPropagation()}(event))" />
         </template>
       </el-table-column>
       <el-table-column label="发布时间"
@@ -118,20 +118,20 @@
                        label="操作"
                        width="190px">
         <template slot-scope="{row}">
-          <m-btn size="mini"
-                 type="primary"
-                 icon="el-icon-edit"
-                 label="编辑"
-                 perms='edit'
-                 btnType="btn"
-                 @click.stop.prevent="handleUpdate(row)" />
-          <m-btn size="mini"
-                 type="danger"
-                 icon="el-icon-delete"
-                 label="删除"
-                 perms='destroy'
-                 btnType="btn"
-                 @click.stop.prevent="handleDel(row)" />
+          <mBtn size="mini"
+                type="primary"
+                icon="el-icon-edit"
+                label="编辑"
+                perms='edit'
+                btnType="btn"
+                @click.stop.prevent="handleUpdate(row)" />
+          <mBtn size="mini"
+                type="danger"
+                icon="el-icon-delete"
+                label="删除"
+                perms='destroy'
+                btnType="btn"
+                @click.stop.prevent="handleDel(row)" />
         </template>
       </el-table-column>
 

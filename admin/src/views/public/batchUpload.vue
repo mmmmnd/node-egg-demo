@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-27 19:18:50
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-01 18:03:48
+ * @LastEditTime: 2021-02-02 10:10:06
 -->
 <template>
   <div class="batch-upload-wrapper">
@@ -76,9 +76,14 @@
                :headers="{token}"
                :action="uploadUrl"
                :show-file-list="false"
+               :disabled="!has('bUpload')"
                :on-success="uploadOnSuccess"
                :on-progress="uploadOnProgress">
-      <el-button type="primary">上传轮播图</el-button>
+      <mBtn type="primary"
+            label="上传轮播图"
+            perms='bUpload'
+            btnType="btn"
+            class="bUpload-btn" />
     </el-upload>
   </div>
 
@@ -287,8 +292,9 @@ export default {
     }
   }
   .upload-demo {
-    .el-button {
+    .bUpload-btn {
       margin-top: 20px;
+      display: inline-block;
     }
   }
 }

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-11 20:28:40
+ * @LastEditTime: 2021-02-02 09:42:33
  */
 import Vue from 'vue'
 
@@ -45,7 +45,7 @@ import * as filters from './filters' // global filters
 // 如果想要中文版 element-ui，按如下方式声明
 Vue.use(ElementUI)
 
-Vue.component("m-btn", btn);
+Vue.component("mBtn", btn);
 Vue.prototype.has = val => {
   const btns = sessionStorage.getItem('btns');
   return btns.includes(val) ? true : false;

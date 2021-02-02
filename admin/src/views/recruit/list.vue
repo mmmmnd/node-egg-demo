@@ -10,14 +10,14 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <m-btn type="primary"
-             label="增加"
-             perms='add'
-             btnType="btn"
-             icon="el-icon-plus"
-             class="filter-item"
-             style="margin-left: 10px;"
-             @click="handleCreate" />
+      <mBtn type="primary"
+            label="增加"
+            perms='add'
+            btnType="btn"
+            icon="el-icon-plus"
+            class="filter-item"
+            style="margin-left: 10px;"
+            @click="handleCreate" />
     </div>
     <el-table :data="list"
               border
@@ -45,10 +45,10 @@
                        align="center"
                        label="状态">
         <template slot-scope="{row}">
-          <m-btn :label="row.status"
-                 perms='update'
-                 btnType='switch'
-                 @click="statusSwitch(row)" />
+          <mBtn :label="row.status"
+                perms='update'
+                btnType='switch'
+                @click="statusSwitch(row)" />
         </template>
       </el-table-column>
 
@@ -72,22 +72,22 @@
                        label="操作"
                        width="200px">
         <template slot-scope="{row}">
-          <m-btn v-if="!row.children && !row.edit"
-                 size="mini"
-                 type="primary"
-                 icon="el-icon-edit"
-                 label="编辑"
-                 perms='edit'
-                 btnType="btn"
-                 @click="handleUpdate(row)" />
-          <m-btn v-if="!row.children && !row.edit"
-                 size="mini"
-                 type="danger"
-                 icon="el-icon-delete"
-                 label="删除"
-                 perms='destroy'
-                 btnType="btn"
-                 @click="handleDel(row)" />
+          <mBtn v-if="!row.children && !row.edit"
+                size="mini"
+                type="primary"
+                icon="el-icon-edit"
+                label="编辑"
+                perms='edit'
+                btnType="btn"
+                @click="handleUpdate(row)" />
+          <mBtn v-if="!row.children && !row.edit"
+                size="mini"
+                type="danger"
+                icon="el-icon-delete"
+                label="删除"
+                perms='destroy'
+                btnType="btn"
+                @click="handleDel(row)" />
         </template>
       </el-table-column>
 

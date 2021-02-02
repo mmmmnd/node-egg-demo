@@ -5,17 +5,17 @@
  * @version: 1.0.0
  * @Date: 2021-01-18 18:37:39
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-26 16:14:29
+ * @LastEditTime: 2021-02-02 10:39:16
 -->
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <el-row>
-        <el-col :span="12">
-          <el-form ref="form"
-                   :model="form"
-                   label-width="120px"
-                   v-loading="listLoading">
+      <el-form ref="form"
+               :model="form"
+               label-width="120px"
+               v-loading="listLoading">
+        <el-row>
+          <el-col :span="12">
             <el-form-item label="网站标题:">
               <el-input v-model="form.title"></el-input>
             </el-form-item>
@@ -31,25 +31,19 @@
                         v-model="form.description"></el-input>
             </el-form-item>
 
-            <el-form-item label="列表内容:">
-              <Tinymce ref="editor"
-                       v-model="form.content"
-                       :height="400" />
-            </el-form-item>
-
             <el-form-item label="最后修改时间:">
               <span>{{ form.updated_at | formatTime('{y}-{m}-{d} {h}:{i}') }}</span>
             </el-form-item>
 
             <el-form-item>
-              <m-btn type="primary"
-                     icon="el-icon-edit"
-                     label="修改"
-                     perms='edit'
-                     btnType="btn"
-                     class="filter-item"
-                     style="margin-left: 10px;vertical-align: unset;"
-                     @click="onSubmit" />
+              <mBtn type="primary"
+                    icon="el-icon-edit"
+                    label="修改"
+                    perms='edit'
+                    btnType="btn"
+                    class="filter-item"
+                    style="margin-left: 10px;vertical-align: unset;"
+                    @click="onSubmit" />
               <el-button type="info"
                          icon="el-icon-view"
                          style="margin-right:10px"
@@ -57,9 +51,16 @@
                 预览
               </el-button>
             </el-form-item>
-          </el-form>
-        </el-col>
-      </el-row>
+          </el-col>
+          <el-col :span="12">
+            <el-form-item label="列表内容:">
+              <Tinymce ref="editor"
+                       v-model="form.content"
+                       :height="400" />
+            </el-form-item>
+          </el-col>
+        </el-row>
+      </el-form>
     </div>
   </div>
 </template>

@@ -10,14 +10,14 @@
 <template>
   <div class="app-container">
     <div class="filter-container">
-      <m-btn type="primary"
-             label="增加"
-             perms='add'
-             btnType="btn"
-             icon="el-icon-plus"
-             class="filter-item"
-             style="margin-left: 10px;"
-             @click="handleCreate" />
+      <mBtn type="primary"
+            label="增加"
+            perms='add'
+            btnType="btn"
+            icon="el-icon-plus"
+            class="filter-item"
+            style="margin-left: 10px;"
+            @click="handleCreate" />
     </div>
 
     <el-table :data="list"
@@ -145,13 +145,13 @@
                        width="190px"
                        fixed="right">
         <template slot-scope="{row}">
-          <m-btn size="mini"
-                 type="primary"
-                 icon="el-icon-edit"
-                 label="编辑"
-                 perms='edit'
-                 btnType="btn"
-                 @click="handleUpdate(row)" />
+          <mBtn size="mini"
+                type="primary"
+                icon="el-icon-edit"
+                label="编辑"
+                perms='edit'
+                btnType="btn"
+                @click="handleUpdate(row)" />
         </template>
       </el-table-column>
     </el-table>

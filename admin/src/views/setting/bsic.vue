@@ -94,24 +94,24 @@
                          accept=".mp4"
                          :show-file-list="false"
                          :on-success="handleSuccess">
-                <m-btn size="small"
-                       type="primary"
-                       label="点击上传"
-                       perms='edit'
-                       btnType="btn"
-                       class="filter-item"
-                       style="margin-left: 10px;" />
+                <mBtn size="small"
+                      type="primary"
+                      label="点击上传"
+                      perms='edit'
+                      btnType="btn"
+                      class="filter-item"
+                      style="margin-left: 10px;" />
               </el-upload>
             </el-form-item>
 
             <el-form-item>
-              <m-btn type="primary"
-                     label="修改"
-                     perms='edit'
-                     btnType="btn"
-                     class="filter-item"
-                     style="margin-left: 10px;"
-                     @click="onSubmit" />
+              <mBtn type="primary"
+                    label="修改"
+                    perms='edit'
+                    btnType="btn"
+                    class="filter-item"
+                    style="margin-left: 10px;"
+                    @click="onSubmit" />
             </el-form-item>
           </el-form>
         </el-col>
