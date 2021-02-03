@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 25/01/2021 17:31:53
+ Date: 03/02/2021 18:43:06
 */
 
 SET NAMES utf8mb4;
@@ -36,7 +36,7 @@ CREATE TABLE `mzc-about`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `category_id`(`category_id`) USING BTREE,
   CONSTRAINT `mzc-about_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `mzc-about-droptype` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 30 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-about
@@ -69,21 +69,21 @@ CREATE TABLE `mzc-about-droptype`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-about-droptype
 -- ----------------------------
-INSERT INTO `mzc-about-droptype` VALUES (1, 4, '全部', 0, 1, '2020-08-28 14:37:13', '2020-11-05 16:06:12', NULL);
-INSERT INTO `mzc-about-droptype` VALUES (2, 4, '执行董事', 1, 1, '2020-08-28 14:37:13', '2020-12-23 15:50:58', NULL);
-INSERT INTO `mzc-about-droptype` VALUES (3, 4, '非执行董事', 1, 1, '2020-08-28 14:37:13', '2020-11-09 16:37:39', NULL);
-INSERT INTO `mzc-about-droptype` VALUES (4, 4, '独立非执行董事', 1, 1, '2020-08-28 14:37:13', '2020-11-09 16:37:47', NULL);
-INSERT INTO `mzc-about-droptype` VALUES (5, 5, '2019', 1, 1, '2020-08-28 14:37:13', '2020-10-27 16:35:35', NULL);
-INSERT INTO `mzc-about-droptype` VALUES (6, 5, '2018', 1, 1, '2020-08-28 14:37:13', '2020-08-28 14:37:13', NULL);
-INSERT INTO `mzc-about-droptype` VALUES (7, 5, '2017', 1, 1, '2020-08-28 14:37:13', '2020-10-27 16:43:35', NULL);
-INSERT INTO `mzc-about-droptype` VALUES (8, 6, '', 1, 1, '2020-08-28 14:37:13', '2020-10-21 16:56:18', NULL);
-INSERT INTO `mzc-about-droptype` VALUES (9, 6, '', 1, 0, '2020-11-09 09:52:36', '2020-11-13 15:44:49', '2020-11-13 15:44:49');
-INSERT INTO `mzc-about-droptype` VALUES (10, 6, '', 0, 0, '2020-11-09 10:00:46', '2020-11-13 15:44:36', '2020-11-13 15:44:36');
+INSERT INTO `mzc-about-droptype` VALUES (1, 4, '全部', 0, 0, '2020-08-28 14:37:13', '2020-11-05 16:06:12', NULL);
+INSERT INTO `mzc-about-droptype` VALUES (2, 4, '执行董事', 1, 0, '2020-08-28 14:37:13', '2020-12-23 15:50:58', NULL);
+INSERT INTO `mzc-about-droptype` VALUES (3, 4, '非执行董事', 1, 0, '2020-08-28 14:37:13', '2020-11-09 16:37:39', NULL);
+INSERT INTO `mzc-about-droptype` VALUES (4, 4, '独立非执行董事', 1, 0, '2020-08-28 14:37:13', '2020-11-09 16:37:47', NULL);
+INSERT INTO `mzc-about-droptype` VALUES (5, 5, '2019', 1, 0, '2020-08-28 14:37:13', '2020-10-27 16:35:35', NULL);
+INSERT INTO `mzc-about-droptype` VALUES (6, 5, '2018', 1, 0, '2020-08-28 14:37:13', '2020-08-28 14:37:13', NULL);
+INSERT INTO `mzc-about-droptype` VALUES (7, 5, '2017', 1, 0, '2020-08-28 14:37:13', '2020-10-27 16:43:35', NULL);
+INSERT INTO `mzc-about-droptype` VALUES (8, 6, '', 1, 0, '2020-08-28 14:37:13', '2020-10-21 16:56:18', NULL);
+INSERT INTO `mzc-about-droptype` VALUES (9, 5, '2016', 1, 0, '2020-11-09 09:52:36', '2021-01-26 11:42:34', '2021-01-26 11:42:34');
+INSERT INTO `mzc-about-droptype` VALUES (10, 5, '2015', 0, 0, '2020-11-09 10:00:46', '2021-01-26 11:42:28', '2021-01-26 11:42:28');
 
 -- ----------------------------
 -- Table structure for mzc-about-single
@@ -91,8 +91,8 @@ INSERT INTO `mzc-about-droptype` VALUES (10, 6, '', 0, 0, '2020-11-09 10:00:46',
 DROP TABLE IF EXISTS `mzc-about-single`;
 CREATE TABLE `mzc-about-single`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `category_id` int(11) NOT NULL DEFAULT 0 COMMENT '菜单cid',
-  `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '网站标题',
+  `product_id` int(11) NOT NULL DEFAULT 0 COMMENT '菜单cid',
+  `site_title` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '网站标题',
   `keywords` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司关键词',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司描述',
   `content` text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '单页内容',
@@ -102,12 +102,12 @@ CREATE TABLE `mzc-about-single`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-about-single
 -- ----------------------------
-INSERT INTO `mzc-about-single` VALUES (1, 2, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。', '<p><img class=\"wscnph\" src=\"http://qhcxehb37.hn-bkt.clouddn.com/team_img3.png\" width=\"300\" height=\"300\" /> <img src=\"http://127.0.0.1:7001/public/images/about_img.png\" alt=\"\" data-src=\"http://127.0.0.1:7001/public/images/about_img.png\" /></p>\n<h5>海南昆仑体育文化股份有限公司介绍</h5>\n<p>海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。下设体育文化事业部、电竞事业部、拓展培训部三个业务部门，以及三家控股子公司，海南海经院机动车驾驶培训有限公司、海南中佳健康发展有限公司、海南中环能监测技术有限公司。</p>\n<p>公司自成立以来，一直遵循&ldquo;优质、高效、团结、奉献&rdquo;的工作态度，不骄不躁、严谨踏实，不断谋求新的发展。几年来，经过公司全体员工的不懈努力和开拓进取，陆续在文化、体育等领域发力，经营状况整体良好，2017年实现营业收入5740.22万元，2018年实现营业收入6917.39万元，2019年实现营业收入7300万元。</p>\n<p>重点业务项目概况如下：</p>\n<p>2016年11月，为海口市国贸繁华中心地段的商业中心宜欣城，全程策划执行了重装开业盛典活动，提供了活动执行、舞台搭建和节目表演等整体服务，获得了高度评价和认可，为海南树立了商场开业庆典活动的全新标杆。</p>\n<p>在2017年5月，策划承办了第55届意大利&ldquo;威尔第之声国际声乐比赛&rdquo;（中国赛区），该比赛是中华人民共和国文化部推荐的国际一类声乐比赛；是意大利文化（遗产）部重点文化项目，并且是直接认证的唯一声乐比赛。本公司为活动提供了整体的策划实施和组织执行，为活动的成功举办提供了强大的保障。</p>\n<p>在2017、2018、2019连续三年策划承办了全国沙滩排球巡回赛总决赛及颁奖盛典，本活动由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，得到了海口市文化广电出版体育局的大力支持，CCTV5全程直播，由本公司全程策划执行，提供了开幕式、赛事运营、颁奖盛典的策划实施、宣传推广等服务。2019年举办的全国沙滩排球巡回赛总决赛，是历年全国巡回赛中参赛队伍最多的一次,也是国内迄今为止举办成年组沙排赛参与人数最多的一次。颁奖盛典、半决赛和总决赛通过了央视网络端、爱奇艺、新浪等几大网络平台进行全程直播，使赛事的传播及影响力较往年进一步扩大。</p>\n<p>2018年11月、2019年11月连续两年策划承办了&ldquo;海南国际旅游岛欢乐节&middot;中国-东盟大学生文化周&rdquo;活动，该活动被划列为第十九届海南国际旅游岛欢乐节的重点版块活动之一。本公司为活动提供了全程策划执行，人员安排组织、舞美物料搭建和宣传推广等整体活动服务，成功搭建了海南与全国及东盟青年之间在文化、教育和艺术交流合作的重要平台，获得了政府部门、海内外各高校和社会各界的一致好评。</p>\n<p>公司在海口经济学院内斥资近千万建设海南省高校内首家电竞体验馆-&ldquo;昆仑电竞馆&rdquo;。2017年7月参加腾讯官方英雄联盟全球高校冠军杯以九战九胜全胜战绩一举夺得全球高校冠军杯世界总冠军。2019年昆仑电竞战队获得腾讯第七届英雄联盟高校联赛海南省冠军、南方大区亚军、全国总决赛殿军。2019年第十四届国际动漫博览交易会电竞项目JEL英雄联盟全国高校总决赛冠军等。</p>\n<p>&ldquo;大海之南&bull;昆仑为巅&rdquo;，海南昆仑体育文化股份有限公司依托强大的人力和资源优势，凭借着极具创意的策划思维、专业过硬的执行能力、齐心协作的团队精神以及独家优质的平台资源，正逐步在海南崛起。</p>', 1, 0, '2020-08-28 15:48:43', '2021-01-19 11:52:02', NULL);
+INSERT INTO `mzc-about-single` VALUES (1, 2, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。', '<p><img src=\"http://127.0.0.1:7001/public/images/about_img.png\" alt=\"\" data-src=\"http://127.0.0.1:7001/public/images/about_img.png\" /></p>\n<h5>海南昆仑体育文化股份有限公司介绍</h5>\n<p>海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。下设体育文化事业部、电竞事业部、拓展培训部三个业务部门，以及三家控股子公司，海南海经院机动车驾驶培训有限公司、海南中佳健康发展有限公司、海南中环能监测技术有限公司。</p>\n<p>公司自成立以来，一直遵循&ldquo;优质、高效、团结、奉献&rdquo;的工作态度，不骄不躁、严谨踏实，不断谋求新的发展。几年来，经过公司全体员工的不懈努力和开拓进取，陆续在文化、体育等领域发力，经营状况整体良好，2017年实现营业收入5740.22万元，2018年实现营业收入6917.39万元，2019年实现营业收入7300万元。</p>\n<p>重点业务项目概况如下：</p>\n<p>2016年11月，为海口市国贸繁华中心地段的商业中心宜欣城，全程策划执行了重装开业盛典活动，提供了活动执行、舞台搭建和节目表演等整体服务，获得了高度评价和认可，为海南树立了商场开业庆典活动的全新标杆。</p>\n<p>在2017年5月，策划承办了第55届意大利&ldquo;威尔第之声国际声乐比赛&rdquo;（中国赛区），该比赛是中华人民共和国文化部推荐的国际一类声乐比赛；是意大利文化（遗产）部重点文化项目，并且是直接认证的唯一声乐比赛。本公司为活动提供了整体的策划实施和组织执行，为活动的成功举办提供了强大的保障。</p>\n<p>在2017、2018、2019连续三年策划承办了全国沙滩排球巡回赛总决赛及颁奖盛典，本活动由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，得到了海口市文化广电出版体育局的大力支持，CCTV5全程直播，由本公司全程策划执行，提供了开幕式、赛事运营、颁奖盛典的策划实施、宣传推广等服务。2019年举办的全国沙滩排球巡回赛总决赛，是历年全国巡回赛中参赛队伍最多的一次,也是国内迄今为止举办成年组沙排赛参与人数最多的一次。颁奖盛典、半决赛和总决赛通过了央视网络端、爱奇艺、新浪等几大网络平台进行全程直播，使赛事的传播及影响力较往年进一步扩大。</p>\n<p>2018年11月、2019年11月连续两年策划承办了&ldquo;海南国际旅游岛欢乐节&middot;中国-东盟大学生文化周&rdquo;活动，该活动被划列为第十九届海南国际旅游岛欢乐节的重点版块活动之一。本公司为活动提供了全程策划执行，人员安排组织、舞美物料搭建和宣传推广等整体活动服务，成功搭建了海南与全国及东盟青年之间在文化、教育和艺术交流合作的重要平台，获得了政府部门、海内外各高校和社会各界的一致好评。</p>\n<p>公司在海口经济学院内斥资近千万建设海南省高校内首家电竞体验馆-&ldquo;昆仑电竞馆&rdquo;。2017年7月参加腾讯官方英雄联盟全球高校冠军杯以九战九胜全胜战绩一举夺得全球高校冠军杯世界总冠军。2019年昆仑电竞战队获得腾讯第七届英雄联盟高校联赛海南省冠军、南方大区亚军、全国总决赛殿军。2019年第十四届国际动漫博览交易会电竞项目JEL英雄联盟全国高校总决赛冠军等。</p>\n<p>&ldquo;大海之南&bull;昆仑为巅&rdquo;，海南昆仑体育文化股份有限公司依托强大的人力和资源优势，凭借着极具创意的策划思维、专业过硬的执行能力、齐心协作的团队精神以及独家优质的平台资源，正逐步在海南崛起。</p>', 1, 0, '2020-08-28 15:48:43', '2021-02-02 17:02:41', NULL);
 INSERT INTO `mzc-about-single` VALUES (2, 3, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。', '<p><img src=\"http://127.0.0.1:7001/public/images/about_img.png\" alt=\"\" data-src=\"http://127.0.0.1:7001/public/images/about_img.png\" /></p>\n<h5>海南昆仑体育文化股份有限公司介绍</h5>\n<p>海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。下设体育文化事业部、电竞事业部、拓展培训部三个业务部门，以及三家控股子公司，海南海经院机动车驾驶培训有限公司、海南中佳健康发展有限公司、海南中环能监测技术有限公司。</p>\n<p>公司自成立以来，一直遵循&ldquo;优质、高效、团结、奉献&rdquo;的工作态度，不骄不躁、严谨踏实，不断谋求新的发展。几年来，经过公司全体员工的不懈努力和开拓进取，陆续在文化、体育等领域发力，经营状况整体良好，2017年实现营业收入5740.22万元，2018年实现营业收入6917.39万元，2019年实现营业收入7300万元。</p>\n<p>重点业务项目概况如下：</p>\n<p>2016年11月，为海口市国贸繁华中心地段的商业中心宜欣城，全程策划执行了重装开业盛典活动，提供了活动执行、舞台搭建和节目表演等整体服务，获得了高度评价和认可，为海南树立了商场开业庆典活动的全新标杆。</p>\n<p>在2017年5月，策划承办了第55届意大利&ldquo;威尔第之声国际声乐比赛&rdquo;（中国赛区），该比赛是中华人民共和国文化部推荐的国际一类声乐比赛；是意大利文化（遗产）部重点文化项目，并且是直接认证的唯一声乐比赛。本公司为活动提供了整体的策划实施和组织执行，为活动的成功举办提供了强大的保障。</p>\n<p>在2017、2018、2019连续三年策划承办了全国沙滩排球巡回赛总决赛及颁奖盛典，本活动由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，得到了海口市文化广电出版体育局的大力支持，CCTV5全程直播，由本公司全程策划执行，提供了开幕式、赛事运营、颁奖盛典的策划实施、宣传推广等服务。2019年举办的全国沙滩排球巡回赛总决赛，是历年全国巡回赛中参赛队伍最多的一次,也是国内迄今为止举办成年组沙排赛参与人数最多的一次。颁奖盛典、半决赛和总决赛通过了央视网络端、爱奇艺、新浪等几大网络平台进行全程直播，使赛事的传播及影响力较往年进一步扩大。</p>\n<p>2018年11月、2019年11月连续两年策划承办了&ldquo;海南国际旅游岛欢乐节&middot;中国-东盟大学生文化周&rdquo;活动，该活动被划列为第十九届海南国际旅游岛欢乐节的重点版块活动之一。本公司为活动提供了全程策划执行，人员安排组织、舞美物料搭建和宣传推广等整体活动服务，成功搭建了海南与全国及东盟青年之间在文化、教育和艺术交流合作的重要平台，获得了政府部门、海内外各高校和社会各界的一致好评。</p>\n<p>公司在海口经济学院内斥资近千万建设海南省高校内首家电竞体验馆-&ldquo;昆仑电竞馆&rdquo;。2017年7月参加腾讯官方英雄联盟全球高校冠军杯以九战九胜全胜战绩一举夺得全球高校冠军杯世界总冠军。2019年昆仑电竞战队获得腾讯第七届英雄联盟高校联赛海南省冠军、南方大区亚军、全国总决赛殿军。2019年第十四届国际动漫博览交易会电竞项目JEL英雄联盟全国高校总决赛冠军等。</p>\n<p>&ldquo;大海之南&bull;昆仑为巅&rdquo;，海南昆仑体育文化股份有限公司依托强大的人力和资源优势，凭借着极具创意的策划思维、专业过硬的执行能力、齐心协作的团队精神以及独家优质的平台资源，正逐步在海南崛起。</p>', 1, 0, '2020-08-28 15:48:43', '2021-01-19 11:50:50', NULL);
 
 -- ----------------------------
@@ -134,13 +134,13 @@ CREATE TABLE `mzc-admin`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 8 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-admin
 -- ----------------------------
-INSERT INTO `mzc-admin` VALUES (1, 1, '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]', '[]', 'adminRoot', '123', '$2a$10$EtVqAo8yz/tHz.eOQc8WMOf8vUvVA8ZJi3UPzHt0hWHwW75zKr2K2', 'http://127.0.0.1:7001/public/images/team_img3.png', '123', '123', 1, 116, NULL, '127.0.0.1', '2021-01-25 16:38:24', '2020-09-02 16:58:14', '2021-01-25 16:38:24', NULL);
-INSERT INTO `mzc-admin` VALUES (2, 2, '', '', 'admin', NULL, '$2a$10$uDaCy8q43i2Vfo3.po87RuZe2IoLsF1k.nxNIRWPNpDs./KTLIkVS', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 133, NULL, '127.0.0.1', '2021-01-12 20:08:43', '2020-09-07 17:17:19', '2021-01-12 20:08:43', NULL);
+INSERT INTO `mzc-admin` VALUES (1, 1, '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]', '[]', 'adminRoot', '123', '$2a$10$EtVqAo8yz/tHz.eOQc8WMOf8vUvVA8ZJi3UPzHt0hWHwW75zKr2K2', 'http://127.0.0.1:7001/public/images/team_img3.png', '123', '123', 1, 135, NULL, '127.0.0.1', '2021-02-03 15:50:48', '2020-09-02 16:58:14', '2021-02-03 15:50:48', NULL);
+INSERT INTO `mzc-admin` VALUES (2, 2, '', '', 'admin', NULL, '$2a$10$uDaCy8q43i2Vfo3.po87RuZe2IoLsF1k.nxNIRWPNpDs./KTLIkVS', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 134, NULL, '127.0.0.1', '2021-01-27 18:38:02', '2020-09-07 17:17:19', '2021-01-27 18:38:02', NULL);
 INSERT INTO `mzc-admin` VALUES (3, 3, '', '', 'editor', NULL, '$2a$10$Yy0uMFMdzIso1cNHCtMhg.Hy6q/DFLGORvso0qZxSMSNsCURhbZQm', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 65, NULL, '127.0.0.1', '2020-12-22 20:22:43', '2020-10-21 09:44:24', '2020-12-22 20:22:43', NULL);
 INSERT INTO `mzc-admin` VALUES (4, 4, '', '', 'admin1', NULL, '$2a$10$1VHPKndJw4ExsbKTIKYXMe.vtVAThiIqfC8oOIRxnHrlhelYO0d2K', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 0, NULL, NULL, NULL, '2020-11-17 11:57:56', '2020-11-17 11:57:56', '1899-12-30 01:00:00');
 INSERT INTO `mzc-admin` VALUES (5, 4, '', '', 'tourists', NULL, '$2a$10$1gRrgWc5qTcDm0gCPxNJgOLsePKS8E02gEQCLBQCzET7gaFzz0aAu', '', '', '', 1, 7, '127.0.0.1', '127.0.0.1', '2020-12-15 16:01:11', '2020-11-27 17:44:45', '2020-12-15 16:01:11', NULL);
@@ -154,54 +154,54 @@ DROP TABLE IF EXISTS `mzc-advert`;
 CREATE TABLE `mzc-advert`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `title` varchar(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
-  `filepath` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '图片',
+  `file_path` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '图片',
   `place` int(10) UNSIGNED NOT NULL DEFAULT 0 COMMENT '文件类型 0->首页轮播 1->页面轮播广告 2->页面banner 3->公司轮播介绍',
-  `parentId` tinyint(1) NOT NULL DEFAULT 0 COMMENT '菜单id',
-  `serId` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '对应place为1的轮播图广告id顺序',
+  `parent_id` tinyint(1) NOT NULL DEFAULT 0 COMMENT '菜单id',
+  `ser_id` varchar(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '0' COMMENT '对应place为1的轮播图广告id顺序',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态',
   `sort` int(11) NOT NULL DEFAULT 0 COMMENT '排序',
+  `created_user_id` int(8) NOT NULL COMMENT '用户创建id',
+  `updated_user_id` int(8) NOT NULL COMMENT '用户修改id',
   `created_at` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 34 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-advert
 -- ----------------------------
-INSERT INTO `mzc-advert` VALUES (1, '标题', 'http://127.0.0.1:7001/public/images/banner.png', 0, 3, '0', 1, 0, '2020-08-21 08:12:23', '2020-11-19 14:46:00', NULL);
-INSERT INTO `mzc-advert` VALUES (2, '标题', 'http://127.0.0.1:7001/public/images/banner2.png', 0, 0, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (3, '标题', 'http://127.0.0.1:7001/public/images/banner.png', 0, 0, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (4, '体育赛事', 'http://127.0.0.1:7001/public/images/ser_info.png', 1, 0, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', '1899-12-30 01:00:00');
-INSERT INTO `mzc-advert` VALUES (5, '电竞教育', 'http://127.0.0.1:7001/public/images/ser_info3.png', 1, 0, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', '1899-12-30 01:00:00');
-INSERT INTO `mzc-advert` VALUES (6, '文化服务', 'http://127.0.0.1:7001/public/images/ser_info2.png', 1, 0, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', '1899-12-30 01:00:00');
-INSERT INTO `mzc-advert` VALUES (7, '会议会展', 'http://127.0.0.1:7001/public/images/ser_info4.png', 1, 0, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', '1899-12-30 01:00:00');
-INSERT INTO `mzc-advert` VALUES (8, '', 'http://127.0.0.1:7001/public/images/banner_info.png', 2, 1, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (9, '', 'http://127.0.0.1:7001/public/images/banner_info2.png', 2, 7, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (10, '校友“LETME”严君泽携RN校友“LETME”严君泽携RN', 'http://127.0.0.1:7001/public/images/ser_img1.png', 3, 7, '1', 1, 0, '2020-08-21 08:12:23', '2020-11-05 11:55:27', NULL);
-INSERT INTO `mzc-advert` VALUES (11, '校友“LETME”严君泽携RNG俱乐部开展宣讲论坛', 'http://127.0.0.1:7001/public/images/ser-photo2.jpg', 3, 7, '2', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (12, '校友“LETME”严君泽携RNG俱乐部开展宣讲论坛', 'http://127.0.0.1:7001/public/images/ser-photo.jpg', 3, 7, '3', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (13, '', 'http://127.0.0.1:7001/public/images/banner_info3.png', 2, 13, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (14, '实验室', 'http://127.0.0.1:7001/public/images/compy_img1_2.png', 3, 13, '1', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (15, '昌江重点企业烟气监测', 'http://127.0.0.1:7001/public/images/compy_img1_3.png', 3, 13, '2', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (16, '中环能环境检测中心', 'http://127.0.0.1:7001/public/images/compy_img1_4.png', 3, 13, '3', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (17, '', 'http://127.0.0.1:7001/public/images/banner_info4.png', 2, 16, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (18, '', 'http://127.0.0.1:7001/public/images/banner_info5.png', 2, 21, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (19, '', 'http://127.0.0.1:7001/public/images/banner_info6.png', 2, 25, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (20, '', 'http://127.0.0.1:7001/public/images/banner_info7.png', 2, 28, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (21, '', 'http://127.0.0.1:7001/public/images/banner_info8.png', 2, 31, '0', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-advert` VALUES (22, '校友“LETME”严君泽携RN', 'http://127.0.0.1:7001/public/uploads/20201105/1604541046558.png', 3, 7, '1', 1, 1, '2020-11-05 09:50:48', '2020-11-05 14:38:58', NULL);
-INSERT INTO `mzc-advert` VALUES (23, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201105/1604541227504.png', 3, 7, '1', 1, 0, '2020-11-05 09:53:49', '2020-11-05 11:12:44', '2020-11-05 11:12:44');
-INSERT INTO `mzc-advert` VALUES (24, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201105/1604541260639.png', 3, 7, '1', 1, 0, '2020-11-05 09:54:22', '2020-11-05 10:17:46', '2020-11-05 10:17:46');
-INSERT INTO `mzc-advert` VALUES (25, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201105/1604548437916.png', 3, 7, '1', 1, 0, '2020-11-05 11:53:58', '2020-11-05 11:53:58', NULL);
-INSERT INTO `mzc-advert` VALUES (26, '123', 'http://127.0.0.1:7001/public/uploads/20201106/1604652307827.png', 3, 13, '1', 1, 0, '2020-11-06 16:45:08', '2020-11-06 17:01:24', NULL);
-INSERT INTO `mzc-advert` VALUES (27, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201109/1604887349725.png', 3, 13, '7', 1, 0, '2020-11-09 10:02:30', '2020-11-09 10:02:30', NULL);
-INSERT INTO `mzc-advert` VALUES (28, '', 'http://127.0.0.1:7001/public/uploads/20201119/1605768730060.png', 0, 0, '0', 1, 1, '2020-11-19 14:52:12', '2020-11-19 15:00:49', NULL);
-INSERT INTO `mzc-advert` VALUES (29, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201125/1606289080316.jpg', 3, 7, '1', 1, 0, '2020-11-25 15:24:40', '2020-11-25 15:24:40', NULL);
-INSERT INTO `mzc-advert` VALUES (30, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201125/1606289831403.png', 3, 7, '1', 1, 0, '2020-11-25 15:37:12', '2020-11-25 15:39:02', '2020-11-25 15:39:02');
-INSERT INTO `mzc-advert` VALUES (31, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201125/1606289831433.png', 3, 7, '1', 1, 0, '2020-11-25 15:37:13', '2020-11-25 15:37:13', NULL);
-INSERT INTO `mzc-advert` VALUES (32, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201125/1606289831399.png', 3, 7, '1', 1, 0, '2020-11-25 15:37:13', '2020-11-25 15:37:13', NULL);
-INSERT INTO `mzc-advert` VALUES (33, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201125/1606289831425.png', 3, 7, '1', 1, 0, '2020-11-25 15:37:13', '2020-11-26 09:30:12', '2020-11-26 09:30:12');
+INSERT INTO `mzc-advert` VALUES (1, '标题', 'http://127.0.0.1:7001/public/images/banner.png', 0, 3, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-11-19 14:46:00', NULL);
+INSERT INTO `mzc-advert` VALUES (2, '标题', 'http://127.0.0.1:7001/public/images/banner2.png', 0, 0, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (3, '标题', 'http://127.0.0.1:7001/public/images/banner.png', 0, 0, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (4, '体育赛事', 'http://127.0.0.1:7001/public/images/ser_info.png', 1, 0, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', '1899-12-30 01:00:00');
+INSERT INTO `mzc-advert` VALUES (5, '电竞教育', 'http://127.0.0.1:7001/public/images/ser_info3.png', 1, 0, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', '1899-12-30 01:00:00');
+INSERT INTO `mzc-advert` VALUES (6, '文化服务', 'http://127.0.0.1:7001/public/images/ser_info2.png', 1, 0, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', '1899-12-30 01:00:00');
+INSERT INTO `mzc-advert` VALUES (7, '会议会展', 'http://127.0.0.1:7001/public/images/ser_info4.png', 1, 0, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', '1899-12-30 01:00:00');
+INSERT INTO `mzc-advert` VALUES (8, '', 'http://127.0.0.1:7001/public/images/banner_info.png', 2, 1, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (9, '', 'http://127.0.0.1:7001/public/images/banner_info2.png', 2, 7, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (10, '校友“LETME”严君泽携RN校友“LETME”严君泽携RN', 'http://127.0.0.1:7001/public/images/ser_img1.png', 3, 7, '3', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-11-05 11:55:27', NULL);
+INSERT INTO `mzc-advert` VALUES (11, '校友“LETME”严君泽携RNG俱乐部开展宣讲论坛', 'http://127.0.0.1:7001/public/images/ser-photo2.jpg', 3, 7, '3', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (12, '校友“LETME”严君泽携RNG俱乐部开展宣讲论坛', 'http://127.0.0.1:7001/public/images/ser-photo.jpg', 3, 7, '3', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (13, '', 'http://127.0.0.1:7001/public/images/banner_info3.png', 2, 13, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (14, '实验室', 'http://127.0.0.1:7001/public/images/compy_img1_2.png', 3, 13, '1', 1, 0, 0, 0, '2020-08-21 08:12:23', '2021-01-28 18:40:19', '2021-01-28 18:40:19');
+INSERT INTO `mzc-advert` VALUES (15, '昌江重点企业烟气监测', 'http://127.0.0.1:7001/public/images/compy_img1_3.png', 3, 13, '2', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (16, '中环能环境检测中心', 'http://127.0.0.1:7001/public/images/compy_img1_4.png', 3, 13, '3', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (17, '', 'http://127.0.0.1:7001/public/images/banner_info4.png', 2, 16, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (18, '', 'http://127.0.0.1:7001/public/images/banner_info5.png', 2, 21, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (19, '', 'http://127.0.0.1:7001/public/images/banner_info6.png', 2, 25, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (20, '', 'http://127.0.0.1:7001/public/images/banner_info7.png', 2, 28, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (21, '', 'http://127.0.0.1:7001/public/images/banner_info8.png', 2, 31, '0', 1, 0, 0, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
+INSERT INTO `mzc-advert` VALUES (22, '校友“LETME”严君泽携RN', 'http://127.0.0.1:7001/public/uploads/20201105/1604541046558.png', 3, 7, '2', 1, 1, 0, 0, '2020-11-05 09:50:48', '2020-11-05 14:38:58', NULL);
+INSERT INTO `mzc-advert` VALUES (23, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201105/1604541227504.png', 3, 7, '1', 1, 0, 0, 0, '2020-11-05 09:53:49', '2021-01-29 16:38:38', NULL);
+INSERT INTO `mzc-advert` VALUES (24, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201105/1604541260639.png', 3, 7, '1', 1, 0, 0, 0, '2020-11-05 09:54:22', '2021-01-29 11:29:38', NULL);
+INSERT INTO `mzc-advert` VALUES (25, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201105/1604548437916.png', 3, 7, '1', 1, 0, 0, 0, '2020-11-05 11:53:58', '2021-01-28 18:32:40', NULL);
+INSERT INTO `mzc-advert` VALUES (26, '123', 'http://127.0.0.1:7001/public/uploads/20201106/1604652307827.png', 3, 13, '1', 1, 0, 0, 0, '2020-11-06 16:45:08', '2021-01-28 18:32:33', NULL);
+INSERT INTO `mzc-advert` VALUES (27, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201109/1604887349725.png', 3, 13, '7', 1, 0, 0, 0, '2020-11-09 10:02:30', '2020-11-09 10:02:30', NULL);
+INSERT INTO `mzc-advert` VALUES (28, '', 'http://127.0.0.1:7001/public/uploads/20201119/1605768730060.png', 0, 0, '0', 1, 1, 0, 0, '2020-11-19 14:52:12', '2020-11-19 15:00:49', NULL);
+INSERT INTO `mzc-advert` VALUES (29, '新增图片', 'http://127.0.0.1:7001/public/uploads/20201125/1606289080316.jpg', 3, 7, '1', 1, 0, 0, 0, '2020-11-25 15:24:40', '2021-01-29 10:34:44', NULL);
+INSERT INTO `mzc-advert` VALUES (44, '新增图片1', 'http://127.0.0.1:7001/public/uploads/20210201/1612166568797.jpg', 3, 7, '1', 1, 0, 0, 0, '2021-02-01 16:02:48', '2021-02-01 16:26:54', '2021-02-01 16:26:54');
+INSERT INTO `mzc-advert` VALUES (45, '新增图片12311', 'http://127.0.0.1:7001/public/uploads/20210201/1612166692527.jpg', 3, 7, '1', 1, 0, 0, 1, '2021-02-01 16:04:52', '2021-02-01 16:26:43', '2021-02-01 16:26:43');
 
 -- ----------------------------
 -- Table structure for mzc-api
@@ -219,7 +219,7 @@ CREATE TABLE `mzc-api`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 99 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 111 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-api
@@ -240,9 +240,9 @@ INSERT INTO `mzc-api` VALUES (13, 4, '/api/aboutDroptype/edit', 'aboutDroptype�
 INSERT INTO `mzc-api` VALUES (14, 4, '/api/aboutDroptype/add', 'aboutDroptype增加', 'add', 1, 0, NULL, '2021-01-08 19:14:18', NULL);
 INSERT INTO `mzc-api` VALUES (15, 4, '/api/aboutDroptype/list', 'aboutDroptype查询', 'query', 1, 0, NULL, '2021-01-08 19:14:32', NULL);
 INSERT INTO `mzc-api` VALUES (16, 4, '/api/aboutDroptype/destroy', 'aboutDroptype删除', 'destroy', 1, 0, NULL, '2021-01-08 19:14:37', NULL);
-INSERT INTO `mzc-api` VALUES (17, 6, '/api/services/list', 'services查询', 'query', 1, 0, NULL, '2021-01-08 19:14:43', NULL);
-INSERT INTO `mzc-api` VALUES (18, 6, '/api/services/update', 'services更新', 'update', 1, 0, NULL, '2021-01-08 19:14:49', NULL);
-INSERT INTO `mzc-api` VALUES (19, 6, '/api/services/edit', 'services编辑', 'edit', 1, 0, NULL, '2021-01-08 19:14:55', NULL);
+INSERT INTO `mzc-api` VALUES (17, 37, '/api/services/detail', 'services查询', 'detail', 1, 0, NULL, '2021-02-01 17:18:10', NULL);
+INSERT INTO `mzc-api` VALUES (18, 6, '/api/services/detail', 'services查询', 'detail', 1, 0, NULL, '2021-02-01 18:07:11', NULL);
+INSERT INTO `mzc-api` VALUES (19, 37, '/api/services/edit', 'services编辑', 'edit', 1, 0, NULL, '2021-02-01 17:18:25', NULL);
 INSERT INTO `mzc-api` VALUES (20, 8, '/api/company/index', 'company查询', 'query', 1, 0, NULL, '2021-01-08 19:15:04', NULL);
 INSERT INTO `mzc-api` VALUES (21, 8, '/api/company/update', 'company更新', 'update', 1, 0, NULL, '2021-01-08 19:15:11', NULL);
 INSERT INTO `mzc-api` VALUES (22, 8, '/api/company/edit', 'company编辑', 'edit', 1, 0, NULL, '2021-01-08 19:15:16', NULL);
@@ -302,7 +302,7 @@ INSERT INTO `mzc-api` VALUES (75, 29, '/api/routes/edit', 'routes编辑', 'edit'
 INSERT INTO `mzc-api` VALUES (76, 30, '/api/apiCode/index', 'apiCode查询', 'query', 1, 0, '2021-01-06 16:10:53', '2021-01-08 19:20:59', NULL);
 INSERT INTO `mzc-api` VALUES (77, 30, '/api/apiCode/add', 'apiCode增加', 'add', 1, 0, '2021-01-06 16:30:49', '2021-01-08 19:21:04', NULL);
 INSERT INTO `mzc-api` VALUES (78, 30, '/api/apiCode/edit', 'apiCode编辑', 'edit', 1, 0, '2021-01-06 16:31:11', '2021-01-08 19:21:11', NULL);
-INSERT INTO `mzc-api` VALUES (79, 6, '/api/advert/detail', '详情页轮播图', 'detail', 1, 0, '2021-01-12 10:17:53', '2021-01-12 10:17:53', NULL);
+INSERT INTO `mzc-api` VALUES (79, 6, '/api/services/edit', 'services编辑', 'edit', 1, 0, '2021-01-12 10:17:53', '2021-02-01 18:08:16', NULL);
 INSERT INTO `mzc-api` VALUES (80, 15, '/api/cases/index', 'cases查询', 'query', 1, 0, '2021-01-12 10:59:25', '2021-01-12 10:59:25', NULL);
 INSERT INTO `mzc-api` VALUES (81, 15, '/api/cases/update', 'cases更新', 'update', 1, 0, '2021-01-12 10:59:41', '2021-01-12 10:59:41', NULL);
 INSERT INTO `mzc-api` VALUES (82, 15, '/api/cases/destroy', 'cases删除', 'destroy', 1, 0, '2021-01-12 10:59:59', '2021-01-12 10:59:59', NULL);
@@ -322,6 +322,18 @@ INSERT INTO `mzc-api` VALUES (95, 36, '/api/about/edit', 'about编辑', 'edit', 
 INSERT INTO `mzc-api` VALUES (96, 35, '/api/about/add', 'about增加', 'add', 1, 0, '2021-01-25 16:29:20', '2021-01-25 17:19:51', NULL);
 INSERT INTO `mzc-api` VALUES (97, 35, '/api/about/edit', 'about编辑', 'edit', 1, 0, '2021-01-25 17:21:53', '2021-01-25 17:21:53', NULL);
 INSERT INTO `mzc-api` VALUES (98, 36, '/api/about/move', 'about移动', 'move', 1, 0, '2021-01-25 17:31:00', '2021-01-25 17:31:00', NULL);
+INSERT INTO `mzc-api` VALUES (99, 38, '/api/services/detail', 'services查询', 'detail', 1, 0, '2021-01-26 17:28:06', '2021-02-01 18:08:58', NULL);
+INSERT INTO `mzc-api` VALUES (100, 38, '/api/services/edit', 'services编辑', 'edit', 1, 0, '2021-02-01 18:09:27', '2021-02-01 18:09:27', NULL);
+INSERT INTO `mzc-api` VALUES (101, 39, '/api/services/detail', 'services查询', 'detail', 1, 0, '2021-02-01 18:09:58', '2021-02-01 18:09:58', NULL);
+INSERT INTO `mzc-api` VALUES (102, 39, '/api/services/edit', 'services编辑', 'edit', 1, 0, '2021-02-01 18:10:35', '2021-02-01 18:10:35', NULL);
+INSERT INTO `mzc-api` VALUES (103, 40, '/api/services/detail', 'services查询', 'detail', 1, 0, '2021-02-01 18:11:05', '2021-02-01 18:11:05', NULL);
+INSERT INTO `mzc-api` VALUES (104, 40, '/api/services/edit', 'services编辑', 'edit', 1, 0, '2021-02-01 18:11:31', '2021-02-01 18:11:31', NULL);
+INSERT INTO `mzc-api` VALUES (105, 6, '/api/advert/add', '批量上传', 'bUpload', 1, 0, '2021-02-02 10:02:23', '2021-02-02 10:02:23', NULL);
+INSERT INTO `mzc-api` VALUES (106, 37, '/api/advert/add', '批量上传', 'bUpload', 1, 0, '2021-02-02 10:02:43', '2021-02-02 10:02:43', NULL);
+INSERT INTO `mzc-api` VALUES (107, 38, '/api/advert/add', '批量上传', 'bUpload', 1, 0, '2021-02-02 10:02:56', '2021-02-02 10:02:56', NULL);
+INSERT INTO `mzc-api` VALUES (108, 39, '/api/advert/add', '批量上传', 'bUpload', 1, 0, '2021-02-02 10:03:23', '2021-02-02 10:03:23', NULL);
+INSERT INTO `mzc-api` VALUES (109, 40, '/api/advert/add', '批量上传', 'bUpload', 1, 0, '2021-02-02 10:03:40', '2021-02-02 10:03:40', NULL);
+INSERT INTO `mzc-api` VALUES (110, 20, '/api/menu/detail', 'menu详情', 'detail', 1, 0, '2021-02-03 17:06:36', '2021-02-03 17:06:36', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-api-code
@@ -337,7 +349,7 @@ CREATE TABLE `mzc-api-code`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-api-code
@@ -351,6 +363,7 @@ INSERT INTO `mzc-api-code` VALUES (6, '移动', 'move', 1, 0, '2021-01-07 11:42:
 INSERT INTO `mzc-api-code` VALUES (7, '详情', 'detail', 1, 0, '2021-01-07 17:11:31', '2021-01-07 17:11:31', NULL);
 INSERT INTO `mzc-api-code` VALUES (8, '下拉', 'down', 1, 0, '2021-01-07 17:12:36', '2021-01-07 17:12:36', NULL);
 INSERT INTO `mzc-api-code` VALUES (9, '上传', 'upload', 1, 0, '2021-01-07 17:18:41', '2021-01-07 17:18:41', NULL);
+INSERT INTO `mzc-api-code` VALUES (10, '批量上传', 'bUpload', 1, 0, '2021-02-02 10:00:55', '2021-02-02 10:01:13', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-cases
@@ -373,7 +386,7 @@ CREATE TABLE `mzc-cases`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-cases
@@ -410,10 +423,10 @@ DROP TABLE IF EXISTS `mzc-company`;
 CREATE TABLE `mzc-company`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `category_id` int(11) NOT NULL DEFAULT 0 COMMENT '分类id',
-  `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '网站标题',
+  `site_title` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '网站标题',
   `keywords` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司关键词',
-  `companyDescription` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司描述',
-  `companyTitle` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司描述',
+  `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '单页内容',
   `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL DEFAULT '' COMMENT '图片',
   `address` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '地址',
@@ -426,20 +439,20 @@ CREATE TABLE `mzc-company`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-company
 -- ----------------------------
-INSERT INTO `mzc-company` VALUES (1, 14, '123海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南中环能检测技术有限公司', '<p>海南中环能检测技术有限公司是一家综合性、专业性的第三方环境服务检测机构，2014年取得省计量认证CMA资质，可向社会独立出具公正环境检测数据。公司自成立以来，以创建环境检测名牌实验室为目标，以严谨检测为依托，以诚信服务为后盾，以科学品质为保证，全方位致力于环保技术开发、服务、咨询。公司可提供的服务项目具体包括：环境及生态调查与评估、环保竣工验收、环境影响评价、排污许可申报、大气环境检测（废气、室内空气、油烟等）、水环境检测（生活饮用水、海水、地下水、废水等）、土壤环境检测（固体废物、底泥等）、声环境检测、油气回收等。</p>\n<p>公司现有员工70余人，其中具有高级、中级、初级职称的技术人员近40人；公司1400余平米的标准化实验室内配备有国内外高端环境检测设备，如GC-MS、ICP-MS、气相色谱仪、离子色谱仪等。公司自开办以来，良好的信誉和专业的技术，为各县市环保、水务等主管部门以及各大企业、公司解决了众多难题，赢得了广大客户和社会的信赖。</p>\n<p>志存高远，锐意进取，作为综合性、专业性的检测机构，中环能检测技术有限公司将不断探索求新，勇攀高峰。</p>', 'http://127.0.0.1:7001/public/images/compy_img1.png', '海南省海口市桂林洋高校区海口经济学院工程大楼副楼1楼', 'www.cecezhn.com', 'zhncece@163.com', '0898-65731291', 1, 0, '1899-12-30 01:00:00', '2020-11-13 08:59:55', NULL);
-INSERT INTO `mzc-company` VALUES (2, 14, '海南昆仑体育文化股份有限公司', '海南中佳健康创建于2017年1月，现主要负责海口经济学院游泳馆和拳星健身俱乐部两大健身场所的经营与管理。', '中佳健康拥有一支精诚团结、技术水平一流的专业教练队伍。我们的教练队伍拥有丰富的教学经验, 采用的最新教学方案,针对不同特点的会员,量身制定个性化的专业训练计划及个人营养咨询，使每一位会员都能轻松完成健身及运动目标，享受完美体形', '海南中佳健康发展有限公司', '<p>海南中佳健康创建于2017年1月，现主要负责海口经济学院游泳馆和拳星健身俱乐部两大健身场所的经营与管理。</p><p>中佳健康游泳馆占地5000平方米，建筑面积6000平方米，现在游泳馆有室内标准泳池和室外游泳池两个泳池，以及3000平配套场地和700平方米木屋等四个主要设施。室内标准泳池能承接各类游泳比赛；游泳馆除了能满足海口经济学院的日常教学和省内游泳竞技比赛外，还配套了餐饮木屋、台球厅、跆拳道室、泳具房、淋浴房等各类服务设施。</p><p>中佳健康拳星健身俱乐部位于海经院拳星时代体育学院一楼西侧，占地1500平方米，是一所已建成的最先进、最标准的专业运动场所。俱乐部以“运动的脉搏”为设计理念，合理地划分出不同功能区，不仅打造出了一个动感、安全、舒适的健身空间，还能使帮助大家释放压力，享受娱乐和放松心情。俱乐部内部分为力量区、哑铃区、跑步机区、综合操厅、私教厅、体测室、动感单车房、亚运会拳击比赛台、更衣室等功能区域。俱乐部还开设了时尚流行的瑜伽、街舞、肚皮舞、健美操、拉丁舞、普拉提、动感单车、拳击操等丰富多样的课程，科学、时尚的课程，融健身、健美于一体，可以满足所有健身男女的需要。2017年10月俱乐部建成伊始就已成为沙滩排球国家队男队与女队的冬训基地。</p><p>中佳健康拥有一支精诚团结、技术水平一流的专业教练队伍。我们的教练队伍拥有丰富的教学经验, 采用的最新教学方案,针对不同特点的会员,量身制定个性化的专业训练计划及个人营养咨询，使每一位会员都能轻松完成健身及运动目标，享受完美体形。</p><p>公司员工均以“细致专心、客户至上”为工作第一要求，力争为每位会员提供周到、详尽的服务。</p><p>中佳健康积极相应国家全民健身的号召，乘政策东风投身高校体育健康的宏伟盛业，在海南昆仑体育文化股份有限公司的领导下，扎根海经服务社会，打造一个海南高校内项目齐全、环境舒适、培训专业和服务优质的健身体系，以科学快乐的健身理念和舒适活力的健身氛围引领高校体育风潮。</p>', 'http://127.0.0.1:7001/public/images/compy_img2.png', '海南省海口市桂林洋高校区海口经济学院工程大楼副楼2楼', 'www.cecezhn.com', 'zhncece@163.com', '0898-65731291', 1, 0, '1899-12-30 01:00:00', '2020-11-09 16:35:22', NULL);
-INSERT INTO `mzc-company` VALUES (3, 14, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南海经院机动车驾驶培训有限公司', '<p>海南中佳健康创建于2017年1月，现主要负责海口经济学院游泳馆和拳星健身俱乐部两大健身场所的经营与管理。</p><p>中佳健康游泳馆占地5000平方米，建筑面积6000平方米，现在游泳馆有室内标准泳池和室外游泳池两个泳池，以及3000平配套场地和700平方米木屋等四个主要设施。室内标准泳池能承接各类游泳比赛；游泳馆除了能满足海口经济学院的日常教学和省内游泳竞技比赛外，还配套了餐饮木屋、台球厅、跆拳道室、泳具房、淋浴房等各类服务设施。</p><p>中佳健康拳星健身俱乐部位于海经院拳星时代体育学院一楼西侧，占地1500平方米，是一所已建成的最先进、最标准的专业运动场所。俱乐部以“运动的脉搏”为设计理念，合理地划分出不同功能区，不仅打造出了一个动感、安全、舒适的健身空间，还能使帮助大家释放压力，享受娱乐和放松心情。俱乐部内部分为力量区、哑铃区、跑步机区、综合操厅、私教厅、体测室、动感单车房、亚运会拳击比赛台、更衣室等功能区域。俱乐部还开设了时尚流行的瑜伽、街舞、肚皮舞、健美操、拉丁舞、普拉提、动感单车、拳击操等丰富多样的课程，科学、时尚的课程，融健身、健美于一体，可以满足所有健身男女的需要。2017年10月俱乐部建成伊始就已成为沙滩排球国家队男队与女队的冬训基地。</p><p>中佳健康拥有一支精诚团结、技术水平一流的专业教练队伍。我们的教练队伍拥有丰富的教学经验, 采用的最新教学方案,针对不同特点的会员,量身制定个性化的专业训练计划及个人营养咨询，使每一位会员都能轻松完成健身及运动目标，享受完美体形。</p>', 'http://127.0.0.1:7001/public/images/compy_img2.png', '海南省海口市桂林洋高校区海口经济学院工程大楼副楼3楼', 'www.cecezhn.com', 'zhncece@163.com', '0898-65731291', 1, 0, '1899-12-30 01:00:00', '2020-11-06 17:27:14', NULL);
+INSERT INTO `mzc-company` VALUES (1, 14, '123海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南中环能检测技术有限公司', '<p>海南中环能检测技术有限公司是一家综合性、专业性的第三方环境服务检测机构，2014年取得省计量认证CMA资质，可向社会独立出具公正环境检测数据。公司自成立以来，以创建环境检测名牌实验室为目标，以严谨检测为依托，以诚信服务为后盾，以科学品质为保证，全方位致力于环保技术开发、服务、咨询。公司可提供的服务项目具体包括：环境及生态调查与评估、环保竣工验收、环境影响评价、排污许可申报、大气环境检测（废气、室内空气、油烟等）、水环境检测（生活饮用水、海水、地下水、废水等）、土壤环境检测（固体废物、底泥等）、声环境检测、油气回收等。</p>\n<p>公司现有员工70余人，其中具有高级、中级、初级职称的技术人员近40人；公司1400余平米的标准化实验室内配备有国内外高端环境检测设备，如GC-MS、ICP-MS、气相色谱仪、离子色谱仪等。公司自开办以来，良好的信誉和专业的技术，为各县市环保、水务等主管部门以及各大企业、公司解决了众多难题，赢得了广大客户和社会的信赖。</p>\n<p>志存高远，锐意进取，作为综合性、专业性的检测机构，中环能检测技术有限公司将不断探索求新，勇攀高峰。</p>', 'http://127.0.0.1:7001/public/images/compy_img1.png', '海南省海口市桂林洋高校区海口经济学院工程大楼副楼1楼', 'www.cecezhn.com', 'zhncece@163.com', '0898-65731291', 1, 2, '1899-12-30 01:00:00', '2021-02-03 16:50:06', NULL);
+INSERT INTO `mzc-company` VALUES (2, 14, '海南昆仑体育文化股份有限公司', '海南中佳健康创建于2017年1月，现主要负责海口经济学院游泳馆和拳星健身俱乐部两大健身场所的经营与管理。', '中佳健康拥有一支精诚团结、技术水平一流的专业教练队伍。我们的教练队伍拥有丰富的教学经验, 采用的最新教学方案,针对不同特点的会员,量身制定个性化的专业训练计划及个人营养咨询，使每一位会员都能轻松完成健身及运动目标，享受完美体形', '海南中佳健康发展有限公司', '<p>海南中佳健康创建于2017年1月，现主要负责海口经济学院游泳馆和拳星健身俱乐部两大健身场所的经营与管理。</p><p>中佳健康游泳馆占地5000平方米，建筑面积6000平方米，现在游泳馆有室内标准泳池和室外游泳池两个泳池，以及3000平配套场地和700平方米木屋等四个主要设施。室内标准泳池能承接各类游泳比赛；游泳馆除了能满足海口经济学院的日常教学和省内游泳竞技比赛外，还配套了餐饮木屋、台球厅、跆拳道室、泳具房、淋浴房等各类服务设施。</p><p>中佳健康拳星健身俱乐部位于海经院拳星时代体育学院一楼西侧，占地1500平方米，是一所已建成的最先进、最标准的专业运动场所。俱乐部以“运动的脉搏”为设计理念，合理地划分出不同功能区，不仅打造出了一个动感、安全、舒适的健身空间，还能使帮助大家释放压力，享受娱乐和放松心情。俱乐部内部分为力量区、哑铃区、跑步机区、综合操厅、私教厅、体测室、动感单车房、亚运会拳击比赛台、更衣室等功能区域。俱乐部还开设了时尚流行的瑜伽、街舞、肚皮舞、健美操、拉丁舞、普拉提、动感单车、拳击操等丰富多样的课程，科学、时尚的课程，融健身、健美于一体，可以满足所有健身男女的需要。2017年10月俱乐部建成伊始就已成为沙滩排球国家队男队与女队的冬训基地。</p><p>中佳健康拥有一支精诚团结、技术水平一流的专业教练队伍。我们的教练队伍拥有丰富的教学经验, 采用的最新教学方案,针对不同特点的会员,量身制定个性化的专业训练计划及个人营养咨询，使每一位会员都能轻松完成健身及运动目标，享受完美体形。</p><p>公司员工均以“细致专心、客户至上”为工作第一要求，力争为每位会员提供周到、详尽的服务。</p><p>中佳健康积极相应国家全民健身的号召，乘政策东风投身高校体育健康的宏伟盛业，在海南昆仑体育文化股份有限公司的领导下，扎根海经服务社会，打造一个海南高校内项目齐全、环境舒适、培训专业和服务优质的健身体系，以科学快乐的健身理念和舒适活力的健身氛围引领高校体育风潮。</p>', 'http://127.0.0.1:7001/public/images/compy_img2.png', '海南省海口市桂林洋高校区海口经济学院工程大楼副楼2楼', 'www.cecezhn.com', 'zhncece@163.com', '0898-65731291', 1, 1, '1899-12-30 01:00:00', '2020-11-09 16:35:22', NULL);
+INSERT INTO `mzc-company` VALUES (3, 14, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南海经院机动车驾驶培训有限公司', '<p>海南中佳健康创建于2017年1月，现主要负责海口经济学院游泳馆和拳星健身俱乐部两大健身场所的经营与管理。</p><p>中佳健康游泳馆占地5000平方米，建筑面积6000平方米，现在游泳馆有室内标准泳池和室外游泳池两个泳池，以及3000平配套场地和700平方米木屋等四个主要设施。室内标准泳池能承接各类游泳比赛；游泳馆除了能满足海口经济学院的日常教学和省内游泳竞技比赛外，还配套了餐饮木屋、台球厅、跆拳道室、泳具房、淋浴房等各类服务设施。</p><p>中佳健康拳星健身俱乐部位于海经院拳星时代体育学院一楼西侧，占地1500平方米，是一所已建成的最先进、最标准的专业运动场所。俱乐部以“运动的脉搏”为设计理念，合理地划分出不同功能区，不仅打造出了一个动感、安全、舒适的健身空间，还能使帮助大家释放压力，享受娱乐和放松心情。俱乐部内部分为力量区、哑铃区、跑步机区、综合操厅、私教厅、体测室、动感单车房、亚运会拳击比赛台、更衣室等功能区域。俱乐部还开设了时尚流行的瑜伽、街舞、肚皮舞、健美操、拉丁舞、普拉提、动感单车、拳击操等丰富多样的课程，科学、时尚的课程，融健身、健美于一体，可以满足所有健身男女的需要。2017年10月俱乐部建成伊始就已成为沙滩排球国家队男队与女队的冬训基地。</p><p>中佳健康拥有一支精诚团结、技术水平一流的专业教练队伍。我们的教练队伍拥有丰富的教学经验, 采用的最新教学方案,针对不同特点的会员,量身制定个性化的专业训练计划及个人营养咨询，使每一位会员都能轻松完成健身及运动目标，享受完美体形。</p>', 'http://127.0.0.1:7001/public/images/compy_img2.png', '海南省海口市桂林洋高校区海口经济学院工程大楼副楼3楼', 'www.cecezhn.com', 'zhncece@163.com', '0898-65731291', 1, 3, '1899-12-30 01:00:00', '2020-11-06 17:27:14', NULL);
 INSERT INTO `mzc-company` VALUES (4, 15, '海南昆仑体育文化股份有限公司', '海南中环能检测技术有限公司是一家综合性、专业性的第三方环境服务检测机构，2014年取得省计量认证CMA资质，可向社会独立出具公正环境检测数据', '环境及生态调查与评估、环保竣工验收、环境影响评价、排污许可申报、大气环境检测（废气、室内空气、油烟等）、水环境检测（生活饮用水、海水、地下水、废水等）、土壤环境检测（固体废物、底泥等）、声环境检测、油气回收等', '海南中环能检测技术有限公司', '<p>海南中环能检测技术有限公司是一家综合性、专业性的第三方环境服务检测机构，2014年取得省计量认证CMA资质，可向社会独立出具公正环境检测数据。公司自成立以来，以创建环境检测名牌实验室为目标，以严谨检测为依托，以诚信服务为后盾，以科学品质为保证，全方位致力于环保技术开发、服务、咨询。公司可提供的服务项目具体包括：环境及生态调查与评估、环保竣工验收、环境影响评价、排污许可申报、大气环境检测（废气、室内空气、油烟等）、水环境检测（生活饮用水、海水、地下水、废水等）、土壤环境检测（固体废物、底泥等）、声环境检测、油气回收等。</p>\r\n<p>公司现有员工70余人，其中具有高级、中级、初级职称的技术人员近40人；公司1400余平米的标准化实验室内配备有国内外高端环境检测设备，如GC-MS、ICP-MS、气相色谱仪、离子色谱仪等。公司自开办以来，良好的信誉和专业的技术，为各县市环保、水务等主管部门以及各大企业、公司解决了众多难题，赢得了广大客户和社会的信赖。</p>\r\n<p>志存高远，锐意进取，作为综合性、专业性的检测机构，中环能检测技术有限公司将不断探索求新，勇攀高峰。</p>', 'http://127.0.0.1:7001/public/images/compy_img1.png', '海南省海口市桂林洋高校区海口经济学院工程大楼副楼二楼', 'www.cecezhn.com', 'zhncece@163.com', '0898-65731291', 1, 0, '1899-12-30 01:00:00', '2020-11-06 17:25:17', NULL);
 INSERT INTO `mzc-company` VALUES (5, 15, '海南昆仑体育文化股份有限公司', '海南中佳健康创建于2017年1月，现主要负责海口经济学院游泳馆和拳星健身俱乐部两大健身场所的经营与管理。', '中佳健康拥有一支精诚团结、技术水平一流的专业教练队伍。我们的教练队伍拥有丰富的教学经验, 采用的最新教学方案,针对不同特点的会员,量身制定个性化的专业训练计划及个人营养咨询，使每一位会员都能轻松完成健身及运动目标，享受完美体形', '海南中佳健康发展有限公司', '<p>海南中佳健康创建于2017年1月，现主要负责海口经济学院游泳馆和拳星健身俱乐部两大健身场所的经营与管理。</p><p>中佳健康游泳馆占地5000平方米，建筑面积6000平方米，现在游泳馆有室内标准泳池和室外游泳池两个泳池，以及3000平配套场地和700平方米木屋等四个主要设施。室内标准泳池能承接各类游泳比赛；游泳馆除了能满足海口经济学院的日常教学和省内游泳竞技比赛外，还配套了餐饮木屋、台球厅、跆拳道室、泳具房、淋浴房等各类服务设施。</p><p>中佳健康拳星健身俱乐部位于海经院拳星时代体育学院一楼西侧，占地1500平方米，是一所已建成的最先进、最标准的专业运动场所。俱乐部以“运动的脉搏”为设计理念，合理地划分出不同功能区，不仅打造出了一个动感、安全、舒适的健身空间，还能使帮助大家释放压力，享受娱乐和放松心情。俱乐部内部分为力量区、哑铃区、跑步机区、综合操厅、私教厅、体测室、动感单车房、亚运会拳击比赛台、更衣室等功能区域。俱乐部还开设了时尚流行的瑜伽、街舞、肚皮舞、健美操、拉丁舞、普拉提、动感单车、拳击操等丰富多样的课程，科学、时尚的课程，融健身、健美于一体，可以满足所有健身男女的需要。2017年10月俱乐部建成伊始就已成为沙滩排球国家队男队与女队的冬训基地。</p><p>中佳健康拥有一支精诚团结、技术水平一流的专业教练队伍。我们的教练队伍拥有丰富的教学经验, 采用的最新教学方案,针对不同特点的会员,量身制定个性化的专业训练计划及个人营养咨询，使每一位会员都能轻松完成健身及运动目标，享受完美体形。</p><p>公司员工均以“细致专心、客户至上”为工作第一要求，力争为每位会员提供周到、详尽的服务。</p><p>中佳健康积极相应国家全民健身的号召，乘政策东风投身高校体育健康的宏伟盛业，在海南昆仑体育文化股份有限公司的领导下，扎根海经服务社会，打造一个海南高校内项目齐全、环境舒适、培训专业和服务优质的健身体系，以科学快乐的健身理念和舒适活力的健身氛围引领高校体育风潮。</p>', 'http://127.0.0.1:7001/public/images/compy_img2.png', '海南省海口市桂林洋高校区海口经济学院工程大楼副楼二楼', 'www.cecezhn.com', 'zhncece@163.com', '0898-65731291', 1, 0, '1899-12-30 01:00:00', NULL, NULL);
 INSERT INTO `mzc-company` VALUES (6, 15, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南海经院机动车驾驶培训有限公司', '<p>海南中佳健康创建于2017年1月，现主要负责海口经济学院游泳馆和拳星健身俱乐部两大健身场所的经营与管理。</p><p>中佳健康游泳馆占地5000平方米，建筑面积6000平方米，现在游泳馆有室内标准泳池和室外游泳池两个泳池，以及3000平配套场地和700平方米木屋等四个主要设施。室内标准泳池能承接各类游泳比赛；游泳馆除了能满足海口经济学院的日常教学和省内游泳竞技比赛外，还配套了餐饮木屋、台球厅、跆拳道室、泳具房、淋浴房等各类服务设施。</p><p>中佳健康拳星健身俱乐部位于海经院拳星时代体育学院一楼西侧，占地1500平方米，是一所已建成的最先进、最标准的专业运动场所。俱乐部以“运动的脉搏”为设计理念，合理地划分出不同功能区，不仅打造出了一个动感、安全、舒适的健身空间，还能使帮助大家释放压力，享受娱乐和放松心情。俱乐部内部分为力量区、哑铃区、跑步机区、综合操厅、私教厅、体测室、动感单车房、亚运会拳击比赛台、更衣室等功能区域。俱乐部还开设了时尚流行的瑜伽、街舞、肚皮舞、健美操、拉丁舞、普拉提、动感单车、拳击操等丰富多样的课程，科学、时尚的课程，融健身、健美于一体，可以满足所有健身男女的需要。2017年10月俱乐部建成伊始就已成为沙滩排球国家队男队与女队的冬训基地。</p><p>中佳健康拥有一支精诚团结、技术水平一流的专业教练队伍。我们的教练队伍拥有丰富的教学经验, 采用的最新教学方案,针对不同特点的会员,量身制定个性化的专业训练计划及个人营养咨询，使每一位会员都能轻松完成健身及运动目标，享受完美体形。</p>', 'http://127.0.0.1:7001/public/images/compy_img2.png', '海南省海口市桂林洋高校区海口经济学院工程大楼副楼二楼', 'www.cecezhn.com', 'zhncece@163.com', '0898-65731291', 1, 0, '1899-12-30 01:00:00', '2020-11-09 08:55:21', NULL);
 INSERT INTO `mzc-company` VALUES (7, 14, '123', '123', '123', '123', '<p>123</p>', 'http://127.0.0.1:7001/public/uploads/20201109/1604887345229.png', '123', '123', '123', '', 1, 0, '2020-11-09 10:02:09', '2020-11-09 10:02:32', NULL);
-INSERT INTO `mzc-company` VALUES (8, 14, '123', '123', '123', '12', '<p>123123</p>', '', '', '', '', '', 1, 1, '2020-11-10 10:10:32', '2020-11-10 10:10:32', NULL);
-INSERT INTO `mzc-company` VALUES (9, 14, '123', '123', '123', '1', '<p>123123</p>', '', '', '', '', '', 1, 1, '2020-11-10 10:12:28', '2020-11-10 10:12:28', NULL);
+INSERT INTO `mzc-company` VALUES (8, 14, '123', '123', '123', '12', '<p>123123</p>', '', '', '', '', '', 1, 0, '2020-11-10 10:10:32', '2020-11-10 10:10:32', NULL);
+INSERT INTO `mzc-company` VALUES (9, 14, '123', '123', '123', '1', '<p>123123</p>', '', '', '', '', '', 1, 0, '2020-11-10 10:12:28', '2020-11-10 10:12:28', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-culture
@@ -462,7 +475,7 @@ CREATE TABLE `mzc-culture`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-culture
@@ -494,7 +507,7 @@ CREATE TABLE `mzc-exception`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 55 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-exception
@@ -553,6 +566,8 @@ INSERT INTO `mzc-exception` VALUES (51, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7
 INSERT INTO `mzc-exception` VALUES (52, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Google Chrome\\\";v=\\\"87\\\", \\\" Not;A Brand\\\";v=\\\"99\\\", \\\"Chromium\\\";v=\\\"87\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTEwMTkxNTYsImV4cCI6MTYxMTA0MDc1Nn0._7pP7OMIUWmczEKgmMxhda6HbYZVIjY5gCL0g9hEmTA\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/aboutSingle/index', '2021-01-19 10:53:22', '2021-01-19 10:53:22', NULL);
 INSERT INTO `mzc-exception` VALUES (53, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Google Chrome\\\";v=\\\"87\\\", \\\" Not;A Brand\\\";v=\\\"99\\\", \\\"Chromium\\\";v=\\\"87\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTEwMTkxNTYsImV4cCI6MTYxMTA0MDc1Nn0._7pP7OMIUWmczEKgmMxhda6HbYZVIjY5gCL0g9hEmTA\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/aboutSingle/index', '2021-01-19 10:53:26', '2021-01-19 10:53:26', NULL);
 INSERT INTO `mzc-exception` VALUES (54, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"content-length\":\"1\",\"pragma\":\"no-cache\",\"cache-control\":\"no-cache\",\"sec-ch-ua\":\"\\\"Google Chrome\\\";v=\\\"87\\\", \\\" Not;A Brand\\\";v=\\\"99\\\", \\\"Chromium\\\";v=\\\"87\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTEyMTE3NDIsImV4cCI6MTYxMTIzMzM0Mn0.Jo6EIqOd3t8panE8Wf596FXEaJXqT7jFu_TvAA5k3cE\",\"content-type\":\"application/x-www-form-urlencoded\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/about/move', '2021-01-21 17:02:45', '2021-01-21 17:02:45', NULL);
+INSERT INTO `mzc-exception` VALUES (55, 2, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Google Chrome\\\";v=\\\"87\\\", \\\" Not;A Brand\\\";v=\\\"99\\\", \\\"Chromium\\\";v=\\\"87\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJSb2xlc0lkIjoyLCJpYXQiOjE2MTE3NDM4ODIsImV4cCI6MTYxMTc2NTQ4Mn0.EFYDf16EEnTkqSEi6-G9ZD9lhD5qD8JlincV--4DYTA\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/services/detail', '2021-01-27 18:38:09', '2021-01-27 18:38:09', NULL);
+INSERT INTO `mzc-exception` VALUES (56, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"pragma\":\"no-cache\",\"cache-control\":\"no-cache\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTIzMzg2NDgsImV4cCI6MTYxMjM2MDI0OH0.0L9hHMyvyz7vyyUR9VyX5iGgqZN-ddQmzYRobU1RzW4\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/menu/detail', '2021-02-03 17:04:15', '2021-02-03 17:04:15', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-menu
@@ -569,7 +584,7 @@ CREATE TABLE `mzc-menu`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-menu
@@ -607,7 +622,7 @@ INSERT INTO `mzc-menu` VALUES (30, 28, '人才招聘', 'recruit', 1, 0, NULL, NU
 INSERT INTO `mzc-menu` VALUES (31, 0, '联系我们', 'contact', 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-menu` VALUES (32, 31, '联系方式', 'contact', 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-menu` VALUES (33, 31, '在线留言', 'contact', 1, 0, NULL, '2020-10-12 17:28:43', NULL);
-INSERT INTO `mzc-menu` VALUES (34, 7, '2', 'services', 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-menu` VALUES (34, 7, '2', 'services', 1, 0, NULL, NULL, '2021-02-02 10:13:49');
 INSERT INTO `mzc-menu` VALUES (35, 0, '1', '#', 1, 0, NULL, NULL, '1899-12-30 01:00:00');
 INSERT INTO `mzc-menu` VALUES (36, 1, '2', '#', 1, 0, NULL, NULL, '1899-12-30 01:00:00');
 
@@ -626,7 +641,7 @@ CREATE TABLE `mzc-message`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-message
@@ -669,7 +684,7 @@ CREATE TABLE `mzc-news`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-news
@@ -703,7 +718,7 @@ CREATE TABLE `mzc-recruit`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `category_id`(`category_id`) USING BTREE,
   CONSTRAINT `mzc-recruit_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `mzc-recruit-droptype` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-recruit
@@ -728,7 +743,7 @@ CREATE TABLE `mzc-recruit-droptype`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-recruit-droptype
@@ -755,12 +770,12 @@ CREATE TABLE `mzc-roles`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-roles
 -- ----------------------------
-INSERT INTO `mzc-roles` VALUES (1, '[1,4,32,33,34,35,36,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,31,24,25,26,27,28,29,30]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,87,88,89,90,96,97,91,92,93,94,95,98,17,18,19,79,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,80,81,82,83,84,40,41,42,43,44,45,46,47,48,49,58,59,60,86,50,51,52,53,54,55,56,57,85,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78]', '超级管理员', '拥有全部权限', 1, 0, NULL, '2021-01-25 17:31:24', NULL);
+INSERT INTO `mzc-roles` VALUES (1, '[1,4,32,33,34,35,36,5,6,37,38,39,40,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,31,24,25,26,27,28,29,30]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,87,88,89,90,96,97,91,92,93,94,95,98,18,79,105,17,19,106,99,100,107,101,102,108,103,104,109,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,80,81,82,83,84,40,41,42,43,44,45,46,47,48,49,58,59,60,86,110,50,51,52,53,54,55,56,57,85,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78]', '超级管理员', '拥有全部权限', 1, 0, NULL, '2021-02-03 17:06:59', NULL);
 INSERT INTO `mzc-roles` VALUES (2, '[4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,1,21]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,58,59,60,50,51,52,53,54,55,56,57]', '管理员', '拥有部分权限（不可修改系统配置）', 1, 0, NULL, '2021-01-25 17:18:02', NULL);
 INSERT INTO `mzc-roles` VALUES (3, '[13,14,15,17,16]', '[]', '编辑', '文章编辑', 1, 0, NULL, '2021-01-06 20:50:55', NULL);
 INSERT INTO `mzc-roles` VALUES (4, '', '', '游客', '没有权限（只可访问首页）', 1, 0, NULL, '2020-12-23 09:55:34', NULL);
@@ -790,17 +805,17 @@ CREATE TABLE `mzc-routes`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`, `path`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 41 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-routes
 -- ----------------------------
-INSERT INTO `mzc-routes` VALUES (1, 0, '/about', 'About', NULL, '/about/single', '关于我们', 'el-icon-user-solid', 0, 1, 0, 1, 1, 0, NULL, '2021-01-18 19:47:32', NULL);
+INSERT INTO `mzc-routes` VALUES (1, 0, '/about', 'About', NULL, '/about/describe', '关于我们', 'el-icon-user-solid', 0, 1, 0, 1, 1, 0, NULL, '2021-01-27 19:53:16', NULL);
 INSERT INTO `mzc-routes` VALUES (2, 1, 'single', 'Single', 'aboutSingle', '', '单页', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-18 19:48:23', '2021-01-19 16:20:32');
 INSERT INTO `mzc-routes` VALUES (3, 1, 'list', 'List', 'aboutList', '', '列表', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-25 16:17:39', '2021-01-25 16:18:13');
-INSERT INTO `mzc-routes` VALUES (4, 1, 'classify', 'Classify', 'aboutClassify', '', '分类', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-05 20:18:53', NULL);
-INSERT INTO `mzc-routes` VALUES (5, 0, '/services', 'services', NULL, '', '服务领域', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (6, 5, 'index', 'Services', 'servicesIndex', '', '服务领域', 'el-icon-service', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (4, 1, 'classify', 'Classify', 'aboutClassify', '', '分类', '', 0, 1, 0, 1, 1, 1, NULL, '2021-01-25 17:40:18', NULL);
+INSERT INTO `mzc-routes` VALUES (5, 0, '/services', 'services', NULL, '/services/index', '服务领域', 'el-icon-service', 0, 1, 0, 1, 1, 0, NULL, '2021-01-26 16:49:57', NULL);
+INSERT INTO `mzc-routes` VALUES (6, 5, 'sports', 'Sports', 'servicesSports', '', '体育赛事', '', 0, 1, 0, 1, 1, 0, NULL, '2021-02-03 08:57:09', NULL);
 INSERT INTO `mzc-routes` VALUES (7, 0, '/company', 'company', NULL, '', '旗下公司', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (8, 7, 'index', 'Company', 'companyIndex', '', '旗下公司', 'company', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (9, 0, '/culture', 'culture', NULL, '', '企业文化', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
@@ -831,6 +846,10 @@ INSERT INTO `mzc-routes` VALUES (33, 1, 'skeleton', 'Skeleton', 'aboutSkeleton',
 INSERT INTO `mzc-routes` VALUES (34, 1, 'team', 'Team', 'aboutTeam', '', '管理团队', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:50:28', '2021-01-19 20:28:36', NULL);
 INSERT INTO `mzc-routes` VALUES (35, 1, 'event', 'Event', 'aboutEvent', '', '大事件', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:50:44', '2021-01-18 16:07:53', NULL);
 INSERT INTO `mzc-routes` VALUES (36, 1, 'honor', 'Honor', 'aboutHonor', '', '企业荣誉', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:52:18', '2021-01-18 16:08:18', NULL);
+INSERT INTO `mzc-routes` VALUES (37, 5, 'culture', 'Culture', 'servicesCulture', '', '文化服务', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:39:16', '2021-01-26 16:45:28', NULL);
+INSERT INTO `mzc-routes` VALUES (38, 5, 'education', 'Education', 'servicesEducation', '', '电竞教育', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:46:32', '2021-01-26 16:46:32', NULL);
+INSERT INTO `mzc-routes` VALUES (39, 5, 'training', 'Training', 'servicesTraining', '', '体验式培训', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:47:11', '2021-01-26 16:47:11', NULL);
+INSERT INTO `mzc-routes` VALUES (40, 5, 'meeting', 'Meeting', 'servicesMeeting', '', '会议会展', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:47:56', '2021-01-26 16:47:56', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-services
@@ -839,10 +858,10 @@ DROP TABLE IF EXISTS `mzc-services`;
 CREATE TABLE `mzc-services`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `category_id` int(11) NOT NULL DEFAULT 0 COMMENT '分类id',
-  `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '网站标题',
+  `site_title` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '网站标题',
   `keywords` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司关键词',
-  `companyDescription` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司描述',
-  `servicesImage` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '图片',
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司描述',
+  `image` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '图片',
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL COMMENT '单页内容',
   `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态',
   `sort` int(11) NOT NULL DEFAULT 0 COMMENT '排序',
@@ -850,17 +869,17 @@ CREATE TABLE `mzc-services`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-services
 -- ----------------------------
-INSERT INTO `mzc-services` VALUES (1, 8, '海南昆仑体育文化股份有限公司', '海南中环能检测技术有限公司是一家综合性、专业性的第三方环境服务检测机构，2014年取得省计量认证CMA资质，可向社会独立出具公正环境检测数据', '环境及生态调查与评估、环保竣工验收、环境影响评价、排污许可申报、大气环境检测（废气、室内空气、油烟等）、水环境检测（生活饮用水、海水、地下水、废水等）、土壤环境检测（固体废物、底泥等）、声环境检测、油气回收等', 'http://127.0.0.1:7001/public/images/ser_img1.png', '<p>海南中环能检测技术有限公司是一家综合性、专业性的第三方环境服务检测机构，2014年取得省计量认证CMA资质，可向社会独立出具公正环境检测数据。公司自成立以来，以创建环境检测名牌实验室为目标，以严谨检测为依托，以诚信服务为后盾，以科学品质为保证，全方位致力于环保技术开发、服务、咨询。公司可提供的服务项目具体包括：环境及生态调查与评估、环保竣工验收、环境影响评价、排污许可申报、大气环境检测（废气、室内空气、油烟等）、水环境检测（生活饮用水、海水、地下水、废水等）、土壤环境检测（固体废物、底泥等）、声环境检测、油气回收等。</p>\r\n<p>公司现有员工70余人，其中具有高级、中级、初级职称的技术人员近40人；公司1400余平米的标准化实验室内配备有国内外高端环境检测设备，如GC-MS、ICP-MS、气相色谱仪、离子色谱仪等。公司自开办以来，良好的信誉和专业的技术，为各县市环保、水务等主管部门以及各大企业、公司解决了众多难题，赢得了广大客户和社会的信赖。</p>\r\n<p>志存高远，锐意进取，作为综合性、专业性的检测机构，中环能检测技术有限公司将不断探索求新，勇攀高峰。</p>', 1, 0, '2020-08-21 08:12:23', '2020-11-25 15:37:24', NULL);
+INSERT INTO `mzc-services` VALUES (1, 8, '海南昆仑体育文化股份有限公司', '海南中环能检测技术有限公司是一家综合性、专业性的第三方环境服务检测机构，2014年取得省计量认证CMA资质，可向社会独立出具公正环境检测数据', '环境及生态调查与评估、环保竣工验收、环境影响评价、排污许可申报、大气环境检测（废气、室内空气、油烟等）、水环境检测（生活饮用水、海水、地下水、废水等）、土壤环境检测（固体废物、底泥等）、声环境检测、油气回收等', 'http://127.0.0.1:7001/public/images/ser_img1.png', '<p>海南中环能检测技术有限公司是一家综合性、专业性的第三方环境服务检测机构，2014年取得省计量认证CMA资质，可向社会独立出具公正环境检测数据。公司自成立以来，以创建环境检测名牌实验室为目标，以严谨检测为依托，以诚信服务为后盾，以科学品质为保证，全方位致力于环保技术开发、服务、咨询。公司可提供的服务项目具体包括：环境及生态调查与评估、环保竣工验收、环境影响评价、排污许可申报、大气环境检测（废气、室内空气、油烟等）、水环境检测（生活饮用水、海水、地下水、废水等）、土壤环境检测（固体废物、底泥等）、声环境检测、油气回收等。</p>\n<p>公司现有员工70余人，其中具有高级、中级、初级职称的技术人员近40人；公司1400余平米的标准化实验室内配备有国内外高端环境检测设备，如GC-MS、ICP-MS、气相色谱仪、离子色谱仪等。公司自开办以来，良好的信誉和专业的技术，为各县市环保、水务等主管部门以及各大企业、公司解决了众多难题，赢得了广大客户和社会的信赖。</p>\n<p>志存高远，锐意进取，作为综合性、专业性的检测机构，中环能检测技术有限公司将不断探索求新，勇攀高峰。</p>', 1, 0, '2020-08-21 08:12:23', '2021-02-02 17:05:23', NULL);
 INSERT INTO `mzc-services` VALUES (2, 9, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', 'http://127.0.0.1:7001/public/images/ser_img1.png', '<h5>电竞教育</h5><p>2017年伽马调查报告的数据显示，电竞行业规模年复合增长率已经达到46%，电竞行业人才缺口达26万，需求缺口高达83%，人才稀缺是电竞这一新兴产业面临的瓶颈之一。而现有教育教学尚没有针对性人才培养模式，造成专业人才大量缺失，很大程度上制约了电竞行业的发展。</p><p>2016年9月，教育部职业教育与成人教育司公布的《关于做好2017年高等职业学校拟招生专业申报工作的通知》中增补了新专业“电子竞技运动与管理专业”，专业代码670411。</p><p>2017年，昆仑电竞与海口经济学院联合申报了海南省首批“电子竞技运动与管理专业”获得批准，2018年、2019年两届招生人数达200人。通过校企合作，不但引进电竞圈内一线的电竞明星，知名解说，行业专家等为教师提供教学保障，还通过昆仑电竞与国内其他电竞企业、俱乐部展开深度合作为电竞专业学生提供广阔的实习实训、就业平台。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><h5>电竞赛事</h5><p>组织及参与的赛事：2017年第六届问道杯电子竞技大赛；2018年首届桫椤湾“绝地求生”电竞大赛；WUCG世界大学生电子竞技大赛海南赛区总执行；2018年，成功在海口经济学院举办了首届昆仑杯电子竞技大赛，该赛事共招募队伍79支，报名人数超400余人。赛事举办期间，校园影响力超万人，总决赛当日观赛人数约2700人，座无虚席。昆仑杯的成功举办，为海南电竞赛事奠定了良好基础及赛事的优良口碑，深受海南高校电竞选手的喜爱与追捧。</p><p>继2018年昆仑杯电子竞技大赛成功举办之后， 2019昆仑杯电子竞技大赛又一次带动全省电竞发展。本次活动集结了全省12所高校：海口经济学院、海南大学、 三亚学院、海南医学院、海南经贸职业技术学院、海南师范大学、海南热带海洋学院、海南职业技术学院、海南科技职业学院、海南工商职业学院、海南政法职业学院、琼台师范学院； 本次活动参赛人数超600人，路演场次6场，校园宣传次数超1000次，通过一系列的校园传播，本次赛事影响力度超5万人！通过与AJXCACC动漫展会的结合，奖昆仑杯成功打造成海南本省精品赛事。</p><h5>昆仑海经电竞战队</h5><p>近两年昆仑战队战绩：<br>\n        2017年7月，英雄联盟战队以九战九胜全胜战绩一举夺得全球高校杯世界冠军<br>\n        2017年8月，英雄联盟战队出征台湾世界大学生明星邀请赛亚军<br>\n        2017年9月，技嘉杯英雄联盟南区区域赛冠军<br>\n        2017年11月，技嘉杯英雄联盟年度总亚军<br>\n        2017年12月，WUCG世界大学生电子竞技联赛英雄联盟中国总冠军，国际赛亚军<br>\n        2017年12月，海口电子竞技嘉年华大赛海南总冠军、季军<br>\n        2017年12月，英雄联盟战队受邀出征德玛西亚杯线下预选赛，与职业战队BLG进行了激烈的对战，并深入的进行了学习交流。<br>\n        2018年6月，英雄联盟全国高校联赛四强；<br>\n        2018年8月，英雄联盟2018第二届全球高校冠军杯殿军；<br>\n        2018年12月，DOTA2全国高校联赛秋季赛冠军；<br>\n        2018年12月，王者荣耀2018海南省电子竞技联赛亚军。\n        </p><h5>昆仑海经电竞战队</h5><p>公司致力在海口打造高端电竞场馆，为广大电竞爱好者提供更舒适、更专业的环境。</p><p>为配合专业教育，公司在海口经济学院内斥资建设海南省内一流、国内领先的电竞教育基地和电竞体验馆。</p>\n', 1, 0, '2020-08-21 08:12:23', '2020-11-02 11:06:34', NULL);
 INSERT INTO `mzc-services` VALUES (3, 10, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', 'http://127.0.0.1:7001/public/images/ser_img1.png', '<h5>电竞教育</h5><p>2017年伽马调查报告的数据显示，电竞行业规模年复合增长率已经达到46%，电竞行业人才缺口达26万，需求缺口高达83%，人才稀缺是电竞这一新兴产业面临的瓶颈之一。而现有教育教学尚没有针对性人才培养模式，造成专业人才大量缺失，很大程度上制约了电竞行业的发展。</p><p>2016年9月，教育部职业教育与成人教育司公布的《关于做好2017年高等职业学校拟招生专业申报工作的通知》中增补了新专业“电子竞技运动与管理专业”，专业代码670411。</p><p>2017年，昆仑电竞与海口经济学院联合申报了海南省首批“电子竞技运动与管理专业”获得批准，2018年、2019年两届招生人数达200人。通过校企合作，不但引进电竞圈内一线的电竞明星，知名解说，行业专家等为教师提供教学保障，还通过昆仑电竞与国内其他电竞企业、俱乐部展开深度合作为电竞专业学生提供广阔的实习实训、就业平台。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><h5>电竞赛事</h5><p>组织及参与的赛事：2017年第六届问道杯电子竞技大赛；2018年首届桫椤湾“绝地求生”电竞大赛；WUCG世界大学生电子竞技大赛海南赛区总执行；2018年，成功在海口经济学院举办了首届昆仑杯电子竞技大赛，该赛事共招募队伍79支，报名人数超400余人。赛事举办期间，校园影响力超万人，总决赛当日观赛人数约2700人，座无虚席。昆仑杯的成功举办，为海南电竞赛事奠定了良好基础及赛事的优良口碑，深受海南高校电竞选手的喜爱与追捧。</p><p>继2018年昆仑杯电子竞技大赛成功举办之后， 2019昆仑杯电子竞技大赛又一次带动全省电竞发展。本次活动集结了全省12所高校：海口经济学院、海南大学、 三亚学院、海南医学院、海南经贸职业技术学院、海南师范大学、海南热带海洋学院、海南职业技术学院、海南科技职业学院、海南工商职业学院、海南政法职业学院、琼台师范学院； 本次活动参赛人数超600人，路演场次6场，校园宣传次数超1000次，通过一系列的校园传播，本次赛事影响力度超5万人！通过与AJXCACC动漫展会的结合，奖昆仑杯成功打造成海南本省精品赛事。</p><h5>昆仑海经电竞战队</h5><p>近两年昆仑战队战绩：<br>\n        2017年7月，英雄联盟战队以九战九胜全胜战绩一举夺得全球高校杯世界冠军<br>\n        2017年8月，英雄联盟战队出征台湾世界大学生明星邀请赛亚军<br>\n        2017年9月，技嘉杯英雄联盟南区区域赛冠军<br>\n        2017年11月，技嘉杯英雄联盟年度总亚军<br>\n        2017年12月，WUCG世界大学生电子竞技联赛英雄联盟中国总冠军，国际赛亚军<br>\n        2017年12月，海口电子竞技嘉年华大赛海南总冠军、季军<br>\n        2017年12月，英雄联盟战队受邀出征德玛西亚杯线下预选赛，与职业战队BLG进行了激烈的对战，并深入的进行了学习交流。<br>\n        2018年6月，英雄联盟全国高校联赛四强；<br>\n        2018年8月，英雄联盟2018第二届全球高校冠军杯殿军；<br>\n        2018年12月，DOTA2全国高校联赛秋季赛冠军；<br>\n        2018年12月，王者荣耀2018海南省电子竞技联赛亚军。\n        </p><h5>昆仑海经电竞战队</h5><p>公司致力在海口打造高端电竞场馆，为广大电竞爱好者提供更舒适、更专业的环境。</p><p>为配合专业教育，公司在海口经济学院内斥资建设海南省内一流、国内领先的电竞教育基地和电竞体验馆。</p>\n\n', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
 INSERT INTO `mzc-services` VALUES (4, 11, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', 'http://127.0.0.1:7001/public/images/ser_img1.png', '<h5>电竞教育</h5><p>2017年伽马调查报告的数据显示，电竞行业规模年复合增长率已经达到46%，电竞行业人才缺口达26万，需求缺口高达83%，人才稀缺是电竞这一新兴产业面临的瓶颈之一。而现有教育教学尚没有针对性人才培养模式，造成专业人才大量缺失，很大程度上制约了电竞行业的发展。</p><p>2016年9月，教育部职业教育与成人教育司公布的《关于做好2017年高等职业学校拟招生专业申报工作的通知》中增补了新专业“电子竞技运动与管理专业”，专业代码670411。</p><p>2017年，昆仑电竞与海口经济学院联合申报了海南省首批“电子竞技运动与管理专业”获得批准，2018年、2019年两届招生人数达200人。通过校企合作，不但引进电竞圈内一线的电竞明星，知名解说，行业专家等为教师提供教学保障，还通过昆仑电竞与国内其他电竞企业、俱乐部展开深度合作为电竞专业学生提供广阔的实习实训、就业平台。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><h5>电竞赛事</h5><p>组织及参与的赛事：2017年第六届问道杯电子竞技大赛；2018年首届桫椤湾“绝地求生”电竞大赛；WUCG世界大学生电子竞技大赛海南赛区总执行；2018年，成功在海口经济学院举办了首届昆仑杯电子竞技大赛，该赛事共招募队伍79支，报名人数超400余人。赛事举办期间，校园影响力超万人，总决赛当日观赛人数约2700人，座无虚席。昆仑杯的成功举办，为海南电竞赛事奠定了良好基础及赛事的优良口碑，深受海南高校电竞选手的喜爱与追捧。</p><p>继2018年昆仑杯电子竞技大赛成功举办之后， 2019昆仑杯电子竞技大赛又一次带动全省电竞发展。本次活动集结了全省12所高校：海口经济学院、海南大学、 三亚学院、海南医学院、海南经贸职业技术学院、海南师范大学、海南热带海洋学院、海南职业技术学院、海南科技职业学院、海南工商职业学院、海南政法职业学院、琼台师范学院； 本次活动参赛人数超600人，路演场次6场，校园宣传次数超1000次，通过一系列的校园传播，本次赛事影响力度超5万人！通过与AJXCACC动漫展会的结合，奖昆仑杯成功打造成海南本省精品赛事。</p><h5>昆仑海经电竞战队</h5><p>近两年昆仑战队战绩：<br>\n        2017年7月，英雄联盟战队以九战九胜全胜战绩一举夺得全球高校杯世界冠军<br>\n        2017年8月，英雄联盟战队出征台湾世界大学生明星邀请赛亚军<br>\n        2017年9月，技嘉杯英雄联盟南区区域赛冠军<br>\n        2017年11月，技嘉杯英雄联盟年度总亚军<br>\n        2017年12月，WUCG世界大学生电子竞技联赛英雄联盟中国总冠军，国际赛亚军<br>\n        2017年12月，海口电子竞技嘉年华大赛海南总冠军、季军<br>\n        2017年12月，英雄联盟战队受邀出征德玛西亚杯线下预选赛，与职业战队BLG进行了激烈的对战，并深入的进行了学习交流。<br>\n        2018年6月，英雄联盟全国高校联赛四强；<br>\n        2018年8月，英雄联盟2018第二届全球高校冠军杯殿军；<br>\n        2018年12月，DOTA2全国高校联赛秋季赛冠军；<br>\n        2018年12月，王者荣耀2018海南省电子竞技联赛亚军。\n        </p><h5>昆仑海经电竞战队</h5><p>公司致力在海口打造高端电竞场馆，为广大电竞爱好者提供更舒适、更专业的环境。</p><p>为配合专业教育，公司在海口经济学院内斥资建设海南省内一流、国内领先的电竞教育基地和电竞体验馆。</p>\n\n', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-services` VALUES (5, 12, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', 'http://127.0.0.1:7001/public/images/ser_img1.png', '<h5>电竞教育</h5><p>2017年伽马调查报告的数据显示，电竞行业规模年复合增长率已经达到46%，电竞行业人才缺口达26万，需求缺口高达83%，人才稀缺是电竞这一新兴产业面临的瓶颈之一。而现有教育教学尚没有针对性人才培养模式，造成专业人才大量缺失，很大程度上制约了电竞行业的发展。</p><p>2016年9月，教育部职业教育与成人教育司公布的《关于做好2017年高等职业学校拟招生专业申报工作的通知》中增补了新专业“电子竞技运动与管理专业”，专业代码670411。</p><p>2017年，昆仑电竞与海口经济学院联合申报了海南省首批“电子竞技运动与管理专业”获得批准，2018年、2019年两届招生人数达200人。通过校企合作，不但引进电竞圈内一线的电竞明星，知名解说，行业专家等为教师提供教学保障，还通过昆仑电竞与国内其他电竞企业、俱乐部展开深度合作为电竞专业学生提供广阔的实习实训、就业平台。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><h5>电竞赛事</h5><p>组织及参与的赛事：2017年第六届问道杯电子竞技大赛；2018年首届桫椤湾“绝地求生”电竞大赛；WUCG世界大学生电子竞技大赛海南赛区总执行；2018年，成功在海口经济学院举办了首届昆仑杯电子竞技大赛，该赛事共招募队伍79支，报名人数超400余人。赛事举办期间，校园影响力超万人，总决赛当日观赛人数约2700人，座无虚席。昆仑杯的成功举办，为海南电竞赛事奠定了良好基础及赛事的优良口碑，深受海南高校电竞选手的喜爱与追捧。</p><p>继2018年昆仑杯电子竞技大赛成功举办之后， 2019昆仑杯电子竞技大赛又一次带动全省电竞发展。本次活动集结了全省12所高校：海口经济学院、海南大学、 三亚学院、海南医学院、海南经贸职业技术学院、海南师范大学、海南热带海洋学院、海南职业技术学院、海南科技职业学院、海南工商职业学院、海南政法职业学院、琼台师范学院； 本次活动参赛人数超600人，路演场次6场，校园宣传次数超1000次，通过一系列的校园传播，本次赛事影响力度超5万人！通过与AJXCACC动漫展会的结合，奖昆仑杯成功打造成海南本省精品赛事。</p><h5>昆仑海经电竞战队</h5><p>近两年昆仑战队战绩：<br>\n        2017年7月，英雄联盟战队以九战九胜全胜战绩一举夺得全球高校杯世界冠军<br>\n        2017年8月，英雄联盟战队出征台湾世界大学生明星邀请赛亚军<br>\n        2017年9月，技嘉杯英雄联盟南区区域赛冠军<br>\n        2017年11月，技嘉杯英雄联盟年度总亚军<br>\n        2017年12月，WUCG世界大学生电子竞技联赛英雄联盟中国总冠军，国际赛亚军<br>\n        2017年12月，海口电子竞技嘉年华大赛海南总冠军、季军<br>\n        2017年12月，英雄联盟战队受邀出征德玛西亚杯线下预选赛，与职业战队BLG进行了激烈的对战，并深入的进行了学习交流。<br>\n        2018年6月，英雄联盟全国高校联赛四强；<br>\n        2018年8月，英雄联盟2018第二届全球高校冠军杯殿军；<br>\n        2018年12月，DOTA2全国高校联赛秋季赛冠军；<br>\n        2018年12月，王者荣耀2018海南省电子竞技联赛亚军。\n        </p><h5>昆仑海经电竞战队</h5><p>公司致力在海口打造高端电竞场馆，为广大电竞爱好者提供更舒适、更专业的环境。</p><p>为配合专业教育，公司在海口经济学院内斥资建设海南省内一流、国内领先的电竞教育基地和电竞体验馆。</p>\n\n', 1, 0, '2020-08-21 08:12:23', '2020-08-21 08:12:23', NULL);
-INSERT INTO `mzc-services` VALUES (6, 34, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', 'http://127.0.0.1:7001/public/images/ser_img1.png', '<h5>电竞教育</h5><p>2017年伽马调查报告的数据显示，电竞行业规模年复合增长率已经达到46%，电竞行业人才缺口达26万，需求缺口高达83%，人才稀缺是电竞这一新兴产业面临的瓶颈之一。而现有教育教学尚没有针对性人才培养模式，造成专业人才大量缺失，很大程度上制约了电竞行业的发展。</p><p>2016年9月，教育部职业教育与成人教育司公布的《关于做好2017年高等职业学校拟招生专业申报工作的通知》中增补了新专业“电子竞技运动与管理专业”，专业代码670411。</p><p>2017年，昆仑电竞与海口经济学院联合申报了海南省首批“电子竞技运动与管理专业”获得批准，2018年、2019年两届招生人数达200人。通过校企合作，不但引进电竞圈内一线的电竞明星，知名解说，行业专家等为教师提供教学保障，还通过昆仑电竞与国内其他电竞企业、俱乐部展开深度合作为电竞专业学生提供广阔的实习实训、就业平台。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><h5>电竞赛事</h5><p>组织及参与的赛事：2017年第六届问道杯电子竞技大赛；2018年首届桫椤湾“绝地求生”电竞大赛；WUCG世界大学生电子竞技大赛海南赛区总执行；2018年，成功在海口经济学院举办了首届昆仑杯电子竞技大赛，该赛事共招募队伍79支，报名人数超400余人。赛事举办期间，校园影响力超万人，总决赛当日观赛人数约2700人，座无虚席。昆仑杯的成功举办，为海南电竞赛事奠定了良好基础及赛事的优良口碑，深受海南高校电竞选手的喜爱与追捧。</p><p>继2018年昆仑杯电子竞技大赛成功举办之后， 2019昆仑杯电子竞技大赛又一次带动全省电竞发展。本次活动集结了全省12所高校：海口经济学院、海南大学、 三亚学院、海南医学院、海南经贸职业技术学院、海南师范大学、海南热带海洋学院、海南职业技术学院、海南科技职业学院、海南工商职业学院、海南政法职业学院、琼台师范学院； 本次活动参赛人数超600人，路演场次6场，校园宣传次数超1000次，通过一系列的校园传播，本次赛事影响力度超5万人！通过与AJXCACC动漫展会的结合，奖昆仑杯成功打造成海南本省精品赛事。</p><h5>昆仑海经电竞战队</h5><p>近两年昆仑战队战绩：<br>\n        2017年7月，英雄联盟战队以九战九胜全胜战绩一举夺得全球高校杯世界冠军<br>\n        2017年8月，英雄联盟战队出征台湾世界大学生明星邀请赛亚军<br>\n        2017年9月，技嘉杯英雄联盟南区区域赛冠军<br>\n        2017年11月，技嘉杯英雄联盟年度总亚军<br>\n        2017年12月，WUCG世界大学生电子竞技联赛英雄联盟中国总冠军，国际赛亚军<br>\n        2017年12月，海口电子竞技嘉年华大赛海南总冠军、季军<br>\n        2017年12月，英雄联盟战队受邀出征德玛西亚杯线下预选赛，与职业战队BLG进行了激烈的对战，并深入的进行了学习交流。<br>\n        2018年6月，英雄联盟全国高校联赛四强；<br>\n        2018年8月，英雄联盟2018第二届全球高校冠军杯殿军；<br>\n        2018年12月，DOTA2全国高校联赛秋季赛冠军；<br>\n        2018年12月，王者荣耀2018海南省电子竞技联赛亚军。\n        </p><h5>昆仑海经电竞战队</h5><p>公司致力在海口打造高端电竞场馆，为广大电竞爱好者提供更舒适、更专业的环境。</p><p>为配合专业教育，公司在海口经济学院内斥资建设海南省内一流、国内领先的电竞教育基地和电竞体验馆。</p>\n\n', 1, 0, NULL, NULL, '2021-01-12 20:19:54');
+INSERT INTO `mzc-services` VALUES (5, 12, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', 'http://127.0.0.1:7001/public/images/ser_img1.png', '<h5>电竞教育</h5>\n<p>2017年伽马调查报告的数据显示，电竞行业规模年复合增长率已经达到46%，电竞行业人才缺口达26万，需求缺口高达83%，人才稀缺是电竞这一新兴产业面临的瓶颈之一。而现有教育教学尚没有针对性人才培养模式，造成专业人才大量缺失，很大程度上制约了电竞行业的发展。</p>\n<p>2016年9月，教育部职业教育与成人教育司公布的《关于做好2017年高等职业学校拟招生专业申报工作的通知》中增补了新专业&ldquo;电子竞技运动与管理专业&rdquo;，专业代码670411。</p>\n<p>2017年，昆仑电竞与海口经济学院联合申报了海南省首批&ldquo;电子竞技运动与管理专业&rdquo;获得批准，2018年、2019年两届招生人数达200人。通过校企合作，不但引进电竞圈内一线的电竞明星，知名解说，行业专家等为教师提供教学保障，还通过昆仑电竞与国内其他电竞企业、俱乐部展开深度合作为电竞专业学生提供广阔的实习实训、就业平台。</p>\n<p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p>\n<p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p>\n<h5>电竞赛事</h5>\n<p>组织及参与的赛事：2017年第六届问道杯电子竞技大赛；2018年首届桫椤湾&ldquo;绝地求生&rdquo;电竞大赛；WUCG世界大学生电子竞技大赛海南赛区总执行；2018年，成功在海口经济学院举办了首届昆仑杯电子竞技大赛，该赛事共招募队伍79支，报名人数超400余人。赛事举办期间，校园影响力超万人，总决赛当日观赛人数约2700人，座无虚席。昆仑杯的成功举办，为海南电竞赛事奠定了良好基础及赛事的优良口碑，深受海南高校电竞选手的喜爱与追捧。</p>\n<p>继2018年昆仑杯电子竞技大赛成功举办之后， 2019昆仑杯电子竞技大赛又一次带动全省电竞发展。本次活动集结了全省12所高校：海口经济学院、海南大学、 三亚学院、海南医学院、海南经贸职业技术学院、海南师范大学、海南热带海洋学院、海南职业技术学院、海南科技职业学院、海南工商职业学院、海南政法职业学院、琼台师范学院； 本次活动参赛人数超600人，路演场次6场，校园宣传次数超1000次，通过一系列的校园传播，本次赛事影响力度超5万人！通过与AJXCACC动漫展会的结合，奖昆仑杯成功打造成海南本省精品赛事。</p>\n<h5>昆仑海经电竞战队</h5>\n<p>近两年昆仑战队战绩：<br />2017年7月，英雄联盟战队以九战九胜全胜战绩一举夺得全球高校杯世界冠军<br />2017年8月，英雄联盟战队出征台湾世界大学生明星邀请赛亚军<br />2017年9月，技嘉杯英雄联盟南区区域赛冠军<br />2017年11月，技嘉杯英雄联盟年度总亚军<br />2017年12月，WUCG世界大学生电子竞技联赛英雄联盟中国总冠军，国际赛亚军<br />2017年12月，海口电子竞技嘉年华大赛海南总冠军、季军<br />2017年12月，英雄联盟战队受邀出征德玛西亚杯线下预选赛，与职业战队BLG进行了激烈的对战，并深入的进行了学习交流。<br />2018年6月，英雄联盟全国高校联赛四强；<br />2018年8月，英雄联盟2018第二届全球高校冠军杯殿军；<br />2018年12月，DOTA2全国高校联赛秋季赛冠军；<br />2018年12月，王者荣耀2018海南省电子竞技联赛亚军。</p>\n<h5>昆仑海经电竞战队</h5>\n<p>公司致力在海口打造高端电竞场馆，为广大电竞爱好者提供更舒适、更专业的环境。</p>\n<p>为配合专业教育，公司在海口经济学院内斥资建设海南省内一流、国内领先的电竞教育基地和电竞体验馆。</p>', 1, 0, '2020-08-21 08:12:23', '2021-02-02 10:37:50', NULL);
+INSERT INTO `mzc-services` VALUES (6, 34, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', 'http://127.0.0.1:7001/public/images/ser_img1.png', '<h5>电竞教育</h5><p>2017年伽马调查报告的数据显示，电竞行业规模年复合增长率已经达到46%，电竞行业人才缺口达26万，需求缺口高达83%，人才稀缺是电竞这一新兴产业面临的瓶颈之一。而现有教育教学尚没有针对性人才培养模式，造成专业人才大量缺失，很大程度上制约了电竞行业的发展。</p><p>2016年9月，教育部职业教育与成人教育司公布的《关于做好2017年高等职业学校拟招生专业申报工作的通知》中增补了新专业“电子竞技运动与管理专业”，专业代码670411。</p><p>2017年，昆仑电竞与海口经济学院联合申报了海南省首批“电子竞技运动与管理专业”获得批准，2018年、2019年两届招生人数达200人。通过校企合作，不但引进电竞圈内一线的电竞明星，知名解说，行业专家等为教师提供教学保障，还通过昆仑电竞与国内其他电竞企业、俱乐部展开深度合作为电竞专业学生提供广阔的实习实训、就业平台。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><p>本专业面向电子竞技企业，以及与电子竞技相关的职业领域的服务、管理一线岗位，主要培养具有良好的电子竞技综合职业能力，掌握一定的专业理论知识，具有较强实践能力的高素质技能型人才。专业主要培养的是电竞产业相关从业人员，包括电竞运动员、教练员、裁判员、职业经纪人、赛事策划与执行、战术与数据分析、场地运营与维护、俱乐部经营与管理、电竞主持与主播、电竞商务等相关人才。</p><h5>电竞赛事</h5><p>组织及参与的赛事：2017年第六届问道杯电子竞技大赛；2018年首届桫椤湾“绝地求生”电竞大赛；WUCG世界大学生电子竞技大赛海南赛区总执行；2018年，成功在海口经济学院举办了首届昆仑杯电子竞技大赛，该赛事共招募队伍79支，报名人数超400余人。赛事举办期间，校园影响力超万人，总决赛当日观赛人数约2700人，座无虚席。昆仑杯的成功举办，为海南电竞赛事奠定了良好基础及赛事的优良口碑，深受海南高校电竞选手的喜爱与追捧。</p><p>继2018年昆仑杯电子竞技大赛成功举办之后， 2019昆仑杯电子竞技大赛又一次带动全省电竞发展。本次活动集结了全省12所高校：海口经济学院、海南大学、 三亚学院、海南医学院、海南经贸职业技术学院、海南师范大学、海南热带海洋学院、海南职业技术学院、海南科技职业学院、海南工商职业学院、海南政法职业学院、琼台师范学院； 本次活动参赛人数超600人，路演场次6场，校园宣传次数超1000次，通过一系列的校园传播，本次赛事影响力度超5万人！通过与AJXCACC动漫展会的结合，奖昆仑杯成功打造成海南本省精品赛事。</p><h5>昆仑海经电竞战队</h5><p>近两年昆仑战队战绩：<br>\n        2017年7月，英雄联盟战队以九战九胜全胜战绩一举夺得全球高校杯世界冠军<br>\n        2017年8月，英雄联盟战队出征台湾世界大学生明星邀请赛亚军<br>\n        2017年9月，技嘉杯英雄联盟南区区域赛冠军<br>\n        2017年11月，技嘉杯英雄联盟年度总亚军<br>\n        2017年12月，WUCG世界大学生电子竞技联赛英雄联盟中国总冠军，国际赛亚军<br>\n        2017年12月，海口电子竞技嘉年华大赛海南总冠军、季军<br>\n        2017年12月，英雄联盟战队受邀出征德玛西亚杯线下预选赛，与职业战队BLG进行了激烈的对战，并深入的进行了学习交流。<br>\n        2018年6月，英雄联盟全国高校联赛四强；<br>\n        2018年8月，英雄联盟2018第二届全球高校冠军杯殿军；<br>\n        2018年12月，DOTA2全国高校联赛秋季赛冠军；<br>\n        2018年12月，王者荣耀2018海南省电子竞技联赛亚军。\n        </p><h5>昆仑海经电竞战队</h5><p>公司致力在海口打造高端电竞场馆，为广大电竞爱好者提供更舒适、更专业的环境。</p><p>为配合专业教育，公司在海口经济学院内斥资建设海南省内一流、国内领先的电竞教育基地和电竞体验馆。</p>\n\n', 1, 0, NULL, NULL, '2021-02-02 10:14:15');
 
 -- ----------------------------
 -- Table structure for mzc-settings
@@ -874,7 +893,7 @@ CREATE TABLE `mzc-settings`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 16 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-settings

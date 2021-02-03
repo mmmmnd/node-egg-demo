@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 10:36:05
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-09 09:42:27
+ * @LastEditTime: 2021-02-02 18:20:27
  */
 
 'use strict';
@@ -20,8 +20,7 @@ class ServicesController extends Controller {
     const params = this.ctx.query;
 
     const company = await this.ctx.service.company.index(params)
-    const aboutSingleMenu = await this.ctx.service.menu.details(15, 14);
-    await this.ctx.helper.checkData({ data: { company, aboutSingleMenu } });
+    await this.ctx.helper.checkData(company);
   }
   /**
    * 修改

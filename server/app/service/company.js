@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:27:48
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-02 15:36:08
+ * @LastEditTime: 2021-02-02 18:20:16
  */
 'use strict';
 
@@ -26,16 +26,16 @@ class CompanyService extends Service {
       ? { category_id, deleted_at: null }
       : { deleted_at: null };
 
-    try {
-      const company = await this.ctx.model.MzcCompany.findAndCountAll({
-        where: filter,
-        offset: (page - 1) * maxPage,
-        limit: maxPage,
-      })
+    const company = await this.ctx.model.MzcCompany.findAndCountAll({
+      where: filter,
+      offset: (page - 1) * maxPage,
+      limit: maxPage,
+    })
 
-      if (company.rows.length == 0) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
+    if (company.rows.length == 0) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
 
-      return {
+    return {
+      data: {
         data: company.rows,
         meta: {
           current_page: parseInt(page),
@@ -44,8 +44,6 @@ class CompanyService extends Service {
           total_pages: Math.ceil(company.count / maxPage),
         }
       }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
     }
   }
   async list (cid) {
