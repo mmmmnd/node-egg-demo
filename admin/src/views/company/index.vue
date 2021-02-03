@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 09:54:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-11 20:48:32
+ * @LastEditTime: 2021-02-03 18:40:13
 -->
 <template>
   <div class="app-container">
@@ -14,13 +14,13 @@
                style="display: inline-block;">
         <el-form-item label="选择分类"
                       style="width: 300px;">
-          <el-select v-model="temp.categoryId"
+          <el-select v-model="category_Id"
                      class="filter-item"
                      placeholder="请选择所属分类"
                      clearable
                      @change="getList"
                      ref="categoryId">
-            <el-option v-for="item in category"
+            <el-option v-for="item in select"
                        :key="item.id"
                        :label="item.title"
                        :value="item.id" />
@@ -36,126 +36,81 @@
             style="margin-left: 10px;"
             @click="handleCreate" />
     </div>
-    <el-table v-loading="listLoading"
-              :data="list"
-              border
-              fit
-              highlight-current-row
+    <el-table :data="list"
               style="width: 100%"
-              ref="tableDataRef">
-      <el-table-column prop="index"
-                       type="index"
-                       align="center"
-                       label="序号"
-                       width="50px"
-                       fixed="left">
+              ref="table"
+              @row-click="clickRowHandle">
+      <el-table-column type="expand">
+        <template slot-scope="props">
+          <el-form class="demo-table-expand">
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="网站标题">
+                  <div v-html="props.row.site_title"></div>
+                </el-form-item>
+                <el-form-item label="网站描述">
+                  <div v-html="props.row.description"></div>
+                </el-form-item>
+                <el-form-item label="网站关键词">
+                  <div v-html="props.row.keywords"></div>
+                </el-form-item>
+                <el-form-item label="公司地址">
+                  <div v-html="props.row.address"></div>
+                </el-form-item>
+                <el-form-item label="公司网址">
+                  <div v-html="props.row.website"></div>
+                </el-form-item>
+                <el-form-item label="电子邮箱">
+                  <div v-html="props.row.email"></div>
+                </el-form-item>
+                <el-form-item label="联系电话">
+                  <div v-html="props.row.phone"></div>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="图片">
+                  <el-image :src="props.row.image"
+                            lazy
+                            fit="cover"
+                            style="width: 500px;height: 350px;border-radius: 6px;"></el-image>
+                </el-form-item>
+
+              </el-col>
+              <el-col :span="24">
+                <el-form-item label="内容">
+                  <div v-html="props.row.content"></div>
+                </el-form-item>
+              </el-col>
+            </el-row>
+          </el-form>
+        </template>
       </el-table-column>
-      <el-table-column prop="id"
-                       align="center"
-                       label="分类"
-                       width="100px"
-                       fixed="left">
+
+      <el-table-column label="id"
+                       prop="id"
+                       align="center">
+      </el-table-column>
+
+      <el-table-column label="分类"
+                       prop="category_id"
+                       align="center">
         <template slot-scope="{row}">
-          <el-tag>{{ row.menu }}</el-tag>
+          <template v-for="item in select">
+            {{row.category_id == item.id?item.title:''}}
+          </template>
         </template>
       </el-table-column>
 
       <el-table-column prop="title"
                        align="center"
-                       label="网站标题"
-                       show-overflow-tooltip
-                       width="150px">
-        <template slot-scope="{row}">
-          <span>{{ row.title }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="keywords"
-                       align="center"
-                       label="网站关键词"
-                       show-overflow-tooltip
-                       width="150px">
-        <template slot-scope="{row}">
-          <span>{{ row.keywords }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="companyDescription"
-                       align="center"
-                       label="网站描述"
-                       show-overflow-tooltip
-                       width="150px">
-        <template slot-scope="{row}">
-          <span class="text-hidden">{{ row.companyDescription }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="companyTitle"
-                       align="center"
                        label="公司标题"
-                       show-overflow-tooltip
-                       width="150px">
-        <template slot-scope="{row}">
-          <span class="text-hidden">{{ row.companyTitle }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="image"
-                       align="center"
-                       label="图片"
-                       width="80px">
-        <template slot-scope="{row}">
-          <el-avatar shape="square"
-                     :size="50"
-                     fit="cover"
-                     :src="row.image"></el-avatar>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="address"
-                       align="center"
-                       label="地址"
-                       show-overflow-tooltip
-                       width="150px">
-        <template slot-scope="{row}">
-          <span class="text-hidden">{{ row.address }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="website"
-                       align="center"
-                       label="网站"
-                       width="150px">
-        <template slot-scope="{row}">
-          <span>{{ row.website }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="email"
-                       align="center"
-                       label="电子邮箱"
-                       width="150px">
-        <template slot-scope="{row}">
-          <span>{{ row.email }}</span>
-        </template>
-      </el-table-column>
-
-      <el-table-column prop="phone"
-                       align="center"
-                       label="联系电话"
-                       width="150px">
-        <template slot-scope="{row}">
-          <span>{{ row.phone }}</span>
-        </template>
+                       width="500"
+                       show-overflow-tooltip>
       </el-table-column>
 
       <el-table-column prop="sort"
                        align="center"
-                       label="排序"
-                       width="80px">
-        <template slot-scope="{row}">
-          <span>{{ row.sort }}</span>
-        </template>
+                       label="排序">
       </el-table-column>
 
       <el-table-column prop="status"
@@ -171,8 +126,7 @@
 
       <el-table-column prop="created_at"
                        align="center"
-                       label="创建时间"
-                       width="150px">
+                       label="创建时间">
         <template slot-scope="{row}">
           <span>{{ row.created_at | formatTime('{y}-{m}-{d} {h}:{i}')  }}</span>
         </template>
@@ -181,7 +135,7 @@
       <el-table-column prop="updated_at"
                        align="center"
                        label="最后修改时间"
-                       width="150px">
+                       width="135px">
         <template slot-scope="{row}">
           <span>{{ row.updated_at | formatTime('{y}-{m}-{d} {h}:{i}') }}</span>
         </template>
@@ -189,8 +143,7 @@
 
       <el-table-column align="center"
                        label="操作"
-                       width="300px"
-                       fixed="right">
+                       width="300px">
         <template slot-scope="{row}">
           <mBtn size="mini"
                 type="primary"
@@ -198,12 +151,14 @@
                 label="编辑"
                 perms='edit'
                 btnType="btn"
-                @click="handleUpdate(row)" />
+                @click="handleUpdate(row)"
+                onclick="(function(e){e.stopPropagation()}(event))" />
           <el-button type="info"
                      size="mini"
                      icon="el-icon-view"
                      style="margin-right:10px"
-                     @click="getView(row)">
+                     @click="getView(row)"
+                     onclick="(function(e){e.stopPropagation()}(event))">
             预览
           </el-button>
           <mBtn size="mini"
@@ -212,7 +167,8 @@
                 label="删除"
                 perms='destroy'
                 btnType="btn"
-                @click="handleDel(row)" />
+                @click="handleDel(row)"
+                onclick="(function(e){e.stopPropagation()}(event))" />
         </template>
       </el-table-column>
 
@@ -229,6 +185,8 @@
            :temp="temp"
            :dialogStatus="dialogStatus"
            :category="category"
+           :select="select"
+           :rules="rules"
            @uploadOnSuccess="uploadOnSuccess"
            @handleFileRemove="handleFileRemove"
            @updateItem="updateItem"
@@ -241,6 +199,7 @@
 
 import { companyIndex, companyUpdate, companyEdit, companyDestroy, companyAdd } from '@/api/company'
 import { advertDetail, advertAdd, advertDestroy, advertUpdate } from '@/api/advert'
+import { menuDetail } from '@/api/menu'
 
 import Pagination from '@/components/Pagination'
 import vEdit from './component/edit'
@@ -250,15 +209,25 @@ export default {
     return {
       list: [],
       total: 0,
-      listLoading: true,
       listQuery: {
         page: 1,
-        limit: 20
+        limit: 20,
+        pid: 13//分类菜单
       },
       category: [],
       showDialog: false,
       temp: {},
-      dialogStatus: ''
+      dialogStatus: '',
+      select: [], //下拉
+      category_Id: '',
+      rules: {
+        category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
+        title: [{ type: 'string', required: true, message: '请输入网站标题', trigger: 'blur' }],
+        keywords: [{ type: 'string', required: true, message: '请输入网站关键词', trigger: 'blur' }],
+        companyDescription: [{ type: 'string', required: true, message: '请输入网站描述', trigger: 'blur' }],
+        status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
+        content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
+      }
     }
   },
   created () {
@@ -268,42 +237,46 @@ export default {
     /**
      * 获取列表 && 筛选
      */
-    getList (id) {
+    getList (params) {
+      if (typeof params === 'number') {
+        this.listQuery.category_id = params
+      } else if (typeof params === 'object') {
+        params.category_id = this.listQuery.category_id;
+        params.pid = this.listQuery.pid;
+        this.listQuery = params
+      } else {
+        this.listQuery.category_id = ''
+      }
       const data = { key: 'place', value: 3 };
-      this.listLoading = true
-      this.listQuery.category_id = typeof id === 'number' ? id : this.temp.categoryId;
+      var _response = []
+
       companyIndex(this.listQuery)
         .then(response => {
-          var company = response.data.company.data;
-          this.category = response.data.aboutSingleMenu;
-          this.total = response.data.company.meta.total
-          this.list = company.filter(companyItem => {
-            var menu = this.category.filter(menuItem => companyItem.category_id === menuItem.id)
-            companyItem.menu = menu[0].title;
-            return companyItem
-          })
+          _response = response.data
           return advertDetail(data)
+        }).then(response => {
+          _response.data.filter(_responseItem => {
+            const advert = response.data.filter(item => item.ser_id == _responseItem.id)
+            _responseItem.advert = advert
+          })
+          this.total = _response.meta.total;
+          this.list = _response.data;
+          return menuDetail(this.listQuery)
         })
         .then(response => {
-          var data = response.data.filter(item => item.parentId == this.category[0].pid);
-          this.list.filter(listItem => {
-            var advert = data.filter(item => listItem.id == item.serId)
-            return listItem.advert = advert
-          })
-          this.listLoading = false
+          this.select = response.data
         })
     },
     /**
      * 切换状态
      */
-    statusSwitch (getSwitch, id) {
-      const data = { id, key: 'status', value: getSwitch };
-      this.listLoading = true
+    statusSwitch (row) {
+      row.status = !row.status
+      const data = { id: row.id, key: 'status', value: row.status };
       companyUpdate(data)
         .then(response => {
-          this.listLoading = false
           this.$notify({
-            title: '成功',
+            site_title: '成功',
             message: response.msg,
             type: 'success'
           });
@@ -313,7 +286,7 @@ export default {
      * 编辑
      */
     handleUpdate (row) {
-      this.temp = Object.assign({}, row) // copy obj
+      this.temp = Object.assign({}, row)
       this.dialogStatus = 'update'
       this.showDialog = true;
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()
@@ -331,7 +304,7 @@ export default {
      * 预览
      */
     getView (row) {
-      window.open(process.env.VUE_APP_BASE_SERVER + "/company/pid/13/cid/" + row.category_id, "blank");
+      window.open(process.env.VUE_APP_BASE_SERVER + "/company/pid/13/cid/" + row.category_id + "/id/" + row.id, "blank");
     },
     /**
      * 删除
@@ -343,10 +316,10 @@ export default {
         type: 'warning'
       }).then(() => {
         companyDestroy(row)
-        this.alertView('删除成功!', 'success')
+        this.$message.success('删除成功!')
         this.$router.go(0);
       }).catch(() => {
-        this.alertView('已取消删除', 'info')
+        this.$message.info('已取消删除')
       });
     },
     /**
@@ -367,47 +340,40 @@ export default {
     uploadOnSuccess (Obj, cab) {
       const data = {
         title: '新增图片',
-        filepath: Obj.e.data.url,
+        file_path: Obj.url,
         place: 3,
-        parentId: this.category[0].pid,
-        serId: Obj.temp.id
+        parent_id: this.listQuery.pid,
+        status: 1,
+        sort: 0,
+        ser_id: Obj.temp.id
       }
       advertAdd(data).then(res => cab(res))
     },
     /**
      * 父页面执行 轮播图删除
      */
-    handleFileRemove (file, cab) {
-      advertDestroy(file).then(res => cab(res))
+    handleFileRemove (Obj, cab) {
+      advertDestroy(Obj).then(res => cab(res))
     },
     /**
-     * 父页面执行 修改
+     * 父页面执行 轮播修改
      */
     updateItem (Obj, cab) {
       advertUpdate(Obj).then(res => cab(res))
     },
-    /**
-     * 弹窗提示
-     */
-    alertView (message, type) {
-      return this.$message({ message, type })
-    }
+    clickRowHandle (row, column, event) {
+      const table = this.$refs.table;
+      this.list.map(item => {
+        row.id != item.id && table.toggleRowExpansion(item, false)
+      })
+      table.toggleRowExpansion(row)
+    },
   }
 }
 </script>
 
-<style >
-.edit-input {
-  padding-right: 100px;
-}
-.cancel-btn {
-  position: absolute;
-  right: 15px;
-  top: 10px;
-}
-.text-hidden {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+<style scoped>
+.el-form-item {
+  margin-bottom: 5px;
 }
 </style>

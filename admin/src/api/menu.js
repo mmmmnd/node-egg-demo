@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-10-12 16:22:28
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-15 15:25:10
+ * @LastEditTime: 2021-02-03 17:00:06
  */
 import request from '@/utils/request'
 
@@ -38,5 +38,13 @@ export function menuAdd (data) {
     url: '/menu/add',
     method: 'post',
     data
+  })
+}
+
+export function menuDetail (params) {
+  return request({
+    url: '/menu/detail',
+    method: 'get',
+    params
   })
 }

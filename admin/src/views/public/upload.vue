@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-19 16:50:44
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-01 16:34:52
+ * @LastEditTime: 2021-02-03 18:28:44
 -->
 <template>
   <el-upload v-if="progress"
@@ -71,3 +71,30 @@ export default {
   }
 }
 </script>
+<style >
+.avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.avatar-uploader .el-upload:hover {
+  border-color: #409eff;
+}
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 178px;
+  height: 178px;
+  line-height: 178px;
+  text-align: center;
+}
+.el-image {
+  display: block;
+}
+.avatar {
+  width: 178px;
+  height: 178px;
+}
+</style>
