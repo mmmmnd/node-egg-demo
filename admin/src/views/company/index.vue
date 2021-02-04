@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 09:54:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-03 18:40:13
+ * @LastEditTime: 2021-02-04 17:57:47
 -->
 <template>
   <div class="app-container">
@@ -120,7 +120,8 @@
           <mBtn :label="row.status"
                 perms='update'
                 btnType='switch'
-                @click="statusSwitch(row)" />
+                @click="statusSwitch(row)"
+                onclick="(function(e){e.stopPropagation()}(event))" />
         </template>
       </el-table-column>
 
@@ -253,18 +254,21 @@ export default {
       companyIndex(this.listQuery)
         .then(response => {
           _response = response.data
-          return advertDetail(data)
-        }).then(response => {
-          _response.data.filter(_responseItem => {
-            const advert = response.data.filter(item => item.ser_id == _responseItem.id)
-            _responseItem.advert = advert
-          })
-          this.total = _response.meta.total;
-          this.list = _response.data;
           return menuDetail(this.listQuery)
-        })
-        .then(response => {
+        }).then(response => {
           this.select = response.data
+          response.data.filter(item => {
+            _response.data.filter(_responseItem => { if (item.id == _responseItem.category_id) _responseItem.pid = item.pid })
+          })
+          return advertDetail(data)
+            .then(response => {
+              _response.data.filter(_responseItem => {
+                const advert = response.data.filter(item => item.ser_id == _responseItem.id && item.parent_id == _responseItem.pid)
+                _responseItem.advert = advert
+              })
+              this.total = _response.meta.total;
+              this.list = _response.data;
+            })
         })
     },
     /**
@@ -295,7 +299,21 @@ export default {
      * 增加
      */
     handleCreate () {
-      this.temp = {}
+      this.temp = {
+        category_id: '',
+        site_title: '',
+        keywords: '',
+        title: '',
+        address: '',
+        website: '',
+        phone: '',
+        email: '',
+        image: '',
+        advert: [],
+        content: '',
+        sort: 0,
+        status: true
+      }
       this.dialogStatus = 'create'
       this.showDialog = true
       this.$refs.newForm.$refs.dataForm && this.$refs.newForm.$refs.dataForm.clearValidate()

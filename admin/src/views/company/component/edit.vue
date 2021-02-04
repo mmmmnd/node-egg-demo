@@ -5,13 +5,13 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-03 18:35:08
+ * @LastEditTime: 2021-02-04 15:43:51
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
              :visible.sync="dialogFormVisible"
              top="0vh">
-    <el-form ref="form"
+    <el-form ref="dataForm"
              :model="temp"
              label-width="120px">
       <el-row>
@@ -164,7 +164,8 @@ export default {
     updateData () {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          let tempData = Object.assign({}, this.temp)
+          const tempData = Object.assign({}, this.temp)
+
           this.$emit('updateData', tempData, res => {
             if (res.code == 0) {
               this.$router.go(0);
@@ -185,7 +186,7 @@ export default {
     createData () {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          let tempData = Object.assign({}, this.temp)
+          const tempData = Object.assign({}, this.temp)
           this.$emit('createData', tempData, res => {
             if (res.code == 0) {
               this.$router.go(0);
@@ -204,6 +205,7 @@ export default {
      * 父页面执行 上传轮播图
      */
     uploadOnSuccess (Obj, cab) {
+      Obj.temp = this.temp;
       this.$emit('uploadOnSuccess', Obj, res => cab(res))
     },
     /**
