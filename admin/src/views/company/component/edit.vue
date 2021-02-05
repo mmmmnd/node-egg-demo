@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-05 15:31:27
+ * @LastEditTime: 2021-02-05 16:58:48
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -107,7 +107,8 @@
           </el-form-item>
         </el-col>
         <el-col :span="24">
-          <el-form-item label="列表内容:">
+          <el-form-item label="列表内容:"
+                        prop="content">
             <Tinymce ref="editor"
                      v-model="temp.content"
                      :height="280" />

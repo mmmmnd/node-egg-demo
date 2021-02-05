@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 09:54:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-05 16:08:07
+ * @LastEditTime: 2021-02-05 16:47:13
 -->
 <template>
   <div class="app-container">
@@ -500,3 +500,8 @@ export default {
   }
 }
 </script>
+<style scoped>
+.el-form-item {
+  margin-bottom: 5px;
+}
+</style>
