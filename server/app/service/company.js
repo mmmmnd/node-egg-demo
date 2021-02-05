@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:27:48
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-02 18:20:16
+ * @LastEditTime: 2021-02-05 11:38:19
  */
 'use strict';
 
@@ -94,20 +94,16 @@ class CompanyService extends Service {
    * @param { String } value 字段值
    */
   async update ({ id, key, value }) {
-    try {
-      const company = await this.ctx.model.MzcCompany.update({ [key]: value }, {
-        where: {
-          id,
-          deleted_at: null
-        },
-      })
+    const company = await this.ctx.model.MzcCompany.update({ [key]: value }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
 
-      if (!company[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
+    if (!company[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
 
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 编辑
@@ -116,30 +112,25 @@ class CompanyService extends Service {
   async edit (params) {
     const { id, category_id, site_title, keywords, description, title, content, image, address, website, email, phone, status, sort } = params;
 
-    try {
-      await this.ctx.model.MzcCompany.update({
-        category_id, site_title, keywords, description, title, content, image, address, website, email, phone, status, sort
-      }, {
-        where: {
-          id,
-          deleted_at: null
-        },
-      })
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    await this.ctx.model.MzcCompany.update({
+      category_id, site_title, keywords, description, title, content, image, address, website, email, phone, status, sort
+    }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
+
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 删除
-   * @param { Number } id 
+   * @param { Array }  params id数组
    */
-  async destroy ({ id }) {
-    const company = await this.ctx.model.MzcCompany.findByPk(id);
-
-    if (!company) return { httpStatus: HttpStatus.NOT_FOUND, msg: '没有找到相关信息' };
-
-    company.destroy();
+  async destroy (params) {
+    await this.ctx.model.MzcCompany.destroy({
+      where: { id: params }
+    })
 
     return { httpStatus: HttpStatus.OK }
   }
@@ -150,14 +141,28 @@ class CompanyService extends Service {
   async add (params) {
     const { category_id, site_title, keywords, description, title, content, image, address, website, email, phone, status, sort } = params;
 
-    try {
-      await this.ctx.model.MzcCompany.create({
-        category_id, site_title, keywords, description, title, content, image, address, website, email, phone, status, sort
-      });
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    await this.ctx.model.MzcCompany.create({
+      category_id, site_title, keywords, description, title, content, image, address, website, email, phone, status, sort
+    });
+
+    return { httpStatus: HttpStatus.OK }
+  }
+  /**
+   * 移动
+   * @param { Number } category_id 类别id
+   * @param { Array } ids 移动的数组
+   */
+  async move ({ category_id, ids }) {
+    const company = await this.ctx.model.MzcCompany.findAll({
+      where: { id: ids }
+    });
+
+    company.map(item => {
+      item.category_id = category_id
+      item.save();
+    })
+
+    return { httpStatus: HttpStatus.OK }
   }
 }
 

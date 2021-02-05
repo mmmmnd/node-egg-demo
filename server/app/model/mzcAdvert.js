@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 19:53:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-01 16:16:35
+ * @LastEditTime: 2021-02-05 09:47:24
  */
 'use strict';
 
@@ -47,9 +47,9 @@ module.exports = app => {
     },
     ser_id: {
       allowNull: !1, // 是否为空
-      type: BOOLEAN, // 类型
+      type: STRING(3), // 类型
       defaultValue: '0', // 默认值
-      comment: '对应place为1的轮播图广告id顺序', // 备注
+      comment: '对应place为3的公司轮播介绍id顺序', // 备注
     },
     status: {
       allowNull: !1, // 是否为空

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-02 16:51:04
+ * @LastEditTime: 2021-02-05 16:35:06
  */
 'use strict';
 const moment = require('moment');
@@ -71,9 +71,10 @@ class WebController extends Controller {
     if (err) return render(ctx);
 
     if (!id) {
-      const companyId = await service.company.getMaxId(cid);
-      id = companyId.id;
+      const companyId = await service.company.getMaxId(cid); //获取当前cid排序最大id
+      id = companyId ? companyId.id : 0
     }
+
     const menuList = await service.menu.list(); // 导航栏菜单
     const companyList = await service.company.list(cid); // company详情数据
     const companyDetail = await service.company.detail(id, cid); // company详情数据

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-02 16:47:08
+ * @LastEditTime: 2021-02-05 09:51:58
 -->
 <%- include('/commom/header',{
   site_title:companyDetail?companyDetail.site_title:"海南昆仑体育文化股份有限公司",
@@ -19,47 +19,50 @@
   <div class="content main-info">
 
     <%- include('/commom/column') %>
-    <div class="content-right">
-      <div class="nav-right">
-        <% companyList.forEach(item => { %>
-          <% if(item.category_id == ctx.params.cid){ %>
-            <a href=<%= `/company/pid/${ctx.params.pid}/cid/${ctx.params.cid}/id/${item.id}` %> class="nav-btn <%= companyDetail.id == item.id ?'active':''; %>"><%= item.title %></a>
-          <% } %>
-        <% }) %>
-      </div>
-      <div class="tab-content">
-        <div class="ser-top">
-          <div class="ser-top-txt">
-            <h5><%= companyDetail.title %></h5>
-            <%- companyDetail.content %>
-          </div>
-          <img src="" alt="" class="ser-top-img" data-src="<%= companyDetail.image %>">
+    <% if(companyDetail){ %>
+      <div class="content-right">
+        <div class="nav-right">
+          <% companyList.forEach(item => { %>
+            <% if(item.category_id == ctx.params.cid){ %>
+              <a href=<%= `/company/pid/${ctx.params.pid}/cid/${ctx.params.cid}/id/${item.id}` %> class="nav-btn <%= companyDetail.id == item.id ?'active':''; %>"><%= item.title %></a>
+            <% } %>
+          <% }) %>
+        </div>
+        <div class="tab-content">
+          <div class="ser-top">
+            <div class="ser-top-txt">
+              <h5><%= companyDetail.title %></h5>
+              <%- companyDetail.content %>
+            </div>
+            <img src="" alt="" class="ser-top-img" data-src="<%= companyDetail.image %>">
 
-          <%- include('/commom/serInfoPhoto',{id: companyDetail.id }) %>
+            <%- include('/commom/serInfoPhoto',{id: companyDetail.id }) %>
 
-          <div class="ser-info-text">
-            <h5>联系方式</h5>
-            <div class="ser-info-cont">
-              <div class="ser-text-right">
-                <p>公司地址：<%= companyDetail.address %></p>
-                <p>公司网址：<a href="<%= companyDetail.website %>" target="_blank"><%= companyDetail.website %></a></p>
-                <p>电子邮箱：<%= companyDetail.email %></p>
-                <p>联系电话：<a tel="<%= companyDetail.phone %>"><%= companyDetail.phone %></a></p>
+            <div class="ser-info-text">
+              <h5>联系方式</h5>
+              <div class="ser-info-cont">
+                <div class="ser-text-right">
+                  <p>公司地址：<%= companyDetail.address %></p>
+                  <p>公司网址：<a href="http://<%= companyDetail.website %>" target="_blank">http://<%= companyDetail.website %></a></p>
+                  <p>电子邮箱：<%= companyDetail.email %></p>
+                  <p>联系电话：<a tel="<%= companyDetail.phone %>"><%= companyDetail.phone %></a></p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    <% }else{ %>
+      <div class="content-right">
+        <div class="ser-top">
+          <div class="ser-top-txt">
+            <h1>暂无数据</h1>
+          </div>
+        </div>
+      </div>
+    <% } %>
   </div>
 </div>
 <%- include('/commom/serInfo') %>
 
 <%- include('/commom/footer') %>
-<script>
-
-  $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
-    $(this).addClass('active').siblings().removeClass('active');
-  })
-
-</script>

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:13:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-25 11:52:19
+ * @LastEditTime: 2021-02-05 10:31:39
  */
 'use strict';
 
@@ -117,7 +117,7 @@ class AboutService extends Service {
   }
   /**
    * 删除
-   * @param { Array }  id数组
+   * @param { Array }  params id数组
    */
   async destroy (params) {
     await this.ctx.model.MzcAbout.destroy({
