@@ -5,30 +5,50 @@
  * @version: 1.0.0
  * @Date: 2021-01-18 18:37:39
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-02 17:02:06
+ * @LastEditTime: 2021-02-05 17:07:04
 -->
 <template>
   <div class="app-container">
     <div class="filter-container">
       <el-form ref="form"
+               :rules="rules"
                :model="form"
-               label-width="120px"
-               v-loading="listLoading">
+               label-width="120px">
         <el-row>
           <el-col :span="12">
-            <el-form-item label="网站标题:">
+            <el-form-item label="网站标题:"
+                          prop="site_title">
               <el-input v-model="form.site_title"></el-input>
             </el-form-item>
 
-            <el-form-item label="网站关键词:">
+            <el-form-item label="网站关键词:"
+                          prop="keywords">
               <el-input type="textarea"
                         v-model="form.keywords"></el-input>
             </el-form-item>
 
-            <el-form-item label="网站描述:">
+            <el-form-item label="网站描述:"
+                          prop="description">
               <el-input type="textarea"
                         rows="4"
                         v-model="form.description"></el-input>
+            </el-form-item>
+
+            <el-form-item label="状态:"
+                          prop="status">
+              <el-switch v-model="form.status"
+                         active-color="#13ce66"
+                         inactive-color="#ff4949"
+                         active-text="开启"
+                         inactive-text="关闭">
+              </el-switch>
+            </el-form-item>
+
+            <el-form-item label="列表内容:"
+                          prop="content">
+              <Tinymce ref="editor"
+                       v-model="form.content"
+                       :height="400" />
             </el-form-item>
 
             <el-form-item label="最后修改时间:">
@@ -52,13 +72,6 @@
               </el-button>
             </el-form-item>
           </el-col>
-          <el-col :span="12">
-            <el-form-item label="列表内容:">
-              <Tinymce ref="editor"
-                       v-model="form.content"
-                       :height="400" />
-            </el-form-item>
-          </el-col>
         </el-row>
       </el-form>
     </div>
@@ -80,7 +93,14 @@ export default {
   },
   data () {
     return {
-      listLoading: false
+      rules: {
+        category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
+        site_title: [{ type: 'string', required: true, message: '请输入网站标题', trigger: 'blur' }],
+        keywords: [{ type: 'string', required: true, message: '请输入网站关键词', trigger: 'blur' }],
+        description: [{ type: 'string', required: true, message: '请输入网站描述', trigger: 'blur' }],
+        status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
+        content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
+      }
     }
   },
   methods: {
@@ -88,12 +108,7 @@ export default {
      * 编辑
      */
     onSubmit () {
-      this.$emit('updateItem', this.form, res => {
-        return this.$message({
-          message: res.msg,
-          type: 'success'
-        })
-      })
+      this.$emit('updateItem', this.form, res => this.$message.success(res.msg))
     },
     /**
      * 预览

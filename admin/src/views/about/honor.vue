@@ -13,7 +13,6 @@
       <vList :select="select"
              :list="list"
              :total="total"
-             :rules="rules"
              :listQuery="listQuery"
              :selectType="selectType"
              @destroyData="destroyData"
@@ -43,13 +42,6 @@ export default {
       },
       select: [], //下拉
       selectType: [], //剪切类型
-      rules: {
-        category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
-        title: [{ type: 'string', required: true, message: '请输入标题', trigger: 'blur' }],
-        avatar_image: [{ required: true, message: '请上传图片', }],
-        status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
-        content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
-      }
     }
   },
   created () {

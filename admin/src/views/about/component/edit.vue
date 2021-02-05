@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-02 10:36:36
+ * @LastEditTime: 2021-02-05 17:47:25
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -174,14 +174,7 @@ export default {
           })
         }
       })
-    },
-    /**
-     * 弹窗提示
-     */
-    alertView (message, type) {
-      return this.$message({ message, type })
     }
-
   }
 }
 </script>

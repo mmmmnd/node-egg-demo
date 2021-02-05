@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-19 11:54:25
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-25 16:16:01
+ * @LastEditTime: 2021-02-05 17:47:14
 -->
 <template>
   <div class="app-container">
@@ -227,11 +227,6 @@ export default {
       type: Object,
       default: {}
     },
-    // 校验类型
-    rules: {
-      type: Object,
-      default: {}
-    },
     // 下拉切换
     selectType: {
       type: Array,
@@ -246,13 +241,20 @@ export default {
       canTools: true, //判断是否批量是否显示
       canMove: true,
       category_Id: '',
-      selectTypeId: ''
+      selectTypeId: '',
+      rules: {
+        category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
+        title: [{ type: 'string', required: true, message: '请输入标题', trigger: 'blur' }],
+        avatar_image: [{ required: true, message: '请上传图片', }],
+        status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
+        content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
+      }
     }
   },
   methods: {
     toggleSelection () {
       const selection = this.$refs.table.selection;
-      if (selection.length == 0) return this.alertView('请勾选选择列表数据', 'warning')
+      if (selection.length == 0) return this.$message.warning('请勾选选择列表数据')
       this.canTools = false;
     },
     /**
@@ -270,7 +272,7 @@ export default {
       })
       data.category_id = params; //类别id
       this.$emit('moveData', data, res => {
-        this.alertView('移动成功!', 'success')
+        this.$message.success('移动成功!')
         this.$router.go(0);
       })
     },
@@ -296,11 +298,11 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$emit('destroyData', data, res => {
-          this.alertView('删除成功!', 'success')
+          this.$message.success('删除成功!')
           this.$router.go(0);
         })
       }).catch(() => {
-        this.alertView('已取消删除', 'info')
+        this.$message.info('已取消删除!')
       });
 
     },
@@ -353,11 +355,11 @@ export default {
         type: 'warning'
       }).then(() => {
         this.$emit('destroyData', [row.id], res => {
-          this.alertView('删除成功!', 'success')
+          this.$message.success('删除成功')
           // this.$router.go(0);
         })
       }).catch(() => {
-        this.alertView('已取消删除', 'info')
+        this.$message.info('已取消删除')
       });
     },
     /**
@@ -368,7 +370,7 @@ export default {
 
       const data = { id: row.id, key: 'status', value: row.status };
       this.$emit('updateItem', data, res => {
-        this.alertView('更新成功!', 'success')
+        this.$message.success('更新成功!')
       })
     },
     /**
@@ -389,12 +391,6 @@ export default {
     getView (row) {
       window.open(process.env.VUE_APP_BASE_SERVER + "/about/pid/1/cid/" + row.product_id, "blank");
     },
-    /**
-     * 弹窗提示
-     */
-    alertView (message, type) {
-      return this.$message({ message, type })
-    }
   }
 }
 </script>

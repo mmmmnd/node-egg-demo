@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-09 16:07:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-19 11:41:10
+ * @LastEditTime: 2021-02-05 17:48:52
 -->
 <template>
   <div class="app-container">
@@ -247,7 +247,12 @@ export default {
      * 增加
      */
     handleCreate () {
-      this.resetTemp()
+      this.temp = {
+        product_id: '',
+        dropContent: '',
+        sort: 0,
+        status: true
+      }
       this.dialogStatus = 'create'
       this.dialogFormVisible = true
       this.$nextTick(() => {
@@ -275,10 +280,10 @@ export default {
         type: 'warning'
       }).then(() => {
         aboutDroptypeDestroy(row)
-        this.alertView('删除成功!', 'success')
+        this.$message.success('删除成功')
         this.$router.go(0);
       }).catch(() => {
-        this.alertView('已取消删除', 'info')
+        this.$message.info('已取消删除')
       });
     },
     /**
@@ -319,23 +324,6 @@ export default {
           })
         }
       })
-    },
-    /**
-     * 重置添加表单
-     */
-    resetTemp () {
-      this.temp = {
-        product_id: '',
-        dropContent: '',
-        sort: 0,
-        status: true
-      }
-    },
-    /**
-     * 弹窗提示
-     */
-    alertView (message, type) {
-      return this.$message({ message, type })
     }
   }
 
