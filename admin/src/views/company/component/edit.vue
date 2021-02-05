@@ -5,13 +5,14 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-04 15:43:51
+ * @LastEditTime: 2021-02-05 15:31:27
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
              :visible.sync="dialogFormVisible"
              top="0vh">
     <el-form ref="dataForm"
+             :rules="rules"
              :model="temp"
              label-width="120px">
       <el-row>
@@ -29,41 +30,50 @@
                          :value="item.id" />
             </el-select>
           </el-form-item>
-          <el-form-item label="网站标题:">
+          <el-form-item label="网站标题:"
+                        prop="site_title">
             <el-input v-model="temp.site_title"></el-input>
           </el-form-item>
 
-          <el-form-item label="网站关键词:">
+          <el-form-item label="网站关键词:"
+                        prop="keywords">
             <el-input type="textarea"
                       v-model="temp.keywords"></el-input>
           </el-form-item>
 
-          <el-form-item label="网站描述:">
+          <el-form-item label="网站描述:"
+                        prop="description">
             <el-input type="textarea"
                       v-model="temp.description"></el-input>
           </el-form-item>
 
-          <el-form-item label="公司标题:">
+          <el-form-item label="公司标题:"
+                        prop="title">
             <el-input v-model="temp.title"></el-input>
           </el-form-item>
 
-          <el-form-item label="公司地址:">
+          <el-form-item label="公司地址:"
+                        prop="address">
             <el-input v-model="temp.address"></el-input>
           </el-form-item>
 
-          <el-form-item label="公司网址:">
+          <el-form-item label="公司网址:"
+                        prop="website">
             <el-input v-model="temp.website"></el-input>
           </el-form-item>
 
-          <el-form-item label="联系电话:">
+          <el-form-item label="联系电话:"
+                        prop="phone">
             <el-input v-model="temp.phone"></el-input>
           </el-form-item>
 
-          <el-form-item label="电子邮箱:">
+          <el-form-item label="电子邮箱:"
+                        prop="email">
             <el-input v-model="temp.email"></el-input>
           </el-form-item>
 
-          <el-form-item label="排序:">
+          <el-form-item label="排序:"
+                        prop="sort">
             <el-input-number v-model="temp.sort"
                              controls-position="right"
                              :min="0"
@@ -71,7 +81,8 @@
                              size="small"></el-input-number>
           </el-form-item>
 
-          <el-form-item label="状态:">
+          <el-form-item label="状态:"
+                        prop="status">
             <el-switch v-model="temp.status"
                        active-color="#13ce66"
                        inactive-color="#ff4949"
@@ -82,11 +93,13 @@
         </el-col>
         <el-col :span="12">
           <el-form-item label="图片:"
-                        style="width:440px">
+                        style="width:440px"
+                        prop="image">
             <mUpload :avatar_image.sync="temp.image" />
           </el-form-item>
 
-          <el-form-item label="轮播图片:">
+          <el-form-item label="轮播图片:"
+                        prop="advert">
             <mBatchUpload :advert="temp.advert"
                           @updateItem="updateItem"
                           @uploadOnSuccess="uploadOnSuccess"
@@ -133,10 +146,6 @@ export default {
       type: Array,
       default: []
     },
-    rules: {
-      type: Object,
-      default: {}
-    },
   },
   data () {
     return {
@@ -144,7 +153,20 @@ export default {
         update: '修改',
         create: '增加'
       },
-
+      rules: {
+        category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
+        site_title: [{ type: 'string', required: true, message: '请输入网站标题', trigger: 'blur' }],
+        keywords: [{ type: 'string', required: true, message: '请输入网站关键词', trigger: 'blur' }],
+        description: [{ type: 'string', required: true, message: '请输入网站描述', trigger: 'blur' }],
+        title: [{ type: 'string', required: true, message: '请输入公司标题', trigger: 'blur' }],
+        address: [{ type: 'string', required: true, message: '请输入公司地址', trigger: 'blur' }],
+        website: [{ type: 'string', required: true, message: '请输入公司网址', trigger: 'blur' }],
+        phone: [{ type: 'string', required: true, message: '请输入联系电话', trigger: 'blur' }],
+        email: [{ type: 'string', required: true, message: '请输入电子邮箱', trigger: 'blur' }],
+        sort: [{ type: 'integer', required: true, message: '请选择排序', trigger: 'blur' }],
+        status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
+        content: [{ type: 'string', required: true, message: '请输入内容', trigger: 'change' }]
+      }
     }
   },
   computed: {
@@ -165,18 +187,7 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
-
-          this.$emit('updateData', tempData, res => {
-            if (res.code == 0) {
-              this.$router.go(0);
-              this.$notify({
-                title: '成功',
-                message: '更新成功',
-                type: 'success',
-                duration: 2000
-              })
-            }
-          })
+          this.$emit('updateData', tempData)
         }
       })
     },
@@ -187,17 +198,7 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
-          this.$emit('createData', tempData, res => {
-            if (res.code == 0) {
-              this.$router.go(0);
-              this.$notify({
-                title: '成功',
-                message: '更新成功',
-                type: 'success',
-                duration: 2000
-              })
-            }
-          })
+          this.$emit('createData', tempData)
         }
       })
     },
@@ -223,8 +224,3 @@ export default {
   }
 }
 </script>
-<style scoped>
-.el-form-item {
-  margin-bottom: 5px;
-}
-</style>

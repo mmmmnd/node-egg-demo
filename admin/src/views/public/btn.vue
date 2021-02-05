@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-11 11:05:38
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-25 16:03:59
+ * @LastEditTime: 2021-02-05 16:07:17
 -->
 <template>
   <span>
@@ -70,6 +70,11 @@ export default {
   data () {
     return {
       text: this.label
+    }
+  },
+  watch: {
+    label (newValue, oldValue) {
+      this.text = newValue;
     }
   },
   methods: {
