@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 10:13:20
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-05 10:31:39
+ * @LastEditTime: 2021-02-05 17:25:01
  */
 'use strict';
 
@@ -62,28 +62,16 @@ class AboutService extends Service {
    * @param { String } cid 二级菜单id
    */
   async list (cid) {
-    console.time();
-    var about
-    about = await this.ctx.app.redis.get('aboutList')
-    if (!about) {
-      about = await this.ctx.model.MzcAbout.findAll({
-        where: {
-          status: true,
-          deleted_at: null,
-          product_id: cid
-        },
-        order: [['sort', 'DESC']],
-      });
+    const about = await this.ctx.model.MzcAbout.findAll({
+      where: {
+        status: true,
+        deleted_at: null,
+        product_id: cid
+      },
+      order: [['sort', 'DESC']],
+    });
 
-      about = JSON.stringify(about);
-
-      await this.ctx.app.redis.set('aboutList', about)
-    }
-    about = JSON.parse(about)
-
-    console.timeEnd();
     return about
-
   }
   /**
    * 修改
