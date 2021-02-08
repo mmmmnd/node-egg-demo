@@ -1,16 +1,16 @@
-<!--
+﻿<!--
  * @Author: 莫卓才
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-25 08:29:03
+ * @LastEditTime: 2021-02-08 17:43:50
 -->
 <%- include('/commom/header',{
-  title:cultureDetail?cultureDetail.data[0].title:"11海南昆仑体育文化股份有限公司",
-  Keywords:cultureDetail?cultureDetail.data[0].keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:cultureDetail?cultureDetail.data[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  site_title:cultureList?cultureList.data[0].site_title:"11海南昆仑体育文化股份有限公司",
+  Keywords:cultureList?cultureList.data[0].keywords:"海南昆仑体育文化股份有限公司",
+  description:cultureList?cultureList.data[0].description:"海南昆仑体育文化股份有限公司",
 }) %>
 <%- include('/commom/banner') %>
 
@@ -20,15 +20,17 @@
     <div class="content-right">
       <div class="news-list">
         <ul>
-          <% cultureDetail.data.forEach(item=>{ %>
-          <li>
-            <img src="" alt="" class="news-list-img" data-src="<%= item.filepath %>">
-            <div class="news-list-right">
-              <em><%= moment(item.created_at).format('YYYY-MM-DD') %></em>
-              <h5><a href="<%= urlInfo +'/id/'+ item.id %>"><%= item.cultureTitle %></a></h5>
-              <p><%= item.cultureDescription %></p>
-            </div>
-          </li>
+          <% cultureList.data.forEach(item=>{ %>
+          <a href="<%= urlInfo +'/id/'+ item.id %>">
+            <li>
+              <img src="" alt="" class="news-list-img" data-src="<%= item.image %>">
+              <div class="news-list-right">
+                <em><%= moment(item.creatsed_at).format('YYYY-MM-DD') %></em>
+                <h5><%= item.title %></h5>
+                <p><%= item.description %></p>
+              </div>
+            </li>
+          </a>
           <% }) %>
         </ul>
       </div>

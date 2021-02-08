@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-05 11:38:38
+ * @LastEditTime: 2021-02-08 16:38:36
  */
 'use strict';
 
@@ -58,7 +58,6 @@ module.exports = app => {
 
   // aboutSingle
   router.get('/api/aboutSingle/index', jwt, controller.aboutSingle.index)
-  // router.get('/api/aboutSingle/detail', jwt, controller.aboutSingle.detail)
   router.post('/api/aboutSingle/edit', jwt, controller.aboutSingle.edit)
 
   // about
@@ -95,6 +94,7 @@ module.exports = app => {
   router.delete('/api/culture/destroy', jwt, controller.culture.destroy);
   router.post('/api/culture/edit', jwt, controller.culture.edit);
   router.post('/api/culture/add', jwt, controller.culture.add);
+  router.post('/api/culture/move', jwt, controller.culture.move);
 
   // news
   router.get('/api/news/index', jwt, controller.news.index)

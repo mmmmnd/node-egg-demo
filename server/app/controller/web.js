@@ -95,12 +95,12 @@ class WebController extends Controller {
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
-    const cultureDetail = await service.culture.detail(cid, page); // culture数据
+    const cultureList = await service.culture.list(cid, page); // culture数据
     const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingsList, cultureDetail, pages: cultureDetail.meta, advertList, url, urlInfo, moment, servicesList }
+    const data = { menuList, settingsList, cultureList, pages: cultureList.meta, advertList, url, urlInfo, moment, servicesList }
     await ctx.render('culture/index.ejs', data);
   }
   async culture_info () {

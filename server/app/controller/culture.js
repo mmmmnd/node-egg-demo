@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 10:36:05
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-10 09:07:08
+ * @LastEditTime: 2021-02-08 16:40:54
  */
 
 'use strict';
@@ -20,10 +20,11 @@ class CultureController extends Controller {
     const params = this.ctx.query;
 
     const culture = await this.ctx.service.culture.index(params)
-    const aboutSingleMenu = await this.ctx.service.menu.details(20, 17);
-    await this.ctx.helper.checkData({ data: { culture, aboutSingleMenu } });
+    await this.ctx.helper.checkData(culture);
   }
-  // 修改
+  /**
+   * 修改
+   */
   async update () {
     const params = this.ctx.request.body;
 
@@ -48,10 +49,22 @@ class CultureController extends Controller {
     const culture = await this.ctx.service.culture.edit(params)
     await this.ctx.helper.checkData(culture);
   }
+  /**
+   * 新增
+   */
   async add () {
     const params = this.ctx.request.body;
 
     const culture = await this.ctx.service.culture.add(params)
+    await this.ctx.helper.checkData(culture);
+  }
+  /**
+   * 移动
+   */
+  async move () {
+    const params = this.ctx.request.body;
+
+    const culture = await this.ctx.service.culture.move(params)
     await this.ctx.helper.checkData(culture);
   }
 }

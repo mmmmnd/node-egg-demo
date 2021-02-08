@@ -5,12 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-08-05 19:52:46
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-10 10:19:38
+ * @LastEditTime: 2021-02-08 11:55:12
 -->
 <%- include('/commom/header',{
-  title:papeInfo?papeInfo.current.title:"11海南昆仑体育文化股份有限公司",
+  site_title:papeInfo?papeInfo.current.site_title:"11海南昆仑体育文化股份有限公司",
   Keywords:papeInfo?papeInfo.current.keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:papeInfo?papeInfo.current.companyDescription:"海南昆仑体育文化股份有限公司",
+  description:papeInfo?papeInfo.current.description:"海南昆仑体育文化股份有限公司",
 }) %>
 
 <%- include('/commom/banner') %>
@@ -23,7 +23,7 @@
     <div class="content-right">
       <div class="main-info">
         <div class="news-info-top">
-          <h3 class="news-title"><%= papeInfo.current.cultureTitle %></h3>
+          <h3 class="news-title"><%= papeInfo.current.title %></h3>
           <div class="news-link"></div>
           <span>来源：<em>本站</em> 时间：<em><%= moment(papeInfo.current.created_at).format('YYYY-MM-DD') %></em>
             浏览：<em><%= papeInfo.current.click %></em></span>
@@ -33,12 +33,12 @@
         </div>
         <div class="news-info-bottom">
           <% if(papeInfo.previous){ %>
-          <a href="<%= urlInfo + '/id/'+papeInfo.previous.id %>">上一篇：<span><%= papeInfo.previous.cultureTitle %></span></a>
+          <a href="<%= urlInfo + '/id/'+papeInfo.previous.id %>">上一篇：<span><%= papeInfo.previous.title %></span></a>
           <% }else{ %>
           <a href="javascript:;" class="disabled">上一篇：<span>暂无</span></a>
           <% } %>
           <% if(papeInfo.next){ %>
-          <a href="<%= urlInfo + '/id/'+papeInfo.next.id %>">下一篇：<span><%= papeInfo.next.cultureTitle %></span></a>
+          <a href="<%= urlInfo + '/id/'+papeInfo.next.id %>">下一篇：<span><%= papeInfo.next.title %></span></a>
           <% }else{ %>
           <a href="javascript:;" class="disabled">下一篇：<span>暂无</span></a>
           <% } %>
