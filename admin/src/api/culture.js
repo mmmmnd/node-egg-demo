@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-09 10:30:40
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-10 10:13:18
+ * @LastEditTime: 2021-02-08 16:48:15
  */
 import request from '@/utils/request'
 
@@ -44,6 +44,14 @@ export function cultureEdit (data) {
 export function cultureAdd (data) {
   return request({
     url: '/culture/add',
+    method: 'post',
+    data
+  })
+}
+
+export function cultureMove (data) {
+  return request({
+    url: '/culture/move',
     method: 'post',
     data
   })
