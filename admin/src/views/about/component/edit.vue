@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-05 17:47:25
+ * @LastEditTime: 2021-02-08 08:56:36
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -140,17 +140,7 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
-          this.$emit('updateData', tempData, res => {
-            if (res.code == 0) {
-              this.$router.go(0);
-              this.$notify({
-                title: '成功',
-                message: '更新成功',
-                type: 'success',
-                duration: 2000
-              })
-            }
-          })
+          this.$emit('updateData', tempData)
         }
       })
     },
@@ -161,17 +151,7 @@ export default {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
           const tempData = Object.assign({}, this.temp)
-          this.$emit('createData', tempData, res => {
-            if (res.code == 0) {
-              this.$router.go(0);
-              this.$notify({
-                title: '成功',
-                message: '更新成功',
-                type: 'success',
-                duration: 2000
-              })
-            }
-          })
+          this.$emit('createData', tempData)
         }
       })
     }
@@ -179,9 +159,6 @@ export default {
 }
 </script>
 <style scoped>
-.el-form-item {
-  margin-bottom: 5px;
-}
 .avatar-uploader .el-upload {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;

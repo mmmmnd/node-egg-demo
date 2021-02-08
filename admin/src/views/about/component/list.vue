@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-19 11:54:25
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-05 17:47:14
+ * @LastEditTime: 2021-02-08 10:53:25
 -->
 <template>
   <div class="app-container">
@@ -84,9 +84,21 @@
           <el-form label-position="left"
                    inline
                    class="demo-table-expand">
-            <el-form-item label="内容">
-              <div v-html="props.row.content"></div>
-            </el-form-item>
+            <el-row>
+              <el-col :span="12">
+                <el-form-item label="内容">
+                  <div v-html="props.row.content"></div>
+                </el-form-item>
+              </el-col>
+              <el-col :span="12">
+                <el-form-item label="图片">
+                  <el-image :src="props.row.avatar_image"
+                            lazy
+                            fit="cover"
+                            style="width: 500px;height: 350px;border-radius: 6px;"></el-image>
+                </el-form-item>
+              </el-col>
+            </el-row>
           </el-form>
         </template>
       </el-table-column>
@@ -107,18 +119,8 @@
       </el-table-column>
       <el-table-column label="标题"
                        prop="title"
+                       width="400"
                        align="center">
-      </el-table-column>
-      <el-table-column prop="avatar_image"
-                       align="center"
-                       label="图片">
-        <template slot-scope="{row}">
-          <el-avatar shape="square"
-                     :size="50"
-                     fit="cover"
-                     v-if="row.avatar_image"
-                     :src="row.avatar_image"></el-avatar>
-        </template>
       </el-table-column>
       <el-table-column prop="status"
                        align="center"
@@ -152,7 +154,7 @@
       <el-table-column align="center"
                        label="操作"
                        width="280">
-        <template slot-scope="{row}">
+        <template slot-scope="{row,$index}">
           <mBtn size="mini"
                 type="primary"
                 icon="el-icon-edit"
@@ -176,14 +178,14 @@
                 perms='destroy'
                 btnType="btn"
                 onclick="(function(e){e.stopPropagation()}(event))"
-                @click="handleDel(row)" />
+                @click="handleDel(row,$index)" />
         </template>
       </el-table-column>
 
     </el-table>
 
-    <pagination v-show="total>0"
-                :total="total"
+    <pagination v-show="totals>0"
+                :total="totals"
                 :page.sync="listQuery.page"
                 :limit.sync="listQuery.limit"
                 @pagination="getList" />
@@ -238,10 +240,11 @@ export default {
       showDialog: false, //弹窗
       temp: {}, //编辑页数据
       dialogStatus: '', //弹窗状态
-      canTools: true, //判断是否批量是否显示
-      canMove: true,
-      category_Id: '',
-      selectTypeId: '',
+      canTools: true, //判断批量操作是否显示
+      canMove: true, //判断批量移动是否显示
+      category_Id: '', //过滤
+      selectTypeId: '', //移动
+      totals: this.total, //总数量
       rules: {
         category_id: [{ required: true, message: '请选择所属分类', trigger: 'change' }],
         title: [{ type: 'string', required: true, message: '请输入标题', trigger: 'blur' }],
@@ -251,18 +254,29 @@ export default {
       }
     }
   },
+  watch: {
+    total (newValue, oldValue) {
+      this.totals = newValue;
+    }
+  },
   methods: {
+    /**
+     * 批量操作
+     */
     toggleSelection () {
       const selection = this.$refs.table.selection;
       if (selection.length == 0) return this.$message.warning('请勾选选择列表数据')
       this.canTools = false;
     },
     /**
-     * 批量移动
+     * 批量移动按钮
      */
     toggleMove () {
       this.canMove = false;
     },
+    /**
+     * 批量移动
+     */
     setMove (params) {
       const selection = this.$refs.table.selection;
       const data = { ids: [] }
@@ -288,23 +302,27 @@ export default {
     /**
      * 批量删除
      */
-    toolsDel () {
+    toolsDel (data = []) {
       const selection = this.$refs.table.selection;
-      const data = [];
-      selection.map(item => data.push(item.id))
+
       this.$confirm('此操作将删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
+        selection.filter(selectionItem => {
+          var index = this.list.indexOf(selectionItem)
+          data.push(selectionItem.id)
+          this.list.splice(index, 1)
+          --this.totals
+          this.canTools = !this.canTools;
+        })
         this.$emit('destroyData', data, res => {
           this.$message.success('删除成功!')
-          this.$router.go(0);
         })
       }).catch(() => {
         this.$message.info('已取消删除!')
       });
-
     },
     clickRowHandle (row, column, event) {
       const table = this.$refs.table;
@@ -317,6 +335,9 @@ export default {
      * 子页面执行 搜索
      */
     getList (params) {
+      this.canTools = true;
+      this.canMove = true;
+      this.selectTypeId = ''
       this.$emit('getList', params)
     },
     /**
@@ -348,7 +369,7 @@ export default {
     /**
      * 子页面执行 删除
      */
-    handleDel (row) {
+    handleDel (row, index) {
       this.$confirm('此操作将删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
@@ -356,7 +377,8 @@ export default {
       }).then(() => {
         this.$emit('destroyData', [row.id], res => {
           this.$message.success('删除成功')
-          // this.$router.go(0);
+          this.list.splice(index, 1)
+          --this.totals
         })
       }).catch(() => {
         this.$message.info('已取消删除')
@@ -377,13 +399,36 @@ export default {
      * 父页面执行 增加
      */
     createData (Obj, cab) {
-      this.$emit('createData', Obj, res => cab(res))
+      this.$emit('createData', Obj, res => {
+        if (res.code == 0) {
+          this.list.push(Obj)
+          ++this.totals
+          this.$notify({
+            title: '成功',
+            message: '更新成功',
+            type: 'success',
+            duration: 2000
+          })
+        }
+      })
     },
     /**
      * 父页面执行 编辑
      */
     updateData (Obj, cab) {
-      this.$emit('updateData', Obj, res => cab(res))
+      this.$emit('updateData', Obj, res => {
+        if (res.code == 0) {
+          const index = this.list.findIndex(v => v.id === Obj.id)
+          this.list.splice(index, 1, Obj)
+          this.showDialog = false
+          this.$notify({
+            title: '成功',
+            message: '更新成功',
+            type: 'success',
+            duration: 2000
+          })
+        }
+      })
     },
     /**
      * 预览
