@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 09:54:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-05 16:47:13
+ * @LastEditTime: 2021-02-08 11:33:41
 -->
 <template>
   <div class="app-container">
@@ -254,8 +254,8 @@ export default {
       temp: {},
       dialogStatus: '',
       select: [], //下拉
-      canTools: true, //判断是否批量是否显示
-      canMove: true, //判断是否批量移动是否显示
+      canTools: true, //判断批量操作是否显示
+      canMove: true, //判断批量移动是否显示
       category_Id: '', //过滤
       selectTypeId: '', //移动
     }
@@ -295,6 +295,9 @@ export default {
                 const advert = response.data.filter(item => item.ser_id == _responseItem.id && item.parent_id == _responseItem.pid)
                 _responseItem.advert = advert
               })
+              this.canTools = true;
+              this.canMove = true;
+              this.selectTypeId = ''
               this.total = _response.meta.total;
               this.list = _response.data;
             })
