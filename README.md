@@ -85,4 +85,4 @@ $ CREATE DATABASE IF NOT EXISTS local-egg-demo DEFAULT CHARACTER SET utf8mb4 COL
 
 喜欢或对你有帮助的话，请你点一个星星 **star** 鼓励我，或者您有更好的建议和意见，请提出来告知我，可以留言 [Issues](https://github.com/mmmmnd/node-egg-demo/issues/new)。希望能够帮助到你学习！Thanks！共勉！
 
-[MIT](https://github.com/LFB/nodejs-koa-blog/blob/master/LICENSE), by mmmmnd
+[MIT](https://github.com/mmmmnd/node-egg-demo/blob/master/LICENSE), by mmmmnd
