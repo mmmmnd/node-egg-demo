@@ -27,7 +27,7 @@ module.exports = app => {
       defaultValue: '0', // 默认值
       comment: '分类id', // 备注
     },
-    title: {
+    site_title: {
       allowNull: !1, // 是否为空
       type: STRING(20), // 类型
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
@@ -39,25 +39,19 @@ module.exports = app => {
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
       comment: '公司关键词', // 备注
     },
-    companyDescription: {
+    description: {
       allowNull: !1, // 是否为空
       type: STRING, // 类型
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
       comment: '公司描述', // 备注
     },
-    cultureTitle: {
+    title: {
       allowNull: !1, // 是否为空
       type: STRING(60), // 类型
       defaultValue: '', // 默认值
       comment: '标题', // 备注
     },
-    cultureDescription: {
-      allowNull: !1, // 是否为空
-      type: STRING, // 类型
-      defaultValue: '', // 默认值
-      comment: '描述', // 备注,
-    },
-    filepath: {
+    file_path: {
       allowNull: !1, // 是否为空
       type: STRING(150), // 类型
       defaultValue: '', // 默认值
