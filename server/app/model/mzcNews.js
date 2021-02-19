@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-30 11:10:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-12 15:48:36
+ * @LastEditTime: 2021-02-19 09:25:31
  */
 'use strict';
 
@@ -51,7 +51,7 @@ module.exports = app => {
       defaultValue: '', // 默认值
       comment: '标题', // 备注
     },
-    file_path: {
+    image: {
       allowNull: !1, // 是否为空
       type: STRING(150), // 类型
       defaultValue: '', // 默认值

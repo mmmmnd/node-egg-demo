@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-06 10:36:05
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-12 11:11:00
+ * @LastEditTime: 2021-02-19 09:19:04
  */
 
 'use strict';
@@ -20,8 +20,7 @@ class newsController extends Controller {
     const params = this.ctx.query;
 
     const news = await this.ctx.service.news.index(params)
-    const aboutSingleMenu = await this.ctx.service.menu.details(24, 22);
-    await this.ctx.helper.checkData({ data: { news, aboutSingleMenu } });
+    await this.ctx.helper.checkData(news);
   }
   // 修改
   async update () {
@@ -52,6 +51,15 @@ class newsController extends Controller {
     const params = this.ctx.request.body;
 
     const news = await this.ctx.service.news.add(params)
+    await this.ctx.helper.checkData(news);
+  }
+  /**
+   * 移动
+   */
+  async move () {
+    const params = this.ctx.request.body;
+
+    const news = await this.ctx.service.news.move(params)
     await this.ctx.helper.checkData(news);
   }
 }

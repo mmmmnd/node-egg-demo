@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-28 17:12:57
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-25 09:41:33
+ * @LastEditTime: 2021-02-19 08:50:58
  */
 window.onload = function () {
   var height = 0, top = 0;
@@ -36,7 +36,6 @@ window.onload = function () {
     }
   }
 
-  document.get
   const imgs = document.getElementsByTagName('img')
   const viewHeight = window.innerHeight || document.documentElement.clientHeight
   let num = 0
@@ -48,8 +47,11 @@ window.onload = function () {
     for (let i = num; i < imgs.length; i++) {
       let distance = viewHeight - imgs[i].getBoundingClientRect().top
       if (distance >= 0) {
-        imgs[i].src = imgs[i].getAttribute('data-src')
-        num = i + 1
+        const dataSrc = imgs[i].getAttribute('data-src')
+        if (dataSrc) {
+          imgs[i].src = dataSrc;
+          num = i + 1
+        }
       }
     }
   }

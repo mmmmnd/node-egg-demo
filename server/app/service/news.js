@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:20:38
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-12 12:01:31
+ * @LastEditTime: 2021-02-19 11:37:58
  */
 'use strict';
 
@@ -24,19 +24,19 @@ class NewsService extends Service {
   async index ({ limit = 20, page = 1, category_id }) {
     const maxPage = Number(limit);
     const filter = category_id
-      ? { category_id, status: true, deleted_at: null }
-      : { deleted_at: null };
+      ? { category_id, deleted_at: null }
+      : { status: true, deleted_at: null };
 
-    try {
-      const news = await this.ctx.model.MzcNews.findAndCountAll({
-        where: filter,
-        offset: (page - 1) * maxPage,
-        limit: maxPage,
-      })
+    const news = await this.ctx.model.MzcNews.findAndCountAll({
+      where: filter,
+      offset: (page - 1) * maxPage,
+      limit: maxPage,
+    })
 
-      if (news.rows.length == 0) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
+    if (news.rows.length == 0) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
 
-      return {
+    return {
+      data: {
         data: news.rows,
         meta: {
           current_page: parseInt(page),
@@ -45,8 +45,6 @@ class NewsService extends Service {
           total_pages: Math.ceil(news.count / maxPage),
         }
       }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
     }
   }
   /**
@@ -56,70 +54,57 @@ class NewsService extends Service {
    * @param { String } value 字段值
    */
   async update ({ id, key, value }) {
-    try {
-      const company = await this.ctx.model.MzcNews.update({ [key]: value }, {
-        where: {
-          id,
-          deleted_at: null
-        },
-      })
+    const company = await this.ctx.model.MzcNews.update({ [key]: value }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
 
-      if (!company[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
+    if (!company[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
 
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 删除
-   * @param { Number } id 
+   * @param { Array }  params id数组
    */
-  async destroy ({ id }) {
-    const company = await this.ctx.model.MzcNews.findByPk(id);
+  async destroy (params) {
+    await this.ctx.model.MzcNews.destroy({
+      where: { id: params }
+    })
 
-    if (!company) return { httpStatus: HttpStatus.NOT_FOUND, msg: '没有找到相关信息' };
-
-    company.destroy();
-
-    return { msg: 1, httpStatus: HttpStatus.OK }
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 编辑
    * @param { Object } params 参数
    */
   async edit (params) {
-    const { id, category_id, title, keywords, companyDescription, cultureTitle, cultureDescription, filepath, content, status, sort } = params;
+    const { id, category_id, site_title, keywords, description, title, image, content, status, sort } = params;
 
-    try {
-      await this.ctx.model.MzcNews.update({
-        category_id, title, keywords, companyDescription, cultureTitle, cultureDescription, filepath, content, status, sort
-      }, {
-        where: {
-          id,
-          deleted_at: null
-        },
-      })
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    await this.ctx.model.MzcNews.update({
+      category_id, site_title, keywords, description, title, image, content, status, sort
+    }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 增加
    * @param { Object } params 参数
    */
   async add (params) {
-    const { category_id, title, keywords, companyDescription, cultureTitle, cultureDescription, filepath, content, status, sort } = params;
+    const { category_id, site_title, keywords, description, title, image, content, status, sort } = params;
 
-    try {
-      await this.ctx.model.MzcNews.create({
-        category_id, title, keywords, companyDescription, cultureTitle, cultureDescription, filepath, content, status, sort
-      });
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    await this.ctx.model.MzcNews.create({
+      category_id, site_title, keywords, description, title, image, content, status, sort
+    });
+
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 详情
@@ -194,6 +179,23 @@ class NewsService extends Service {
 
     news.click = click;
     news.save();
+  }
+  /**
+   * 移动
+   * @param { Number } category_id 类别id
+   * @param { Array } ids 移动的数组
+   */
+  async move ({ category_id, ids }) {
+    const news = await this.ctx.model.MzcNews.findAll({
+      where: { id: ids }
+    });
+
+    news.map(item => {
+      item.category_id = category_id
+      item.save();
+    })
+
+    return { httpStatus: HttpStatus.OK }
   }
 }
 

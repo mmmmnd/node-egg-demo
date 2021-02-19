@@ -1,4 +1,4 @@
-<!--
+﻿<!--
  * @Author: 莫卓才
  * @eMail: handsome.mo@foxmail.com
  * @Descripttion: 描述
@@ -23,7 +23,7 @@
         <ul>
           <% newsDetail.data.forEach(item=>{ %>
           <li>
-            <img src="" alt="" class="news-list-img" data-src="<%= item.file_path %>">
+            <img src="" alt="" class="news-list-img" data-src="<%= item.image %>">
             <div class="news-list-right">
               <em><%= moment(item.created_at).format('YYYY-MM-DD') %></em>
               <h5><a href="<%= urlInfo +'/id/'+ item.id %>"><%= item.title %></a></h5>
