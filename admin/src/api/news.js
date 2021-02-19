@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-12 11:11:53
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-12 11:12:21
+ * @LastEditTime: 2021-02-19 10:01:17
  */
 
 import request from '@/utils/request'
@@ -45,6 +45,14 @@ export function newsEdit (data) {
 export function newsAdd (data) {
   return request({
     url: '/news/add',
+    method: 'post',
+    data
+  })
+}
+
+export function newsMove (data) {
+  return request({
+    url: '/news/move',
     method: 'post',
     data
   })

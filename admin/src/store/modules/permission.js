@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-08 15:41:15
+ * @LastEditTime: 2021-02-19 09:59:35
  */
 import { constantRoutes } from '@/router'
 import { routesIndex } from '@/api/routes'
@@ -56,7 +56,9 @@ export const componentsMap = {
   cultureSocial: () => import('@/views/culture/social'),
   cultureEmployees: () => import('@/views/culture/employees'),
   cultureParty: () => import('@/views/culture/party'),
-  newsIndex: () => import('@/views/news/index'),
+  newsEnterprise: () => import('@/views/news/enterprise'),
+  newsIndustry: () => import('@/views/news/industry'),
+  newsNotice: () => import('@/views/news/notice'),
   casesCase: () => import('@/views/cases/case'),
   casesPartner: () => import('@/views/cases/partner'),
   recruitIndex: () => import('@/views/recruit/index'),
