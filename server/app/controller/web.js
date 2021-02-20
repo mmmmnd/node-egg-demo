@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-19 16:06:43
+ * @LastEditTime: 2021-02-20 17:21:42
  */
 'use strict';
 const moment = require('moment');
@@ -203,13 +203,13 @@ class WebController extends Controller {
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
-    const recruitDetail = await service.recruit.detail(); // recruit页面数据
+    const aboutSingleDetail = await service.aboutSingle.detail(cid); // about单页数据
     const recruitDroptypeList = await service.recruitDroptype.list(); //  recruit公司数据
     const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingsList, recruitDetail, recruitDroptypeList, advertList, servicesList, moment }
+    const data = { menuList, settingsList, aboutSingleDetail, recruitDroptypeList, advertList, servicesList, moment }
     await ctx.render('recruit/index.ejs', data);
   }
   async contact () {

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-12 09:28:24
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-17 10:37:44
+ * @LastEditTime: 2021-02-20 16:46:13
  */
 'use strict';
 
@@ -26,24 +26,6 @@ module.exports = app => {
       type: INTEGER(8).UNSIGNED, // 类型
       defaultValue: '0', // 默认值
       comment: '分类id', // 备注
-    },
-    title: {
-      allowNull: !1, // 是否为空
-      type: STRING(20), // 类型
-      defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
-      comment: '网站标题', // 备注
-    },
-    keywords: {
-      allowNull: !1, // 是否为空
-      type: STRING, // 类型
-      defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
-      comment: '公司关键词', // 备注
-    },
-    companyDescription: {
-      allowNull: !1, // 是否为空
-      type: STRING, // 类型
-      defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
-      comment: '公司描述', // 备注
     },
     position: {
       allowNull: !1, // 是否为空

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 11:29:26
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-18 09:38:11
+ * @LastEditTime: 2021-02-20 16:59:45
  */
 'use strict';
 
@@ -130,9 +130,9 @@ class RecruitDroptypeService extends Service {
       include: [{
         as: 'recruit',
         model: this.ctx.model.MzcRecruit,
-        order: [['id', 'ASC']],
+        order: [['sort', 'DESC'], ['id', 'ASC']],
       }],
-      order: [['id', 'ASC']],
+      order: [['sort', 'DESC'], ['id', 'ASC']],
     });
   }
 
