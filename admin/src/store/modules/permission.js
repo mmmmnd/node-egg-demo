@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-19 09:59:35
+ * @LastEditTime: 2021-02-20 10:54:51
  */
 import { constantRoutes } from '@/router'
 import { routesIndex } from '@/api/routes'
@@ -61,6 +61,7 @@ export const componentsMap = {
   newsNotice: () => import('@/views/news/notice'),
   casesCase: () => import('@/views/cases/case'),
   casesPartner: () => import('@/views/cases/partner'),
+  casesClassify: () => import('@/views/cases/classify'),
   recruitIndex: () => import('@/views/recruit/index'),
   recruitList: () => import('@/views/recruit/list'),
   menusIndex: () => import('@/views/menu/index'),
