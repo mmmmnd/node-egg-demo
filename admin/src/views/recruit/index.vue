@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-16 17:20:43
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-11 21:01:16
+ * @LastEditTime: 2021-02-20 17:35:32
 -->
 <template>
   <div class="app-container">
@@ -45,17 +45,8 @@
           <el-form label-position="left"
                    inline
                    class="demo-table-expand">
-            <el-form-item label="网站标题">
-              <div v-html="props.row.title"></div>
-            </el-form-item>
-            <el-form-item label="网站描述">
-              <div v-html="props.row.companyDescription"></div>
-            </el-form-item>
             <el-form-item label="内容">
               <div v-html="props.row.content"></div>
-            </el-form-item>
-            <el-form-item label="网站描述">
-              <div v-html="props.row.keywords"></div>
             </el-form-item>
           </el-form>
         </template>
@@ -116,22 +107,24 @@
       </el-table-column>
       <el-table-column align="center"
                        label="操作"
-                       width="190px">
-        <template slot-scope="{row}">
+                       width="200px">
+        <template slot-scope="{row,$index}">
           <mBtn size="mini"
                 type="primary"
                 icon="el-icon-edit"
                 label="编辑"
                 perms='edit'
                 btnType="btn"
-                @click.stop.prevent="handleUpdate(row)" />
+                onclick="(function(e){e.stopPropagation()}(event))"
+                @click="handleUpdate(row)" />
           <mBtn size="mini"
                 type="danger"
                 icon="el-icon-delete"
                 label="删除"
                 perms='destroy'
                 btnType="btn"
-                @click.stop.prevent="handleDel(row)" />
+                onclick="(function(e){e.stopPropagation()}(event))"
+                @click="handleDel(row,$index)" />
         </template>
       </el-table-column>
 
@@ -227,7 +220,7 @@ export default {
         .then(response => {
           this.listLoading = false
           this.$notify({
-            title: '成功',
+            site_title: '成功',
             message: response.msg,
             type: 'success'
           });
@@ -254,43 +247,61 @@ export default {
     /**
      * 删除
      */
-    handleDel (row) {
+    handleDel (row, index) {
       this.$confirm('此操作将删除该文件, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
         recruitDestroy(row)
-        this.alertView('删除成功!', 'success')
-        this.$router.go(0);
+        this.$message.success('删除成功')
+        this.list.splice(index, 1)
+        --this.totals
       }).catch(() => {
-        this.alertView('已取消删除', 'info')
+        this.$message.success.info('已取消删除')
       });
     },
     /**
      * 父页面执行 修改
      */
     updateData (Obj, cab) {
-      console.log(Obj);
-      recruitEdit(Obj).then(res => cab(res))
+      recruitEdit(Obj).then(res => {
+        if (res.code == 0) {
+          const index = this.list.findIndex(v => v.id === Obj.id)
+          this.list.splice(index, 1, Obj)
+          this.showDialog = false
+          this.$notify({
+            title: '成功',
+            message: '更新成功',
+            type: 'success',
+            duration: 2000
+          })
+        }
+      })
     },
     /**
      * 父页面执行 增加
      */
     createData (Obj, cab) {
-      recruitAdd(Obj).then(res => cab(res))
+      recruitAdd(Obj).then(res => {
+        if (res.code == 0) {
+          this.showDialog = false
+          this.list.push(Obj)
+          ++this.totals
+          this.$notify({
+            title: '成功',
+            message: '更新成功',
+            type: 'success',
+            duration: 2000
+          })
+        }
+      })
     },
     /**
      * 父页面执行 修改
      */
     updateItem (Obj, cab) {
       advertUpdate(Obj).then(res => cab(res))
-    },
-    /**
-     * 弹窗提示
-     */
-    alertView (message, type) {
-      return this.$message({ message, type })
     }
   }
 }

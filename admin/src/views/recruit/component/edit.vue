@@ -5,11 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-11-03 14:42:18
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-17 17:29:31
+ * @LastEditTime: 2021-02-20 17:31:51
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
-             :visible.sync="dialogFormVisible">
+             :visible.sync="dialogFormVisible"
+             v-if="dialogFormVisible">
     <el-form ref="dataForm"
              :rules="rules"
              :model="temp"
@@ -30,12 +31,6 @@
                          :value="item.id" />
             </el-select>
           </el-form-item>
-          <el-form-item label="网站标题:"
-                        class="postInfo-container-item"
-                        prop="title">
-            <el-input type="textarea"
-                      v-model="temp.title"></el-input>
-          </el-form-item>
 
           <el-form-item label="职位"
                         class="postInfo-container-item"
@@ -49,15 +44,6 @@
             <el-input v-model="temp.address"></el-input>
           </el-form-item>
 
-          <el-form-item label="排序"
-                        prop="sort">
-            <el-input-number v-model="temp.sort"
-                             controls-position="right"
-                             :min="0"
-                             ref="inputNumber"
-                             size="small"></el-input-number>
-          </el-form-item>
-
           <el-form-item label="状态:"
                         class="postInfo-container-item"
                         prop="status">
@@ -68,22 +54,8 @@
                        inactive-text="关闭">
             </el-switch>
           </el-form-item>
-
         </el-col>
         <el-col :span="12">
-          <el-form-item label="网站描述:"
-                        class="postInfo-container-item"
-                        prop="companyDescription">
-            <el-input type="textarea"
-                      v-model="temp.companyDescription"></el-input>
-          </el-form-item>
-
-          <el-form-item label="网站关键词:"
-                        class="postInfo-container-item"
-                        prop="keywords">
-            <el-input type="textarea"
-                      v-model="temp.keywords"></el-input>
-          </el-form-item>
 
           <el-form-item label="学历"
                         class="postInfo-container-item"
@@ -103,6 +75,14 @@
             <el-input v-model="temp.sex"></el-input>
           </el-form-item>
 
+          <el-form-item label="排序"
+                        prop="sort">
+            <el-input-number v-model="temp.sort"
+                             controls-position="right"
+                             :min="0"
+                             ref="inputNumber"
+                             size="small"></el-input-number>
+          </el-form-item>
         </el-col>
 
       </el-row>
@@ -185,18 +165,8 @@ export default {
     updateData () {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          let tempData = Object.assign({}, this.temp)
-          this.$emit('updateData', tempData, res => {
-            if (res.code == 0) {
-              this.$router.go(0);
-              this.$notify({
-                title: '成功',
-                message: '更新成功',
-                type: 'success',
-                duration: 2000
-              })
-            }
-          })
+          const tempData = Object.assign({}, this.temp)
+          this.$emit('updateData', tempData)
         }
       })
     },
@@ -206,18 +176,8 @@ export default {
     createData () {
       this.$refs['dataForm'].validate((valid) => {
         if (valid) {
-          let tempData = Object.assign({}, this.temp)
-          this.$emit('createData', tempData, res => {
-            if (res.code == 0) {
-              this.$router.go(0);
-              this.$notify({
-                title: '成功',
-                message: '更新成功',
-                type: 'success',
-                duration: 2000
-              })
-            }
-          })
+          const tempData = Object.assign({}, this.temp)
+          this.$emit('createData', tempData)
         }
       })
     },
@@ -228,13 +188,6 @@ export default {
       const Obj = { id: item.id, key: 'sort', value }
       this.$emit('updateItem', Obj, res => { })
     },
-    /**
-     * 弹窗提示
-     */
-    alertView (message, type) {
-      return this.$message({ message, type })
-    }
-
   }
 }
 </script>
