@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-13 08:23:42
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-16 10:20:35
+ * @LastEditTime: 2021-02-20 09:44:03
  */
 'use strict';
 const Controller = require('egg').Controller;
@@ -18,9 +18,7 @@ class CasesController extends Controller {
     const params = this.ctx.query;
 
     const cases = await this.ctx.service.cases.index(params);
-    const aboutSingleMenu = await this.ctx.service.menu.details(12, 8);
-    await this.ctx.helper.checkData({ data: { cases, aboutSingleMenu } });
-
+    await this.ctx.helper.checkData(cases);
   }
   // 修改
   async update () {
@@ -54,6 +52,15 @@ class CasesController extends Controller {
     const params = this.ctx.request.body;
 
     const cases = await this.ctx.service.cases.add(params)
+    await this.ctx.helper.checkData(cases);
+  }
+  /**
+   * 移动
+   */
+  async move () {
+    const params = this.ctx.request.body;
+
+    const cases = await this.ctx.service.cases.move(params)
     await this.ctx.helper.checkData(cases);
   }
 }

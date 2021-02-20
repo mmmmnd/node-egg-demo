@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 10/02/2021 13:05:25
+ Date: 20/02/2021 16:30:46
 */
 
 SET NAMES utf8mb4;
@@ -139,8 +139,8 @@ CREATE TABLE `mzc-admin`  (
 -- ----------------------------
 -- Records of mzc-admin
 -- ----------------------------
-INSERT INTO `mzc-admin` VALUES (1, 1, '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]', '[]', 'adminRoot', '123', '$2a$10$EtVqAo8yz/tHz.eOQc8WMOf8vUvVA8ZJi3UPzHt0hWHwW75zKr2K2', 'http://127.0.0.1:7001/public/images/team_img3.png', '123', '123', 1, 143, NULL, '127.0.0.1', '2021-02-10 09:06:11', '2020-09-02 16:58:14', '2021-02-10 09:06:11', NULL);
-INSERT INTO `mzc-admin` VALUES (2, 2, '', '', 'admin', NULL, '$2a$10$uDaCy8q43i2Vfo3.po87RuZe2IoLsF1k.nxNIRWPNpDs./KTLIkVS', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 134, NULL, '127.0.0.1', '2021-01-27 18:38:02', '2020-09-07 17:17:19', '2021-01-27 18:38:02', NULL);
+INSERT INTO `mzc-admin` VALUES (1, 1, '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]', '[]', 'adminRoot', '123', '$2a$10$EtVqAo8yz/tHz.eOQc8WMOf8vUvVA8ZJi3UPzHt0hWHwW75zKr2K2', 'http://127.0.0.1:7001/public/images/team_img3.png', '123', '123', 1, 151, NULL, '127.0.0.1', '2021-02-20 15:01:47', '2020-09-02 16:58:14', '2021-02-20 15:01:47', NULL);
+INSERT INTO `mzc-admin` VALUES (2, 1, '[]', '[]', 'admin', NULL, '$2a$10$uDaCy8q43i2Vfo3.po87RuZe2IoLsF1k.nxNIRWPNpDs./KTLIkVS', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 135, NULL, '127.0.0.1', '2021-02-19 17:30:35', '2020-09-07 17:17:19', '2021-02-20 09:54:18', NULL);
 INSERT INTO `mzc-admin` VALUES (3, 3, '', '', 'editor', NULL, '$2a$10$Yy0uMFMdzIso1cNHCtMhg.Hy6q/DFLGORvso0qZxSMSNsCURhbZQm', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 65, NULL, '127.0.0.1', '2020-12-22 20:22:43', '2020-10-21 09:44:24', '2020-12-22 20:22:43', NULL);
 INSERT INTO `mzc-admin` VALUES (4, 4, '', '', 'admin1', NULL, '$2a$10$1VHPKndJw4ExsbKTIKYXMe.vtVAThiIqfC8oOIRxnHrlhelYO0d2K', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 0, NULL, NULL, NULL, '2020-11-17 11:57:56', '2020-11-17 11:57:56', '1899-12-30 01:00:00');
 INSERT INTO `mzc-admin` VALUES (5, 4, '', '', 'tourists', NULL, '$2a$10$1gRrgWc5qTcDm0gCPxNJgOLsePKS8E02gEQCLBQCzET7gaFzz0aAu', '', '', '', 1, 7, '127.0.0.1', '127.0.0.1', '2020-12-15 16:01:11', '2020-11-27 17:44:45', '2020-12-15 16:01:11', NULL);
@@ -222,7 +222,7 @@ CREATE TABLE `mzc-api`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 132 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 152 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-api
@@ -256,11 +256,11 @@ INSERT INTO `mzc-api` VALUES (26, 10, '/api/culture/update', 'culture更新', 'u
 INSERT INTO `mzc-api` VALUES (27, 10, '/api/culture/destroy', 'culture删除', 'destroy', 1, 0, NULL, '2021-01-08 19:15:51', NULL);
 INSERT INTO `mzc-api` VALUES (28, 10, '/api/culture/edit', 'culture编辑', 'edit', 1, 0, NULL, '2021-01-08 19:15:57', NULL);
 INSERT INTO `mzc-api` VALUES (29, 10, '/api/culture/add', 'culture增加', 'add', 1, 0, NULL, '2021-01-08 19:16:03', NULL);
-INSERT INTO `mzc-api` VALUES (30, 12, '/api/news/index', 'news查询', 'query', 1, 0, NULL, '2021-01-08 19:16:11', NULL);
-INSERT INTO `mzc-api` VALUES (31, 12, '/api/news/update', 'news更新', 'update', 1, 0, NULL, '2021-01-08 19:16:18', NULL);
-INSERT INTO `mzc-api` VALUES (32, 12, '/api/news/destroy', 'news删除', 'destroy', 1, 0, NULL, '2021-01-08 19:16:24', NULL);
-INSERT INTO `mzc-api` VALUES (33, 12, '/api/news/edit', 'news编辑', 'edit', 1, 0, NULL, '2021-01-08 19:16:30', NULL);
-INSERT INTO `mzc-api` VALUES (34, 12, '/api/news/add', 'news增加', 'add', 1, 0, NULL, '2021-01-08 19:16:35', NULL);
+INSERT INTO `mzc-api` VALUES (30, 44, '/api/news/index', 'news查询', 'query', 1, 0, NULL, '2021-02-19 09:28:14', NULL);
+INSERT INTO `mzc-api` VALUES (31, 44, '/api/news/update', 'news更新', 'update', 1, 0, NULL, '2021-01-08 19:16:18', NULL);
+INSERT INTO `mzc-api` VALUES (32, 44, '/api/news/destroy', 'news删除', 'destroy', 1, 0, NULL, '2021-01-08 19:16:24', NULL);
+INSERT INTO `mzc-api` VALUES (33, 44, '/api/news/edit', 'news编辑', 'edit', 1, 0, NULL, '2021-01-08 19:16:30', NULL);
+INSERT INTO `mzc-api` VALUES (34, 44, '/api/news/add', 'news增加', 'add', 1, 0, NULL, '2021-01-08 19:16:35', NULL);
 INSERT INTO `mzc-api` VALUES (35, 14, '/api/cases/index', 'cases查询', 'query', 1, 0, NULL, '2021-01-08 19:16:40', NULL);
 INSERT INTO `mzc-api` VALUES (36, 14, '/api/cases/update', 'cases更新', 'update', 1, 0, NULL, '2021-01-08 19:16:46', NULL);
 INSERT INTO `mzc-api` VALUES (37, 14, '/api/cases/destroy', 'cases删除', 'destroy', 1, 0, NULL, '2021-01-08 19:16:51', NULL);
@@ -358,6 +358,26 @@ INSERT INTO `mzc-api` VALUES (128, 43, '/api/culture/destroy', 'culture删除', 
 INSERT INTO `mzc-api` VALUES (129, 43, '/api/culture/edit', 'culture编辑', 'edit', 1, 0, '2021-02-08 17:38:01', '2021-02-08 17:38:01', NULL);
 INSERT INTO `mzc-api` VALUES (130, 43, '/api/culture/add', 'culture增加', 'add', 1, 0, '2021-02-08 17:38:15', '2021-02-08 17:38:15', NULL);
 INSERT INTO `mzc-api` VALUES (131, 43, '/api/culture/move', 'culture移动', 'move', 1, 0, '2021-02-08 17:38:29', '2021-02-08 17:38:29', NULL);
+INSERT INTO `mzc-api` VALUES (132, 44, '/api/news/move', 'news移动', 'move', 1, 0, '2021-02-19 09:34:08', '2021-02-19 09:34:41', NULL);
+INSERT INTO `mzc-api` VALUES (133, 45, '/api/news/index', 'news查询', 'query', 1, 0, '2021-02-19 09:40:04', '2021-02-19 09:40:04', NULL);
+INSERT INTO `mzc-api` VALUES (134, 45, '/api/news/update', 'news更新', 'update', 1, 0, '2021-02-19 09:40:21', '2021-02-19 09:40:21', NULL);
+INSERT INTO `mzc-api` VALUES (135, 45, '/api/news/destroy', 'news删除', 'destroy', 1, 0, '2021-02-19 09:40:37', '2021-02-19 09:40:37', NULL);
+INSERT INTO `mzc-api` VALUES (136, 45, '/api/news/edit', 'news编辑', 'edit', 1, 0, '2021-02-19 09:43:01', '2021-02-19 09:43:01', NULL);
+INSERT INTO `mzc-api` VALUES (137, 45, '/api/news/add', 'news增加', 'add', 1, 0, '2021-02-19 09:43:14', '2021-02-19 09:43:14', NULL);
+INSERT INTO `mzc-api` VALUES (138, 45, '/api/news/move', 'news移动', 'move', 1, 0, '2021-02-19 09:43:27', '2021-02-19 09:43:27', NULL);
+INSERT INTO `mzc-api` VALUES (139, 46, '/api/news/index', 'news查询', 'query', 1, 0, '2021-02-19 09:44:02', '2021-02-19 09:44:02', NULL);
+INSERT INTO `mzc-api` VALUES (140, 46, '/api/news/update', 'news更新', 'update', 1, 0, '2021-02-19 09:45:14', '2021-02-19 09:45:14', NULL);
+INSERT INTO `mzc-api` VALUES (141, 46, '/api/news/destroy', 'news删除', 'destroy', 1, 0, '2021-02-19 09:45:30', '2021-02-19 09:45:30', NULL);
+INSERT INTO `mzc-api` VALUES (142, 46, '/api/news/edit', 'news编辑', 'edit', 1, 0, '2021-02-19 09:45:45', '2021-02-19 09:45:45', NULL);
+INSERT INTO `mzc-api` VALUES (143, 46, '/api/news/add', 'news增加', 'add', 1, 0, '2021-02-19 09:45:57', '2021-02-19 09:45:57', NULL);
+INSERT INTO `mzc-api` VALUES (144, 46, '/api/news/move', 'news移动', 'move', 1, 0, '2021-02-19 09:53:46', '2021-02-19 09:53:46', NULL);
+INSERT INTO `mzc-api` VALUES (145, 14, '/api/casesDroptype/list', 'casesDroptype分类', 'query', 1, 0, '2021-02-19 17:56:47', '2021-02-19 17:56:47', NULL);
+INSERT INTO `mzc-api` VALUES (146, 14, '/api/cases/move', 'cases移动', 'move', 1, 0, '2021-02-20 09:53:35', '2021-02-20 09:53:35', NULL);
+INSERT INTO `mzc-api` VALUES (147, 47, '/api/casesDroptype/index', 'casesDroptype列表', 'query', 1, 0, '2021-02-20 11:12:16', '2021-02-20 11:12:16', NULL);
+INSERT INTO `mzc-api` VALUES (148, 47, '/api/casesDroptype/update', 'casesDroptype更新', 'update', 1, 0, '2021-02-20 15:09:43', '2021-02-20 15:09:43', NULL);
+INSERT INTO `mzc-api` VALUES (149, 47, '/api/casesDroptype/destroy', 'casesDroptype删除', 'destroy', 1, 0, '2021-02-20 15:10:05', '2021-02-20 15:10:05', NULL);
+INSERT INTO `mzc-api` VALUES (150, 47, '/api/casesDroptype/edit', 'casesDroptype修改', 'edit', 1, 0, '2021-02-20 15:10:26', '2021-02-20 15:10:26', NULL);
+INSERT INTO `mzc-api` VALUES (151, 47, '/api/casesDroptype/add', 'casesDroptype增加', 'add', 1, 0, '2021-02-20 15:10:46', '2021-02-20 15:10:46', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-api-code
@@ -396,12 +416,12 @@ DROP TABLE IF EXISTS `mzc-cases`;
 CREATE TABLE `mzc-cases`  (
   `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `category_id` int(11) NOT NULL DEFAULT 0 COMMENT '分类id',
-  `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '网站标题',
+  `product_id` int(11) NOT NULL COMMENT '关联父表id',
+  `site_title` varchar(20) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '网站标题',
   `keywords` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司关键词',
-  `companyDescription` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司描述',
-  `cultureTitle` varchar(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
-  `type` tinyint(4) NULL DEFAULT NULL COMMENT '类型',
-  `filepath` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '图片',
+  `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司描述',
+  `title` varchar(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
+  `image` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '图片',
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '内容',
   `click` mediumint(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '点击次数',
   `status` tinyint(1) NOT NULL DEFAULT 1,
@@ -410,35 +430,62 @@ CREATE TABLE `mzc-cases`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 25 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-cases
 -- ----------------------------
-INSERT INTO `mzc-cases` VALUES (1, 26, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 8, 'http://127.0.0.1:7001/public/images/case1.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 42, 1, 0, '2020-08-19 09:46:29', '2020-12-23 16:12:39', NULL);
-INSERT INTO `mzc-cases` VALUES (2, 26, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 8, 'http://127.0.0.1:7001/public/images/case2.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 7, 1, 2, '2020-08-19 09:46:29', '2020-11-29 15:09:43', NULL);
-INSERT INTO `mzc-cases` VALUES (3, 26, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 8, 'http://127.0.0.1:7001/public/images/case3.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (4, 26, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 8, 'http://127.0.0.1:7001/public/images/case1.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"\" alt=\"/public/images/banner.png\"></p>\n', 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (5, 26, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 8, 'http://127.0.0.1:7001/public/images/case2.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"\" alt=\"/public/images/banner.png\"></p>\n', 3, 1, 0, '2020-08-19 09:46:29', '2020-11-18 11:53:07', NULL);
-INSERT INTO `mzc-cases` VALUES (6, 26, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 8, 'http://127.0.0.1:7001/public/images/case3.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 1, 1, 0, '2020-08-19 09:46:29', '2020-08-26 09:02:52', NULL);
-INSERT INTO `mzc-cases` VALUES (7, 26, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 8, 'http://127.0.0.1:7001/public/images/case1.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (8, 26, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 8, 'http://127.0.0.1:7001/public/images/case2.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 1, 1, 0, '2020-08-19 09:46:29', '2020-08-26 09:02:49', NULL);
-INSERT INTO `mzc-cases` VALUES (9, 26, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 8, 'http://127.0.0.1:7001/public/images/case3.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 1, 1, 0, '2020-08-19 09:46:29', '2020-08-26 09:02:46', NULL);
-INSERT INTO `mzc-cases` VALUES (10, 27, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 0, 'http://127.0.0.1:7001/public/images/coop.png', '', 0, 1, 0, '2020-08-19 09:46:29', '2020-12-23 16:12:50', NULL);
-INSERT INTO `mzc-cases` VALUES (11, 27, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 0, 'http://127.0.0.1:7001/public/images/coop2.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (12, 27, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 0, 'http://127.0.0.1:7001/public/images/coop3.png', '', 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (13, 27, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 0, 'http://127.0.0.1:7001/public/images/coop4.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (14, 27, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 0, 'http://127.0.0.1:7001/public/images/coop5.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (15, 27, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 0, 'http://127.0.0.1:7001/public/images/coop6.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (16, 27, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 0, 'http://127.0.0.1:7001/public/images/coop7.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (17, 27, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 0, 'http://127.0.0.1:7001/public/images/coop.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (18, 27, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 0, 'http://127.0.0.1:7001/public/images/coop2.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (19, 27, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 0, 'http://127.0.0.1:7001/public/images/coop3.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
-INSERT INTO `mzc-cases` VALUES (20, 26, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 8, '', NULL, 2, 1, 0, '2020-08-19 09:46:29', '2020-11-16 11:04:42', NULL);
-INSERT INTO `mzc-cases` VALUES (21, 0, '123', '123', '123', '123', 11, 'http://127.0.0.1:7001/public/uploads/20201116/1605495317488.jpg', '<p>123</p>', 0, 1, 1, '2020-11-16 10:55:39', '2020-11-16 10:55:39', NULL);
-INSERT INTO `mzc-cases` VALUES (22, 0, '123', '123', '123', '123', 11, '', '<p>123</p>', 0, 1, 1, '2020-11-16 10:56:21', '2020-11-16 10:56:21', NULL);
-INSERT INTO `mzc-cases` VALUES (23, 26, '123', '123', '123', '123', 11, '', '<p>1123</p>', 1, 1, 1, '2020-11-16 11:03:25', '2020-11-16 11:04:38', NULL);
-INSERT INTO `mzc-cases` VALUES (24, 27, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 8, 'http://127.0.0.1:7001/public/uploads/20201116/1605499141498.jpg', '', 0, 1, 1, '2020-11-16 11:59:05', '2020-11-16 14:49:11', '2020-11-16 14:49:11');
+INSERT INTO `mzc-cases` VALUES (1, 26, 1, '1海南昆仑体育文化股份有限公司', '1海南昆仑体育文化股份有限公司', '1海南昆仑体育文化股份有限公司', '1助力全民健身，广东省“百馆计划”项目正式启动', 'http://127.0.0.1:7001/public/images/case1.png', '<p>1本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p>\n<p><img src=\"/public/images/banner.png\" alt=\"\" /></p>', 44, 1, 3, '2020-08-19 09:46:29', '2021-02-20 09:27:15', NULL);
+INSERT INTO `mzc-cases` VALUES (2, 26, 2, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 'http://127.0.0.1:7001/public/images/case2.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 9, 1, 2, '2020-08-19 09:46:29', '2021-02-19 17:06:51', NULL);
+INSERT INTO `mzc-cases` VALUES (3, 26, 3, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 'http://127.0.0.1:7001/public/images/case3.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
+INSERT INTO `mzc-cases` VALUES (4, 26, 4, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 'http://127.0.0.1:7001/public/images/case1.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"\" alt=\"/public/images/banner.png\"></p>\n', 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
+INSERT INTO `mzc-cases` VALUES (5, 26, 5, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 'http://127.0.0.1:7001/public/images/case2.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"\" alt=\"/public/images/banner.png\"></p>\n', 3, 1, 0, '2020-08-19 09:46:29', '2020-11-18 11:53:07', NULL);
+INSERT INTO `mzc-cases` VALUES (6, 26, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 'http://127.0.0.1:7001/public/images/case3.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 1, 1, 0, '2020-08-19 09:46:29', '2020-08-26 09:02:52', NULL);
+INSERT INTO `mzc-cases` VALUES (7, 26, 2, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 'http://127.0.0.1:7001/public/images/case1.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
+INSERT INTO `mzc-cases` VALUES (8, 26, 3, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 'http://127.0.0.1:7001/public/images/case2.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 1, 1, 0, '2020-08-19 09:46:29', '2020-08-26 09:02:49', NULL);
+INSERT INTO `mzc-cases` VALUES (9, 26, 4, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '助力全民健身，广东省“百馆计划”项目正式启动', 'http://127.0.0.1:7001/public/images/case3.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 1, 1, 0, '2020-08-19 09:46:29', '2020-08-26 09:02:46', NULL);
+INSERT INTO `mzc-cases` VALUES (10, 27, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/images/coop.png', '', 0, 1, 0, '2020-08-19 09:46:29', '2020-12-23 16:12:50', NULL);
+INSERT INTO `mzc-cases` VALUES (11, 27, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/images/coop2.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
+INSERT INTO `mzc-cases` VALUES (12, 27, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/images/coop3.png', '', 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
+INSERT INTO `mzc-cases` VALUES (13, 27, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/images/coop4.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
+INSERT INTO `mzc-cases` VALUES (14, 27, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/images/coop5.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
+INSERT INTO `mzc-cases` VALUES (15, 27, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/images/coop6.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
+INSERT INTO `mzc-cases` VALUES (16, 27, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/images/coop7.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
+INSERT INTO `mzc-cases` VALUES (17, 27, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/images/coop.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
+INSERT INTO `mzc-cases` VALUES (18, 27, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/images/coop2.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2020-08-19 09:46:29', NULL);
+INSERT INTO `mzc-cases` VALUES (19, 27, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/images/coop3.png', NULL, 0, 1, 0, '2020-08-19 09:46:29', '2021-02-20 16:22:03', NULL);
+INSERT INTO `mzc-cases` VALUES (20, 26, 1, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/images/coop7.png', NULL, 4, 1, 0, '2020-08-19 09:46:29', '2021-02-20 09:27:19', NULL);
+INSERT INTO `mzc-cases` VALUES (21, 26, 1, '123', '123', '123', '123', 'http://127.0.0.1:7001/public/uploads/20201116/1605495317488.jpg', '<p>123</p>', 0, 1, 1, '2020-11-16 10:55:39', '2021-02-20 10:05:43', NULL);
+INSERT INTO `mzc-cases` VALUES (22, 26, 1, '123', '123', '123', '123', 'http://127.0.0.1:7001/public/images/case2.png', '<p>123</p>', 0, 1, 1, '2020-11-16 10:56:21', '2020-11-16 10:56:21', NULL);
+INSERT INTO `mzc-cases` VALUES (23, 26, 1, '123', '123', '123', '123', 'http://127.0.0.1:7001/public/images/case3.png', '<p>1123</p>', 2, 1, 1, '2020-11-16 11:03:25', '2021-02-20 10:05:43', NULL);
+INSERT INTO `mzc-cases` VALUES (24, 27, 3, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '1234', 'http://127.0.0.1:7001/public/uploads/20201116/1605499141498.jpg', '', 0, 1, 1, '2020-11-16 11:59:05', '2020-11-16 14:49:11', '2020-11-16 14:49:11');
+INSERT INTO `mzc-cases` VALUES (25, 26, 1, '测试', '测试', '测试', '测试', 'http://127.0.0.1:7001/public/uploads/20210220/1613785037606.jpg', '<p>测试测试</p>', 0, 1, 1, '2021-02-20 09:37:21', '2021-02-20 09:37:21', NULL);
+INSERT INTO `mzc-cases` VALUES (26, 27, 0, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '', 'http://127.0.0.1:7001/public/uploads/20210220/1613809504935.jpg', '', 0, 1, 0, '2021-02-20 16:25:06', '2021-02-20 16:28:56', NULL);
+
+-- ----------------------------
+-- Table structure for mzc-cases-droptype
+-- ----------------------------
+DROP TABLE IF EXISTS `mzc-cases-droptype`;
+CREATE TABLE `mzc-cases-droptype`  (
+  `id` int(8) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `title` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '下拉内容',
+  `status` tinyint(1) NOT NULL DEFAULT 1 COMMENT '状态',
+  `sort` int(6) NULL DEFAULT 0 COMMENT '排序',
+  `created_at` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
+  `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of mzc-cases-droptype
+-- ----------------------------
+INSERT INTO `mzc-cases-droptype` VALUES (1, '体育赛事', 1, 0, NULL, '2021-02-20 15:23:48', NULL);
+INSERT INTO `mzc-cases-droptype` VALUES (2, '文化服务', 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-cases-droptype` VALUES (3, '电竞教育', 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-cases-droptype` VALUES (4, '体验式培训', 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-cases-droptype` VALUES (5, '会议会展', 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-cases-droptype` VALUES (6, '测试测试', 1, 0, '2021-02-20 15:26:26', '2021-02-20 15:26:26', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-company
@@ -505,18 +552,18 @@ CREATE TABLE `mzc-culture`  (
 -- ----------------------------
 -- Records of mzc-culture
 -- ----------------------------
-INSERT INTO `mzc-culture` VALUES (1, 17, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '1123', 'http://127.0.0.1:7001/public/images/wh_img1.png', '<p>123123本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p>\n<p><img src=\"/public/images/banner.png\" alt=\"\" /></p>', 132, 1, 0, '2020-08-19 09:39:04', '2021-02-08 17:41:29', NULL);
-INSERT INTO `mzc-culture` VALUES (2, 18, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', 'http://127.0.0.1:7001/public/images/wh_img2.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 4, 1, 0, '2020-08-19 09:39:04', '2020-11-12 15:46:49', NULL);
+INSERT INTO `mzc-culture` VALUES (1, 17, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '1123', 'http://127.0.0.1:7001/public/images/wh_img1.png', '<p>123123本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p>\n<p><img src=\"/public/images/banner.png\" alt=\"\" /></p>', 133, 1, 0, '2020-08-19 09:39:04', '2021-02-18 10:58:29', NULL);
+INSERT INTO `mzc-culture` VALUES (2, 18, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', 'http://127.0.0.1:7001/public/images/wh_img2.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 8, 1, 0, '2020-08-19 09:39:04', '2021-02-18 09:28:41', NULL);
 INSERT INTO `mzc-culture` VALUES (3, 19, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 3, 1, 0, '2020-08-19 09:39:04', '2020-11-12 15:46:52', NULL);
-INSERT INTO `mzc-culture` VALUES (4, 20, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 1, 1, 0, '2020-08-19 09:39:04', '2020-11-12 15:44:35', NULL);
+INSERT INTO `mzc-culture` VALUES (4, 20, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 1, 1, 0, '2020-08-19 09:39:04', '2021-02-18 09:24:19', NULL);
 INSERT INTO `mzc-culture` VALUES (5, 18, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 2, 1, 0, '2020-08-19 09:39:04', '2020-08-25 15:27:39', NULL);
-INSERT INTO `mzc-culture` VALUES (6, 20, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 7, 1, 0, '2020-08-19 09:39:04', '2020-11-12 15:44:41', NULL);
-INSERT INTO `mzc-culture` VALUES (7, 17, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '2', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 73, 1, 0, '2020-08-19 09:39:04', '2021-02-08 17:32:56', NULL);
+INSERT INTO `mzc-culture` VALUES (6, 20, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 9, 1, 0, '2020-08-19 09:39:04', '2021-02-18 09:24:31', NULL);
+INSERT INTO `mzc-culture` VALUES (7, 17, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '2', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 76, 1, 0, '2020-08-19 09:39:04', '2021-02-18 10:45:05', NULL);
 INSERT INTO `mzc-culture` VALUES (8, 17, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '3', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 1, 1, 0, '2020-08-19 09:39:04', '2020-11-12 10:23:29', NULL);
 INSERT INTO `mzc-culture` VALUES (9, 17, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '4', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 73, 1, 0, '2020-08-19 09:39:04', '2021-02-08 11:55:38', NULL);
-INSERT INTO `mzc-culture` VALUES (10, 17, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '5', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 7, 1, 0, '2020-08-19 09:39:04', '2021-02-08 11:55:36', NULL);
-INSERT INTO `mzc-culture` VALUES (11, 17, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '6', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 9, 1, 0, '2020-08-19 09:39:04', '2021-02-08 14:52:13', NULL);
-INSERT INTO `mzc-culture` VALUES (12, 17, '123', '123', '123', '7', 'http://127.0.0.1:7001/public/uploads/20201110/1604974493815.jpg', '<p>123</p>', 158, 1, 0, '2020-11-10 10:14:58', '2021-02-08 17:44:13', NULL);
+INSERT INTO `mzc-culture` VALUES (10, 17, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '5', '', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 9, 1, 0, '2020-08-19 09:39:04', '2021-02-18 18:03:07', NULL);
+INSERT INTO `mzc-culture` VALUES (11, 17, '23', '23', '23', '6', 'http://127.0.0.1:7001/public/uploads/20201110/1604974493815.jpg', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 53, 1, 0, '2020-08-19 09:39:04', '2021-02-19 08:41:52', NULL);
+INSERT INTO `mzc-culture` VALUES (12, 17, '123', '123', '123', '7', 'http://127.0.0.1:7001/public/uploads/20201110/1604974493815.jpg', '<p>123</p>', 168, 1, 0, '2020-11-10 10:14:58', '2021-02-18 09:51:43', NULL);
 INSERT INTO `mzc-culture` VALUES (13, 19, '1海南昆仑体育文化股份有限公司', '1海南昆仑体育文化股份有限公司', '123海南昆仑体育文化股份有限公司', '二次新增测试', 'http://127.0.0.1:7001/public/uploads/20210208/1612775696772.jpg', '<p>二次新增测试</p>', 0, 1, 0, '2021-02-08 17:05:48', '2021-02-08 17:20:35', NULL);
 
 -- ----------------------------
@@ -533,7 +580,7 @@ CREATE TABLE `mzc-exception`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 57 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-exception
@@ -594,6 +641,8 @@ INSERT INTO `mzc-exception` VALUES (53, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7
 INSERT INTO `mzc-exception` VALUES (54, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"content-length\":\"1\",\"pragma\":\"no-cache\",\"cache-control\":\"no-cache\",\"sec-ch-ua\":\"\\\"Google Chrome\\\";v=\\\"87\\\", \\\" Not;A Brand\\\";v=\\\"99\\\", \\\"Chromium\\\";v=\\\"87\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTEyMTE3NDIsImV4cCI6MTYxMTIzMzM0Mn0.Jo6EIqOd3t8panE8Wf596FXEaJXqT7jFu_TvAA5k3cE\",\"content-type\":\"application/x-www-form-urlencoded\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/about/move', '2021-01-21 17:02:45', '2021-01-21 17:02:45', NULL);
 INSERT INTO `mzc-exception` VALUES (55, 2, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Google Chrome\\\";v=\\\"87\\\", \\\" Not;A Brand\\\";v=\\\"99\\\", \\\"Chromium\\\";v=\\\"87\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJSb2xlc0lkIjoyLCJpYXQiOjE2MTE3NDM4ODIsImV4cCI6MTYxMTc2NTQ4Mn0.EFYDf16EEnTkqSEi6-G9ZD9lhD5qD8JlincV--4DYTA\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/services/detail', '2021-01-27 18:38:09', '2021-01-27 18:38:09', NULL);
 INSERT INTO `mzc-exception` VALUES (56, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"pragma\":\"no-cache\",\"cache-control\":\"no-cache\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTIzMzg2NDgsImV4cCI6MTYxMjM2MDI0OH0.0L9hHMyvyz7vyyUR9VyX5iGgqZN-ddQmzYRobU1RzW4\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/menu/detail', '2021-02-03 17:04:15', '2021-02-03 17:04:15', NULL);
+INSERT INTO `mzc-exception` VALUES (57, 2, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJSb2xlc0lkIjoyLCJpYXQiOjE2MTM3MjcwMzUsImV4cCI6MTYxMzc0ODYzNX0.01DDFqj6Q2kIQer54UaT2SlJUvld_jfU3rHmlwDxUus\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/menu/detail', '2021-02-19 17:30:53', '2021-02-19 17:30:53', NULL);
+INSERT INTO `mzc-exception` VALUES (58, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTM3ODMwMzIsImV4cCI6MTYxMzgwNDYzMn0.0olLwt1AfrqJHKyb4kFxsR2BiIt1XsTvw0j4OiMN1Ho\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/casesDroptype/index', '2021-02-20 11:17:02', '2021-02-20 11:17:02', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-menu
@@ -700,7 +749,7 @@ CREATE TABLE `mzc-news`  (
   `keywords` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司关键词',
   `description` varchar(255) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '海南昆仑体育文化股份有限公司' COMMENT '公司描述',
   `title` varchar(60) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '标题',
-  `file_path` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '图片',
+  `image` varchar(150) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '' COMMENT '图片',
   `content` text CHARACTER SET utf8 COLLATE utf8_unicode_ci NULL COMMENT '内容',
   `click` mediumint(8) UNSIGNED NOT NULL DEFAULT 0 COMMENT '点击次数',
   `status` tinyint(1) NOT NULL DEFAULT 1,
@@ -709,15 +758,16 @@ CREATE TABLE `mzc-news`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_unicode_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-news
 -- ----------------------------
-INSERT INTO `mzc-news` VALUES (1, 22, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', 'http://127.0.0.1:7001/public/images/wh_img1.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>', 20, 1, 0, '2020-08-19 09:45:05', '2020-11-18 11:12:15', NULL);
-INSERT INTO `mzc-news` VALUES (2, 23, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', 'http://127.0.0.1:7001/public/images/wh_img1.png', '22<p>本项赛事是经', 4, 1, 0, '2020-08-19 09:45:05', '2020-11-12 11:53:32', NULL);
-INSERT INTO `mzc-news` VALUES (3, 24, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', 'http://127.0.0.1:7001/public/images/wh_img1.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 11, 1, 0, '2020-08-19 09:45:05', '2020-11-27 18:15:01', NULL);
+INSERT INTO `mzc-news` VALUES (1, 22, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', 'http://127.0.0.1:7001/public/images/wh_img1.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p>\n<p><img src=\"/public/images/banner.png\" alt=\"\" /></p>', 33, 1, 0, '2020-08-19 09:45:05', '2021-02-19 10:02:39', NULL);
+INSERT INTO `mzc-news` VALUES (2, 23, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', 'http://127.0.0.1:7001/public/images/wh_img1.png', '22<p>本项赛事是经', 5, 1, 0, '2020-08-19 09:45:05', '2021-02-19 10:04:09', NULL);
+INSERT INTO `mzc-news` VALUES (3, 24, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '团建强基础，党建上台阶”主题党日活动总结', 'http://127.0.0.1:7001/public/images/wh_img1.png', '<p>本项赛事是经国家体育总局批准列入《全国性单项体育协会竞技体育重要赛事名录》的国家级重要赛事，由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，海口市文化广电出版体育局大力支持，由CCTV-5提供实况转播。</p><p><img src=\"/public/images/banner.png\" alt=\"\"></p>\n', 14, 1, 0, '2020-08-19 09:45:05', '2021-02-18 09:11:39', NULL);
 INSERT INTO `mzc-news` VALUES (4, 24, '123', '123', '123', '123', 'http://127.0.0.1:7001/public/uploads/20201112/1605153557466.jpg', '<p>123</p>', 2, 1, 1, '2020-11-12 11:59:19', '2020-11-12 15:48:05', '2020-11-12 15:48:05');
+INSERT INTO `mzc-news` VALUES (5, 22, '海南昆仑体育文化股份有限公司', '测试', '海南昆仑体育文化股份有限公司', '测试', 'http://127.0.0.1:7001/public/uploads/20210219/1613705974833.jpg', '<p>测试</p>', 0, 1, 1, '2021-02-19 11:35:45', '2021-02-19 11:39:36', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-recruit
@@ -800,7 +850,7 @@ CREATE TABLE `mzc-roles`  (
 -- ----------------------------
 -- Records of mzc-roles
 -- ----------------------------
-INSERT INTO `mzc-roles` VALUES (1, '[1,4,32,33,34,35,36,5,6,37,38,39,40,7,8,9,10,41,42,43,11,12,13,14,15,16,17,18,19,20,21,22,23,31,24,25,26,27,28,29,30]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,87,88,89,90,96,97,91,92,93,94,95,98,18,79,105,17,19,106,99,100,107,101,102,108,103,104,109,20,21,22,23,24,111,112,25,26,27,28,29,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,30,31,32,33,34,35,36,37,38,39,80,81,82,83,84,40,41,42,43,44,45,46,47,48,49,58,59,60,86,110,50,51,52,53,54,55,56,57,85,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78]', '超级管理员', '拥有全部权限', 1, 0, NULL, '2021-02-08 17:38:38', NULL);
+INSERT INTO `mzc-roles` VALUES (1, '[1,4,32,33,34,35,36,5,6,37,38,39,40,7,8,9,10,41,42,43,11,44,45,46,13,14,15,47,16,17,18,19,20,21,22,23,31,24,25,26,27,28,29,30]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,87,88,89,90,96,97,91,92,93,94,95,98,18,79,105,17,19,106,99,100,107,101,102,108,103,104,109,20,21,22,23,24,111,112,25,26,27,28,29,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,30,31,32,33,34,132,133,134,135,136,137,138,139,140,141,142,143,144,35,36,37,38,39,145,146,80,81,82,83,84,147,148,149,150,151,40,41,42,43,44,45,46,47,48,49,58,59,60,86,110,50,51,52,53,54,55,56,57,85,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78]', '超级管理员', '拥有全部权限', 1, 0, NULL, '2021-02-20 15:11:05', NULL);
 INSERT INTO `mzc-roles` VALUES (2, '[4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,1,21]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,58,59,60,50,51,52,53,54,55,56,57]', '管理员', '拥有部分权限（不可修改系统配置）', 1, 0, NULL, '2021-01-25 17:18:02', NULL);
 INSERT INTO `mzc-roles` VALUES (3, '[13,14,15,17,16]', '[]', '编辑', '文章编辑', 1, 0, NULL, '2021-01-06 20:50:55', NULL);
 INSERT INTO `mzc-roles` VALUES (4, '', '', '游客', '没有权限（只可访问首页）', 1, 0, NULL, '2020-12-23 09:55:34', NULL);
@@ -830,7 +880,7 @@ CREATE TABLE `mzc-routes`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`, `path`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-routes
@@ -838,46 +888,50 @@ CREATE TABLE `mzc-routes`  (
 INSERT INTO `mzc-routes` VALUES (1, 0, '/about', 'about', NULL, '/about/describe', '关于我们', 'el-icon-user-solid', 0, 1, 0, 1, 1, 0, NULL, '2021-02-08 15:35:31', NULL);
 INSERT INTO `mzc-routes` VALUES (2, 1, 'single', 'Single', 'aboutSingle', '', '单页', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-18 19:48:23', '2021-01-19 16:20:32');
 INSERT INTO `mzc-routes` VALUES (3, 1, 'list', 'List', 'aboutList', '', '列表', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-25 16:17:39', '2021-01-25 16:18:13');
-INSERT INTO `mzc-routes` VALUES (4, 1, 'classify', 'Classify', 'aboutClassify', '', '分类', '', 0, 1, 0, 1, 1, 1, NULL, '2021-01-25 17:40:18', NULL);
+INSERT INTO `mzc-routes` VALUES (4, 1, 'classify', 'aboutClassify', 'aboutClassify', '', '分类', '', 0, 1, 0, 1, 1, 1, NULL, '2021-02-20 10:13:21', NULL);
 INSERT INTO `mzc-routes` VALUES (5, 0, '/services', 'services', NULL, '/services/index', '服务领域', 'el-icon-service', 0, 1, 0, 1, 1, 0, NULL, '2021-01-26 16:49:57', NULL);
-INSERT INTO `mzc-routes` VALUES (6, 5, 'sports', 'Sports', 'servicesSports', '', '体育赛事', '', 0, 1, 0, 1, 1, 0, NULL, '2021-02-03 08:57:09', NULL);
+INSERT INTO `mzc-routes` VALUES (6, 5, 'sports', 'servicesSports', 'servicesSports', '', '体育赛事', '', 0, 1, 0, 1, 1, 0, NULL, '2021-02-03 08:57:09', NULL);
 INSERT INTO `mzc-routes` VALUES (7, 0, '/company', 'company', NULL, '', '旗下公司', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (8, 7, 'index', 'Company', 'companyIndex', '', '旗下公司', 'company', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (9, 0, '/culture', 'culture', NULL, '', '企业文化', 'culture', 0, 1, 0, 1, 1, 0, NULL, '2021-02-08 15:36:47', NULL);
-INSERT INTO `mzc-routes` VALUES (10, 9, 'enterprise', 'Enterprise', 'cultureEnterprise', '', '企业文化', '', 0, 1, 0, 1, 1, 0, NULL, '2021-02-08 15:36:32', NULL);
-INSERT INTO `mzc-routes` VALUES (11, 0, '/news', 'news', NULL, '', '新闻中心', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (12, 11, 'index', 'News', 'newsIndex', '', '新闻中心', 'news', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (8, 7, 'index', 'companyIndex', 'companyIndex', '', '旗下公司', 'company', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (9, 0, '/culture', 'culture', NULL, '/culture/enterprise', '企业文化', 'culture', 0, 1, 0, 1, 1, 0, NULL, '2021-02-19 08:59:39', NULL);
+INSERT INTO `mzc-routes` VALUES (10, 9, 'enterprise', 'cultureEnterprise', 'cultureEnterprise', '', '企业文化', '', 0, 1, 0, 1, 1, 0, NULL, '2021-02-08 15:36:32', NULL);
+INSERT INTO `mzc-routes` VALUES (11, 0, '/news', 'news', NULL, '/news/enterprise', '新闻中心', 'news', 0, 1, 0, 1, 1, 0, NULL, '2021-02-19 08:59:13', NULL);
+INSERT INTO `mzc-routes` VALUES (12, 11, 'index', 'newsIndex', 'newsIndex', '', '新闻中心', 'news', 0, 1, 0, 1, 1, 0, NULL, NULL, '2021-02-19 09:29:14');
 INSERT INTO `mzc-routes` VALUES (13, 0, '/cases', 'Cases', NULL, '/cases/case', '合作案例', 'el-icon-suitcase', 0, 1, 0, 1, 1, 0, NULL, '2021-01-15 16:07:19', NULL);
-INSERT INTO `mzc-routes` VALUES (14, 13, 'case', 'Case', 'casesCase', '', '服务案例', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (15, 13, 'partner', 'Partner', 'casesPartner', '', '合作伙伴', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (14, 13, 'case', 'casesCase', 'casesCase', '', '服务案例', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (15, 13, 'partner', 'casesPartner', 'casesPartner', '', '合作伙伴', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (16, 0, '/recruit', 'recruit', NULL, '/recruit/recruit', '人力资源', 'hr', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (17, 16, 'recruit', 'Recruit', 'recruitIndex', '', '列表', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (18, 16, 'recruitList', 'RecruitList', 'recruitList', '', '分类', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (17, 16, 'recruit', 'recruitIndex', 'recruitIndex', '', '列表', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (18, 16, 'recruitList', 'recruitList', 'recruitList', '', '分类', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (19, 0, '/menu', 'menus', NULL, '/menu/index', '菜单', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (20, 19, 'index', 'Menus', 'menusIndex', '', '菜单', 'el-icon-menu', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (20, 19, 'index', 'menusIndex', 'menusIndex', '', '菜单', 'el-icon-menu', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (21, 0, '/setting', 'Setting', NULL, '/setting/bsic', '设置', 'el-icon-setting', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (22, 21, 'bsic', 'Bsic', 'settingBsic', '', '基本设置', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (23, 21, 'advertising', 'Advertising', 'settingAdvertising', '', '广告设置', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (22, 21, 'bsic', 'settingBsic', 'settingBsic', '', '基本设置', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (23, 21, 'advertising', 'settingAdvertising', 'settingAdvertising', '', '广告设置', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (24, 0, '/permissions', 'Permissions', NULL, '/permissions/roles', '权限管理', 'el-icon-lock', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (25, 24, 'roles', 'Roles', 'permissionsRoles', '', '角色管理', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-12 11:58:25', NULL);
-INSERT INTO `mzc-routes` VALUES (26, 24, 'admin', 'Admin', 'permissionsAdmin', '', '用户管理', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-12 11:58:45', NULL);
-INSERT INTO `mzc-routes` VALUES (27, 24, '/permissions/power', 'Power', 'permissionsPower', '/permissions/power/api', '权限管理', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (28, 27, 'api', 'Api', 'permissionsPowerApi', '', '接口权限', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (29, 27, 'menu', 'Menu', 'permissionsPowerMenu', '', '菜单权限', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (30, 27, 'code', 'Code', 'permissionsPowerCode', '', '识别码管理', '', 0, 1, 0, 1, 1, 0, '2021-01-06 16:36:47', '2021-01-06 16:37:30', NULL);
-INSERT INTO `mzc-routes` VALUES (31, 21, 'exception', 'Exception', 'settingException', '', '异常访问', '', 0, 1, 0, 1, 1, 0, '2021-01-12 11:06:59', '2021-01-12 11:13:29', NULL);
-INSERT INTO `mzc-routes` VALUES (32, 1, 'describe', 'Cescribe', 'aboutDescribe', '', '公司简介', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:49:20', '2021-01-18 15:53:57', NULL);
-INSERT INTO `mzc-routes` VALUES (33, 1, 'skeleton', 'Skeleton', 'aboutSkeleton', '', '企业架构', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:50:03', '2021-01-18 16:03:09', NULL);
-INSERT INTO `mzc-routes` VALUES (34, 1, 'team', 'Team', 'aboutTeam', '', '管理团队', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:50:28', '2021-01-19 20:28:36', NULL);
-INSERT INTO `mzc-routes` VALUES (35, 1, 'event', 'Event', 'aboutEvent', '', '大事件', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:50:44', '2021-01-18 16:07:53', NULL);
-INSERT INTO `mzc-routes` VALUES (36, 1, 'honor', 'Honor', 'aboutHonor', '', '企业荣誉', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:52:18', '2021-01-18 16:08:18', NULL);
-INSERT INTO `mzc-routes` VALUES (37, 5, 'culture', 'Culture', 'servicesCulture', '', '文化服务', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:39:16', '2021-01-26 16:45:28', NULL);
-INSERT INTO `mzc-routes` VALUES (38, 5, 'education', 'Education', 'servicesEducation', '', '电竞教育', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:46:32', '2021-01-26 16:46:32', NULL);
-INSERT INTO `mzc-routes` VALUES (39, 5, 'training', 'Training', 'servicesTraining', '', '体验式培训', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:47:11', '2021-01-26 16:47:11', NULL);
-INSERT INTO `mzc-routes` VALUES (40, 5, 'meeting', 'Meeting', 'servicesMeeting', '', '会议会展', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:47:56', '2021-01-26 16:47:56', NULL);
-INSERT INTO `mzc-routes` VALUES (41, 9, 'social', 'Social', 'cultureSocial', '', '社会责任', '', 0, 1, 0, 1, 1, 0, '2021-02-08 15:26:49', '2021-02-08 15:27:52', NULL);
-INSERT INTO `mzc-routes` VALUES (42, 9, 'employees', 'Employees', 'cultureEmployees', '', '员工活动', '', 0, 1, 0, 1, 1, 0, '2021-02-08 15:34:15', '2021-02-08 15:34:15', NULL);
-INSERT INTO `mzc-routes` VALUES (43, 9, 'party', 'Party', 'cultureParty', '', '党建专栏', '', 0, 1, 0, 1, 1, 0, '2021-02-08 15:34:58', '2021-02-08 15:34:58', NULL);
+INSERT INTO `mzc-routes` VALUES (25, 24, 'roles', 'permissionsRoles', 'permissionsRoles', '', '角色管理', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-12 11:58:25', NULL);
+INSERT INTO `mzc-routes` VALUES (26, 24, 'admin', 'permissionsAdmin', 'permissionsAdmin', '', '用户管理', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-12 11:58:45', NULL);
+INSERT INTO `mzc-routes` VALUES (27, 24, '/permissions/power', 'permissionsPower', 'permissionsPower', '/permissions/power/api', '权限管理', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (28, 27, 'api', 'permissionsPowerApi', 'permissionsPowerApi', '', '接口权限', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (29, 27, 'menu', 'permissionsPowerMenu', 'permissionsPowerMenu', '', '菜单权限', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (30, 27, 'code', 'permissionsPowerCode', 'permissionsPowerCode', '', '识别码管理', '', 0, 1, 0, 1, 1, 0, '2021-01-06 16:36:47', '2021-01-06 16:37:30', NULL);
+INSERT INTO `mzc-routes` VALUES (31, 21, 'exception', 'settingException', 'settingException', '', '异常访问', '', 0, 1, 0, 1, 1, 0, '2021-01-12 11:06:59', '2021-01-12 11:13:29', NULL);
+INSERT INTO `mzc-routes` VALUES (32, 1, 'describe', 'aboutDescribe', 'aboutDescribe', '', '公司简介', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:49:20', '2021-02-20 10:13:32', NULL);
+INSERT INTO `mzc-routes` VALUES (33, 1, 'skeleton', 'aboutSkeleton', 'aboutSkeleton', '', '企业架构', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:50:03', '2021-02-20 10:13:41', NULL);
+INSERT INTO `mzc-routes` VALUES (34, 1, 'team', 'aboutTeam', 'aboutTeam', '', '管理团队', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:50:28', '2021-02-20 10:13:52', NULL);
+INSERT INTO `mzc-routes` VALUES (35, 1, 'event', 'aboutEvent', 'aboutEvent', '', '大事件', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:50:44', '2021-01-18 16:07:53', NULL);
+INSERT INTO `mzc-routes` VALUES (36, 1, 'honor', 'aboutHonor', 'aboutHonor', '', '企业荣誉', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:52:18', '2021-01-18 16:08:18', NULL);
+INSERT INTO `mzc-routes` VALUES (37, 5, 'culture', 'servicesCulture', 'servicesCulture', '', '文化服务', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:39:16', '2021-01-26 16:45:28', NULL);
+INSERT INTO `mzc-routes` VALUES (38, 5, 'education', 'servicesEducation', 'servicesEducation', '', '电竞教育', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:46:32', '2021-01-26 16:46:32', NULL);
+INSERT INTO `mzc-routes` VALUES (39, 5, 'training', 'servicesTraining', 'servicesTraining', '', '体验式培训', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:47:11', '2021-01-26 16:47:11', NULL);
+INSERT INTO `mzc-routes` VALUES (40, 5, 'meeting', 'servicesMeeting', 'servicesMeeting', '', '会议会展', '', 0, 1, 0, 1, 1, 0, '2021-01-26 16:47:56', '2021-01-26 16:47:56', NULL);
+INSERT INTO `mzc-routes` VALUES (41, 9, 'social', 'cultureSocial', 'cultureSocial', '', '社会责任', '', 0, 1, 0, 1, 1, 0, '2021-02-08 15:26:49', '2021-02-08 15:27:52', NULL);
+INSERT INTO `mzc-routes` VALUES (42, 9, 'employees', 'cultureEmployees', 'cultureEmployees', '', '员工活动', '', 0, 1, 0, 1, 1, 0, '2021-02-08 15:34:15', '2021-02-08 15:34:15', NULL);
+INSERT INTO `mzc-routes` VALUES (43, 9, 'party', 'cultureParty', 'cultureParty', '', '党建专栏', '', 0, 1, 0, 1, 1, 0, '2021-02-08 15:34:58', '2021-02-08 15:34:58', NULL);
+INSERT INTO `mzc-routes` VALUES (44, 11, 'enterprise', 'newsEnterprise', 'newsEnterprise', '', '企业新闻', '', 0, 1, 0, 1, 1, 0, '2021-02-19 08:43:21', '2021-02-19 08:44:02', NULL);
+INSERT INTO `mzc-routes` VALUES (45, 11, 'industry', 'newsIndustry', 'newsIndustry', '', '行业新闻', '', 0, 1, 0, 1, 1, 0, '2021-02-19 08:44:54', '2021-02-19 08:44:54', NULL);
+INSERT INTO `mzc-routes` VALUES (46, 11, 'notice', 'newsNotice', 'newsNotice', '', '通知公告', '', 0, 1, 0, 1, 1, 0, '2021-02-19 08:45:26', '2021-02-19 08:52:26', NULL);
+INSERT INTO `mzc-routes` VALUES (47, 13, 'classify', 'casesClassify', 'casesClassify', '', '分类', '', 0, 1, 0, 1, 1, 0, '2021-02-20 10:10:10', '2021-02-20 10:10:10', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-services

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-09-22 09:21:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-18 11:55:52
+ * @LastEditTime: 2021-02-20 16:21:44
  */
 'use strict';
 
@@ -17,33 +17,36 @@ const HttpStatus = require('../utils/httpStatus');
  */
 class CasesService extends Service {
   /**
-   * 
+   * 获取列表
    * @param { Number } limit 限制页
    * @param { Number } page 当前页
-   * @param { String } cid  二级菜单id
-   * @param { String } type 菜单分类id
+   * @param { String } category_id  二级菜单id
+   * @param { Number } product_id  分类id
    */
-  async index ({ limit = 20, page = 1, cid, type }) {
+  async index ({ limit = 20, page = 1, category_id, product_id }) {
     const maxPage = Number(limit);
-    const filter = type
-      ? { type, category_id: cid, deleted_at: null }
-      : { category_id: cid, deleted_at: null };
+    const filter = product_id
+      ? { product_id, category_id, deleted_at: null }
+      : { category_id, deleted_at: null };
 
     const cases = await this.ctx.model.MzcCases.findAndCountAll({
       where: filter,
       offset: (page - 1) * maxPage,
       limit: maxPage,
+      order: [['id', 'DESC']],
     })
 
     if (cases.rows.length == 0) throw new Error('没有找到相关信息');
 
     return {
-      data: cases.rows,
-      meta: {
-        current_page: parseInt(page),
-        per_page: maxPage,
-        total: cases.count,
-        total_pages: Math.ceil(cases.count / maxPage),
+      data: {
+        data: cases.rows,
+        meta: {
+          current_page: parseInt(page),
+          per_page: maxPage,
+          total: cases.count,
+          total_pages: Math.ceil(cases.count / maxPage),
+        }
       }
     }
 
@@ -55,20 +58,16 @@ class CasesService extends Service {
    * @param { String } value 字段值
    */
   async update ({ id, key, value }) {
-    try {
-      const cases = await this.ctx.model.MzcCases.update({ [key]: value }, {
-        where: {
-          id,
-          deleted_at: null
-        },
-      })
+    const cases = await this.ctx.model.MzcCases.update({ [key]: value }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
 
-      if (!cases[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
+    if (!cases[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
 
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 删除
@@ -81,55 +80,49 @@ class CasesService extends Service {
 
     cases.destroy();
 
-    return { msg: 1, httpStatus: HttpStatus.OK }
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 编辑
    * @param { Object } params 参数
    */
   async edit (params) {
-    const { id, category_id, title, keywords, companyDescription, cultureTitle, type, filepath, content, status, sort } = params;
+    const { id, category_id, product_id, site_title, keywords, description, title, image, content, status, sort } = params;
 
-    try {
-      await this.ctx.model.MzcCases.update({
-        category_id, title, keywords, companyDescription, cultureTitle, type, filepath, content, status, sort
-      }, {
-        where: {
-          id,
-          deleted_at: null
-        },
-      })
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    await this.ctx.model.MzcCases.update({
+      category_id, product_id, site_title, keywords, description, title, image, content, status, sort
+    }, {
+      where: {
+        id,
+        deleted_at: null
+      },
+    })
+
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 增加
    * @param { Object } params 参数
    */
   async add (params) {
-    const { category_id, title, keywords, companyDescription, cultureTitle, type, filepath, content, status, sort } = params;
+    const { category_id, product_id, site_title, keywords, description, title, image, content, status, sort } = params;
 
-    try {
-      await this.ctx.model.MzcCases.create({
-        category_id, title, keywords, companyDescription, cultureTitle, type, filepath, content, status, sort
-      });
-      return { httpStatus: HttpStatus.OK }
-    } catch (error) {
-      return { msg: error.message, httpStatus: HttpStatus.INTERNAL_SERVER_ERROR };
-    }
+    await this.ctx.model.MzcCases.create({
+      category_id, product_id, site_title, keywords, description, title, image, content, status, sort
+    });
+
+    return { httpStatus: HttpStatus.OK }
   }
   /**
    * 列表
-   * @param { Number } cid 二级菜单id
+   * @param { Number } category_id 二级菜单id
    * @param { Number } page 分页
    */
-  async list (cid, page) {
-    const pageSize = cid == 26 ? 9 : 20;
+  async list (category_id, page) {
+    const pageSize = category_id == 26 ? 9 : 20;
     const cases = await this.ctx.model.MzcCases.findAndCountAll({
       where: {
-        category_id: cid,
+        category_id,
         status: true,
         deleted_at: null
       },
@@ -153,29 +146,29 @@ class CasesService extends Service {
   }
   /**
    * 详情
-   * @param { Number } cid 二级菜单id
+   * @param { Number } category_id 二级菜单id
    */
-  async detail (cid) {
+  async detail (category_id) {
     return await this.ctx.model.MzcCases.findAll({
       where: {
-        category_id: cid,
+        category_id,
         status: true,
         deleted_at: null
       },
-      limit: cid == 26 ? 5 : 10,
+      limit: category_id == 26 ? 5 : 10,
       order: [['sort', 'DESC'], ['id', 'DESC']],
     })
   }
   /**
    * 详情页
-   * @param { Number } cid 二级菜单id
+   * @param { Number } category_id 二级菜单id
    * @param { Number } id 文章id号 
    */
-  async info (cid, id) {
+  async info (category_id, id) {
     let current, previous, next;
     const cases = await this.ctx.model.MzcCases.findAll({
       where: {
-        category_id: cid,
+        category_id,
         deleted_at: null,
         status: true,
       },
@@ -207,6 +200,23 @@ class CasesService extends Service {
 
     cases.click = click;
     cases.save();
+  }
+  /**
+   * 移动
+   * @param { Number } product_id 类别id
+   * @param { Array } ids 移动的数组
+   */
+  async move ({ product_id, ids }) {
+    const cases = await this.ctx.model.MzcCases.findAll({
+      where: { id: ids }
+    });
+
+    cases.map(item => {
+      item.product_id = product_id
+      item.save();
+    })
+
+    return { httpStatus: HttpStatus.OK }
   }
 }
 

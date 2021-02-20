@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-19 09:18:38
+ * @LastEditTime: 2021-02-20 11:46:02
  */
 'use strict';
 
@@ -110,6 +110,15 @@ module.exports = app => {
   router.delete('/api/cases/destroy', jwt, controller.cases.destroy)
   router.post('/api/cases/edit', jwt, controller.cases.edit);
   router.post('/api/cases/add', jwt, controller.cases.add);
+  router.post('/api/cases/move', jwt, controller.cases.move);
+
+  // casesDroptype
+  router.get('/api/casesDroptype/list', jwt, controller.casesDroptype.list)
+  router.get('/api/casesDroptype/index', jwt, controller.casesDroptype.index)
+  router.put('/api/casesDroptype/update', jwt, controller.casesDroptype.update)
+  router.delete('/api/casesDroptype/destroy', jwt, controller.casesDroptype.destroy)
+  router.post('/api/casesDroptype/edit', jwt, controller.casesDroptype.edit);
+  router.post('/api/casesDroptype/add', jwt, controller.casesDroptype.add);
 
   // recruit
   router.get('/api/recruit/index', jwt, controller.recruit.index)

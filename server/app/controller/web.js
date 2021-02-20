@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-05 16:35:06
+ * @LastEditTime: 2021-02-19 16:06:43
  */
 'use strict';
 const moment = require('moment');
@@ -163,19 +163,20 @@ class WebController extends Controller {
   async cases () {
     const { ctx, service } = this;
     const { pid, cid, page = 1 } = ctx.params;
-    const url = `cases/pid/${pid}/cid/${cid}`;
-    const urlInfo = `cases_info/pid/${pid}/cid/${cid}`;
+    const url = `/cases/pid/${pid}/cid/${cid}`;
+    const urlInfo = `/cases_info/pid/${pid}/cid/${cid}`;
 
     const err = await error(pid, cid, this);
     if (err) return render(ctx);
 
     const menuList = await service.menu.list(); // 导航栏菜单
     const casesList = await service.cases.list(cid, page); // case数据
+    const casesDroptypeList = await service.casesDroptype.list()
     const settingsList = await service.settings.list(); // 基本设置
     const advertList = await service.advert.list(); // 轮播图广告
     const servicesList = await service.services.list(); // serInfo 模板数据
 
-    const data = { menuList, settingsList, casesList, pages: casesList.meta, advertList, url, urlInfo, servicesList, moment }
+    const data = { menuList, settingsList, casesList, pages: casesList.meta, advertList, url, urlInfo, servicesList, casesDroptypeList, moment }
     await ctx.render('cases/index.ejs', data);
   }
   async cases_info () {

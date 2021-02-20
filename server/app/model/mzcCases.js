@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-10 15:27:27
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-13 15:32:48
+ * @LastEditTime: 2021-02-20 09:22:13
  */
 'use strict';
 
@@ -27,7 +27,13 @@ module.exports = app => {
       defaultValue: '0', // 默认值
       comment: '分类id', // 备注
     },
-    title: {
+    product_id: {
+      allowNull: !1, // 是否为空
+      type: INTEGER, // 类型
+      defaultValue: '0', // 默认值
+      comment: '类型', // 备注
+    },
+    site_title: {
       allowNull: !1, // 是否为空
       type: STRING(20), // 类型
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
@@ -39,25 +45,19 @@ module.exports = app => {
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
       comment: '公司关键词', // 备注
     },
-    companyDescription: {
+    description: {
       allowNull: !1, // 是否为空
       type: STRING, // 类型
       defaultValue: '海南昆仑体育文化股份有限公司', // 默认值
       comment: '公司描述', // 备注
     },
-    cultureTitle: {
+    title: {
       allowNull: !1, // 是否为空
       type: STRING(60), // 类型
       defaultValue: '', // 默认值
       comment: '标题', // 备注
     },
-    type: {
-      allowNull: !1, // 是否为空
-      type: STRING(2), // 类型
-      defaultValue: '8', // 默认值
-      comment: '类型', // 备注
-    },
-    filepath: {
+    image: {
       allowNull: !1, // 是否为空
       type: STRING(150), // 类型
       defaultValue: '', // 默认值

@@ -5,12 +5,12 @@
  * @version: 1.0.0
  * @Date: 2020-07-24 09:42:13
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-26 09:02:38
+ * @LastEditTime: 2021-02-19 16:58:49
 -->
 <%- include('/commom/header',{
-  title:casesList?casesList.data[0].title:"11海南昆仑体育文化股份有限公司",
+  site_title:casesList?casesList.data[0].site_title:"11海南昆仑体育文化股份有限公司",
   Keywords:casesList?casesList.data[0].keywords:"海南昆仑体育文化股份有限公司",
-  companyDescription:casesList?casesList.data[0].companyDescription:"海南昆仑体育文化股份有限公司",
+  description:casesList?casesList.data[0].description:"海南昆仑体育文化股份有限公司",
 }) %>
 <%- include('/commom/banner') %>
 
@@ -25,12 +25,12 @@
             <% casesList.data.forEach(item=>{ %>
               <% if(item.category_id == '26'){ %>
                 <li class="row4-slide">
-                  <a href="/<%= urlInfo +'/id/'+ item.id %>">
-                    <% menutitle = menuList[1].children.find(menuItem => { if( menuItem.id === item.type ) return menuItem }) %>
+                  <a href="<%= urlInfo +'/id/'+ item.id %>">
+                    <% var menutitle = casesDroptypeList.find(Droptype => Droptype.id == item.product_id ) %>
                     <span><%= menutitle.title %></span>
-                    <img src="" alt="" class="row4-img" data-src="<%= item.filepath %>">
+                    <img src="" alt="" class="row4-img" data-src="<%= item.image %>">
                     <div class="ser-info-txt">
-                      <h5><%= item.cultureTitle %></h5>
+                      <h5><%= item.title %></h5>
                       <p><%= moment(item.created_at).format('YYYY-MM-DD')%></p>
                     </div>
                   </a>
@@ -46,7 +46,7 @@
               <% if(item.category_id == '27'){ %>
               <li>
                 <a href="javascript:;">
-                  <img src="" alt="" data-src="<%= item.filepath %>">
+                  <img src="" alt="" data-src="<%= item.image %>">
                 </a>
               </li>
               <% } %>
