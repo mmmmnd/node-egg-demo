@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-11-18 15:10:59
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-12 09:36:13
+ * @LastEditTime: 2021-02-22 17:19:59
 -->
 <template>
   <div class="app-container">
@@ -39,14 +39,14 @@
         <span>首页轮播图</span>
       </el-table-column>
 
-      <el-table-column prop="filepath"
+      <el-table-column prop="file_path"
                        align="center"
                        label="图片">
         <template slot-scope="{row}">
           <el-avatar shape="square"
                      :size="50"
                      fit="cover"
-                     :src="row.filepath"></el-avatar>
+                     :src="row.file_path"></el-avatar>
         </template>
       </el-table-column>
 
@@ -87,6 +87,7 @@
                 label="编辑"
                 perms='edit'
                 btnType="btn"
+                onclick="(function(e){e.stopPropagation()}(event))"
                 @click="handleUpdate(row)" />
           <mBtn size="mini"
                 type="danger"
@@ -94,6 +95,7 @@
                 label="删除"
                 perms='destroy'
                 btnType="btn"
+                onclick="(function(e){e.stopPropagation()}(event))"
                 @click="handleDel(row)" />
         </template>
       </el-table-column>
@@ -110,7 +112,7 @@
                style="width: 400px; margin-left:50px;">
 
         <el-form-item label="图片"
-                      prop="filepath">
+                      prop="file_path">
           <el-upload v-if="avatarProgress"
                      class="avatar-uploader"
                      :headers="{token}"
@@ -118,8 +120,8 @@
                      :show-file-list="false"
                      :on-progress="setAvatarProgress"
                      :on-success="handleAvatarSuccess">
-            <img v-if="temp.filepath"
-                 :src="temp.filepath"
+            <img v-if="temp.file_path"
+                 :src="temp.file_path"
                  class="avatar">
             <i v-else
                class="el-icon-plus avatar-uploader-icon"></i>
@@ -173,7 +175,7 @@ export default {
         value: 0
       },
       temp: {
-        filepath: '',
+        file_path: '',
         sort: 0,
         status: true
       },
@@ -183,7 +185,7 @@ export default {
         create: '增加'
       },
       rules: {
-        filepath: [{ type: 'string', required: true, message: '请上传图片', trigger: 'blur' }],
+        file_path: [{ type: 'string', required: true, message: '请上传图片', trigger: 'blur' }],
         status: [{ type: 'boolean', required: true, message: '请选择状态', trigger: 'blur' }],
         sort: [{ type: 'integer', required: true, message: '请选择排序', trigger: 'blur' }]
       },
@@ -309,7 +311,7 @@ export default {
      */
     resetTemp () {
       this.temp = {
-        filepath: '',
+        file_path: '',
         sort: 0,
         status: true,
         place: 0,
@@ -325,7 +327,7 @@ export default {
       if (res.code == 0) {
         this.avatarProgress = true;
         this.percentage = 0;
-        this.temp.filepath = res.data.url;
+        this.temp.file_path = res.data.url;
       }
     },
     /**

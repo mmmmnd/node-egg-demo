@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-20 17:14:51
+ * @LastEditTime: 2021-02-23 11:19:56
  */
 import { constantRoutes } from '@/router'
 import { routesIndex } from '@/api/routes'
@@ -65,6 +65,7 @@ export const componentsMap = {
   recruitIndex: () => import('@/views/recruit/index'),
   recruitList: () => import('@/views/recruit/list'),
   recruitConcept: () => import('@/views/recruit/concept'),
+  messageIndex: () => import('@/views/message/index'),
   menusIndex: () => import('@/views/menu/index'),
   settingBsic: () => import('@/views/setting/bsic'),
   settingAdvertising: () => import('@/views/setting/advertising'),

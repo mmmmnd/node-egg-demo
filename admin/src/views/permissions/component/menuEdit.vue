@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-30 08:36:33
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-12 11:08:03
+ * @LastEditTime: 2021-02-22 17:26:51
 -->
 <template>
   <el-dialog :title="textMap[dialogStatus]"
@@ -52,7 +52,7 @@
                       placeholder="请输入title"></el-input>
           </el-form-item>
 
-          <el-form-item label="Status"
+          <el-form-item label="Sort"
                         align="center">
             <el-input-number v-model="temp.sort"
                              controls-position="right"
