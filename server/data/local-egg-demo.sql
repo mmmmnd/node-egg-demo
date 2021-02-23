@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 20/02/2021 17:37:24
+ Date: 23/02/2021 11:47:12
 */
 
 SET NAMES utf8mb4;
@@ -109,7 +109,7 @@ CREATE TABLE `mzc-about-single`  (
 -- ----------------------------
 INSERT INTO `mzc-about-single` VALUES (1, 2, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。', '<p><img src=\"http://127.0.0.1:7001/public/images/about_img.png\" alt=\"\" data-src=\"http://127.0.0.1:7001/public/images/about_img.png\" /></p>\n<h5>海南昆仑体育文化股份有限公司介绍</h5>\n<p>海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。下设体育文化事业部、电竞事业部、拓展培训部三个业务部门，以及三家控股子公司，海南海经院机动车驾驶培训有限公司、海南中佳健康发展有限公司、海南中环能监测技术有限公司。</p>\n<p>公司自成立以来，一直遵循&ldquo;优质、高效、团结、奉献&rdquo;的工作态度，不骄不躁、严谨踏实，不断谋求新的发展。几年来，经过公司全体员工的不懈努力和开拓进取，陆续在文化、体育等领域发力，经营状况整体良好，2017年实现营业收入5740.22万元，2018年实现营业收入6917.39万元，2019年实现营业收入7300万元。</p>\n<p>重点业务项目概况如下：</p>\n<p>2016年11月，为海口市国贸繁华中心地段的商业中心宜欣城，全程策划执行了重装开业盛典活动，提供了活动执行、舞台搭建和节目表演等整体服务，获得了高度评价和认可，为海南树立了商场开业庆典活动的全新标杆。</p>\n<p>在2017年5月，策划承办了第55届意大利&ldquo;威尔第之声国际声乐比赛&rdquo;（中国赛区），该比赛是中华人民共和国文化部推荐的国际一类声乐比赛；是意大利文化（遗产）部重点文化项目，并且是直接认证的唯一声乐比赛。本公司为活动提供了整体的策划实施和组织执行，为活动的成功举办提供了强大的保障。</p>\n<p>在2017、2018、2019连续三年策划承办了全国沙滩排球巡回赛总决赛及颁奖盛典，本活动由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，得到了海口市文化广电出版体育局的大力支持，CCTV5全程直播，由本公司全程策划执行，提供了开幕式、赛事运营、颁奖盛典的策划实施、宣传推广等服务。2019年举办的全国沙滩排球巡回赛总决赛，是历年全国巡回赛中参赛队伍最多的一次,也是国内迄今为止举办成年组沙排赛参与人数最多的一次。颁奖盛典、半决赛和总决赛通过了央视网络端、爱奇艺、新浪等几大网络平台进行全程直播，使赛事的传播及影响力较往年进一步扩大。</p>\n<p>2018年11月、2019年11月连续两年策划承办了&ldquo;海南国际旅游岛欢乐节&middot;中国-东盟大学生文化周&rdquo;活动，该活动被划列为第十九届海南国际旅游岛欢乐节的重点版块活动之一。本公司为活动提供了全程策划执行，人员安排组织、舞美物料搭建和宣传推广等整体活动服务，成功搭建了海南与全国及东盟青年之间在文化、教育和艺术交流合作的重要平台，获得了政府部门、海内外各高校和社会各界的一致好评。</p>\n<p>公司在海口经济学院内斥资近千万建设海南省高校内首家电竞体验馆-&ldquo;昆仑电竞馆&rdquo;。2017年7月参加腾讯官方英雄联盟全球高校冠军杯以九战九胜全胜战绩一举夺得全球高校冠军杯世界总冠军。2019年昆仑电竞战队获得腾讯第七届英雄联盟高校联赛海南省冠军、南方大区亚军、全国总决赛殿军。2019年第十四届国际动漫博览交易会电竞项目JEL英雄联盟全国高校总决赛冠军等。</p>\n<p>&ldquo;大海之南&bull;昆仑为巅&rdquo;，海南昆仑体育文化股份有限公司依托强大的人力和资源优势，凭借着极具创意的策划思维、专业过硬的执行能力、齐心协作的团队精神以及独家优质的平台资源，正逐步在海南崛起。</p>', 1, 0, '2020-08-28 15:48:43', '2021-02-05 17:21:16', NULL);
 INSERT INTO `mzc-about-single` VALUES (2, 3, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。', '<p><img src=\"http://127.0.0.1:7001/public/images/about_img.png\" alt=\"\" data-src=\"http://127.0.0.1:7001/public/images/about_img.png\" /></p>\n<h5>海南昆仑体育文化股份有限公司介绍</h5>\n<p>海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。下设体育文化事业部、电竞事业部、拓展培训部三个业务部门，以及三家控股子公司，海南海经院机动车驾驶培训有限公司、海南中佳健康发展有限公司、海南中环能监测技术有限公司。</p>\n<p>公司自成立以来，一直遵循&ldquo;优质、高效、团结、奉献&rdquo;的工作态度，不骄不躁、严谨踏实，不断谋求新的发展。几年来，经过公司全体员工的不懈努力和开拓进取，陆续在文化、体育等领域发力，经营状况整体良好，2017年实现营业收入5740.22万元，2018年实现营业收入6917.39万元，2019年实现营业收入7300万元。</p>\n<p>重点业务项目概况如下：</p>\n<p>2016年11月，为海口市国贸繁华中心地段的商业中心宜欣城，全程策划执行了重装开业盛典活动，提供了活动执行、舞台搭建和节目表演等整体服务，获得了高度评价和认可，为海南树立了商场开业庆典活动的全新标杆。</p>\n<p>在2017年5月，策划承办了第55届意大利&ldquo;威尔第之声国际声乐比赛&rdquo;（中国赛区），该比赛是中华人民共和国文化部推荐的国际一类声乐比赛；是意大利文化（遗产）部重点文化项目，并且是直接认证的唯一声乐比赛。本公司为活动提供了整体的策划实施和组织执行，为活动的成功举办提供了强大的保障。</p>\n<p>在2017、2018、2019连续三年策划承办了全国沙滩排球巡回赛总决赛及颁奖盛典，本活动由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，得到了海口市文化广电出版体育局的大力支持，CCTV5全程直播，由本公司全程策划执行，提供了开幕式、赛事运营、颁奖盛典的策划实施、宣传推广等服务。2019年举办的全国沙滩排球巡回赛总决赛，是历年全国巡回赛中参赛队伍最多的一次,也是国内迄今为止举办成年组沙排赛参与人数最多的一次。颁奖盛典、半决赛和总决赛通过了央视网络端、爱奇艺、新浪等几大网络平台进行全程直播，使赛事的传播及影响力较往年进一步扩大。</p>\n<p>2018年11月、2019年11月连续两年策划承办了&ldquo;海南国际旅游岛欢乐节&middot;中国-东盟大学生文化周&rdquo;活动，该活动被划列为第十九届海南国际旅游岛欢乐节的重点版块活动之一。本公司为活动提供了全程策划执行，人员安排组织、舞美物料搭建和宣传推广等整体活动服务，成功搭建了海南与全国及东盟青年之间在文化、教育和艺术交流合作的重要平台，获得了政府部门、海内外各高校和社会各界的一致好评。</p>\n<p>公司在海口经济学院内斥资近千万建设海南省高校内首家电竞体验馆-&ldquo;昆仑电竞馆&rdquo;。2017年7月参加腾讯官方英雄联盟全球高校冠军杯以九战九胜全胜战绩一举夺得全球高校冠军杯世界总冠军。2019年昆仑电竞战队获得腾讯第七届英雄联盟高校联赛海南省冠军、南方大区亚军、全国总决赛殿军。2019年第十四届国际动漫博览交易会电竞项目JEL英雄联盟全国高校总决赛冠军等。</p>\n<p>&ldquo;大海之南&bull;昆仑为巅&rdquo;，海南昆仑体育文化股份有限公司依托强大的人力和资源优势，凭借着极具创意的策划思维、专业过硬的执行能力、齐心协作的团队精神以及独家优质的平台资源，正逐步在海南崛起。</p>', 1, 0, '2020-08-28 15:48:43', '2021-02-05 17:21:31', NULL);
-INSERT INTO `mzc-about-single` VALUES (3, 29, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '<p><img src=\"http://127.0.0.1:7001/public/images/about_img.png\" alt=\"\" data-src=\"http://127.0.0.1:7001/public/images/about_img.png\" /></p>\n<h5>海南昆仑体育文化股份有限公司介绍</h5>\n<p>海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。下设体育文化事业部、电竞事业部、拓展培训部三个业务部门，以及三家控股子公司，海南海经院机动车驾驶培训有限公司、海南中佳健康发展有限公司、海南中环能监测技术有限公司。</p>\n<p>公司自成立以来，一直遵循&ldquo;优质、高效、团结、奉献&rdquo;的工作态度，不骄不躁、严谨踏实，不断谋求新的发展。几年来，经过公司全体员工的不懈努力和开拓进取，陆续在文化、体育等领域发力，经营状况整体良好，2017年实现营业收入5740.22万元，2018年实现营业收入6917.39万元，2019年实现营业收入7300万元。</p>\n<p>重点业务项目概况如下：</p>\n<p>2016年11月，为海口市国贸繁华中心地段的商业中心宜欣城，全程策划执行了重装开业盛典活动，提供了活动执行、舞台搭建和节目表演等整体服务，获得了高度评价和认可，为海南树立了商场开业庆典活动的全新标杆。</p>\n<p>在2017年5月，策划承办了第55届意大利&ldquo;威尔第之声国际声乐比赛&rdquo;（中国赛区），该比赛是中华人民共和国文化部推荐的国际一类声乐比赛；是意大利文化（遗产）部重点文化项目，并且是直接认证的唯一声乐比赛。本公司为活动提供了整体的策划实施和组织执行，为活动的成功举办提供了强大的保障。</p>\n<p>在2017、2018、2019连续三年策划承办了全国沙滩排球巡回赛总决赛及颁奖盛典，本活动由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，得到了海口市文化广电出版体育局的大力支持，CCTV5全程直播，由本公司全程策划执行，提供了开幕式、赛事运营、颁奖盛典的策划实施、宣传推广等服务。2019年举办的全国沙滩排球巡回赛总决赛，是历年全国巡回赛中参赛队伍最多的一次,也是国内迄今为止举办成年组沙排赛参与人数最多的一次。颁奖盛典、半决赛和总决赛通过了央视网络端、爱奇艺、新浪等几大网络平台进行全程直播，使赛事的传播及影响力较往年进一步扩大。</p>\n<p>2018年11月、2019年11月连续两年策划承办了&ldquo;海南国际旅游岛欢乐节&middot;中国-东盟大学生文化周&rdquo;活动，该活动被划列为第十九届海南国际旅游岛欢乐节的重点版块活动之一。本公司为活动提供了全程策划执行，人员安排组织、舞美物料搭建和宣传推广等整体活动服务，成功搭建了海南与全国及东盟青年之间在文化、教育和艺术交流合作的重要平台，获得了政府部门、海内外各高校和社会各界的一致好评。</p>\n<p>公司在海口经济学院内斥资近千万建设海南省高校内首家电竞体验馆-&ldquo;昆仑电竞馆&rdquo;。2017年7月参加腾讯官方英雄联盟全球高校冠军杯以九战九胜全胜战绩一举夺得全球高校冠军杯世界总冠军。2019年昆仑电竞战队获得腾讯第七届英雄联盟高校联赛海南省冠军、南方大区亚军、全国总决赛殿军。2019年第十四届国际动漫博览交易会电竞项目JEL英雄联盟全国高校总决赛冠军等。</p>\n<p>&ldquo;大海之南&bull;昆仑为巅&rdquo;，海南昆仑体育文化股份有限公司依托强大的人力和资源优势，凭借着极具创意的策划思维、专业过硬的执行能力、齐心协作的团队精神以及独家优质的平台资源，正逐步在海南崛起。</p>', 1, 0, NULL, '2021-02-20 17:18:29', NULL);
+INSERT INTO `mzc-about-single` VALUES (3, 29, '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '海南昆仑体育文化股份有限公司', '<p><img src=\"http://127.0.0.1:7001/public/images/about_img.png\" alt=\"\" data-src=\"http://127.0.0.1:7001/public/images/about_img.png\" /></p>\n<h5>海南昆仑体育文化股份有限公司介绍</h5>\n<p>海南昆仑体育文化股份有限公司成立于2015年，注册资本1亿人民币。公司以学校为基础，积极整合场地、设备、人力等优质资源，搭建与市场对接的常态机制。对外开展业务涉及：大型文艺体育活动及演出、国际文化合作与交流、影视制作投资、品牌策划推广、旅游会议会展、管理咨询、体育赛事服务管理和拓展培训等。下设体育文化事业部、电竞事业部、拓展培训部三个业务部门，以及三家控股子公司，海南海经院机动车驾驶培训有限公司、海南中佳健康发展有限公司、海南中环能监测技术有限公司。</p>\n<p>公司自成立以来，一直遵循&ldquo;优质、高效、团结、奉献&rdquo;的工作态度，不骄不躁、严谨踏实，不断谋求新的发展。几年来，经过公司全体员工的不懈努力和开拓进取，陆续在文化、体育等领域发力，经营状况整体良好，2017年实现营业收入5740.22万元，2018年实现营业收入6917.39万元，2019年实现营业收入7300万元。</p>\n<p>重点业务项目概况如下：</p>\n<p>2016年11月，为海口市国贸繁华中心地段的商业中心宜欣城，全程策划执行了重装开业盛典活动，提供了活动执行、舞台搭建和节目表演等整体服务，获得了高度评价和认可，为海南树立了商场开业庆典活动的全新标杆。</p>\n<p>在2017年5月，策划承办了第55届意大利&ldquo;威尔第之声国际声乐比赛&rdquo;（中国赛区），该比赛是中华人民共和国文化部推荐的国际一类声乐比赛；是意大利文化（遗产）部重点文化项目，并且是直接认证的唯一声乐比赛。本公司为活动提供了整体的策划实施和组织执行，为活动的成功举办提供了强大的保障。</p>\n<p>在2017、2018、2019连续三年策划承办了全国沙滩排球巡回赛总决赛及颁奖盛典，本活动由国家体育总局排球运动管理中心、海南省旅游和文化广电体育厅、海口市人民政府主办，得到了海口市文化广电出版体育局的大力支持，CCTV5全程直播，由本公司全程策划执行，提供了开幕式、赛事运营、颁奖盛典的策划实施、宣传推广等服务。2019年举办的全国沙滩排球巡回赛总决赛，是历年全国巡回赛中参赛队伍最多的一次,也是国内迄今为止举办成年组沙排赛参与人数最多的一次。颁奖盛典、半决赛和总决赛通过了央视网络端、爱奇艺、新浪等几大网络平台进行全程直播，使赛事的传播及影响力较往年进一步扩大。</p>\n<p>2018年11月、2019年11月连续两年策划承办了&ldquo;海南国际旅游岛欢乐节&middot;中国-东盟大学生文化周&rdquo;活动，该活动被划列为第十九届海南国际旅游岛欢乐节的重点版块活动之一。本公司为活动提供了全程策划执行，人员安排组织、舞美物料搭建和宣传推广等整体活动服务，成功搭建了海南与全国及东盟青年之间在文化、教育和艺术交流合作的重要平台，获得了政府部门、海内外各高校和社会各界的一致好评。</p>\n<p>公司在海口经济学院内斥资近千万建设海南省高校内首家电竞体验馆-&ldquo;昆仑电竞馆&rdquo;。2017年7月参加腾讯官方英雄联盟全球高校冠军杯以九战九胜全胜战绩一举夺得全球高校冠军杯世界总冠军。2019年昆仑电竞战队获得腾讯第七届英雄联盟高校联赛海南省冠军、南方大区亚军、全国总决赛殿军。2019年第十四届国际动漫博览交易会电竞项目JEL英雄联盟全国高校总决赛冠军等。</p>\n<p>&ldquo;大海之南&bull;昆仑为巅&rdquo;，海南昆仑体育文化股份有限公司依托强大的人力和资源优势，凭借着极具创意的策划思维、专业过硬的执行能力、齐心协作的团队精神以及独家优质的平台资源，正逐步在海南崛起。</p>', 1, 0, NULL, '2021-02-22 16:59:16', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-admin
@@ -140,8 +140,8 @@ CREATE TABLE `mzc-admin`  (
 -- ----------------------------
 -- Records of mzc-admin
 -- ----------------------------
-INSERT INTO `mzc-admin` VALUES (1, 1, '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]', '[]', 'adminRoot', '123', '$2a$10$EtVqAo8yz/tHz.eOQc8WMOf8vUvVA8ZJi3UPzHt0hWHwW75zKr2K2', 'http://127.0.0.1:7001/public/images/team_img3.png', '123', '123', 1, 151, NULL, '127.0.0.1', '2021-02-20 15:01:47', '2020-09-02 16:58:14', '2021-02-20 15:01:47', NULL);
-INSERT INTO `mzc-admin` VALUES (2, 1, '[]', '[]', 'admin', NULL, '$2a$10$uDaCy8q43i2Vfo3.po87RuZe2IoLsF1k.nxNIRWPNpDs./KTLIkVS', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 135, NULL, '127.0.0.1', '2021-02-19 17:30:35', '2020-09-07 17:17:19', '2021-02-20 09:54:18', NULL);
+INSERT INTO `mzc-admin` VALUES (1, 1, '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]', '[]', 'adminRoot', '123', '$2a$10$EtVqAo8yz/tHz.eOQc8WMOf8vUvVA8ZJi3UPzHt0hWHwW75zKr2K2', 'http://127.0.0.1:7001/public/images/team_img3.png', '123', '123', 1, 155, NULL, '127.0.0.1', '2021-02-23 10:56:46', '2020-09-02 16:58:14', '2021-02-23 10:56:46', NULL);
+INSERT INTO `mzc-admin` VALUES (2, 1, '[]', '[]', 'admin', NULL, '$2a$10$uDaCy8q43i2Vfo3.po87RuZe2IoLsF1k.nxNIRWPNpDs./KTLIkVS', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 0, 135, NULL, '127.0.0.1', '2021-02-19 17:30:35', '2020-09-07 17:17:19', '2021-02-22 16:58:46', NULL);
 INSERT INTO `mzc-admin` VALUES (3, 3, '', '', 'editor', NULL, '$2a$10$Yy0uMFMdzIso1cNHCtMhg.Hy6q/DFLGORvso0qZxSMSNsCURhbZQm', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 65, NULL, '127.0.0.1', '2020-12-22 20:22:43', '2020-10-21 09:44:24', '2020-12-22 20:22:43', NULL);
 INSERT INTO `mzc-admin` VALUES (4, 4, '', '', 'admin1', NULL, '$2a$10$1VHPKndJw4ExsbKTIKYXMe.vtVAThiIqfC8oOIRxnHrlhelYO0d2K', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 0, NULL, NULL, NULL, '2020-11-17 11:57:56', '2020-11-17 11:57:56', '1899-12-30 01:00:00');
 INSERT INTO `mzc-admin` VALUES (5, 4, '', '', 'tourists', NULL, '$2a$10$1gRrgWc5qTcDm0gCPxNJgOLsePKS8E02gEQCLBQCzET7gaFzz0aAu', '', '', '', 1, 7, '127.0.0.1', '127.0.0.1', '2020-12-15 16:01:11', '2020-11-27 17:44:45', '2020-12-15 16:01:11', NULL);
@@ -223,7 +223,7 @@ CREATE TABLE `mzc-api`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 154 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 156 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-api
@@ -381,6 +381,8 @@ INSERT INTO `mzc-api` VALUES (150, 47, '/api/casesDroptype/edit', 'casesDroptype
 INSERT INTO `mzc-api` VALUES (151, 47, '/api/casesDroptype/add', 'casesDroptype增加', 'add', 1, 0, '2021-02-20 15:10:46', '2021-02-20 15:10:46', NULL);
 INSERT INTO `mzc-api` VALUES (152, 48, '/api/aboutSingle/edit', 'concept编辑', 'edit', 1, 0, '2021-02-20 17:15:52', '2021-02-20 17:15:52', NULL);
 INSERT INTO `mzc-api` VALUES (153, 48, '/api/aboutSingle/index', 'concept查询', 'query', 1, 0, '2021-02-20 17:16:18', '2021-02-20 17:16:18', NULL);
+INSERT INTO `mzc-api` VALUES (154, 50, '/api/message/list', 'message查询', 'query', 1, 0, '2021-02-23 11:27:12', '2021-02-23 11:27:12', NULL);
+INSERT INTO `mzc-api` VALUES (155, 50, '/api/message/destroy', 'message删除', 'destroy', 1, 0, '2021-02-23 11:27:32', '2021-02-23 11:27:32', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-api-code
@@ -583,7 +585,7 @@ CREATE TABLE `mzc-exception`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-exception
@@ -646,6 +648,7 @@ INSERT INTO `mzc-exception` VALUES (55, 2, '127.0.0.1', '{\"host\":\"127.0.0.1:7
 INSERT INTO `mzc-exception` VALUES (56, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"pragma\":\"no-cache\",\"cache-control\":\"no-cache\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTIzMzg2NDgsImV4cCI6MTYxMjM2MDI0OH0.0L9hHMyvyz7vyyUR9VyX5iGgqZN-ddQmzYRobU1RzW4\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/menu/detail', '2021-02-03 17:04:15', '2021-02-03 17:04:15', NULL);
 INSERT INTO `mzc-exception` VALUES (57, 2, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJSb2xlc0lkIjoyLCJpYXQiOjE2MTM3MjcwMzUsImV4cCI6MTYxMzc0ODYzNX0.01DDFqj6Q2kIQer54UaT2SlJUvld_jfU3rHmlwDxUus\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/menu/detail', '2021-02-19 17:30:53', '2021-02-19 17:30:53', NULL);
 INSERT INTO `mzc-exception` VALUES (58, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTM3ODMwMzIsImV4cCI6MTYxMzgwNDYzMn0.0olLwt1AfrqJHKyb4kFxsR2BiIt1XsTvw0j4OiMN1Ho\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/casesDroptype/index', '2021-02-20 11:17:02', '2021-02-20 11:17:02', NULL);
+INSERT INTO `mzc-exception` VALUES (59, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTQwNDkwMDYsImV4cCI6MTYxNDA3MDYwNn0.2NsyiwjfTGEzfUe5ndeuxfBpEiwX_9P3gmqqKmS3RCo\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/message/list', '2021-02-23 11:26:43', '2021-02-23 11:26:43', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-menu
@@ -715,31 +718,33 @@ CREATE TABLE `mzc-message`  (
   `email` varchar(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '邮箱',
   `title` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '标题',
   `remarks` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT '备注',
+  `ip` varchar(60) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT '' COMMENT 'ip',
   `created_at` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 17 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 18 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-message
 -- ----------------------------
-INSERT INTO `mzc-message` VALUES (1, '', '', '', '', '', '2020-08-19 17:27:38', '2020-08-19 17:27:38', '2020-08-21 10:21:11');
-INSERT INTO `mzc-message` VALUES (2, '123', '', '', '', '', '2020-08-19 17:27:47', '2020-08-19 17:27:47', '2020-08-21 10:21:11');
-INSERT INTO `mzc-message` VALUES (3, '1', '', '', '', '', '2020-08-21 10:14:48', '2020-08-21 10:14:48', '2020-08-21 10:21:11');
-INSERT INTO `mzc-message` VALUES (4, '123', '123', '123', '123', '', '2020-08-21 10:19:38', '2020-08-21 10:19:38', '2020-08-21 10:21:11');
-INSERT INTO `mzc-message` VALUES (5, '123', '123', '123', '123', '', '2020-08-21 10:19:43', '2020-08-21 10:19:43', '2020-08-21 10:21:11');
-INSERT INTO `mzc-message` VALUES (6, '123', '123', '123', '123', '', '2020-08-21 10:19:50', '2020-08-21 10:19:50', '2020-08-21 10:21:11');
-INSERT INTO `mzc-message` VALUES (7, '123', '123', '123', '123', '123', '2020-08-21 10:21:11', '2020-08-21 10:21:11', '2020-08-21 10:21:11');
-INSERT INTO `mzc-message` VALUES (8, '1', '1', '1', '1', '1', '2020-08-25 17:23:09', '2020-08-25 17:23:09', NULL);
-INSERT INTO `mzc-message` VALUES (9, '123', '123', '123', '123', '123', '2020-09-02 11:56:15', '2020-09-02 11:56:15', NULL);
-INSERT INTO `mzc-message` VALUES (10, '123', '123', '123', '123', '123', '2020-09-02 14:59:05', '2020-09-02 14:59:05', NULL);
-INSERT INTO `mzc-message` VALUES (11, '123', '123', '123', '123', '123', '2020-09-02 15:06:26', '2020-09-02 15:06:26', NULL);
-INSERT INTO `mzc-message` VALUES (12, '123', '123', '123', '123', '123', '2020-09-02 15:29:25', '2020-09-02 15:29:25', NULL);
-INSERT INTO `mzc-message` VALUES (13, '123', '123', '123', '123', '123', '2020-09-22 11:48:17', '2020-09-22 11:48:17', NULL);
-INSERT INTO `mzc-message` VALUES (14, '123', '123', '123', '123', '123', '2020-11-19 15:49:05', '2020-11-19 15:49:05', NULL);
-INSERT INTO `mzc-message` VALUES (15, '123', '123', '123', '123', '123', '2020-11-19 15:49:15', '2020-11-19 15:49:15', NULL);
-INSERT INTO `mzc-message` VALUES (16, '123', '123', '123', '123', '123', '2020-11-19 15:50:23', '2020-11-19 15:50:23', NULL);
+INSERT INTO `mzc-message` VALUES (1, '', '', '', '', '', '', '2020-08-19 17:27:38', '2020-08-19 17:27:38', '2020-08-21 10:21:11');
+INSERT INTO `mzc-message` VALUES (2, '123', '', '', '', '', '', '2020-08-19 17:27:47', '2020-08-19 17:27:47', '2020-08-21 10:21:11');
+INSERT INTO `mzc-message` VALUES (3, '1', '', '', '', '', '', '2020-08-21 10:14:48', '2020-08-21 10:14:48', '2020-08-21 10:21:11');
+INSERT INTO `mzc-message` VALUES (4, '123', '123', '123', '123', '', '', '2020-08-21 10:19:38', '2020-08-21 10:19:38', '2020-08-21 10:21:11');
+INSERT INTO `mzc-message` VALUES (5, '123', '123', '123', '123', '', '', '2020-08-21 10:19:43', '2020-08-21 10:19:43', '2020-08-21 10:21:11');
+INSERT INTO `mzc-message` VALUES (6, '123', '123', '123', '123', '', '', '2020-08-21 10:19:50', '2020-08-21 10:19:50', '2020-08-21 10:21:11');
+INSERT INTO `mzc-message` VALUES (7, '123', '123', '123', '123', '123', '', '2020-08-21 10:21:11', '2020-08-21 10:21:11', '2020-08-21 10:21:11');
+INSERT INTO `mzc-message` VALUES (8, '1', '1', '1', '1', '1', '127.0.0.1', '2020-08-25 17:23:09', '2020-08-25 17:23:09', NULL);
+INSERT INTO `mzc-message` VALUES (9, '123', '123', '123', '123', '123', '', '2020-09-02 11:56:15', '2020-09-02 11:56:15', NULL);
+INSERT INTO `mzc-message` VALUES (10, '123', '123', '123', '123', '123', '', '2020-09-02 14:59:05', '2020-09-02 14:59:05', NULL);
+INSERT INTO `mzc-message` VALUES (11, '123', '123', '123', '123', '123', '', '2020-09-02 15:06:26', '2020-09-02 15:06:26', NULL);
+INSERT INTO `mzc-message` VALUES (12, '123', '123', '123', '123', '123', '', '2020-09-02 15:29:25', '2020-09-02 15:29:25', NULL);
+INSERT INTO `mzc-message` VALUES (13, '123', '123', '123', '123', '123', '', '2020-09-22 11:48:17', '2020-09-22 11:48:17', NULL);
+INSERT INTO `mzc-message` VALUES (14, '123', '123', '123', '123', '123', '', '2020-11-19 15:49:05', '2020-11-19 15:49:05', NULL);
+INSERT INTO `mzc-message` VALUES (15, '123', '123', '123', '123', '123', '', '2020-11-19 15:49:15', '2020-11-19 15:49:15', NULL);
+INSERT INTO `mzc-message` VALUES (16, '123', '123', '123', '123', '123', '', '2020-11-19 15:50:23', '2020-11-19 15:50:23', NULL);
+INSERT INTO `mzc-message` VALUES (17, 'ip测试', 'ip测试', 'ip测试', 'ip测试', 'ip测试', '127.0.0.1', '2021-02-23 11:35:32', '2021-02-23 11:35:32', '2021-02-23 11:44:48');
 
 -- ----------------------------
 -- Table structure for mzc-news
@@ -850,7 +855,7 @@ CREATE TABLE `mzc-roles`  (
 -- ----------------------------
 -- Records of mzc-roles
 -- ----------------------------
-INSERT INTO `mzc-roles` VALUES (1, '[1,4,32,33,34,35,36,5,6,37,38,39,40,7,8,9,10,41,42,43,11,44,45,46,13,14,15,47,16,17,18,48,19,20,21,22,23,31,24,25,26,27,28,29,30]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,87,88,89,90,96,97,91,92,93,94,95,98,18,79,105,17,19,106,99,100,107,101,102,108,103,104,109,20,21,22,23,24,111,112,25,26,27,28,29,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,30,31,32,33,34,132,133,134,135,136,137,138,139,140,141,142,143,144,35,36,37,38,39,145,146,80,81,82,83,84,147,148,149,150,151,40,41,42,43,44,45,46,47,48,49,152,153,58,59,60,86,110,50,51,52,53,54,55,56,57,85,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78]', '超级管理员', '拥有全部权限', 1, 0, NULL, '2021-02-20 17:18:03', NULL);
+INSERT INTO `mzc-roles` VALUES (1, '[1,4,32,33,34,35,36,5,6,37,38,39,40,7,8,9,10,41,42,43,11,44,45,46,13,14,15,47,16,17,18,48,19,20,21,22,23,31,24,25,26,27,28,29,30,49,50]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,87,88,89,90,96,97,91,92,93,94,95,98,18,79,105,17,19,106,99,100,107,101,102,108,103,104,109,20,21,22,23,24,111,112,25,26,27,28,29,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,30,31,32,33,34,132,133,134,135,136,137,138,139,140,141,142,143,144,35,36,37,38,39,145,146,80,81,82,83,84,147,148,149,150,151,40,41,42,43,44,45,46,47,48,49,152,153,58,59,60,86,110,50,51,52,53,54,55,56,57,85,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,154,155]', '超级管理员', '拥有全部权限', 1, 0, NULL, '2021-02-23 11:27:42', NULL);
 INSERT INTO `mzc-roles` VALUES (2, '[4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,1,21]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,58,59,60,50,51,52,53,54,55,56,57]', '管理员', '拥有部分权限（不可修改系统配置）', 1, 0, NULL, '2021-01-25 17:18:02', NULL);
 INSERT INTO `mzc-roles` VALUES (3, '[13,14,15,17,16]', '[]', '编辑', '文章编辑', 1, 0, NULL, '2021-01-06 20:50:55', NULL);
 INSERT INTO `mzc-roles` VALUES (4, '', '', '游客', '没有权限（只可访问首页）', 1, 0, NULL, '2020-12-23 09:55:34', NULL);
@@ -880,35 +885,35 @@ CREATE TABLE `mzc-routes`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`, `path`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 49 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-routes
 -- ----------------------------
-INSERT INTO `mzc-routes` VALUES (1, 0, '/about', 'about', NULL, '/about/describe', '关于我们', 'el-icon-user-solid', 0, 1, 0, 1, 1, 0, NULL, '2021-02-08 15:35:31', NULL);
+INSERT INTO `mzc-routes` VALUES (1, 0, '/about', 'about', NULL, '/about/describe', '关于我们', 'el-icon-user-solid', 0, 1, 0, 1, 1, 1, NULL, '2021-02-22 17:46:41', NULL);
 INSERT INTO `mzc-routes` VALUES (2, 1, 'single', 'Single', 'aboutSingle', '', '单页', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-18 19:48:23', '2021-01-19 16:20:32');
 INSERT INTO `mzc-routes` VALUES (3, 1, 'list', 'List', 'aboutList', '', '列表', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-25 16:17:39', '2021-01-25 16:18:13');
-INSERT INTO `mzc-routes` VALUES (4, 1, 'classify', 'aboutClassify', 'aboutClassify', '', '分类', '', 0, 1, 0, 1, 1, 1, NULL, '2021-02-20 10:13:21', NULL);
-INSERT INTO `mzc-routes` VALUES (5, 0, '/services', 'services', NULL, '/services/index', '服务领域', 'el-icon-service', 0, 1, 0, 1, 1, 0, NULL, '2021-01-26 16:49:57', NULL);
+INSERT INTO `mzc-routes` VALUES (4, 1, 'classify', 'aboutClassify', 'aboutClassify', '', '分类', '', 0, 1, 0, 1, 1, 0, NULL, '2021-02-22 17:52:39', NULL);
+INSERT INTO `mzc-routes` VALUES (5, 0, '/services', 'services', NULL, '/services/index', '服务领域', 'el-icon-service', 0, 1, 0, 1, 1, 2, NULL, '2021-02-22 17:46:51', NULL);
 INSERT INTO `mzc-routes` VALUES (6, 5, 'sports', 'servicesSports', 'servicesSports', '', '体育赛事', '', 0, 1, 0, 1, 1, 0, NULL, '2021-02-03 08:57:09', NULL);
-INSERT INTO `mzc-routes` VALUES (7, 0, '/company', 'company', NULL, '', '旗下公司', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (7, 0, '/company', 'company', NULL, '', '旗下公司', '', 0, 1, 0, 1, 1, 3, NULL, '2021-02-22 17:47:02', NULL);
 INSERT INTO `mzc-routes` VALUES (8, 7, 'index', 'companyIndex', 'companyIndex', '', '旗下公司', 'company', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (9, 0, '/culture', 'culture', NULL, '/culture/enterprise', '企业文化', 'culture', 0, 1, 0, 1, 1, 0, NULL, '2021-02-19 08:59:39', NULL);
+INSERT INTO `mzc-routes` VALUES (9, 0, '/culture', 'culture', NULL, '/culture/enterprise', '企业文化', 'culture', 0, 1, 0, 1, 1, 4, NULL, '2021-02-22 17:47:22', NULL);
 INSERT INTO `mzc-routes` VALUES (10, 9, 'enterprise', 'cultureEnterprise', 'cultureEnterprise', '', '企业文化', '', 0, 1, 0, 1, 1, 0, NULL, '2021-02-08 15:36:32', NULL);
-INSERT INTO `mzc-routes` VALUES (11, 0, '/news', 'news', NULL, '/news/enterprise', '新闻中心', 'news', 0, 1, 0, 1, 1, 0, NULL, '2021-02-19 08:59:13', NULL);
+INSERT INTO `mzc-routes` VALUES (11, 0, '/news', 'news', NULL, '/news/enterprise', '新闻中心', 'news', 0, 1, 0, 1, 1, 5, NULL, '2021-02-22 17:47:37', NULL);
 INSERT INTO `mzc-routes` VALUES (12, 11, 'index', 'newsIndex', 'newsIndex', '', '新闻中心', 'news', 0, 1, 0, 1, 1, 0, NULL, NULL, '2021-02-19 09:29:14');
-INSERT INTO `mzc-routes` VALUES (13, 0, '/cases', 'Cases', NULL, '/cases/case', '合作案例', 'el-icon-suitcase', 0, 1, 0, 1, 1, 0, NULL, '2021-01-15 16:07:19', NULL);
+INSERT INTO `mzc-routes` VALUES (13, 0, '/cases', 'Cases', NULL, '/cases/case', '合作案例', 'el-icon-suitcase', 0, 1, 0, 1, 1, 6, NULL, '2021-02-22 17:47:56', NULL);
 INSERT INTO `mzc-routes` VALUES (14, 13, 'case', 'casesCase', 'casesCase', '', '服务案例', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (15, 13, 'partner', 'casesPartner', 'casesPartner', '', '合作伙伴', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (16, 0, '/recruit', 'recruit', NULL, '/recruit/recruit', '人力资源', 'hr', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (17, 16, 'recruit', 'recruitIndex', 'recruitIndex', '', '人才招聘', '', 0, 1, 0, 1, 1, 0, NULL, '2021-02-20 17:07:22', NULL);
-INSERT INTO `mzc-routes` VALUES (18, 16, 'recruitList', 'recruitList', 'recruitList', '', '分类', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (19, 0, '/menu', 'menus', NULL, '/menu/index', '菜单', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (16, 0, '/recruit', 'recruit', NULL, '/recruit/recruit', '人力资源', 'hr', 0, 1, 0, 1, 1, 7, NULL, '2021-02-22 17:48:11', NULL);
+INSERT INTO `mzc-routes` VALUES (17, 16, 'recruit', 'recruitIndex', 'recruitIndex', '', '人才招聘', '', 0, 1, 0, 1, 1, 2, NULL, '2021-02-22 17:56:38', NULL);
+INSERT INTO `mzc-routes` VALUES (18, 16, 'recruitList', 'recruitList', 'recruitList', '', '分类', '', 0, 1, 0, 1, 1, 3, NULL, '2021-02-22 17:58:06', NULL);
+INSERT INTO `mzc-routes` VALUES (19, 0, '/menu', 'menus', NULL, '/menu/index', '菜单', '', 0, 1, 0, 1, 1, 9, NULL, '2021-02-22 17:49:38', NULL);
 INSERT INTO `mzc-routes` VALUES (20, 19, 'index', 'menusIndex', 'menusIndex', '', '菜单', 'el-icon-menu', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (21, 0, '/setting', 'Setting', NULL, '/setting/bsic', '设置', 'el-icon-setting', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (21, 0, '/setting', 'Setting', NULL, '/setting/bsic', '设置', 'el-icon-setting', 0, 1, 0, 1, 1, 10, NULL, '2021-02-22 17:50:07', NULL);
 INSERT INTO `mzc-routes` VALUES (22, 21, 'bsic', 'settingBsic', 'settingBsic', '', '基本设置', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (23, 21, 'advertising', 'settingAdvertising', 'settingAdvertising', '', '广告设置', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (24, 0, '/permissions', 'Permissions', NULL, '/permissions/roles', '权限管理', 'el-icon-lock', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
+INSERT INTO `mzc-routes` VALUES (24, 0, '/permissions', 'Permissions', NULL, '/permissions/roles', '权限管理', 'el-icon-lock', 0, 1, 0, 1, 1, 11, NULL, '2021-02-22 17:55:04', NULL);
 INSERT INTO `mzc-routes` VALUES (25, 24, 'roles', 'permissionsRoles', 'permissionsRoles', '', '角色管理', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-12 11:58:25', NULL);
 INSERT INTO `mzc-routes` VALUES (26, 24, 'admin', 'permissionsAdmin', 'permissionsAdmin', '', '用户管理', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-12 11:58:45', NULL);
 INSERT INTO `mzc-routes` VALUES (27, 24, '/permissions/power', 'permissionsPower', 'permissionsPower', '/permissions/power/api', '权限管理', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
@@ -931,8 +936,10 @@ INSERT INTO `mzc-routes` VALUES (43, 9, 'party', 'cultureParty', 'cultureParty',
 INSERT INTO `mzc-routes` VALUES (44, 11, 'enterprise', 'newsEnterprise', 'newsEnterprise', '', '企业新闻', '', 0, 1, 0, 1, 1, 0, '2021-02-19 08:43:21', '2021-02-19 08:44:02', NULL);
 INSERT INTO `mzc-routes` VALUES (45, 11, 'industry', 'newsIndustry', 'newsIndustry', '', '行业新闻', '', 0, 1, 0, 1, 1, 0, '2021-02-19 08:44:54', '2021-02-19 08:44:54', NULL);
 INSERT INTO `mzc-routes` VALUES (46, 11, 'notice', 'newsNotice', 'newsNotice', '', '通知公告', '', 0, 1, 0, 1, 1, 0, '2021-02-19 08:45:26', '2021-02-19 08:52:26', NULL);
-INSERT INTO `mzc-routes` VALUES (47, 13, 'classify', 'casesClassify', 'casesClassify', '', '分类', '', 0, 1, 0, 1, 1, 0, '2021-02-20 10:10:10', '2021-02-20 10:10:10', NULL);
-INSERT INTO `mzc-routes` VALUES (48, 16, 'concept', 'recruitConcept', 'recruitConcept', '', '人才理念', '', 0, 1, 0, 1, 1, 0, '2021-02-20 17:08:26', '2021-02-20 17:10:59', NULL);
+INSERT INTO `mzc-routes` VALUES (47, 13, 'classify', 'casesClassify', 'casesClassify', '', '分类', '', 0, 1, 0, 1, 1, 3, '2021-02-20 10:10:10', '2021-02-22 17:57:45', NULL);
+INSERT INTO `mzc-routes` VALUES (48, 16, 'concept', 'recruitConcept', 'recruitConcept', '', '人才理念', '', 0, 1, 0, 1, 1, 1, '2021-02-20 17:08:26', '2021-02-22 17:57:31', NULL);
+INSERT INTO `mzc-routes` VALUES (49, 0, '/message', 'message', '', '/message/index', '在线留言', '', 0, 1, 0, 1, 1, 8, '2021-02-22 17:34:23', '2021-02-22 17:49:18', NULL);
+INSERT INTO `mzc-routes` VALUES (50, 49, 'index', 'messageIndex', 'messageIndex', '', '在线留言', 'el-icon-chat-dot-square', 0, 1, 0, 1, 1, 0, '2021-02-22 17:36:51', '2021-02-23 11:16:08', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-services
