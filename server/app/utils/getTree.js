@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-17 11:58:07
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-26 11:58:05
+ * @LastEditTime: 2021-02-22 17:58:47
  */
 'use strict';
 
@@ -114,7 +114,6 @@ class GetTree {
         })
         );
 
-        arrs.sort((a, b) => a.id - b.id)
         return arrs.sort((a, b) => a.sort - b.sort)
       /**
        * 页面菜单

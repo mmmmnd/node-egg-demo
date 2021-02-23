@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-17 16:32:41
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-11-19 15:46:18
+ * @LastEditTime: 2021-02-23 11:44:11
  */
 'use strict';
 
@@ -32,7 +32,7 @@ class MessageService extends Service {
       else if (code !== captcha) return { msg: '验证码错误', errorStatus: HttpStatus.UNAUTHORIZED };
 
       await this.ctx.model.MzcMessage.create({
-        name, phone, email, title, remarks
+        name, phone, email, title, remarks, ip: this.ctx.ip
       });
 
       return { httpStatus: HttpStatus.OK }
@@ -40,6 +40,46 @@ class MessageService extends Service {
     } catch (err) {
       throw new Error(err);
     }
+  }
+  /**
+   * 获取列表
+   * @param { String } limit 最大限制
+   * @param { String } page 分页
+   */
+  async list ({ limit = 20, page = 1 }) {
+    const maxPage = Number(limit);
+    const message = await this.ctx.model.MzcMessage.findAndCountAll({
+      where: {
+        deleted_at: null
+      },
+      offset: (page - 1) * maxPage,
+      limit: maxPage,
+    })
+
+    if (message.rows.length == 0) return { msg: '没有找到相关信息', errorStatus: HttpStatus.NOT_FOUND };
+
+    return {
+      data: {
+        data: message.rows,
+        meta: {
+          current_page: parseInt(page),
+          per_page: maxPage,
+          total: message.count,
+          total_pages: Math.ceil(message.count / maxPage),
+        }
+      }
+    }
+  }
+  /**
+   * 删除
+   * @param { Array }  params id数组
+   */
+  async destroy ({ id }) {
+    await this.ctx.model.MzcMessage.destroy({
+      where: { id }
+    })
+
+    return { httpStatus: HttpStatus.OK }
   }
 }
 

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-18 10:09:53
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-08-19 17:19:29
+ * @LastEditTime: 2021-02-23 11:29:23
  */
 'use strict';
 const moment = require('moment');
@@ -49,6 +49,12 @@ module.exports = app => {
       type: STRING, // 类型
       defaultValue: '', // 默认值
       comment: '备注', // 备注
+    },
+    ip: {
+      allowNull: !1, // 是否为空
+      type: STRING(60), // 类型
+      defaultValue: '', // 默认值
+      comment: 'ip', // 备注
     },
     created_at: {
       allowNull: !0, // 是否为空

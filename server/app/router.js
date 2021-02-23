@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-20 11:46:02
+ * @LastEditTime: 2021-02-23 11:10:43
  */
 'use strict';
 
@@ -38,6 +38,8 @@ module.exports = app => {
 
   // message
   router.post('/api/message/create', controller.message.create);
+  router.get('/api/message/list', jwt, controller.message.list)
+  router.delete('/api/message/destroy', jwt, controller.message.destroy);
 
   // admin
   router.post('/api/admin/create', controller.admin.create);
