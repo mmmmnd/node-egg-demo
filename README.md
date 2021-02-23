@@ -1,7 +1,7 @@
 ## 一、这是个什么的项目？
 
 基于 Node 开发一套企业官网，使用 Egg 二次开发一套适合多端的 RESTful API，同时配套完整RBAC后台权限管理系统。
-前端展示基于 ejs 服务端渲染，后台基于 Vue.js 前后端分离。
+前端展示基于 Ejs 服务端渲染，后台基于 Vue.js 前后端分离。
 
 ## 二、项目包含什么功能？
 
@@ -57,7 +57,7 @@ $ CREATE DATABASE IF NOT EXISTS local-egg-demo DEFAULT CHARACTER SET utf8mb4 COL
 
 项目使用了Redis，请在你的电脑上面装上Redis：：[「点击：附上Redis安装教程」](https://www.runoob.com/redis/redis-install.html)，安装好 Redis 后，需启动Redis。
 
-### 3.4.修改 Koa2 项目数据库配置
+### 3.4.修改 Egg 项目数据库配置
 
 请在根目录下的 [——config/config.default.js](https://github.com/LFB/nodejs-koa-blog/blob/master/config/config.js) 文件下修改您本地的数据库名字和数据库密码 。
 
