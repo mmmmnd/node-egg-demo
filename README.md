@@ -57,7 +57,7 @@ $ CREATE DATABASE IF NOT EXISTS local-egg-demo DEFAULT CHARACTER SET utf8mb4 COL
 
 项目使用了Redis，请在你的电脑上面装上Redis：：[「点击：附上Redis安装教程」](https://www.runoob.com/redis/redis-install.html)，安装好 Redis 后，需启动Redis。
 
-### 3.4.修改 Koa2 项目数据库配置
+### 3.4.修改 Egg 项目数据库配置
 
 请在根目录下的 [——config/config.default.js](https://github.com/LFB/nodejs-koa-blog/blob/master/config/config.js) 文件下修改您本地的数据库名字和数据库密码 。
 
