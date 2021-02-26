@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 23/02/2021 11:47:12
+ Date: 26/02/2021 17:39:04
 */
 
 SET NAMES utf8mb4;
@@ -140,9 +140,9 @@ CREATE TABLE `mzc-admin`  (
 -- ----------------------------
 -- Records of mzc-admin
 -- ----------------------------
-INSERT INTO `mzc-admin` VALUES (1, 1, '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]', '[]', 'adminRoot', '123', '$2a$10$EtVqAo8yz/tHz.eOQc8WMOf8vUvVA8ZJi3UPzHt0hWHwW75zKr2K2', 'http://127.0.0.1:7001/public/images/team_img3.png', '123', '123', 1, 155, NULL, '127.0.0.1', '2021-02-23 10:56:46', '2020-09-02 16:58:14', '2021-02-23 10:56:46', NULL);
-INSERT INTO `mzc-admin` VALUES (2, 1, '[]', '[]', 'admin', NULL, '$2a$10$uDaCy8q43i2Vfo3.po87RuZe2IoLsF1k.nxNIRWPNpDs./KTLIkVS', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 0, 135, NULL, '127.0.0.1', '2021-02-19 17:30:35', '2020-09-07 17:17:19', '2021-02-22 16:58:46', NULL);
-INSERT INTO `mzc-admin` VALUES (3, 3, '', '', 'editor', NULL, '$2a$10$Yy0uMFMdzIso1cNHCtMhg.Hy6q/DFLGORvso0qZxSMSNsCURhbZQm', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 65, NULL, '127.0.0.1', '2020-12-22 20:22:43', '2020-10-21 09:44:24', '2020-12-22 20:22:43', NULL);
+INSERT INTO `mzc-admin` VALUES (1, 1, '[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23]', '[]', 'adminRoot', '1231', '$2a$10$EtVqAo8yz/tHz.eOQc8WMOf8vUvVA8ZJi3UPzHt0hWHwW75zKr2K2', 'http://127.0.0.1:7001/public/images/team_img3.png', '123', '123', 1, 167, NULL, '127.0.0.1', '2021-02-26 17:07:07', '2020-09-02 16:58:14', '2021-02-26 17:07:07', NULL);
+INSERT INTO `mzc-admin` VALUES (2, 2, '[]', '[]', 'admin', NULL, '$2a$10$uDaCy8q43i2Vfo3.po87RuZe2IoLsF1k.nxNIRWPNpDs./KTLIkVS', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 135, NULL, '127.0.0.1', '2021-02-19 17:30:35', '2020-09-07 17:17:19', '2021-02-23 18:03:13', NULL);
+INSERT INTO `mzc-admin` VALUES (3, 3, '', '', 'editor', NULL, '$2a$10$986klzpbJZx1KRuVgVAWduBUs6Rlp6hfRLPYatPg9w/1RbVW.p4YC', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 66, NULL, '127.0.0.1', '2021-02-26 17:27:42', '2020-10-21 09:44:24', '2021-02-26 17:37:00', NULL);
 INSERT INTO `mzc-admin` VALUES (4, 4, '', '', 'admin1', NULL, '$2a$10$1VHPKndJw4ExsbKTIKYXMe.vtVAThiIqfC8oOIRxnHrlhelYO0d2K', 'http://127.0.0.1:7001/public/images/team_img3.png', '', '', 1, 0, NULL, NULL, NULL, '2020-11-17 11:57:56', '2020-11-17 11:57:56', '1899-12-30 01:00:00');
 INSERT INTO `mzc-admin` VALUES (5, 4, '', '', 'tourists', NULL, '$2a$10$1gRrgWc5qTcDm0gCPxNJgOLsePKS8E02gEQCLBQCzET7gaFzz0aAu', '', '', '', 1, 7, '127.0.0.1', '127.0.0.1', '2020-12-15 16:01:11', '2020-11-27 17:44:45', '2020-12-15 16:01:11', NULL);
 INSERT INTO `mzc-admin` VALUES (6, 4, '', '', 'admin2', NULL, '$2a$10$OjbStZVljQYdTiYYaweDxeHczzTFSYhgw9/bI/r8RV4c7I4eof9pa', '', '', '', 1, 4, '127.0.0.1', '127.0.0.1', '2020-12-15 20:03:55', '2020-12-15 15:57:12', '2020-12-15 20:03:55', NULL);
@@ -312,7 +312,7 @@ INSERT INTO `mzc-api` VALUES (81, 15, '/api/cases/update', 'cases更新', 'updat
 INSERT INTO `mzc-api` VALUES (82, 15, '/api/cases/destroy', 'cases删除', 'destroy', 1, 0, '2021-01-12 10:59:59', '2021-01-12 10:59:59', NULL);
 INSERT INTO `mzc-api` VALUES (83, 15, '/api/cases/edit', 'cases编辑', 'edit', 1, 0, '2021-01-12 11:00:21', '2021-01-12 11:00:21', NULL);
 INSERT INTO `mzc-api` VALUES (84, 15, '/api/cases/add', 'cases增加', 'add', 1, 0, '2021-01-12 11:00:44', '2021-01-12 11:00:44', NULL);
-INSERT INTO `mzc-api` VALUES (85, 31, '/api/exception/index', 'exception查询', 'query', 1, 0, '2021-01-12 15:46:33', '2021-01-12 15:46:33', NULL);
+INSERT INTO `mzc-api` VALUES (85, 51, '/api/exception/index', 'exception查询', 'query', 1, 0, '2021-01-12 15:46:33', '2021-02-23 15:59:13', NULL);
 INSERT INTO `mzc-api` VALUES (86, 20, '/api/menu/add', 'menu增加', 'add', 1, 0, '2021-01-12 20:53:00', '2021-01-12 20:53:00', NULL);
 INSERT INTO `mzc-api` VALUES (87, 35, '/api/about/index', 'about查询', 'query', 1, 0, '2021-01-25 16:23:33', '2021-01-25 17:21:09', NULL);
 INSERT INTO `mzc-api` VALUES (88, 35, '/api/about/update', 'about更新', 'update', 1, 0, '2021-01-25 16:23:54', '2021-01-25 16:23:54', NULL);
@@ -585,7 +585,7 @@ CREATE TABLE `mzc-exception`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 60 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 62 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-exception
@@ -649,6 +649,8 @@ INSERT INTO `mzc-exception` VALUES (56, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7
 INSERT INTO `mzc-exception` VALUES (57, 2, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInVzZXJSb2xlc0lkIjoyLCJpYXQiOjE2MTM3MjcwMzUsImV4cCI6MTYxMzc0ODYzNX0.01DDFqj6Q2kIQer54UaT2SlJUvld_jfU3rHmlwDxUus\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/menu/detail', '2021-02-19 17:30:53', '2021-02-19 17:30:53', NULL);
 INSERT INTO `mzc-exception` VALUES (58, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTM3ODMwMzIsImV4cCI6MTYxMzgwNDYzMn0.0olLwt1AfrqJHKyb4kFxsR2BiIt1XsTvw0j4OiMN1Ho\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/casesDroptype/index', '2021-02-20 11:17:02', '2021-02-20 11:17:02', NULL);
 INSERT INTO `mzc-exception` VALUES (59, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTQwNDkwMDYsImV4cCI6MTYxNDA3MDYwNn0.2NsyiwjfTGEzfUe5ndeuxfBpEiwX_9P3gmqqKmS3RCo\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/message/list', '2021-02-23 11:26:43', '2021-02-23 11:26:43', NULL);
+INSERT INTO `mzc-exception` VALUES (60, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTQwNjYwMDYsImV4cCI6MTYxNDA4NzYwNn0.DoZ09V_q4hEmBMTCaZnPsC7bqNN-FgmejZ28Rq89NdI\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/exception/index', '2021-02-23 15:55:11', '2021-02-23 15:55:11', NULL);
+INSERT INTO `mzc-exception` VALUES (61, 1, '127.0.0.1', '{\"host\":\"127.0.0.1:7001\",\"connection\":\"keep-alive\",\"content-length\":\"65\",\"pragma\":\"no-cache\",\"cache-control\":\"no-cache\",\"sec-ch-ua\":\"\\\"Chromium\\\";v=\\\"88\\\", \\\"Google Chrome\\\";v=\\\"88\\\", \\\";Not A Brand\\\";v=\\\"99\\\"\",\"accept\":\"application/json, text/plain, */*\",\"sec-ch-ua-mobile\":\"?0\",\"user-agent\":\"Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36\",\"token\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsInVzZXJSb2xlc0lkIjoxLCJpYXQiOjE2MTQzMzA0MjcsImV4cCI6MTYxNDM1MjAyN30.QKn5SyrbHTPiklPAxzfO2jcTZ78Jf6TUkYY1IIHKK_8\",\"content-type\":\"application/json;charset=UTF-8\",\"origin\":\"http://localhost:9528\",\"sec-fetch-site\":\"cross-site\",\"sec-fetch-mode\":\"cors\",\"sec-fetch-dest\":\"empty\",\"referer\":\"http://localhost:9528/\",\"accept-encoding\":\"gzip, deflate, br\",\"accept-language\":\"zh-CN,zh;q=0.9\"}', '/api/admin/editPass', '2021-02-26 17:07:27', '2021-02-26 17:07:27', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-menu
@@ -855,8 +857,8 @@ CREATE TABLE `mzc-roles`  (
 -- ----------------------------
 -- Records of mzc-roles
 -- ----------------------------
-INSERT INTO `mzc-roles` VALUES (1, '[1,4,32,33,34,35,36,5,6,37,38,39,40,7,8,9,10,41,42,43,11,44,45,46,13,14,15,47,16,17,18,48,19,20,21,22,23,31,24,25,26,27,28,29,30,49,50]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,87,88,89,90,96,97,91,92,93,94,95,98,18,79,105,17,19,106,99,100,107,101,102,108,103,104,109,20,21,22,23,24,111,112,25,26,27,28,29,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,30,31,32,33,34,132,133,134,135,136,137,138,139,140,141,142,143,144,35,36,37,38,39,145,146,80,81,82,83,84,147,148,149,150,151,40,41,42,43,44,45,46,47,48,49,152,153,58,59,60,86,110,50,51,52,53,54,55,56,57,85,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,154,155]', '超级管理员', '拥有全部权限', 1, 0, NULL, '2021-02-23 11:27:42', NULL);
-INSERT INTO `mzc-roles` VALUES (2, '[4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,1,21]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,58,59,60,50,51,52,53,54,55,56,57]', '管理员', '拥有部分权限（不可修改系统配置）', 1, 0, NULL, '2021-01-25 17:18:02', NULL);
+INSERT INTO `mzc-roles` VALUES (1, '[1,4,32,33,34,35,36,5,6,37,38,39,40,7,8,9,10,41,42,43,11,44,45,46,13,14,15,47,16,17,18,48,19,20,21,22,23,24,25,26,27,28,29,30,31,51,49,50]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,87,88,89,90,96,97,91,92,93,94,95,98,18,79,105,17,19,106,99,100,107,101,102,108,103,104,109,20,21,22,23,24,111,112,25,26,27,28,29,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,30,31,32,33,34,132,133,134,135,136,137,138,139,140,141,142,143,144,35,36,37,38,39,145,146,80,81,82,83,84,147,148,149,150,151,40,41,42,43,44,45,46,47,48,49,152,153,58,59,60,86,110,50,51,52,53,54,55,56,57,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,85,154,155]', '超级管理员', '拥有全部权限', 1, 0, NULL, '2021-02-23 15:59:21', NULL);
+INSERT INTO `mzc-roles` VALUES (2, '[4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,22,23,1,21]', '[11,12,13,14,15,16,1,4,2,3,5,6,7,8,9,10,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,58,59,60,50,51,52,53,54,55,56,57]', '管理员', '拥有部分权限（不可修改系统配置）', 0, 0, NULL, '2021-02-23 18:03:19', NULL);
 INSERT INTO `mzc-roles` VALUES (3, '[13,14,15,17,16]', '[]', '编辑', '文章编辑', 1, 0, NULL, '2021-01-06 20:50:55', NULL);
 INSERT INTO `mzc-roles` VALUES (4, '', '', '游客', '没有权限（只可访问首页）', 1, 0, NULL, '2020-12-23 09:55:34', NULL);
 INSERT INTO `mzc-roles` VALUES (5, '', '', '0', '0', 1, 0, '2020-12-22 12:00:07', '2020-12-23 09:55:25', '2020-12-25 16:00:30');
@@ -885,7 +887,7 @@ CREATE TABLE `mzc-routes`  (
   `updated_at` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `deleted_at` datetime(0) NULL DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`, `path`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 52 CHARACTER SET = utf8 COLLATE = utf8_bin ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
 -- Records of mzc-routes
@@ -913,14 +915,14 @@ INSERT INTO `mzc-routes` VALUES (20, 19, 'index', 'menusIndex', 'menusIndex', ''
 INSERT INTO `mzc-routes` VALUES (21, 0, '/setting', 'Setting', NULL, '/setting/bsic', '设置', 'el-icon-setting', 0, 1, 0, 1, 1, 10, NULL, '2021-02-22 17:50:07', NULL);
 INSERT INTO `mzc-routes` VALUES (22, 21, 'bsic', 'settingBsic', 'settingBsic', '', '基本设置', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (23, 21, 'advertising', 'settingAdvertising', 'settingAdvertising', '', '广告设置', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
-INSERT INTO `mzc-routes` VALUES (24, 0, '/permissions', 'Permissions', NULL, '/permissions/roles', '权限管理', 'el-icon-lock', 0, 1, 0, 1, 1, 11, NULL, '2021-02-22 17:55:04', NULL);
+INSERT INTO `mzc-routes` VALUES (24, 0, '/permissions', 'Permissions', NULL, '/permissions/roles', '权限管理', 'el-icon-lock', 0, 1, 0, 1, 1, 11, NULL, '2021-02-23 15:41:27', NULL);
 INSERT INTO `mzc-routes` VALUES (25, 24, 'roles', 'permissionsRoles', 'permissionsRoles', '', '角色管理', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-12 11:58:25', NULL);
 INSERT INTO `mzc-routes` VALUES (26, 24, 'admin', 'permissionsAdmin', 'permissionsAdmin', '', '用户管理', '', 0, 1, 0, 1, 1, 0, NULL, '2021-01-12 11:58:45', NULL);
 INSERT INTO `mzc-routes` VALUES (27, 24, '/permissions/power', 'permissionsPower', 'permissionsPower', '/permissions/power/api', '权限管理', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (28, 27, 'api', 'permissionsPowerApi', 'permissionsPowerApi', '', '接口权限', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (29, 27, 'menu', 'permissionsPowerMenu', 'permissionsPowerMenu', '', '菜单权限', '', 0, 1, 0, 1, 1, 0, NULL, NULL, NULL);
 INSERT INTO `mzc-routes` VALUES (30, 27, 'code', 'permissionsPowerCode', 'permissionsPowerCode', '', '识别码管理', '', 0, 1, 0, 1, 1, 0, '2021-01-06 16:36:47', '2021-01-06 16:37:30', NULL);
-INSERT INTO `mzc-routes` VALUES (31, 21, 'exception', 'settingException', 'settingException', '', '异常访问', '', 0, 1, 0, 1, 1, 0, '2021-01-12 11:06:59', '2021-01-12 11:13:29', NULL);
+INSERT INTO `mzc-routes` VALUES (31, 0, '/exception', 'exception', '', '/exception/index', '异常访问', '', 0, 1, 0, 1, 1, 8, '2021-01-12 11:06:59', '2021-02-23 15:52:46', NULL);
 INSERT INTO `mzc-routes` VALUES (32, 1, 'describe', 'aboutDescribe', 'aboutDescribe', '', '公司简介', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:49:20', '2021-02-20 10:13:32', NULL);
 INSERT INTO `mzc-routes` VALUES (33, 1, 'skeleton', 'aboutSkeleton', 'aboutSkeleton', '', '企业架构', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:50:03', '2021-02-20 10:13:41', NULL);
 INSERT INTO `mzc-routes` VALUES (34, 1, 'team', 'aboutTeam', 'aboutTeam', '', '管理团队', '', 0, 1, 0, 1, 1, 0, '2021-01-18 15:50:28', '2021-02-20 10:13:52', NULL);
@@ -938,8 +940,9 @@ INSERT INTO `mzc-routes` VALUES (45, 11, 'industry', 'newsIndustry', 'newsIndust
 INSERT INTO `mzc-routes` VALUES (46, 11, 'notice', 'newsNotice', 'newsNotice', '', '通知公告', '', 0, 1, 0, 1, 1, 0, '2021-02-19 08:45:26', '2021-02-19 08:52:26', NULL);
 INSERT INTO `mzc-routes` VALUES (47, 13, 'classify', 'casesClassify', 'casesClassify', '', '分类', '', 0, 1, 0, 1, 1, 3, '2021-02-20 10:10:10', '2021-02-22 17:57:45', NULL);
 INSERT INTO `mzc-routes` VALUES (48, 16, 'concept', 'recruitConcept', 'recruitConcept', '', '人才理念', '', 0, 1, 0, 1, 1, 1, '2021-02-20 17:08:26', '2021-02-22 17:57:31', NULL);
-INSERT INTO `mzc-routes` VALUES (49, 0, '/message', 'message', '', '/message/index', '在线留言', '', 0, 1, 0, 1, 1, 8, '2021-02-22 17:34:23', '2021-02-22 17:49:18', NULL);
+INSERT INTO `mzc-routes` VALUES (49, 0, '/message', 'message', '', '/message/index', '在线留言', '', 0, 1, 0, 1, 1, 8, '2021-02-22 17:34:23', '2021-02-23 15:52:31', NULL);
 INSERT INTO `mzc-routes` VALUES (50, 49, 'index', 'messageIndex', 'messageIndex', '', '在线留言', 'el-icon-chat-dot-square', 0, 1, 0, 1, 1, 0, '2021-02-22 17:36:51', '2021-02-23 11:16:08', NULL);
+INSERT INTO `mzc-routes` VALUES (51, 31, 'index', 'exceptionIndex', 'exceptionIndex', '', '异常访问', 'el-icon-warning-outline', 0, 1, 0, 1, 1, 0, '2021-02-23 15:45:11', '2021-02-23 15:53:57', NULL);
 
 -- ----------------------------
 -- Table structure for mzc-services
