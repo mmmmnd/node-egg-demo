@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-03 09:49:59
+ * @LastEditTime: 2021-02-25 15:29:25
  */
 const getters = {
   sidebar: state => state.app.sidebar,
@@ -15,5 +15,6 @@ const getters = {
   name: state => state.user.name,
   visitedViews: state => state.tagsView.visitedViews,
   cachedViews: state => state.tagsView.cachedViews,
+  userInfo: state => state.user.userInfo
 }
 export default getters

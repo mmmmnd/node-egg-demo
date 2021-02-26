@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2021-01-12 15:26:40
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-12 16:05:52
+ * @LastEditTime: 2021-02-23 15:57:52
  */
 -->
 <template>
@@ -62,7 +62,7 @@
 </template>
 
 <script>
-import { exceptionIndex } from '@/api/setting'
+import { exceptionIndex } from '@/api/exception'
 
 import Pagination from '@/components/Pagination'
 export default {

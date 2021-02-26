@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-01 10:02:45
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-23 11:19:56
+ * @LastEditTime: 2021-02-23 15:55:08
  */
 import { constantRoutes } from '@/router'
 import { routesIndex } from '@/api/routes'
@@ -65,11 +65,11 @@ export const componentsMap = {
   recruitIndex: () => import('@/views/recruit/index'),
   recruitList: () => import('@/views/recruit/list'),
   recruitConcept: () => import('@/views/recruit/concept'),
+  exceptionIndex: () => import('@/views/exception/index'),
   messageIndex: () => import('@/views/message/index'),
   menusIndex: () => import('@/views/menu/index'),
   settingBsic: () => import('@/views/setting/bsic'),
   settingAdvertising: () => import('@/views/setting/advertising'),
-  settingException: () => import('@/views/setting/exception'),
   permissionsRoles: () => import('@/views/permissions/roles'),
   permissionsAdmin: () => import('@/views/permissions/admin'),
   permissionsPower: () => import('@/views/permissions/power'),

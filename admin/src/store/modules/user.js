@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-02 11:22:36
+ * @LastEditTime: 2021-02-25 15:30:15
  */
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
@@ -15,7 +15,8 @@ const getDefaultState = () => {
   return {
     token: getToken(),
     name: '',
-    avatar: ''
+    avatar: '',
+    userInfo: {}
   }
 }
 
@@ -33,6 +34,9 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
+  },
+  SET_USER_INFO: (state, userInfo) => {
+    state.userInfo = userInfo;
   }
 }
 
@@ -66,6 +70,7 @@ const actions = {
 
         commit('SET_NAME', nickname)
         commit('SET_AVATAR', avatar_image)
+        commit('SET_USER_INFO', data)
         resolve(data)
       }).catch(error => {
         reject(error)

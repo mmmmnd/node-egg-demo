@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-08 21:13:53
+ * @LastEditTime: 2021-02-23 16:34:14
  */
 import Vue from 'vue'
 import Router from 'vue-router'
@@ -64,6 +64,20 @@ export const constantRoutes = [
       component: (resolve) => require(['@/views/dashboard/index'], resolve),
       meta: { title: 'Dashboard', icon: 'dashboard', affix: true }
     }]
+  },
+
+  {
+    path: '/PersonalCenter',
+    component: Layout,
+    hidden: true,
+    children: [
+      {
+        path: 'index',
+        name: 'PersonalCenterIndex',
+        component: () => import('@/views/PersonalCenter/index'),
+        meta: { title: '个人中心' }
+      }
+    ]
   },
 ]
 
