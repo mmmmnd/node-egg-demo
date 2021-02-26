@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-17 16:31:11
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 17:12:29
+ * @LastEditTime: 2021-02-26 17:24:09
  */
 'use strict';
 const AdminValidators = require('../validators/admin');
@@ -89,6 +89,20 @@ class AdminController extends Controller {
 		const params = this.ctx.request.body;
 
 		const admin = await this.ctx.service.admin.update(params);
+		await this.ctx.helper.checkData(admin);
+	}
+	/**
+	 * 修改密码
+	 */
+	async editPass () {
+		const params = this.ctx.request.body;
+		//校验用户密码
+		const { password, passwords } = adminValidators;
+		const validators = await this.ctx.validate({ password, passwords }, params)
+
+		if (!validators) return false;
+
+		const admin = await this.ctx.service.admin.editPass(params);
 		await this.ctx.helper.checkData(admin);
 	}
 }

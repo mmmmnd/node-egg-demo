@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-12-15 10:50:37
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-12 10:37:58
+ * @LastEditTime: 2021-02-26 17:07:52
  */
 'use strict';
 /**
@@ -35,7 +35,8 @@ class ApiService extends Service {
       '/api/admin/logout',
       '/api/admin/current',
       '/api/routes/index',
-      '/api/api/getUserApi'
+      '/api/api/getUserApi',
+      '/api/admin/editPass'
     ]; // 白名单
     if (whiteList.includes(urlPathName)) return true
 

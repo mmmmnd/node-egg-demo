@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2020-12-25 17:35:41
+ * @LastEditTime: 2021-02-26 17:36:49
  */
 'use strict';
 
@@ -111,9 +111,13 @@ class AdminService extends Service {
 	async current () {
 		const [ctx, userInfo] = [this.ctx, global.userInfo];
 
-		const admin = await ctx.model.MzcAdmin.findByPk(userInfo.userId, {
+		var admin = await ctx.model.MzcAdmin.findByPk(userInfo.userId, {
 			attributes: { exclude: ['password'] }
 		});
+
+		const adminRoles = await this.ctx.service.roles.detail(admin.roles_id);
+		admin = JSON.parse(JSON.stringify(admin));
+		admin.roles_name = adminRoles.roles_name;
 
 		return { data: admin, msg: '获取用户信息成功！' };
 	}
@@ -218,6 +222,35 @@ class AdminService extends Service {
 		if (!admin[0]) return { msg: '没有找到相关信息', errorStatus: HttpStatus.INVALID_REQUEST };
 
 		return { httpStatus: HttpStatus.OK }
+	}
+	/**
+	 * 修改密码
+	 * @param { Number } userPass 密码
+	 */
+	async editPass ({ userPass }) {
+
+		const admin = await this.ctx.model.MzcAdmin.findOne({
+			where: {
+				id: global.userInfo.userId,
+				deleted_at: null
+			}
+		})
+
+		const login = bcrypt.compareSync(userPass, admin.password);
+
+		if (!login) return { msg: '原始密码不正确', errorStatus: HttpStatus.INVALID_REQUEST };
+
+		await this.ctx.model.MzcAdmin.update({
+			password: userPass
+		}, {
+			where: {
+				id: global.userInfo.userId,
+				deleted_at: null
+			},
+		})
+
+		await this.ctx.app.redis.del(this.ctx.app.config.usetToken + userInfo.userId);
+		return { msg: '密码修改成功，请重新登录！', errorStatus: HttpStatus.CREATED, code: 0 };
 	}
 }
 

@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-23 11:10:43
+ * @LastEditTime: 2021-02-26 17:05:50
  */
 'use strict';
 
@@ -50,6 +50,7 @@ module.exports = app => {
   router.post('/api/admin/edit', jwt, controller.admin.edit)
   router.post('/api/admin/add', jwt, controller.admin.add)
   router.put('/api/admin/update', jwt, controller.admin.update)
+  router.put('/api/admin/editPass', jwt, controller.admin.editPass)
 
   // menu
   router.get('/api/menu/index', jwt, controller.menu.index);
