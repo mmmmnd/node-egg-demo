@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-06-30 19:36:54
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-01-19 11:23:29
+ * @LastEditTime: 2021-03-02 17:38:27
  */
 /* eslint valid-jsdoc: "off" */
 
@@ -73,6 +73,7 @@ module.exports = appInfo => {
       enable: false,
       ignoreJSON: true
     },
+    domainWhiteList: ['http://127.0.0.1:9528']
   };
 
   config.redis = {
@@ -93,8 +94,9 @@ module.exports = appInfo => {
   };
 
   config.cors = {
-    origin: '*',
-    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+    origin: 'http://127.0.0.1:9528',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH',
+    credentials: true,
   };
 
   config.validatePlus = {

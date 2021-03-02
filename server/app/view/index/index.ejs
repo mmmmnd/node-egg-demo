@@ -93,7 +93,7 @@
               <div class="row3-img">
                 <% menutitle = menuList[4].children.find(menuItem => { if( menuItem.id === item.category_id ) return menuItem }) %>
                 <span class="news-tab"><%= menutitle.title %></span>
-                <img src="" alt="" data-src="<%= item.filepath %>">
+                <img src="" alt="" data-src="<%= item.image %>">
               </div>
               <div class="row3-txt">
                 <h5><%= item.cultureTitle %></h5>
@@ -130,7 +130,7 @@
         <% casesDetail.forEach(item =>{ %>
         <div class="swiper-slide row4-slide">
           <a href="/cases_info/pid/25/cid/<%= item.category_id %>/id/<%= item.id %>">
-            <img src="" alt="" class="row4-img" data-src="<%= item.filepath %>">
+            <img src="" alt="" class="row4-img" data-src="<%= item.image %>">
             <div class="row4-txt">
               <h5><%= item.cultureTitle %></h5>
               <p><%= moment(item.created_at).format('YYYY-MM-DD') %></p>
@@ -159,7 +159,7 @@
           <% casesInfo.forEach(item =>{ %>
           <li>
             <a href="javascript:;">
-              <img src="" alt="" data-src="<%= item.filepath %>">
+              <img src="" alt="" data-src="<%= item.image %>">
             </a>
           </li>
           <% }) %>

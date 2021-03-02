@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-01 10:04:55
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-20 17:21:42
+ * @LastEditTime: 2021-03-02 17:51:41
  */
 'use strict';
 const moment = require('moment');
@@ -27,7 +27,7 @@ class WebController extends Controller {
     const servicesList = await service.services.list(); // services数据
     const aboutSingleDetail = await service.aboutSingle.detail(2); // about单页数据
 
-    const data = { advertList, menuList, settingsList, aboutSingleDetail, servicesList, newsList: newsList.data, casesDetail, casesInfo, newsDetail: newsDetail.data, moment };
+    const data = { advertList, menuList, settingsList, aboutSingleDetail, servicesList, newsList: newsList.data.data, casesDetail, casesInfo, newsDetail: newsDetail.data, moment };
     await ctx.render('index/index.ejs', data);
   }
   async about () {

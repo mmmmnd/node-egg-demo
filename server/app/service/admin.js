@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-07-21 11:11:10
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-26 17:36:49
+ * @LastEditTime: 2021-03-02 17:39:53
  */
 'use strict';
 
@@ -48,6 +48,10 @@ class AdminService extends Service {
 	 */
 	async login (params) {
 		const { ctx } = this;
+		const code = this.ctx.session.code;
+
+		if (!params.captcha) return { msg: '验证码为空', errorStatus: HttpStatus.INVALID_REQUEST };
+		else if (code !== params.captcha) return { msg: '验证码错误', errorStatus: HttpStatus.UNAUTHORIZED };
 
 		try {
 			const admin = await ctx.model.MzcAdmin.findOne({
