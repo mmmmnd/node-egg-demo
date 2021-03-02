@@ -5,7 +5,7 @@
  * @version: 1.0.0
  * @Date: 2020-08-31 10:33:51
  * @LastEditors: 莫卓才
- * @LastEditTime: 2021-02-25 15:30:15
+ * @LastEditTime: 2021-03-01 15:46:03
  */
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
@@ -43,9 +43,9 @@ const mutations = {
 const actions = {
   // user login
   login ({ commit }, userInfo) {
-    const { nickname, password } = userInfo
+    const { nickname, password, captcha } = userInfo
     return new Promise((resolve, reject) => {
-      login({ nickname: nickname.trim(), password: password }).then(response => {
+      login({ nickname: nickname.trim(), password: password, captcha: captcha }).then(response => {
         const { data } = response
         commit('SET_TOKEN', data.token)
         setToken(data.token)

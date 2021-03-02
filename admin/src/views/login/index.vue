@@ -42,17 +42,28 @@
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
+      <el-form-item prop="captcha">
+        <span class="svg-container">
+          <svg-icon icon-class="captcha" />
+        </span>
+        <el-input v-model="loginForm.captcha"
+                  placeholder="验证码"
+                  name="captcha"
+                  type="text"
+                  tabindex="1"
+                  auto-complete="on"
+                  maxlength="4"
+                  style="width: 60%;"></el-input>
+        <img :src=imgSrc
+             ref="captcha"
+             style="float: right;padding: 5px 0;"
+             @click="getCaptcha">
+      </el-form-item>
 
       <el-button :loading="loading"
                  type="primary"
                  style="width:100%;margin-bottom:30px;"
                  @click.native.prevent="handleLogin">登录</el-button>
-
-      <!-- <div class="tips">
-        <span style="margin-right:20px;">nickname: admin</span>
-        <span> password: any</span>
-      </div> -->
-
     </el-form>
   </div>
 </template>
@@ -76,18 +87,30 @@ export default {
         callback()
       }
     }
+    const validateCaptcha = (rule, value, callback) => {
+      if (!value) {
+        callback(new Error('验证码不能为空'))
+      } else if (value.length < 4) {
+        callback(new Error('请输入验证码'))
+      } else {
+        callback()
+      }
+    }
     return {
       loginForm: {
         nickname: '',
-        password: ''
+        password: '',
+        captcha: ''
       },
       loginRules: {
         nickname: [{ required: true, trigger: 'blur', validator: validatenickname }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }],
+        captcha: [{ required: true, trigger: 'blur', validator: validateCaptcha }]
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: undefined,
+      imgSrc: process.env.VUE_APP_BASE_SERVER + '/captcha?height=38&width=137&fontSize=50'
     }
   },
   watch: {
@@ -99,6 +122,9 @@ export default {
     }
   },
   methods: {
+    getCaptcha () {
+      this.$refs.captcha.src = this.imgSrc
+    },
     showPwd () {
       if (this.passwordType === 'password') {
         this.passwordType = ''
