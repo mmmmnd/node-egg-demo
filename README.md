@@ -49,7 +49,7 @@ $ git clone https://github.com/mmmmnd/node-egg-demo.git
 # 登录数据库
 $ mysql -uroot -p密码
 
-# 创建 boblog 数据库
+# 创建 local-egg-demo 数据库
 $ CREATE DATABASE IF NOT EXISTS local-egg-demo DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
@@ -83,6 +83,6 @@ $ CREATE DATABASE IF NOT EXISTS local-egg-demo DEFAULT CHARACTER SET utf8mb4 COL
 
 ## License
 
-喜欢或对你有帮助的话，请你点一个星星 **star** 鼓励我，或者您有更好的建议和意见，请提出来告知我，可以留言 [Issues](https://github.com/mmmmnd/node-egg-demo/issues/new)。希望能够帮助到你学习！Thanks！共勉！
+喜欢或对你有帮助的话，请你点一个星星 **star** 鼓励我，或者您有更好的建议和意见，可以留言 [Issues](https://github.com/mmmmnd/node-egg-demo/issues/new)，或者发Email给我 handsome.mo@foxmail.com 希望能够帮助到你学习！Thanks！共勉！
 
 [MIT](https://github.com/mmmmnd/node-egg-demo/blob/master/LICENSE), by mmmmnd
